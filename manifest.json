@@ -3,7 +3,7 @@
   "name": "Sudoku",
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/Ceebug/CeeSudoku/refs/heads/main/icon.png",
+      "src": "./icon.png",
       "type": "image/png",
       "sizes": "190x190",
       "purpose": "any"
