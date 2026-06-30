@@ -1448,6 +1448,7 @@ position: relative;
               const winToast = document.getElementById("winToast");
 			  const pauseBtn = document.getElementById("pause-btn");
 			  const title = document.getElementById("title");
+			  const modeButton = document.getElementById("mode");
         
               let solution = [];
               let puzzle = [];
@@ -1466,7 +1467,7 @@ position: relative;
               let finished = false;
               let menuOpen = false;
 			  let winmenuOpen = false;
-			let pageMode = "dark";
+			  let pageMode = "dark";
               function showWinScreen() {
             winDifficulty.textContent =
                 difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
@@ -1482,9 +1483,7 @@ position: relative;
         }
 
 function changemode() {
-    const modeButton = document.getElementById("mode");
-
-    // If currently light, switch back to dark immediately.
+	console.log("changemode function called");
     if (pageMode === "light") {
         document.body.className = "dark";
         pageMode = "dark";
@@ -1492,12 +1491,9 @@ function changemode() {
         return;
     }
 
-    // Otherwise switch to light.
     document.body.className = "light";
     pageMode = "light";
     if (modeButton) modeButton.innerHTML = "<b>☾</b>";
-
-    // Switch back to dark once the page has finished loading.
     if (document.readyState === "complete") {
         document.body.className = "dark";
         pageMode = "dark";
