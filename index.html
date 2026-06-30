@@ -1494,6 +1494,39 @@ position: relative;
                 }
                 return boxes[boxIndex(row, col)].every((cellIndex) => grid[cellIndex] !== value);
               }
+			let pageMode = "dark";
+
+function changeMode() {
+    const modeButton = document.getElementById("mode");
+
+    // If currently light, switch back to dark immediately.
+    if (pageMode === "light") {
+        document.body.className = "dark";
+        pageMode = "dark";
+        if (modeButton) modeButton.innerHTML = "☀";
+        return;
+    }
+
+    // Otherwise switch to light.
+    document.body.className = "light";
+    pageMode = "light";
+    if (modeButton) modeButton.innerHTML = "<b>☾</b>";
+
+    // Switch back to dark once the page has finished loading.
+    if (document.readyState === "complete") {
+        document.body.className = "dark";
+        pageMode = "dark";
+        if (modeButton) modeButton.innerHTML = "☀";
+    } else {
+        window.addEventListener("load", function restoreDark() {
+            window.removeEventListener("load", restoreDark);
+
+            document.body.className = "dark";
+            pageMode = "dark";
+            if (modeButton) modeButton.innerHTML = "☀";
+        });
+    }
+}
         
               function fillGrid(grid, index = 0) {
                 if (index === 81) return true;
