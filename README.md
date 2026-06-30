@@ -1,5 +1,6 @@
 ![Big text that says ceedoku](./title.png)
-# A ad-free sudoku made by [@Ceebug](https://github.com/Ceebug)
+## An ad-free Sudoku game made by [@Ceebug](https://github.com/Ceebug)</h2>
+</br>
 
 ### **&nbsp;Features:**
 - **Fully installable, right from your browser** (Your browser will prompt you to install it)
