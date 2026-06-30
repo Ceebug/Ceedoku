@@ -1466,7 +1466,7 @@ position: relative;
               let finished = false;
               let menuOpen = false;
 			  let winmenuOpen = false;
-			  let pageMode = "dark";
+			let pageMode = localStorage.getItem("theme") || "dark";
               function showWinScreen() {
             winDifficulty.textContent =
                 difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
@@ -1486,13 +1486,15 @@ function changemode() {
     if (pageMode === "light") {
 		console.log("changemode(): The page was light, switching to dark");
         document.body.className = "dark";
-        pageMode = "dark";
+		pageMode = "dark";
+		localStorage.setItem("theme", pageMode);
         if (modeButton) modeButton.innerHTML = "☀";
         return;
     }
 	console.log("changemode(): The page was dark, switching to light");
     document.body.className = "light";
     pageMode = "light";
+	localStorage.setItem("theme", pageMode);
 	if (modeButton) modeButton.innerHTML = "<b>☾</b>";
 }
         function hideWinScreen() {
@@ -1624,7 +1626,7 @@ function pauseTimer() {
         pauseBtn.textContent = "▶";
 
         title.textContent = "Sudoku - Paused";
-
+		saveGame()
 
     } else {
         startTimer();
@@ -1762,8 +1764,29 @@ if (value) {
             updateNumberCounts();
             updateStatus();
             updateHistoryButtons();
+			saveGame()
         }
-        
+function saveGame() {
+    localStorage.setItem("save", JSON.stringify({
+        solution,
+        puzzle,
+        values,
+        givens,
+        notes: notes.map(set => [...set]),
+        selected,
+        difficulty,
+        pencilMode,
+        eraseMode,
+        mistakes,
+        elapsed,
+        pausedElapsed,
+        timerPaused,
+        undoStack,
+        redoStack,
+        finished,
+        pageMode
+    }));
+}
               function selectCell(index) {
                 selected = index;
                 paintBoard();
@@ -2139,6 +2162,7 @@ function checkWin() {
     if (values.every((value, index) => value === solution[index])) {
         finished = true;   // <-- FIRST thing inside the win block
 		pauseTimer()
+		
         clearInterval(timerId);
 
         playBoardRipple();
@@ -2146,6 +2170,9 @@ function checkWin() {
         const maxDistance = Math.max(...getBoardDistances(selected));
 
         setTimeout(showWinScreen, maxDistance * 60 + 900);
+		function clearSave() {
+    localStorage.removeItem("save");
+	}
     }
 }
 function forcewin() {
@@ -2157,6 +2184,9 @@ function forcewin() {
         const maxDistance = Math.max(...getBoardDistances(selected));
 
         setTimeout(showWinScreen, maxDistance * 60 + 900);
+		function clearSave() {
+    localStorage.removeItem("save");
+}
 		}
         
               function closeDifficultyMenu() {
@@ -2210,7 +2240,36 @@ function forcewin() {
                   item.setAttribute("aria-selected", item.dataset.difficulty === difficulty ? "true" : "false");
                 });
 	        }
+function loadGame() {
+    const save = localStorage.getItem("save");
 
+    if (!save) {
+        newGame();
+        return;
+    }
+
+    const game = JSON.parse(save);
+
+    solution = game.solution;
+    puzzle = game.puzzle;
+    values = game.values;
+    givens = game.givens;
+    notes = game.notes.map(arr => new Set(arr));
+
+    selected = game.selected;
+    difficulty = game.difficulty;
+    pencilMode = game.pencilMode;
+    eraseMode = game.eraseMode;
+    mistakes = game.mistakes;
+    elapsed = game.elapsed;
+    pausedElapsed = game.pausedElapsed;
+    timerPaused = game.timerPaused;
+    undoStack = game.undoStack;
+    redoStack = game.redoStack;
+    pageMode = game.pageMode;
+
+    paintBoard();
+}
 function newGame(nextDifficulty = difficulty) {
     difficulty = nextDifficulty;
 
@@ -2263,7 +2322,7 @@ function newGame(nextDifficulty = difficulty) {
         
         
               renderNumberPad();
-              newGame();
+loadGame();
 
 undoButton.addEventListener("click", () => {
     if (timerPaused) return;
