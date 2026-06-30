@@ -8,5 +8,5 @@
 - **Works offline** (As long as you have opened the installed version at least once before with internet)
 - **Multiple difficulties**
 
-**Find the game here: [Ceedoku.github.io](https://ceedoku.github.io)**
+**Find the game here: [Ceedoku.github.io](https://ceedoku.github.io)**<br>
 **Also on this page: [ceebug.github.io/ceesudoku/](https://ceebug.github.io/ceesudoku)**
