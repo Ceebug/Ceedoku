@@ -9,3 +9,4 @@
 - **Multiple difficulties**
 
 **Find the game here: [Ceedoku.github.io](https://ceedoku.github.io)**
+**Also on this page: [ceebug.github.io/ceesudoku/](https://ceebug.github.io/ceesudoku)**
