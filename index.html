@@ -131,6 +131,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         transform-origin: center;
         animation: columnFlash 0.9s ease-out forwards;
     }
+		
     
     @keyframes columnFlash {
         0% {
@@ -1246,7 +1247,7 @@ transform: translatey(-5px)
     }
 	.game-shell {
 		border-radius: 52px;
-		transform: translatey(5px)
+		/* transform: translatey(5px) */
 	}
 	
 	.main {
@@ -1732,6 +1733,20 @@ function pauseTimer() {
         title.textContent = "Sudoku";
     }
 }
+			window.addEventListener('blur', lostfocuspause() {
+    console.log('Window lost focus; paused game');
+		if (!timerPaused) {
+				// PAUSE
+        timerPaused = true;
+
+        clearInterval(timerId);
+
+        elapsedMs = Date.now() - startTime;
+
+        pauseBtn.textContent = "▶";
+        title.textContent = "Sudoku - Paused";
+		}
+});
 			function resumeTimer() {
     if (!timerPaused) return;
 
