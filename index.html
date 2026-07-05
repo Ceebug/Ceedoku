@@ -1709,7 +1709,7 @@ let timerPaused = false;
         timerEl.textContent =
             `Time: ${formatTime(Math.floor(elapsedMs / 1000))}`;
     }, 100);
-}
+};
 function pauseTimer() {
     if (!timerPaused) {
         // PAUSE
@@ -1734,6 +1734,7 @@ function pauseTimer() {
     }
 }
 			window.addEventListener('blur', lostfocuspause())
+			function lostfocuspause() {
     console.log('Window lost focus; paused game');
 		if (!timerPaused) {
 				// PAUSE
@@ -1746,7 +1747,7 @@ function pauseTimer() {
         pauseBtn.textContent = "▶";
         title.textContent = "Sudoku - Paused";
 		}
-});
+};
 			function resumeTimer() {
     if (!timerPaused) return;
 
