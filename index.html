@@ -131,6 +131,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         transform-origin: center;
         animation: columnFlash 0.9s ease-out forwards;
     }
+		
     
     @keyframes columnFlash {
         0% {
@@ -231,8 +232,8 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
           color: var(--text);
           display: grid;
           place-items: center;
-          padding: 28px;
           letter-spacing: 0;
+		  overflow: hidden
         }
     .box-complete-flash {
         position: absolute;
@@ -302,13 +303,16 @@ position: relative;
         animation: boxWave 10s cubic-bezier(.22,1,.36,1) forwards;
     }
         .game-shell {
-          width: min(1120px, calc(100vw - 32px));
-          padding: clamp(14px, 2.2vw, 26px);
+          padding-top: 10px !important;
           border: 1px solid color-mix(in srgb, var(--surface-3) 70%, transparent);
-          border-radius: 66px;
+          border-radius: 40px;
           background: var(--shell);
           box-shadow: 0 5px 15px rgba(12, 22, 36, .12);
           backdrop-filter: blur(10px);
+		  padding-left: 20px;
+		  padding-right: 20px;
+		  height: fit-content;
+		  padding-bottom: 18px
         }
     
         button,
@@ -325,7 +329,7 @@ position: relative;
           width: 100%;
           display: grid;
           grid-template-columns: minmax(0, var(--board-size)) minmax(280px, 330px);
-          gap: clamp(24px, 3.4vw, 44px);
+          gap: 4dvh;
           align-items: start;
           justify-content: center;
         }
@@ -333,7 +337,7 @@ position: relative;
         .main {
           min-width: 0;
           display: grid;
-          gap: 18px;
+          gap: 2dvh;
         }
     
         .topbar {
@@ -759,13 +763,17 @@ position: relative;
     
         .sidebar {
           min-width: 0;
-          min-height: var(--board-size);
           margin-top: 82px;
-          display: grid;
+          display: flex;
           gap: 18px;
           background-color: var(--surface-2);
           padding: 5px;
-          border-radius: 44px;
+          border-radius: 43px;
+		  border: 1px solid var(--surface-3) !important;
+		  flex-direction: column;
+		  height: 88%;
+		  border-top-right-radius: 41px;
+		  border-top-left-radius: 41px
         }
     
         .control-band,
@@ -1010,18 +1018,22 @@ position: relative;
         .numbers-band {
           align-self: end;
           padding: 14px;
-          display: grid;
+          display: flex;
           gap: 10px;
+		  width: 100%;
+		  height: 100%;
+		  flex-direction: column
         }
     
         .number-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 5px;
+		  width: 100%;
+		  height: 100%
         }
     
         .number-button {
-          aspect-ratio: 1;
           display: grid;
           place-items: center;
           color: var(--muted);
@@ -1078,7 +1090,7 @@ position: relative;
           opacity: 1;
         }
     
-        @media (max-width: 850px) {
+        @media (orientation: portrait) {
           body {
             place-items: start center;
             padding: 14px;
@@ -1120,10 +1132,13 @@ position: relative;
           }
         }
     
-        @media (max-width: 520px) {
+        @@media (orientation: portrait) {
           .topbar {
             align-items: start;
           }
+		  .sidebar {
+			height: fit-content
+			}
 		
           .control-band {
             grid-template-columns: 1fr;
@@ -1136,13 +1151,7 @@ position: relative;
           }
     
           .hint-button,
-          .history-pill {
-            width: 100%;
-          }
     
-          .timer-wrap {
-            order: -1;
-          }
     
           .number-grid {
             grid-template-columns: repeat(5, 1fr);
@@ -1154,7 +1163,8 @@ position: relative;
             background-color: var(--surface-2); 
             border-radius: 1004px;             
             padding: 5px;                  
-            box-sizing: border-box;         
+            box-sizing: border-box;    
+			height: 60px
           }
           .pencilanderaserbutton {
     	flex: 1;
@@ -1178,13 +1188,11 @@ position: relative;
           background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
           box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
         }
-		@media (max-width: 600px) {
+		@media (orientation: portrait) {
 				        .hint-button:hover,
-        .pencil-button:hover,
         .new-main:hover,
         .new-side:hover,
         .number-button:hover,
-        .erase-button:hover,
         .menu-item:hover,
         .theme-toggle:hover,
         .history-button:hover:not(:disabled) {
@@ -1239,54 +1247,95 @@ transform: translatey(-5px)
     }
 	.game-shell {
 		border-radius: 52px;
-		transform: translatey(15px)
+		/* transform: translatey(5px) */
 	}
+	
 	.main {
 		gap: 5px;
 	}
 	.hint-wrap {
 		width: 33.3%;
-		transform: translatey(-62px)translatex(-6px)
 		}
 	#pause-btn {
 		width: 50px;
 		transform: translatey(-5px)translatex(0px)
 		}
+	#mode {
+		padding: 0 0 2 0px !important;
+		height: 42.75 !important;
+		width: 45% !important;
+	}	
+	.bar {
+	width: 45%
+	}
+	#pause-btn {
+	width: 45% !important;
+	height: 42.75 !important;
+	padding: 0 5 0 5
+	}
 	.sidebar{
-		border-top-right-radius: 35px;
-		border-top-left-radius: 35px;
-		gap: 2px;
-		padding-bottom: 4px
+		border-top-right-radius: 34px;
+		border-top-left-radius: 34px;
+		gap: 10px;
+		padding-bottom: 4px;
+		display: flex !important;
+		flex-direction: column;
 	}
 	.timer-wrap {
-		font-size: 12.5px;
+		font-size: 12px;
 		width: 33.35%;
-		transform: translatey(-6px);
-		justify-self: center
+		justify-self: center;
+		padding: 0 10px !important;
 	}
 	.aah {
 		width: 33.3%;
-		transform: translatey(-118px)translatex(221px)
 	}
+	.hint-button:active,
+.pencil-button:active:not([aria-pressed="true"]),
+.new-main:active,
+.new-side:active,
+.number-button:active,
+.erase-button:active:not([aria-pressed="true"]),
+.menu-item:active,
+.theme-toggle:active,
+.history-button:active:not(:disabled) {
+    background: color-mix(in srgb, var(--blue-soft) 65%, var(--surface-2));
+    color: var(--muted);
+    transform: translateY(1px);
+    border-radius: 999px; /* if you want the rounded tap highlight */
+}
+
+	button {
+    -webkit-tap-highlight-color: transparent;
+    }
 	.control-band {
-		height: 58px
+		height: 58px;
+		padding: 7px !important;
+		display: flex !important
+	}
+	.foo {
+		top: 13px !important;
+		width: 95px !important;
+		right: 22px !important
 	}
 	.game-shell {
 		border-radius: 58px
 	}
 	.number-grid {
 		display: flex;
-		width: 318px;
 		flex-wrap: wrap;
 		justify-content: center
+	}
+	.game-shell {
+		height: fit-content !important
 	}
 	.number-grid div {
 		flex: 0 0 calc(20% - 10px); 
 		box-sizing: border-box;
 	}
 	.number-button {
-		width: 54px;
-		height: 54px;
+		width: 49px;
+		height: 49px;
 	}
 }
     </style>
@@ -1401,8 +1450,8 @@ transform: translatey(-5px)
 
                 </div>
             </aside>
-<div style="display: flex;position: absolute;right: 20px;top: 20px;width: 120px;gap: 10px;"><button id="mode" class="hint-button" onclick="changemode()" style="font-size:22px;justify-self: right;width: 50px;height: 50px;right: 20px;top: 20px;">☀</button>
-<button id="pause-btn" class="hint-button" onclick="pauseTimer()" style="justify-self: left;width: 50px;height: 50px;right: 20px;top: 20px;">❚❚</button>
+<div class="foo" style="display: flex;position: absolute;right: 20px;top: 20px;width: 120px;gap: 10px;"><button id="mode" class="bar hint-button" onclick="changemode()" style="font-size:22px;justify-self: right;width: 50px;height: 50px;right: 20px;top: 20px;">☀</button>
+<button id="pause-btn" class="hint-button bar" onclick="pauseTimer()" style="justify-self: left;width: 50px;height: 50px;right: 20px;top: 20px;">❚❚</button>
 </div>
         </main>
 <div id="winOverlay" class="win-overlay" style="border-radius: 66px;" hidden="">
@@ -1518,8 +1567,8 @@ transform: translatey(-5px)
               function showWinScreen() {
             winDifficulty.textContent =
                 difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
-        
-            winTime.textContent = formatTime(elapsed);
+		
+			
             winMistakes.textContent = mistakes;
         
             winOverlay.hidden = false;
@@ -1656,11 +1705,11 @@ let timerPaused = false;
 
     timerId = setInterval(() => {
         elapsedMs = Date.now() - startTime;
-
+		winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
         timerEl.textContent =
             `Time: ${formatTime(Math.floor(elapsedMs / 1000))}`;
     }, 100);
-}
+};
 function pauseTimer() {
     if (!timerPaused) {
         // PAUSE
@@ -1684,6 +1733,21 @@ function pauseTimer() {
         title.textContent = "Sudoku";
     }
 }
+			window.addEventListener("visibilitychange", lostfocuspause)
+			function lostfocuspause() {
+    console.log('Window lost focus; paused game');
+		if (!timerPaused) {
+				// PAUSE
+        timerPaused = true;
+
+        clearInterval(timerId);
+
+        elapsedMs = Date.now() - startTime;
+
+        pauseBtn.textContent = "▶";
+        title.textContent = "Sudoku - Paused";
+		}
+};
 			function resumeTimer() {
     if (!timerPaused) return;
 
@@ -1901,7 +1965,7 @@ function saveGame() {
             winDifficulty.textContent =
                 difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
         
-            winTime.textContent = formatTime(elapsed);
+            winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
             winMistakes.textContent = mistakes;
         
             winOverlay.hidden = false;
@@ -2355,6 +2419,7 @@ function loadGame() {
 
     // ---------------- TIMER UI ----------------
     if (timerPaused) {
+		winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
         timerEl.textContent =
             `Time: ${formatTime(Math.floor(elapsedMs / 1000))}`;
 
@@ -2404,6 +2469,7 @@ difficultyBadge.textContent = DIFFICULTIES[difficulty].label;
     renderBoard();
 
     timerEl.textContent = "Time: 00:00";
+	winTime.textContent = "00:00";
     pauseBtn.textContent = "❚❚";
 	title.textContent = "Sudoku"
     hidewinscreen();
