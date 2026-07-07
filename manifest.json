@@ -1,6 +1,6 @@
 {
-  "short_name": "Sudoku",
-  "name": "Sudoku",
+  "short_name": "Ceedoku",
+  "name": "Ceedoku",
   "icons": [
     {
       "src": "./icon512.png",
