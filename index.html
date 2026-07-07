@@ -1295,9 +1295,6 @@ transform: translatey(-5px)
     }
 	.game-shell {
 		border-radius: 52px;
-		display: flex;
-		align-items: center;
-		height: 100vh;  
 	}
 	
 	.main {
@@ -1352,7 +1349,7 @@ transform: translatey(-5px)
     background: color-mix(in srgb, var(--blue-soft) 65%, var(--surface-2));
     color: var(--muted);
     transform: translateY(1px);
-    border-radius: 999px; /* if you want the rounded tap highlight */
+    border-radius: 999px;
 }
 
 	button {
@@ -1417,7 +1414,10 @@ transform: translatey(-5px)
 	h2 {
 		font-size: large
 	}
-	.new-main
+	.null {
+		display: flex;
+		align-self: center
+	}	
 }
     </style>
 	<script>
@@ -1432,7 +1432,7 @@ transform: translatey(-5px)
 </head>
 
 <body class="dark">
-<div><div class="game-shell" style="padding-top: 20px;">
+<div class="null"><div class="game-shell" style="padding-top: 20px;">
         <main class="app" aria-label="Ceedoku game">
             <section class="main" style="width: 100%;">
 
