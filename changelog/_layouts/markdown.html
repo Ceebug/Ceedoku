@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html itemscope="" itemtype="http://schema.org/WebPage" lang="en-AU"><head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+        :root {
+          color-scheme: light;
+          --bg: #101418;
+          --surface: #ffffff;
+          --surface-2: #202833;
+          --surface-3: #dde8f2;
+          --text: #213044;
+	  --text2: #000000;
+	  --text3: var(--muted);
+	  --text4: #435368;
+          --muted: #66778c;
+          --line: #b7c5d6;
+          --line-strong: #4c5867;
+	  --blue: #73a7ff;
+          --blue-soft: #d7e8ff;
+          --blue-softer: #eaf3ff;
+          --lime: #9cff35;
+          --lime-soft: #dcffb5;
+		  --penciaalerasebutton: #d7e1ee;
+          --lime-text: #195700;
+          --lime-glow: rgba(156, 255, 53, .56);
+          --danger: #d93025;
+          --danger-soft: #ffe7e5;
+          --shell: rgba(255, 255, 255, .48);
+          --shadow: 0 0px 46px rgba(28, 48, 74, .12);
+          --radius: 999px;
+	  --shadow-color: #bebebe;
+	  --shadow-color2: #bebebe;
+          --cell-size: clamp(34px, 8.2vmin, 64px);
+          --board-size: calc(var(--cell-size) * 9);
+          font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        html.dark,
+	body.dark {
+          color-scheme: dark;
+          --bg: #101418;
+          --surface: #171d24;
+          --surface-2: #202833;
+          --surface-3: #2a3442;
+          --text: #95a4b6;
+          --muted: #98a7b8;
+          --line: #4e6177;
+          --blue: #73a7ff;
+          --blue-soft: #203a5f;
+          --blue-softer: #1b2c45;
+          --lime: #a7ff48;
+	      --pencilerasebutton: #26313f;
+          --lime-soft: #263d1d;
+	  --text2: #dce3e9;
+	  --text3: #bec9da;
+	  --text4: #bbc6d4;
+          --lime-text: #bcff76;
+          --lime-glow: rgba(167, 255, 72, .46);
+          --danger: #ff8a80;
+	  --shadow-color: #232930;
+	  --shadow-color2: #343c45;
+          --danger-soft: #4c2424;
+          --shell: rgba(255, 255, 255, .045);
+          --shadow: 0 5px 48px rgba(0, 0, 0, .32);
+        }
+     
+        * {
+          box-sizing: border-box;
+        }
+    	a,
+a:visited {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+    cursor: pointer;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--blue);
+}
+
+a:active {
+    color: var(--blue);
+}
+    
+        body {
+          margin: 0;
+          min-height: 100%;
+          background:
+            radial-gradient(circle at 15% 15%, color-mix(in srgb, var(--blue) 10%, transparent), transparent 30%),
+            linear-gradient(135deg, var(--bg), color-mix(in srgb, var(--surface-2) 40%, var(--bg)));
+          color: var(--text);
+          display: grid;
+          place-items: center;
+          letter-spacing: 0;
+        }
+html {
+    min-height: 100%;
+    background:
+        radial-gradient(circle at 15% 15%, color-mix(in srgb, var(--blue) 10%, transparent), transparent 30%),
+        linear-gradient(135deg, var(--bg), color-mix(in srgb, var(--surface-2) 40%, var(--bg)));
+}
+button, 
+input[type="button"], 
+input[type="submit"] {
+  cursor: pointer;
+}
+
+
+
+    @media (orientation: portrait) and (max-width: 700px) {
+
+    ul {
+        padding-left: 25px;
+	padding-right: 5px
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+
+    li:last-child {
+        margin-bottom: 0;
+    }
+    .card {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important
+    }
+    body {
+    	min-height: 100vh;
+    	background: transparent;
+    }    
+    .why {
+	margin-top: 15px !important
+    }
+}
+    </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzOCAzOCIgd2lkdGg9IjM4IiBoZWlnaHQ9IjM4Ij4KCiAgPGRlZnM+CiAgICA8Y2xpcFBhdGggaWQ9ImNsaXAiPgogICAgICA8cmVjdCB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHJ4PSIxMCI+PC9yZWN0PgogICAgPC9jbGlwUGF0aD4KICA8L2RlZnM+CgogIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8cmVjdCB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIGZpbGw9IiMxYTczZTgiPjwvcmVjdD4KCiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOSAxOSkiPgogICAgICA8IS0tIDI0IHJhaW5ib3cgd2VkZ2VzIC0tPgogICAgICA8cGF0aCBkPSJNMCwwIEwwLC0zMCBBMzAsMzAgMCAwLDEgNy43NiwtMjguOTggWiIgZmlsbD0iIzFhNzNlOCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEw3Ljc2LC0yOC45OCBBMzAsMzAgMCAwLDEgMTUsLTI1Ljk4IFoiIGZpbGw9IiMyMTgwZDgiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMMTUsLTI1Ljk4IEEzMCwzMCAwIDAsMSAyMS4yMSwtMjEuMjEgWiIgZmlsbD0iIzJiOGRkMCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyMS4yMSwtMjEuMjEgQTMwLDMwIDAgMCwxIDI1Ljk4LC0xNSBaIiBmaWxsPSIjMzVhMjhhIj48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTDI1Ljk4LC0xNSBBMzAsMzAgMCAwLDEgMjguOTgsLTcuNzYgWiIgZmlsbD0iIzQwYjU2YSI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyOC45OCwtNy43NiBBMzAsMzAgMCAwLDEgMzAsMCBaIiBmaWxsPSIjNjhiZjU1Ij48L3BhdGg+CgogICAgICA8cGF0aCBkPSJNMCwwIEwzMCwwIEEzMCwzMCAwIDAsMSAyOC45OCw3Ljc2IFoiIGZpbGw9IiM4ZmM4NDAiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMMjguOTgsNy43NiBBMzAsMzAgMCAwLDEgMjUuOTgsMTUgWiIgZmlsbD0iI2I3ZDEyYSI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyNS45OCwxNSBBMzAsMzAgMCAwLDEgMjEuMjEsMjEuMjEgWiIgZmlsbD0iI2RiYzcxNCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyMS4yMSwyMS4yMSBBMzAsMzAgMCAwLDEgMTUsMjUuOTggWiIgZmlsbD0iI2ZiYmMwNCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwxNSwyNS45OCBBMzAsMzAgMCAwLDEgNy43NiwyOC45OCBaIiBmaWxsPSIjZjRhMjA0Ij48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTDcuNzYsMjguOTggQTMwLDMwIDAgMCwxIDAsMzAgWiIgZmlsbD0iI2VjODYwYiI+PC9wYXRoPgoKICAgICAgPHBhdGggZD0iTTAsMCBMMCwzMCBBMzAsMzAgMCAwLDEgLTcuNzYsMjguOTggWiIgZmlsbD0iI2U1NmExMyI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtNy43NiwyOC45OCBBMzAsMzAgMCAwLDEgLTE1LDI1Ljk4IFoiIGZpbGw9IiNkZjUzMWEiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMLTE1LDI1Ljk4IEEzMCwzMCAwIDAsMSAtMjEuMjEsMjEuMjEgWiIgZmlsbD0iI2Q5MzAyNSI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtMjEuMjEsMjEuMjEgQTMwLDMwIDAgMCwxIC0yNS45OCwxNSBaIiBmaWxsPSIjY2YyZjRkIj48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTC0yNS45OCwxNSBBMzAsMzAgMCAwLDEgLTI4Ljk4LDcuNzYgWiIgZmlsbD0iI2M2MzA3NiI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtMjguOTgsNy43NiBBMzAsMzAgMCAwLDEgLTMwLDAgWiIgZmlsbD0iI2I4MzQ5YyI+PC9wYXRoPgoKICAgICAgPHBhdGggZD0iTTAsMCBMLTMwLDAgQTMwLDMwIDAgMCwxIC0yOC45OCwtNy43NiBaIiBmaWxsPSIjYTUzY2JmIj48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTC0yOC45OCwtNy43NiBBMzAsMzAgMCAwLDEgLTI1Ljk4LC0xNSBaIiBmaWxsPSIjOGQ0OWQ0Ij48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTC0yNS45OCwtMTUgQTMwLDMwIDAgMCwxIC0yMS4yMSwtMjEuMjEgWiIgZmlsbD0iIzZmNWRlMyI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtMjEuMjEsLTIxLjIxIEEzMCwzMCAwIDAsMSAtMTUsLTI1Ljk4IFoiIGZpbGw9IiM0ZjZkZWIiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMLTE1LC0yNS45OCBBMzAsMzAgMCAwLDEgLTcuNzYsLTI4Ljk4IFoiIGZpbGw9IiMzMzdiZWUiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMLTcuNzYsLTI4Ljk4IEEzMCwzMCAwIDAsMSAwLC0zMCBaIiBmaWxsPSIjMWE3M2U4Ij48L3BhdGg+CiAgICA8L2c+CiAgPC9nPgoKICA8IS0tIDPDlzMgZ3JpZCAtLT4KICA8ZyBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC45MikiPgogICAgPHJlY3QgeD0iNyIgeT0iNyIgd2lkdGg9IjYiIGhlaWdodD0iNiIgcng9IjIiPjwvcmVjdD4KICAgIDxyZWN0IHg9IjE2IiB5PSI3IiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiByeD0iMiI+PC9yZWN0PgogICAgPHJlY3QgeD0iMjUiIHk9IjciIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CgogICAgPHJlY3QgeD0iNyIgeT0iMTYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIxNiIgeT0iMTYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIyNSIgeT0iMTYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CgogICAgPHJlY3QgeD0iNyIgeT0iMjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIxNiIgeT0iMjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIyNSIgeT0iMjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgPC9nPgoKPC9zdmc+">
+  <title>Ceedoku - Changelogs</title></head>
+<body class="dark activity-stream" style="height: 100%;padding: 10px"><div class="about-container" style="display:flex;flex-direction:column;width: calc(100dvw - 20px)"><img src=".\title.png" alt="CEEDOKU" class="title"><h2 class="why" style="color:var(--text2);margin-bottom:0px;margin-top:0px;">Browser Installation Guide</h2><div></div>{{ content }}</div></body></html>
+
