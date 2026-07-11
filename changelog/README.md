@@ -1,3 +1,6 @@
+- ### Version 2.0.11:
+  > #### Changes:
+  >> - Patched the main menu mode button not having the text centered horizontally.
 - ### Version 2.0.10:
   > #### Changes:
   >> - Patched the symbol not updating after mode switch in the main menu mode switcher.
