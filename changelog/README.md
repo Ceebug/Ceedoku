@@ -1,3 +1,7 @@
+- ### Version 2.1.4:
+  > #### Changes:
+  >> ##### Fixed:
+  >>> - Fixed the active vs hover states for some buttons when in touch mode.
 - ### Version 2.1.3:
   > #### Changes:
   >> ##### Changed:
