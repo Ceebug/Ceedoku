@@ -178,7 +178,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
             opacity .28s ease;
     }
     .new-main2.disabled:hover {background: #b1bdcc !important}
-.new-main2.disabled:active {background: #b1bdcc !important;transform(translatey(0px) !Important}
+.new-main2.disabled:active {background: #b1bdcc !important;transform:(translatey(0px) !Important}
     .win-overlay.show .win-card {
         transform: scale(1) translateY(0);
         opacity: 1;
