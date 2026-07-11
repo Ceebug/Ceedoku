@@ -711,34 +711,34 @@ if (runninggame){
                 undoStack.push(move);
                 applyHistoryMove(move, "redo");
               }
-function peers(index) {
-  const result = new Set();
+
+function getCandidates(index) {
+  if (values[index] !== 0) return [];
 
   const row = Math.floor(index / 9);
   const col = index % 9;
   const box = Math.floor(row / 3) * 3 + Math.floor(col / 3);
 
-  for (const i of rows[row]) result.add(i);
-  for (const i of cols[col]) result.add(i);
-  for (const i of boxes[box]) result.add(i);
-
-  result.delete(index);
-
-  return result;
-}
-function getCandidates(index) {
-  if (values[index] !== 0) return [];
-
   const used = new Set();
 
-  for (const i of peers(index)) {
-    if (values[i]) used.add(values[i]);
+  for (const i of rows[row]) {
+    if (i !== index && values[i]) used.add(values[i]);
+  }
+
+  for (const i of cols[col]) {
+    if (i !== index && values[i]) used.add(values[i]);
+  }
+
+  for (const i of boxes[box]) {
+    if (i !== index && values[i]) used.add(values[i]);
   }
 
   const candidates = [];
 
   for (let n = 1; n <= 9; n++) {
-    if (!used.has(n)) candidates.push(n);
+    if (!used.has(n)) {
+      candidates.push(n);
+    }
   }
 
   return candidates;
