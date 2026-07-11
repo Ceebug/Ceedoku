@@ -114,16 +114,16 @@
 }
 
 	.delete-button:hover {
-		background-color: var(--delete-save)
+		background-color: var(--delete-save) !important
 	}
 	.delete-button:active {
-		background: color-mix(in srgb, var(--delete-save) 70%, var(--surface-2))
+		background: color-mix(in srgb, var(--delete-save) 70%, var(--surface-2)) !important
 	}
 	.cancel-button:hover {
-		background-color: var(--muted)
+		background-color: var(--muted) !important
 	}
 	.cancel-button:active {
-		background: color-mix(in srgb, var(--muted) 70%, var(--surface-2))
+		background: color-mix(in srgb, var(--muted) 70%, var(--surface-2)) !important
 	}
 
 }
