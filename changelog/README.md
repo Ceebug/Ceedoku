@@ -1,10 +1,16 @@
 - ### Version 2.1.1:
   > #### Changes:
+  >> ##### Fixed:
+  >>> - Number buttons staying highlighted when in mobile
+- ### Version 2.1.1:
+  > #### Changes:
   >> ##### Changed:
   >>> - Changed the cells to have rounded corners.
   >>> - Changed the hover state of buttons in light mode to be a little better
   >> ##### Added:
   >>> - Added hover and active states for new buttons
+  >> ##### Fixed:
+  >>> - Fixed the mistakes showing on the wrong side of the box
 - ### Version 2.1.0:
   > #### Changes:
   >> ##### Added:
