@@ -1,3 +1,9 @@
+- ### Version 2.0.10:
+  > #### Changes:
+  >> - Patched the symbol not updating after mode switch in the main menu mode switcher.
+- ### Version 2.0.9:
+  > #### Changes:
+  >> - Added a light/dark mode switcher to the main menu.
 - ### Version 2.0.8:
   > #### Changes:
   >> - Fixed a bug where some difficulty menus were still displaying wrong.
