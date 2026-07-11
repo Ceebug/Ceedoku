@@ -849,7 +849,6 @@ position: relative;
             opacity: 0;
             transform: scale(1);
           }
-        }
 		}
         .status-line {
           display: flex;
@@ -1187,7 +1186,7 @@ body.light .whatdoievencallthis {
     
         .menu-item[aria-selected="true"] {
           color: var(--blue);
-          background: background: var(--surface-2);;
+          background: var(--surface-2);;
         }
     #timer {
     cursor: default;
@@ -1310,7 +1309,7 @@ body.light .whatdoievencallthis {
           }
         }
     
-        @@media (orientation: portrait) {
+        @media (orientation: portrait) {
           .topbar {
             align-items: start;
           }
