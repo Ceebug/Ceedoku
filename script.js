@@ -755,32 +755,30 @@ function findNakedSingle(index) {
 function findHiddenSingleForCell(index) {
   if (givens[index] || values[index] !== 0) return null;
 
+  const candidates = getCandidates(index);
+
   const unitList = [
     rows[Math.floor(index / 9)],
     cols[index % 9],
     boxes[Math.floor(index / 27) * 3 + Math.floor((index % 9) / 3)]
   ];
 
-  for (const unit of unitList) {
-    for (let number = 1; number <= 9; number++) {
-      const possible = unit.filter(i =>
-        !givens[i] &&
-        values[i] === 0 &&
-        getCandidates(i).includes(number)
-      );
+  for (const number of candidates) {
+    for (const unit of unitList) {
 
-      if (possible.length === 1 && possible[0] === index) {
-		  console.log({
-  index,
-  number,
-  unit,
-  possible,
-  candidates: unit.map(i => ({
-    i,
-    value: values[i],
-    candidates: values[i] ? [] : getCandidates(i)
-  }))
-});
+      let foundElsewhere = false;
+
+      for (const i of unit) {
+        if (i === index) continue;      // <-- don't count this cell
+        if (givens[i] || values[i] !== 0) continue;
+
+        if (getCandidates(i).includes(number)) {
+          foundElsewhere = true;
+          break;
+        }
+      }
+
+      if (!foundElsewhere) {
         return {
           index,
           value: number
@@ -788,7 +786,7 @@ function findHiddenSingleForCell(index) {
       }
     }
   }
- 
+
   return null;
 }
 
@@ -805,10 +803,16 @@ function hint() {
 
   let move = null;
 
-  if (selected !== null && !givens[selected] && values[selected] === 0) {
+  // Try the selected cell first
+  if (
+    selected !== null &&
+    !givens[selected] &&
+    values[selected] === 0
+  ) {
     move = findMoveForCell(selected);
   }
 
+  // Otherwise search the whole board
   if (!move) {
     for (let i = 0; i < 81; i++) {
       if (givens[i] || values[i] !== 0) continue;
@@ -819,9 +823,30 @@ function hint() {
     }
   }
 
-  console.log("MOVE =", move);
-
+  // No logical move found
   if (!move) return;
+
+  const target = move.index;
+  selected = target;
+
+  const beforeStates = new Map([[target, cellSnapshot(target)]]);
+  const previousCompleted = getCompletedUnits();
+
+  values[target] = move.value;
+  notes[target].clear();
+
+  const nextCompleted = getCompletedUnits();
+
+  scrubNotes(
+    collectNewlyCompleted(previousCompleted, nextCompleted),
+    beforeStates
+  );
+
+  pushChanges(makeChangeList(beforeStates), target);
+
+  paintBoard();
+  animateNewCompletions(previousCompleted, selected);
+  checkWin();
 }
              
         
