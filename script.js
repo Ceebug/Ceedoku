@@ -125,21 +125,7 @@
                 pauseOverlay.classList.add("show");
             });
         }
-function peers(index) {
-  const result = new Set();
 
-  const row = Math.floor(index / 9);
-  const col = index % 9;
-  const box = Math.floor(row / 3) * 3 + Math.floor(col / 3);
-
-  for (const i of rows[row]) result.add(i);
-  for (const i of cols[col]) result.add(i);
-  for (const i of boxes[box]) result.add(i);
-
-  result.delete(index);
-
-  return result;
-}
 					function showcontinueGame() {
 					if(nosave)return
             continueDifficulty.textContent =
@@ -153,6 +139,7 @@ function peers(index) {
                 continueOverlay.classList.add("show");
             });
         }
+
 					function showdeleteGame() {
             deleteOverlay.hidden = false;
         
@@ -724,6 +711,21 @@ if (runninggame){
                 undoStack.push(move);
                 applyHistoryMove(move, "redo");
               }
+function peers(index) {
+  const result = new Set();
+
+  const row = Math.floor(index / 9);
+  const col = index % 9;
+  const box = Math.floor(row / 3) * 3 + Math.floor(col / 3);
+
+  for (const i of rows[row]) result.add(i);
+  for (const i of cols[col]) result.add(i);
+  for (const i of boxes[box]) result.add(i);
+
+  result.delete(index);
+
+  return result;
+}
 function getCandidates(index) {
   if (values[index] !== 0) return [];
 
