@@ -753,40 +753,95 @@ function findNakedSingle(index) {
 }
 
 function findHiddenSingleForCell(index) {
-  if (givens[index] || values[index] !== 0) return null;
 
+  // Ignore cells that already have a value.
+  if (givens[index] || values[index] !== 0) {
+    return null;
+  }
+
+  // Find every number that this cell could legally contain.
   const candidates = getCandidates(index);
 
-  const unitList = [
-    rows[Math.floor(index / 9)],
-    cols[index % 9],
-    boxes[Math.floor(index / 27) * 3 + Math.floor((index % 9) / 3)]
-  ];
+  // Work out which row, column and box this cell belongs to.
+  const row = rows[Math.floor(index / 9)];
+  const col = cols[index % 9];
+  const box = boxes[Math.floor(index / 27) * 3 + Math.floor((index % 9) / 3)];
 
+  // Check each candidate separately.
   for (const number of candidates) {
-    for (const unit of unitList) {
 
-      let foundElsewhere = false;
+    // ---------- ROW ----------
+    let rowUnique = true;
 
-      for (const i of unit) {
-        if (i === index) continue;      // <-- don't count this cell
-        if (givens[i] || values[i] !== 0) continue;
+    for (const other of row) {
 
-        if (getCandidates(i).includes(number)) {
-          foundElsewhere = true;
-          break;
-        }
+      // Don't compare the cell to itself.
+      if (other === index) continue;
+
+      // Ignore filled cells.
+      if (values[other] !== 0) continue;
+
+      // If another cell can also be this number,
+      // then this isn't unique in the row.
+      if (getCandidates(other).includes(number)) {
+        rowUnique = false;
+        break;
       }
+    }
 
-      if (!foundElsewhere) {
-        return {
-          index,
-          value: number
-        };
+    if (rowUnique) {
+      return {
+        index,
+        value: number
+      };
+    }
+
+    // ---------- COLUMN ----------
+    let colUnique = true;
+
+    for (const other of col) {
+
+      if (other === index) continue;
+
+      if (values[other] !== 0) continue;
+
+      if (getCandidates(other).includes(number)) {
+        colUnique = false;
+        break;
       }
+    }
+
+    if (colUnique) {
+      return {
+        index,
+        value: number
+      };
+    }
+
+    // ---------- BOX ----------
+    let boxUnique = true;
+
+    for (const other of box) {
+
+      if (other === index) continue;
+
+      if (values[other] !== 0) continue;
+
+      if (getCandidates(other).includes(number)) {
+        boxUnique = false;
+        break;
+      }
+    }
+
+    if (boxUnique) {
+      return {
+        index,
+        value: number
+      };
     }
   }
 
+  // None of this cell's candidates were hidden singles.
   return null;
 }
 
