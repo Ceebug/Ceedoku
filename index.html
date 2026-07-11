@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-    <script id="vervar">const version = "2.1.0";</script>
+    <script id="vervar">const version = "2.1.1";</script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +19,7 @@
 	  --text2: #000000;
 	  --text3: var(--muted);
 	  --text4: #435368;
+		 --blue-soft2: #accfff;
           --muted: #66778c;
           --line: #b7c5d6;
           --line-strong: #4c5867;
@@ -42,8 +43,23 @@
           --board-size: calc(var(--cell-size) * 9);
           font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
+.delete-button:hover {
+	background: color-mix(in srgb, var(--delete-save) 70%, var(--surface-2)) !important
+}
+.delete-button:active {
+	background: color-mix(in srgb, var(--delete-save) 60%, var(--surface-2)) !important
+}
+.cancel-button:hover {
+	background: color-mix(in srgb, var(--muted) 70%, var(--surface-2)) !important
+}
+.cancel-button:active {
+	background: color-mix(in srgb, var(--muted) 60%, var(--surface-2)) !important
+}
 #title {
 font-size: clamp(1.20rem, 5vw, 2.5rem)
+}
+.cell {
+	border-radius: 2px
 }
 
     @keyframes cellPulse {
@@ -56,7 +72,17 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         100% {
             transform: scale(1);
         }
-    }.cell.related {
+    }
+.cell.related {
+        background: color-mix(in srgb, var(--blue) 12%, var(--surface));
+    }
+.cell.given.related {
+        background: color-mix(in srgb, var(--blue) 12%, var(--surface));
+    }
+	.cell.completed.related {
+        background: color-mix(in srgb, var(--blue) 12%, var(--surface));
+    }
+	.cell.given.completed.related {
         background: color-mix(in srgb, var(--blue) 12%, var(--surface));
     }
     .mode-wheel {
@@ -68,6 +94,13 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
     .cell.same-number {
         background: color-mix(in srgb, var(--blue) 20%, var(--surface));
     }
+    .cell.completed.same-number {
+        background: color-mix(in srgb, var(--blue) 20%, var(--surface));
+    }
+    .cell.given.completed.same-number {
+        background: color-mix(in srgb, var(--blue) 20%, var(--surface));
+    }
+
     .win-overlay {
         position: fixed;
         inset: 0;
@@ -162,6 +195,16 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
     .cell.related.same-number {
         background: color-mix(in srgb, var(--blue) 30%, var(--surface));
     }
+    .cell.given.related.same-number {
+        background: color-mix(in srgb, var(--blue) 30%, var(--surface));
+    }
+    .cell.related.completed.same-number {
+        background: color-mix(in srgb, var(--blue) 30%, var(--surface));
+    }
+    .cell.given.completed.related.same-number {
+        background: color-mix(in srgb, var(--blue) 30%, var(--surface));
+    }
+
     
     .cell-complete-pop {
         animation: cellPulse 180ms ease-out;
@@ -212,6 +255,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
           --line: #4e6177;
           --blue: #73a7ff;
           --blue-soft: #203a5f;
+		  --blue-soft2: var(--blue-soft);
           --blue-softer: #1b2c45;
           --lime: #a7ff48;
 	      --pencilerasebutton: #26313f;
@@ -498,19 +542,23 @@ position: relative;
         }
     
         .cell:nth-child(3n) {
-          border-right-width: 3px;
+          border-right-width: 2px;
           border-right-color: var(--line-strong);
         }
     
         .cell:nth-child(9n) {
           border-right: 0;
         }
+	.cell.selected.related {
+		border-width: 0px !important
+	}
     
         .cell:nth-child(n + 19):nth-child(-n + 27),
         .cell:nth-child(n + 46):nth-child(-n + 54) {
-          border-bottom-width: 3px;
+          border-bottom-width: 2px;
           border-bottom-color: var(--line-strong);
         }
+
     
         .cell:nth-child(n + 73) {
           border-bottom: 0;
@@ -926,12 +974,12 @@ body.light .whatdoievencallthis {
         .menu-item:hover,
         .theme-toggle:hover,
         .history-button:hover:not(:disabled) {
-          background: color-mix(in srgb, var(--blue-soft) 65%, var(--surface-2));
+          background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2));
 	  color: var(--muted);
         }
     		.menu-item[aria-selected=true]:hover,
 			    		.menu-item[aria-selected=true]:active {
-          background: color-mix(in srgb, var(--blue-soft) 65%, var(--surface-2));		
+          background: color-mix(in srgb, var(--blue-soft2) 65%, var(--surface-2));		
 }		  
         .hint-button:active,
         .pencil-button:active,
@@ -1040,7 +1088,8 @@ body.light .whatdoievencallthis {
 	.something {
 		top: 100% !important;
 		right: -10% !important
-    }
+   	 }
+
         .new-game-band {
           position: relative;
           display: grid;
@@ -1462,7 +1511,7 @@ transform: translatey(-5px)
 .menu-item:active,
 .theme-toggle:active,
 .history-button:active:not(:disabled) {
-    background: color-mix(in srgb, var(--blue-soft) 65%, var(--surface-2));
+    background: color-mix(in srgb, var(--blue-soft2) 65%, var(--surface-2));
     color: var(--muted);
     transform: translateY(1px);
     border-radius: 999px;
@@ -1550,6 +1599,18 @@ transform: translatey(-5px)
 		top: 120%;
 		box-shadow: none !important
 	}
+	.delete-button:hover {
+		background-color: var(--delete-save)
+	}
+	.delete-button:active {
+		background: color-mix(in srgb, var(--delete-save) 70%, var(--surface-2))
+	}
+	.cancel-button:hover {
+		background-color: var(--muted)
+	}
+	.cancel-button:active {
+		background: color-mix(in srgb, var(--muted) 70%, var(--surface-2))
+	}
 	.whatdoievencallthis {
 		width: 100%
 	}
@@ -1590,7 +1651,7 @@ transform: translatey(-5px)
                 </div>
                 <div class="board-wrap">
                     <div class="board" id="board" role="grid" aria-label="Ceedoku board"></div>
-                </div><div class="status-line" style="padding: 3px;">
+                </div><div class="status-line" style="padding: 3px;display: flex;justify-content: space-between;">
                     <span id="mistakeStatus">Mistakes: 0</span>
                     <span id="emptyStatus">Empty: 36</span>
                 </div>
@@ -1796,7 +1857,7 @@ transform: translatey(-5px)
                     
 
                 </div></div>
-		<button class="new-main2" onclick="continueGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;">Continue Game</button><button class="new-main2" onclick="showdeleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background-color: var(--delete-save)">Delete Save File</button><button class="new-main2" onclick="hidecontinuegame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background: var(--surface-3);">Cancel</button>
+		<button class="new-main2" onclick="continueGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;">Continue Game</button><button class="new-main2 delete-button" onclick="showdeleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background-color: var(--delete-save)">Delete Save File</button><button class="new-main2 cancel-button" onclick="hidecontinuegame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background: var(--muted);">Cancel</button>
                 
 
             </div>
@@ -1826,7 +1887,7 @@ transform: translatey(-5px)
                     
 
                 </div></div>
-		<button class="new-main2" onclick="deleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background-color: var(--delete-save)">Delete Save File</button><button class="new-main2" onclick="hidedeleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background: var(--surface-3);">Cancel</button>
+		<button class="new-main2 delete-button" onclick="deleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background-color: var(--delete-save)">Delete Save File</button><button class="new-main2 cancel-button" onclick="hidedeleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background: var(--muted);">Cancel</button>
                 
 
             </div>
