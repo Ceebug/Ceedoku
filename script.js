@@ -310,9 +310,9 @@ function pauseTimer() {
 }
 			window.addEventListener("visibilitychange", lostfocuspause)
 			function lostfocuspause() {
-    console.log('Window lost focus; paused game');
+				if (runninggame) {
 		if (!timerPaused) {
-				// PAUSE
+	    console.log('Window lost focus; paused game');
         timerPaused = true;
 
         clearInterval(timerId);
@@ -323,6 +323,7 @@ function pauseTimer() {
         document.title = "Ceedoku - Paused";
 		showPauseScreen()
 		}
+	}
 };
 
 
