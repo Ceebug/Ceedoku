@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-    <script id="vervar">const version = "2.1.5";</script>
+    <script id="vervar">const version = "2.3.0";</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#101418">
@@ -120,7 +120,7 @@
 
                 </div>
             </aside>
-<div class="foo" style="display: flex;position: absolute;right: 20px;top: 20px;width: 120px;gap: 10px;"><button id="mode" class="bar hint-button" onclick="changemode()" style="font-size:22px;justify-self: right;width: 50px;height: 50px;right: 20px;top: 20px;">☀</button>
+<div class="foo" style="display: flex;position: absolute;right: 20px;top: 20px;gap: 10px;">
 <button id="pause-btn" class="hint-button bar" onclick="pauseTimer()" style="justify-self: left;width: 50px;height: 50px;right: 20px;top: 20px;">▶</button>
 </div>
         </main>
@@ -216,7 +216,7 @@
         </div>
 
      </div></div>   
-        <div id="mainmenu" class="win-overlay2 show" style="align-items: normal;height: 101dvh;position: absolute;width: 100dvw;background-color: var(--bg);display: flex;flex-direction: column;padding: 20px;justify-content: center;z-index: 4999;"><button id="mode2" class="bar hint-button mode" onclick="changemode()" style="font-size:22px;justify-self: right;width: 50px;height: 50px;right: 20px;top: 20px;position: absolute;">☀</button><h3 id="version" style="position: absolute;bottom: 0px;z-index: 9999;margin-bottom: 0px;left: 50dvw;transform: translatex(-50%);"><strong>Version:</strong> *loading*</h3><div class="cmon" style="display: flex;flex-direction: column;align-content: center;"><div style="display:flex;justify-content:center"><img style="width:90%" class="whatdoievencallthis" src="./title.png" alt="CEEDOKU"></div><div style="margin-top: 20px;"><button class="new-main2" id="igiveup" onclick="showcontinueGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;">Continue Game</button></div><div style="margin-top: 20px;"><button class="new-main2" onclick="openmainDifficultyMenu()" id="mainDifficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;">New Game</button>
+        <div id="mainmenu" class="win-overlay2 show" style="align-items: normal;height: 101dvh;position: absolute;width: 100dvw;background-color: var(--bg);display: flex;flex-direction: column;padding: 20px;justify-content: center;z-index: 4999;"><h3 id="version" style="position: absolute;bottom: 0px;z-index: 9999;margin-bottom: 0px;left: 50dvw;transform: translatex(-50%);"><strong>Version:</strong> *loading*</h3><div class="cmon" style="display: flex;flex-direction: column;align-content: center;"><div style="display:flex;justify-content:center"><img style="width:90%" class="whatdoievencallthis" src="./title.png" alt="CEEDOKU"></div><div style="margin-top: 20px;"><button class="new-main2" id="igiveup" onclick="showcontinueGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;">Continue Game</button></div><div style="margin-top: 20px;"><button class="new-main2" onclick="openmainDifficultyMenu()" id="mainDifficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;">New Game</button>
                     
                     
                     <div class="difficulty-menu2 urgh" id="maindifficultyMenu" role="listbox" aria-label="Difficulty">
@@ -225,7 +225,7 @@
                         <button class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Hard <span>51</span></button>
                         <button class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Expert <span>58</span></button>
 					</div>
-                </div></div></div><div id="crashscreen" style="visibility:hidden;width: 100dvw;height: 100dvh;position: absolute;background-color: black;z-index: 10000;display: flex;flex-direction: column;justify-content: center;align-items: center;"><h1 style="font-size: 150px;margin-bottom: 50px;">:(</h1><h1>Ceedoku has crashed</h1><h2 id="crashscreenerrormsg">There was no crash message</h2></div><div id="continueOverlay" class="win-overlay" style="border-radius: 66px;overflow: clip;">
+                </div></div></div><div id="crashscreen" style="visibility:hidden;width: 100dvw;height: 100dvh;position: absolute;background-color: black;z-index: 10000000;display: flex;flex-direction: column;justify-content: center;align-items: center;"><h1 style="font-size: 150px;margin-bottom: 50px;">:(</h1><h1>Ceedoku has crashed</h1><h2 id="crashscreenerrormsg">There was no crash message</h2></div><div id="continueOverlay" class="win-overlay" style="border-radius: 66px;overflow: clip;">
 
 
             <div class="win-card">
@@ -286,6 +286,10 @@
             </div>
 
         </div>
+	<div id="sitecontrols" style="z-index:10000;width: fit-content;position: absolute;top: 0px;right: 0px;background-color: var(--surface);padding: 5px;display: flex;gap: 5px;padding-left: 10px;padding-bottom: 10px;border-bottom-left-radius: 32px;"><button id="mode" class="bar hint-button" onclick="changemode()" style="font-size:22px;width: 50px;height: 50px;">☀</button>
+<button id="fullscreen" class="bar hint-button" onclick="fullscreen()" style="font-size:18px;width: 50px;height: 50px;padding: 0px;transform: rotate(40deg);">❮ ❯</button>
+
+</div>
 <script id="touchormousedetector">const touchStyles = document.getElementById("touchStyles");touchStyles.disabled = !window.matchMedia("(hover: none) and (pointer: coarse)").matches;window.addEventListener("pointermove", (e) => {if (e.pointerType === "mouse") {touchStyles.disabled = true;}});window.addEventListener("pointerdown", (e) => {if (e.pointerType === "touch") {touchStyles.disabled = false;}});</script>
 
 <script id="setver">document.getElementById("version").textContent = `Version: ${version}`;</script>		
