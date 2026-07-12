@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-    <script id="vervar">const version = "2.3.1";</script>
+    <script id="vervar">const version = "2.3.2";</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#101418">
@@ -286,8 +286,10 @@
             </div>
 
         </div>
-	<div id="sitecontrols" style="z-index:10000;width: fit-content;position: absolute;top: 0px;right: 0px;background-color: var(--surface);padding: 5px;display: flex;gap: 5px;padding-left: 10px;padding-bottom: 10px;border-bottom-left-radius: 32px;"><button id="mode" class="bar hint-button" onclick="changemode()" style="font-size:22px;width: 50px;height: 50px !important;">☀</button>
+	<div id="sitecontrols" style="z-index: 10000; width: fit-content; position: absolute; top: 0px; right: 0px; background-color: var(--surface); padding: 5px 5px 10px 10px; display: flex; gap: 5px; border-bottom-left-radius: 32px; --darkreader-inline-bgcolor: var(--darkreader-bg--surface, var(--darkreader-background-ffffff, #181a1b));border: 1px solid var(--outline);border-top: 0px;border-right: 0;" data-darkreader-inline-bgcolor=""><button id="mode" class="bar hint-button" onclick="changemode()" style="font-size:22px;width: 50px;height: 50px !important;"><b>☾</b></button>
 <button id="fullscreen" class="bar hint-button" onclick="fullscreen()" style="font-size:18px;width: 50px;height: 50px;padding: 0px;transform: rotate(40deg);">❮ ❯</button>
+
+</div>
 
 </div>
 <script id="touchormousedetector">const touchStyles = document.getElementById("touchStyles");touchStyles.disabled = !window.matchMedia("(hover: none) and (pointer: coarse)").matches;window.addEventListener("pointermove", (e) => {if (e.pointerType === "mouse") {touchStyles.disabled = true;}});window.addEventListener("pointerdown", (e) => {if (e.pointerType === "touch") {touchStyles.disabled = false;}});</script>
