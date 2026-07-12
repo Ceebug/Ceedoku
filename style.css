@@ -1393,9 +1393,6 @@ body.light .whatdoievencallthis {
 		  .sidebar {
 			height: fit-content
 			}
-					#mode {
-transform: translatey(-5px)
-}
 		
           .control-band {
             grid-template-columns: 1fr;
@@ -1423,11 +1420,6 @@ transform: translatey(-5px)
 		width: 50px;
 		transform: translatey(-5px)translatex(0px)
 		}
-	#mode {
-		padding: 0 0 2 0px !important;
-		height: 42.75 !important;
-		width: 45% !important;
-	}	
 	.bar {
 	width: 45%
 	}
