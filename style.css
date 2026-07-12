@@ -63,6 +63,9 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
             transform: scale(1);
         }
     }
+.sidebar {
+	max-height: calc(100% - 82px)
+}
 .cell.related {
         background: color-mix(in srgb, var(--blue) 12%, var(--surface));
     }
@@ -385,14 +388,14 @@ position: relative;
         .game-shell {
           padding-top: 10px !important;
           border: 1px solid color-mix(in srgb, var(--surface-3) 70%, transparent);
-          border-radius: 40px;
+          border-radius: 62px;
           background: var(--shell);
           box-shadow: 0 5px 15px rgba(12, 22, 36, .12);
           backdrop-filter: blur(10px);
 		  padding-left: 20px;
 		  padding-right: 20px;
 		  height: fit-content;
-		  padding-bottom: 18px
+		  padding-bottom: 20px
         }
     
         button,
