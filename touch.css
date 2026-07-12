@@ -1,0 +1,129 @@
+
+			        .hint-button:active,
+        .new-main:active,
+        .new-side:active,
+		.new-main2:active,
+        .number-button:active,
+        .menu-item:active,
+        .theme-toggle:active,
+        .history-button:active:not(:disabled) {
+	  background: color-mix(in srgb, var(--blue-soft) 65%, var(--surface-2));
+          transform: translateY(1px);
+        }
+				        .hint-button:hover,
+        .new-main:hover,
+        .new-side:hover,
+		.new-main2:hover,
+        .number-button:hover,
+        .menu-item:hover,
+        .theme-toggle:hover,
+        .history-button:hover:not(:disabled) {
+          border-radius: var(--radius);
+          color: var(--muted);
+          background: var(--surface-2);
+          transition: transform .12s ease, background .14s ease, color .14s ease, box-shadow .14s ease;
+        }
+	.pencil-button:hover,
+	.erase-button:hover {
+	background: var(--pencilerasebutton)
+	} 
+		.new-main:hover {
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;
+          background: var(--blue);
+          color: #fff;
+          font-size: 1.02rem;
+          font-weight: 850;
+		  border-radius: var(--radius);
+		  }
+		 .new-main2:hover {
+          border-top-right-radius: 999px !important;
+          border-bottom-right-radius: 999px !important;
+          background: var(--blue);
+          color: #fff;
+          font-size: 1.02rem;
+          font-weight: 850;
+		  border-radius: var(--radius);
+		  }
+
+		.new-side:hover {
+		  border-top-left-radius: 0 !important;
+          border-bottom-left-radius: 0 !important;
+          background: color-mix(in srgb, var(--blue) 86%, #000);
+          color: #fff;
+          display: grid;
+          place-items: center;
+          border-left: 1px solid rgba(255, 255, 255, .24);
+		  border-radius: var(--radius);
+		  }
+        .pencil-button[aria-pressed="true"]:active {
+          color: color-mix(in srgb, var(--lime-text) 80%, #fff);
+          background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
+        }
+        .pencil-button[aria-pressed="true"]:hover {
+          color: var(--lime-text);
+          background: var(--lime-soft);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
+        }
+    
+        .erase-button[aria-pressed="true"] {
+          color: var(--lime-text);
+          background: var(--lime-soft);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
+        }
+    
+        .erase-button[aria-pressed="true"]:active {
+          color: color-mix(in srgb, var(--lime-text) 80%, #fff);
+          background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
+        }
+        .erase-button[aria-pressed="true"]:hover {
+          color: var(--lime-text);
+          background: var(--lime-soft);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
+        }
+		
+		        .pencil-button[aria-pressed="true"]:hover {
+          color: var(--lime-text);
+          background: var(--lime-soft);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
+        }
+				        .erase-button[aria-pressed="true"]:hover {
+          color: var(--lime-text);
+          background: var(--lime-soft);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
+        }
+
+	.hint-button:active,
+.pencil-button:active:not([aria-pressed="true"]),
+.new-side:active,
+.new-main:active,
+.new-main2:active,
+.number-button:active,
+.erase-button:active:not([aria-pressed="true"]),
+.menu-item:active,
+.theme-toggle:active,
+.history-button:active:not(:disabled) {
+    background: color-mix(in srgb, var(--blue-soft2) 65%, var(--surface-2));
+    color: var(--muted);
+    transform: translateY(1px);
+    border-radius: 999px;
+	border-top-right-radius: 999px !important;
+	border-bottom-right-radius: 999px !important;
+}
+
+	.delete-button:hover {
+		background: var(--delete-save) !important
+	}
+	.delete-button:active {
+		background: color-mix(in srgb, var(--delete-save) 70%, var(--surface-2)) !important
+	}
+	.cancel-button:hover {
+		background: var(--muted) !important
+	}
+	.cancel-button:active {
+		background: color-mix(in srgb, var(--muted) 70%, var(--surface-2)) !important
+	}
+
+}

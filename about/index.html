@@ -1,6 +1,151 @@
 <html itemscope="" itemtype="http://schema.org/WebPage" lang="en-AU"><head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+:root {
+    --surface: #171d24;
+    --text: #dce3e9;
+    --blue: #73a7ff;
+    --shadow: 0 5px 48px rgba(0,0,0,.32);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #101418;
+    color: var(--text);
+    font-family: Inter, system-ui, sans-serif;
+}
+
+
+/* Title bar */
+
+.titlebar {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.logo {
+    height: 60px;
+}
+
+.desktop-menu {
+    margin-left: auto;
+    display: flex;
+    gap: 25px;
+}
+
+.desktop-menu a,
+.mobile-sidebar a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.desktop-menu a:hover,
+.mobile-sidebar a:hover {
+    color: var(--blue);
+}
+
+
+/* Mobile button */
+
+.menu-button {
+    display: none;
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 32px;
+    cursor: pointer;
+}
+
+
+/* Mobile sidebar */
+
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+
+    width: 280px;
+    height: 100dvh;
+
+    background: var(--surface);
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 20px;
+
+    transition: left .3s ease;
+
+    z-index: 1000;
+}
+
+.mobile-sidebar.open {
+    left: 0;
+}
+.sidebar-spacer {
+    flex: 1;
+}
+
+.close-menu {
+    background: none;
+    border: 1px solid var(--text);
+    color: var(--text);
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.close-menu:hover {
+    color: var(--blue);
+}
+
+.sidebar-logo {
+    width: 200px;
+    margin-bottom: 20px;
+}
+.menu-button {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 32px;
+    cursor: pointer;
+}
+
+
+/* Mobile layout */
+
+@media (max-width: 700px) {
+
+    .titlebar {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+        position: absolute;
+        top: 28px;
+        left: 15px;
+        z-index: 999;
+		height: fit-content !important;
+        margin: 0;
+        padding: 0;
+    }
+
+}</style>
+<style>
         :root {
           color-scheme: light;
           --bg: #101418;
@@ -131,21 +276,59 @@ input[type="submit"] {
 	margin-top: 15px !important
     }
     button {
-		height: 12dvh
+		height: 100px
 	}
     .whatamidoingwithmylife {
 		height: fit-content !important;
 		flex-direction: column
 	}
+    .img {
+	width: 80%;
+	transform: translatex(55px);
+	margin-top: 23px
+    }
+    .close-menu {
+		height: fit-content
+	}
 }
     </style>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzOCAzOCIgd2lkdGg9IjM4IiBoZWlnaHQ9IjM4Ij4KCiAgPGRlZnM+CiAgICA8Y2xpcFBhdGggaWQ9ImNsaXAiPgogICAgICA8cmVjdCB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHJ4PSIxMCI+PC9yZWN0PgogICAgPC9jbGlwUGF0aD4KICA8L2RlZnM+CgogIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8cmVjdCB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIGZpbGw9IiMxYTczZTgiPjwvcmVjdD4KCiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOSAxOSkiPgogICAgICA8IS0tIDI0IHJhaW5ib3cgd2VkZ2VzIC0tPgogICAgICA8cGF0aCBkPSJNMCwwIEwwLC0zMCBBMzAsMzAgMCAwLDEgNy43NiwtMjguOTggWiIgZmlsbD0iIzFhNzNlOCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEw3Ljc2LC0yOC45OCBBMzAsMzAgMCAwLDEgMTUsLTI1Ljk4IFoiIGZpbGw9IiMyMTgwZDgiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMMTUsLTI1Ljk4IEEzMCwzMCAwIDAsMSAyMS4yMSwtMjEuMjEgWiIgZmlsbD0iIzJiOGRkMCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyMS4yMSwtMjEuMjEgQTMwLDMwIDAgMCwxIDI1Ljk4LC0xNSBaIiBmaWxsPSIjMzVhMjhhIj48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTDI1Ljk4LC0xNSBBMzAsMzAgMCAwLDEgMjguOTgsLTcuNzYgWiIgZmlsbD0iIzQwYjU2YSI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyOC45OCwtNy43NiBBMzAsMzAgMCAwLDEgMzAsMCBaIiBmaWxsPSIjNjhiZjU1Ij48L3BhdGg+CgogICAgICA8cGF0aCBkPSJNMCwwIEwzMCwwIEEzMCwzMCAwIDAsMSAyOC45OCw3Ljc2IFoiIGZpbGw9IiM4ZmM4NDAiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMMjguOTgsNy43NiBBMzAsMzAgMCAwLDEgMjUuOTgsMTUgWiIgZmlsbD0iI2I3ZDEyYSI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyNS45OCwxNSBBMzAsMzAgMCAwLDEgMjEuMjEsMjEuMjEgWiIgZmlsbD0iI2RiYzcxNCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyMS4yMSwyMS4yMSBBMzAsMzAgMCAwLDEgMTUsMjUuOTggWiIgZmlsbD0iI2ZiYmMwNCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwxNSwyNS45OCBBMzAsMzAgMCAwLDEgNy43NiwyOC45OCBaIiBmaWxsPSIjZjRhMjA0Ij48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTDcuNzYsMjguOTggQTMwLDMwIDAgMCwxIDAsMzAgWiIgZmlsbD0iI2VjODYwYiI+PC9wYXRoPgoKICAgICAgPHBhdGggZD0iTTAsMCBMMCwzMCBBMzAsMzAgMCAwLDEgLTcuNzYsMjguOTggWiIgZmlsbD0iI2U1NmExMyI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtNy43NiwyOC45OCBBMzAsMzAgMCAwLDEgLTE1LDI1Ljk4IFoiIGZpbGw9IiNkZjUzMWEiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMLTE1LDI1Ljk4IEEzMCwzMCAwIDAsMSAtMjEuMjEsMjEuMjEgWiIgZmlsbD0iI2Q5MzAyNSI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtMjEuMjEsMjEuMjEgQTMwLDMwIDAgMCwxIC0yNS45OCwxNSBaIiBmaWxsPSIjY2YyZjRkIj48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTC0yNS45OCwxNSBBMzAsMzAgMCAwLDEgLTI4Ljk4LDcuNzYgWiIgZmlsbD0iI2M2MzA3NiI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtMjguOTgsNy43NiBBMzAsMzAgMCAwLDEgLTMwLDAgWiIgZmlsbD0iI2I4MzQ5YyI+PC9wYXRoPgoKICAgICAgPHBhdGggZD0iTTAsMCBMLTMwLDAgQTMwLDMwIDAgMCwxIC0yOC45OCwtNy43NiBaIiBmaWxsPSIjYTUzY2JmIj48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTC0yOC45OCwtNy43NiBBMzAsMzAgMCAwLDEgLTI1Ljk4LC0xNSBaIiBmaWxsPSIjOGQ0OWQ0Ij48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTC0yNS45OCwtMTUgQTMwLDMwIDAgMCwxIC0yMS4yMSwtMjEuMjEgWiIgZmlsbD0iIzZmNWRlMyI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtMjEuMjEsLTIxLjIxIEEzMCwzMCAwIDAsMSAtMTUsLTI1Ljk4IFoiIGZpbGw9IiM0ZjZkZWIiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMLTE1LC0yNS45OCBBMzAsMzAgMCAwLDEgLTcuNzYsLTI4Ljk4IFoiIGZpbGw9IiMzMzdiZWUiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMLTcuNzYsLTI4Ljk4IEEzMCwzMCAwIDAsMSAwLC0zMCBaIiBmaWxsPSIjMWE3M2U4Ij48L3BhdGg+CiAgICA8L2c+CiAgPC9nPgoKICA8IS0tIDPDlzMgZ3JpZCAtLT4KICA8ZyBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC45MikiPgogICAgPHJlY3QgeD0iNyIgeT0iNyIgd2lkdGg9IjYiIGhlaWdodD0iNiIgcng9IjIiPjwvcmVjdD4KICAgIDxyZWN0IHg9IjE2IiB5PSI3IiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiByeD0iMiI+PC9yZWN0PgogICAgPHJlY3QgeD0iMjUiIHk9IjciIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CgogICAgPHJlY3QgeD0iNyIgeT0iMTYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIxNiIgeT0iMTYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIyNSIgeT0iMTYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CgogICAgPHJlY3QgeD0iNyIgeT0iMjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIxNiIgeT0iMjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIyNSIgeT0iMjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgPC9nPgoKPC9zdmc+">
-  <title>Ceedoku - About</title></head><body class="dark activity-stream" style="height: 100%;padding: 10px;">
+  <title>Ceedoku - About the game</title></head><body class="dark activity-stream" style="height: fit-content;/*! padding: 10px; */"><header class="titlebar" style="">
+
+    <a href="https://ceedoku.github.io/home">
+        <img src="./title.png" class="logo" alt="Ceedoku" style="">
+    </a>
+
+    <nav class="desktop-menu">
+        <a href="https://ceedoku.github.io/about"><strong>About the Game</strong></a>
+        <a href="https://ceedoku.github.io/download">Download</a>
+        <a href="https://ceedoku.github.io/install">Installation Guide</a>
+        <a href="https://ceedoku.github.io/changelog">Changelog</a>
+    </nav>
+
+</header>
+
+<button class="menu-button" onclick="toggleMenu()" style="color: rgb(71, 186, 130); --darkreader-inline-color: var(--darkreader-text-47ba82, #59c18e);" data-darkreader-inline-color="">☰</button>
+
+
+<div class="mobile-sidebar" id="sidebar">
+
+    <a href="https://ceedoku.github.io/home">
+        <img src="./title.png" class="sidebar-logo" alt="Ceedoku">
+    </a>
+
+    <a href="https://ceedoku.github.io/about"><strong>About the Game</strong></a>
+    <a href="https://ceedoku.github.io/download">Download</a>
+    <a href="https://ceedoku.github.io/install">Installation Guide</a>
+    <a href="https://ceedoku.github.io/changelog">Changelog</a>
+    <div class="sidebar-spacer"></div>
+        <button class="close-menu" onclick="toggleMenu()">
+        Close Menu
+    </button>
+</div>
     <div class="about-container" style="display: flex;flex-direction: column;width: calc(100dvw - 20px);">
 
-        <img src=".\title.png" alt="CEEDOKU" class="title">
-
-        <h2 class="why" style="color: var(--text2); margin-bottom: 0px; margin-top: 0px; --darkreader-inline-color: var(--darkreader-text--text2, var(--darkreader-text-000000, #e8e6e3));" data-darkreader-inline-color="">Features:</h2>
+        <img class="img" src=".\title.png" alt="CEEDOKU" style="">        <h2 class="why" style="color: var(--text2); margin-bottom: 0px; margin-top: 0px; --darkreader-inline-color: var(--darkreader-text--text2, var(--darkreader-text-000000, #e8e6e3));" data-darkreader-inline-color="">Features:</h2>
 
         <div class="card" style="padding-top: 8px; padding-bottom: 8px; background-color: var(--surface); border-radius: 20px; border: 1px solid rgb(35, 43, 54); margin-top: 1dvh; --darkreader-inline-bgcolor: var(--darkreader-bg--surface, var(--darkreader-background-ffffff, #181a1b)); --darkreader-inline-border-top: var(--darkreader-border-232b36, #7d7467); --darkreader-inline-border-right: var(--darkreader-border-232b36, #7d7467); --darkreader-inline-border-bottom: var(--darkreader-border-232b36, #7d7467); --darkreader-inline-border-left: var(--darkreader-border-232b36, #7d7467);" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
             <ul>
@@ -163,8 +346,7 @@ input[type="submit"] {
 		<li><strong>No ads</strong></li>
 		<li><strong>Pause on lost focus</strong> (Your game will be paused if you minimize, close, or otherwise make the app not visible.)
             </li></ul>
-        </div>
-      <h2 style="color: var(--text2); margin-bottom: 0px; margin-top: 10px; --darkreader-inline-color: var(--darkreader-text--text2, var(--darkreader-text-000000, #e8e6e3));" data-darkreader-inline-color="">Where to find it:</h2>
+        </div><h2 style="color: var(--text2); margin-bottom: 0px; margin-top: 10px; --darkreader-inline-color: var(--darkreader-text--text2, var(--darkreader-text-000000, #e8e6e3));" data-darkreader-inline-color="">Download Ceedoku</h2>
         <div class="card" style="padding: 8px 25px 25px; background-color: var(--surface); border-radius: 20px; border: 1px solid rgb(35, 43, 54); margin-top: 1dvh; --darkreader-inline-bgcolor: var(--darkreader-bg--surface, var(--darkreader-background-ffffff, #181a1b)); --darkreader-inline-border-top: var(--darkreader-border-232b36, #7d7467); --darkreader-inline-border-right: var(--darkreader-border-232b36, #7d7467); --darkreader-inline-border-bottom: var(--darkreader-border-232b36, #7d7467); --darkreader-inline-border-left: var(--darkreader-border-232b36, #7d7467);margin-bottom: 10px;" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""><p style="">Ceedoku is a website, not an app. However, this does not mean you cannot install Ceedoku. Below are all the ways you can access Ceedoku. <br> Whether it be using the website, Installing from an executable, or something else; rest assured: Ceedoku can run on anything.</p><div class="whatamidoingwithmylife" style="width: 100%; height: 55px; background-color: var(--surface-2); border-radius: 8px; display: flex; padding: 4px; gap: 4px; --darkreader-inline-bgcolor: var(--darkreader-bg--surface-2, var(--darkreader-background-ffffff, #181a1b));" data-darkreader-inline-bgcolor=""><button onclick="location.href='https://ceedoku.github.io';" style="border-radius: 4px; width: 100%; border: 1px solid var(--muted); display: flex; justify-content: center; align-items: center; --darkreader-inline-border-short: 1px solid var(--darkreader-border--muted);" "="" data-darkreader-inline-border-short="">  <svg class="sphere-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="height: 65%; margin-right: 5px; stroke: rgb(72, 147, 255); --darkreader-inline-stroke: var(--darkreader-text-4893ff, #4ca9ff);" data-darkreader-inline-stroke="">
     <circle cx="12" cy="12" r="10"></circle>
     <line x1="2" y1="12" x2="22" y2="12"></line>
@@ -190,6 +372,29 @@ input[type="submit"] {
 
         </div>
     
+
+<script>
+function toggleMenu() {
+    document.getElementById("sidebar").classList.toggle("open");
+}
+
+
+document.addEventListener("click", function(event) {
+
+    const sidebar = document.getElementById("sidebar");
+    const button = document.querySelector(".menu-button");
+
+    if (
+        sidebar.classList.contains("open") &&
+        !sidebar.contains(event.target) &&
+        !button.contains(event.target)
+    ) {
+        sidebar.classList.remove("open");
+    }
+
+});
+</script>
+
 
 
 </body></html>
