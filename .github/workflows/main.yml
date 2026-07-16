@@ -26,7 +26,7 @@ jobs:
 
       - name: Copy game files
         run: |
-          cp index.html testofsync.html script.js style.css touch.css sw.js manifest.json code.md website/
+          cp index.html script.js style.css touch.css sw.js manifest.json code.md website/
 
       - name: Create sync commit
         run: |
@@ -35,7 +35,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add index.html script.js style.css touch.css manifest.json code.md testofsync.html
+          git add index.html script.js style.css touch.css manifest.json code.md
 
           CHANGES=$(git diff --cached --name-only)
 
