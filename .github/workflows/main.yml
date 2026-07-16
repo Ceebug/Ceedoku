@@ -35,7 +35,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add index.html script.js style.css touch.css manifest.json
+          git add index.html script.js style.css touch.css manifest.json testofsync.html
 
           CHANGES=$(git diff --cached --name-only)
 
