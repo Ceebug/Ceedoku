@@ -56,10 +56,13 @@
 	background: color-mix(in srgb, var(--delete-save) 60%, var(--surface-2)) !important
 }
 .cancel-button:hover {
-	background: color-mix(in srgb, var(--muted) 70%, var(--surface-2)) !important
+	background: color-mix(in srgb, var(--surface-2) 70%, var(--surface)) !important
 }
 .cancel-button:active {
-	background: color-mix(in srgb, var(--muted) 60%, var(--surface-2)) !important
+	background: color-mix(in srgb, var(--surface-2) 60%, var(--surface)) !important
+}
+.cancel-button {
+	background: var(--surface-2) !important
 }
 #title {
 font-size: clamp(1.20rem, 5vw, 2.5rem)
