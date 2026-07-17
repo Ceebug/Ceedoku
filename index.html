@@ -55,7 +55,7 @@
             <aside class="sidebar" aria-label="Game controls" style="box-shadow: 0 0 5px 5px var(--shadow-color);">
                 <div class="control-band">
                     <div class="control-card hint-wrap">
-                        <button class="hint-button" id="hintButton" type="button">
+                        <button title="Get a hint." aria-label="Get a hint" class="hint-button" id="hintButton" type="button">
                             <svg viewBox="0 0 30 31" style="height: 35px;">
                                 <path d="M17.3 25.91c.5 0 .91.48.91 1.08 0 .59-.4 1.07-.91 1.07h-4.6c-.5 0-.91-.48-.91-1.07 0-.6.4-1.08.91-1.08zM15 2.34a9.68 9.68 0 019.64 9.71c0 3.5-1.86 6.7-4.83 8.41-.23.14-.4.39-.5.82a3.21 3.21 0 01-3.13 2.5H13.5a3.21 3.21 0 01-3.17-2.68c-.08-.45-.17-.65-.12-.62a9.72 9.72 0 01-4.85-8.43c0-5.36 4.31-9.7 9.64-9.7zm0 2.15a7.53 7.53 0 00-7.5 7.56 7.57 7.57 0 003.78 6.57c.65.38.99 1.1 1.16 2.12.1.51.54.89 1.06.89h2.68c.5 0 .94-.35 1.05-.83.23-.98.73-1.73 1.5-2.19a7.57 7.57 0 003.77-6.56A7.53 7.53 0 0015 4.5z" fill="var(--muted)"></path>
                             </svg>
@@ -64,13 +64,13 @@
                     <div class="control-card timer-wrap" id="timer">Time: 00:00</div>
                     <div class="control-card history-wrap aah">
                         <div class="history-pill" aria-label="History controls">
-                            <button class="history-button" id="undoButton" type="button" aria-label="Undo" title="Undo" disabled="">
+                            <button title="Undo your last move." aria-label="Undo your last move" class="history-button" id="undoButton" type="button" aria-label="Undo" title="Undo" disabled="">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M10 7 5 12l5 5"></path>
                                     <path d="M5 12h14"></path>
                                 </svg>
                             </button>
-                            <button class="history-button" id="redoButton" type="button" aria-label="Redo" title="Redo" disabled="">
+                            <button  title="Redo your last move." aria-label="Redo your last move" class="history-button" id="redoButton" type="button" aria-label="Redo" title="Redo" disabled="">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="m14 7 5 5-5 5"></path>
                                     <path d="M19 12H5"></path>
@@ -81,15 +81,15 @@
                 </div>
 
                 <div class="new-game-band" id="newGameBand">
-                    <button class="new-main uuh" id="newGameButton" type="button">New Game</button>
-                    <button class="new-side umm" id="difficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty">
+                    <button title="Create a new game with the previously selected difficulty." class="new-main uuh" id="newGameButton" type="button">New Game</button>
+                    <button title="Toggle the difficulty menu." class="new-side umm" id="difficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="m6 9 6 6 6-6"></path>
                         </svg>
                     </button>
                     <div class="difficulty-menu something" id="difficultyMenu" role="listbox" aria-label="Difficulty">
                         <button title="Create a new game with the easy difficulty." aria-label="Create a new game with the easy difficulty" class="menu-item" type="button" data-difficulty="easy" role="option" aria-selected="true">Easy <span>36 Holes</span></button>
-                        <button title="Create a new game with the medium difficult."  aria-label="Create a new game with the medium difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Medium <span>44 Holes</span></button>
+                        <button title="Create a new game with the medium difficulty."  aria-label="Create a new game with the medium difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Medium <span>44 Holes</span></button>
                         <button title="Create a new game with the hard difficulty."  aria-label="Create a new game with the hard difficulty"  class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Hard <span>51 Holes</span></button>
                         <button title="Create a new game with the expert difficulty."  aria-label="Create a new game with the expert difficulty" class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Expert <span>58 Holes</span></button>
                     </div>
@@ -99,14 +99,14 @@
 
                 <div class="numbers-band">
                     <div class="pencilanderaser">
-                        <button class="pencileraserbutton pencil-button" id="pencilButton" type="button" aria-pressed="false">
+                        <button title="Toggle pencil mode." class="pencileraserbutton pencil-button" id="pencilButton" type="button" aria-pressed="false">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M12 20h9"></path>
                                 <path d="m16.5 3.5 4 4L8 20H4v-4L16.5 3.5Z"></path>
                             </svg>
                             Pencil
                         </button>
-                        <button class="pencileraserbutton erase-button" id="eraseButton" type="button" aria-pressed="false">
+                        <button title="Toggle erase mode." class="pencileraserbutton erase-button" id="eraseButton" type="button" aria-pressed="false">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="m3 15 8-8a3 3 0 0 1 4.2 0l5.8 5.8"></path>
                                 <path d="m14 21 7-7"></path>
@@ -152,14 +152,14 @@
                 </div></div>
 
                 <div class="new-game-band" id="winnewgameband" style="margin-bottom: 5px;">
-                    <button class="new-main" id="winNewGameButton" type="button">New Game</button>
-                    <button class="new-side" id="winDifficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty">
+                    <button title="Create a new game with the previously selected difficulty." class="new-main" id="winNewGameButton" type="button">New Game</button>
+                    <button title="Toggle the difficulty menu." class="new-side" id="winDifficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="m6 9 6 6 6-6"></path>
                         </svg>
                     </button>
                     <div class="difficulty-menu" id="windifficultyMenu" role="listbox" aria-label="Difficulty">
-                                  <button title="Create a new game with the easy difficult.y" aria-label="Create a new game with the easy difficulty" class="menu-item" type="button" data-difficulty="easy" role="option" aria-selected="true">Easy <span>36 Holes</span></button>
+                                  <button title="Create a new game with the easy difficulty." aria-label="Create a new game with the easy difficulty" class="menu-item" type="button" data-difficulty="easy" role="option" aria-selected="true">Easy <span>36 Holes</span></button>
                         <button title="Create a new game with the medium difficulty."  aria-label="Create a new game with the medium difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Medium <span>44 Holes</span></button>
                         <button title="Create a new game with the hard difficulty."  aria-label="Create a new game with the hard difficulty"  class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Hard <span>51 Holes</span></button>
                         <button title="Create a new game with the expert difficulty."  aria-label="Create a new game with the expert difficulty" class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Expert <span>58 Holes</span></button>
@@ -196,15 +196,15 @@
                 </div></div>
 		<button class="new-main2" onclick="resumeTimer()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;">Continue Game</button>
                 <div class="new-game-band" id="pausenewgameband"  style="margin-bottom: 5px;">
-                    <button class="new-main" id="pauseNewGameButton" type="button">New Game</button>
-                    <button class="new-side" onclick="togglepauseDifficultyMenu()" id="pauseDifficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty">
+                    <button title="Create a new game with the previously selected difficulty." class="new-main" id="pauseNewGameButton" type="button">New Game</button>
+                    <button title="Toggle the difficulty menu." class="new-side" onclick="togglepauseDifficultyMenu()" id="pauseDifficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="m6 9 6 6 6-6"></path>
                         </svg>
                     </button>
                     <div class="difficulty-menu" id="pausedifficultyMenu" role="listbox" aria-label="Difficulty">
-                         <button title="Create a new game with the easy difficulty." aria-label="Create a new game with the easy difficulty" class="menu-item" type="button" data-difficulty="easy" role="option" aria-selected="true">Easy <span>36 Holes</span></button>
-                        <button title="Create a new game with the medium difficult."  aria-label="Create a new game with the medium difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Medium <span>44 Holes</span></button>
+                        <button title="Create a new game with the easy difficulty." aria-label="Create a new game with the easy difficulty" class="menu-item" type="button" data-difficulty="easy" role="option" aria-selected="true">Easy <span>36 Holes</span></button>
+                        <button title="Create a new game with the medium difficulty."  aria-label="Create a new game with the medium difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Medium <span>44 Holes</span></button>
                         <button title="Create a new game with the hard difficulty."  aria-label="Create a new game with the hard difficulty"  class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Hard <span>51 Holes</span></button>
                         <button title="Create a new game with the expert difficulty."  aria-label="Create a new game with the expert difficulty" class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Expert <span>58 Holes</span></button>
                     </div>
@@ -216,7 +216,7 @@
         </div>
 
      </div></div>   
-        <div id="mainmenu" class="win-overlay2 show" style="align-items: normal;height: 101dvh;position: absolute;width: 100dvw;background-color: var(--bg);display: flex;flex-direction: column;padding: 20px;justify-content: center;z-index: 4999;"><h3 id="version" style="position: absolute;bottom: 0px;z-index: 9999;margin-bottom: 0px;left: 50dvw;transform: translatex(-50%);"><strong>Version:</strong> *loading*</h3><div class="cmon" style="display: flex;flex-direction: column;align-content: center;"><div style="display:flex;justify-content:center"><img style="width:90%" class="whatdoievencallthis" src="./title.png" alt="CEEDOKU"></div><div style="margin-top: 20px;"><button class="new-main2" id="igiveup" onclick="showcontinueGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;">Continue Game</button></div><div style="margin-top: 20px;"><button class="new-main2" onclick="openmainDifficultyMenu()" id="mainDifficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;">New Game</button>
+        <div id="mainmenu" class="win-overlay2 show" style="align-items: normal;height: 101dvh;position: absolute;width: 100dvw;background-color: var(--bg);display: flex;flex-direction: column;padding: 20px;justify-content: center;z-index: 4999;"><h3 id="version" style="position: absolute;bottom: 0px;z-index: 9999;margin-bottom: 0px;left: 50dvw;transform: translatex(-50%);"><strong>Version:</strong> *loading*</h3><div class="cmon" style="display: flex;flex-direction: column;align-content: center;"><div style="display:flex;justify-content:center"><img style="width:90%" class="whatdoievencallthis" src="./title.png" alt="CEEDOKU"></div><div style="margin-top: 20px;"><button title="Open the save stats menu." class="new-main2" id="igiveup" onclick="showcontinueGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;">Continue Game</button></div><div title="Open the difficulty menu." style="margin-top: 20px;"><button class="new-main2" onclick="openmainDifficultyMenu()" id="mainDifficultyToggle" type="button" aria-label="Choose difficulty" aria-expanded="false" title="Difficulty" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;">New Game</button>
                     
                     
                     <div class="difficulty-menu2 urgh" id="maindifficultyMenu" role="listbox" aria-label="Difficulty">
@@ -250,7 +250,7 @@
                     
 
                 </div></div>
-		<button class="new-main2" onclick="continueGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;">Continue Game</button><button class="new-main2 delete-button" onclick="showdeleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background-color: var(--delete-save)">Delete Save File</button><button class="new-main2 cancel-button" onclick="hidecontinuegame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background: var(--muted);">Cancel</button>
+		<button class="new-main2" onclick="continueGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;" title="Continue your save game">Continue Game</button><button title="Open the save deletion confirmation menu." class="new-main2 delete-button" onclick="showdeleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background-color: var(--delete-save)">Delete Save File</button><button title="Cancel continuing your save game." class="new-main2 cancel-button" onclick="hidecontinuegame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background: var(--muted);">Cancel</button>
                 
 
             </div>
@@ -280,7 +280,7 @@
                     
 
                 </div></div>
-		<button class="new-main2 delete-button" onclick="deleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background-color: var(--delete-save)">Delete Save File</button><button class="new-main2 cancel-button" onclick="hidedeleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background: var(--muted);">Cancel</button>
+		<button title="Delete your save." class="new-main2 delete-button" onclick="deleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background-color: var(--delete-save)">Delete Save File</button><button title="Cancel deleting your save file." class="new-main2 cancel-button" onclick="hidedeleteGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;background: var(--muted);">Cancel</button>
                 
 
             </div>
