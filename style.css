@@ -55,9 +55,6 @@
 .delete-button:active {
 	background: color-mix(in srgb, var(--delete-save) 60%, var(--surface-2)) !important
 }
-.cancel-button {
-	background: var(--surface-2) !important
-}
 #title {
 font-size: clamp(1.20rem, 5vw, 2.5rem)
 }
