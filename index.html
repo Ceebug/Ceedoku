@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-    <script id="vervar">const version = "3.0.0";</script>
+    <script id="vervar">const version = "4.0.0";</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#101418">
@@ -92,6 +92,9 @@
                         <button title="Create a new game with the medium difficulty."  aria-label="Create a new game with the medium difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Medium <span>44 Holes</span></button>
                         <button title="Create a new game with the hard difficulty."  aria-label="Create a new game with the hard difficulty"  class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Hard <span>51 Holes</span></button>
                         <button title="Create a new game with the expert difficulty."  aria-label="Create a new game with the expert difficulty" class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Expert <span>58 Holes</span></button>
+						<button title="Create a new game with the master difficulty."  aria-label="Create a new game with the master difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Master <span>64 Holes</span></button>
+                        <button title="Create a new game with the extreme difficulty."  aria-label="Create a new game with the extreme difficulty"  class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Extreme <span>70 Holes</span></button>
+                        <button title="Create a new game with the impossible difficulty."  aria-label="Create a new game with the impossible difficulty" class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Impossible <span>76 Holes</span></button>
                     </div>
                 </div>
 
@@ -159,10 +162,13 @@
                         </svg>
                     </button>
                     <div class="difficulty-menu" id="windifficultyMenu" role="listbox" aria-label="Difficulty Menu">
-                                  <button title="Create a new game with the easy difficulty." aria-label="Create a new game with the easy difficulty" class="menu-item" type="button" data-difficulty="easy" role="option" aria-selected="true">Easy <span>36 Holes</span></button>
+                        <button title="Create a new game with the easy difficulty." aria-label="Create a new game with the easy difficulty" class="menu-item" type="button" data-difficulty="easy" role="option" aria-selected="true">Easy <span>36 Holes</span></button>
                         <button title="Create a new game with the medium difficulty."  aria-label="Create a new game with the medium difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Medium <span>44 Holes</span></button>
                         <button title="Create a new game with the hard difficulty."  aria-label="Create a new game with the hard difficulty"  class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Hard <span>51 Holes</span></button>
                         <button title="Create a new game with the expert difficulty."  aria-label="Create a new game with the expert difficulty" class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Expert <span>58 Holes</span></button>
+						<button title="Create a new game with the master difficulty."  aria-label="Create a new game with the master difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Master <span>64 Holes</span></button>
+                        <button title="Create a new game with the extreme difficulty."  aria-label="Create a new game with the extreme difficulty"  class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Extreme <span>70 Holes</span></button>
+                        <button title="Create a new game with the impossible difficulty."  aria-label="Create a new game with the impossible difficulty" class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Impossible <span>76 Holes</span></button>
                     </div>
                 </div>
 				<button class="new-main2" onclick="showmainmenu()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;">Main Menu</button>
@@ -207,6 +213,10 @@
                         <button title="Create a new game with the medium difficulty."  aria-label="Create a new game with the medium difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Medium <span>44 Holes</span></button>
                         <button title="Create a new game with the hard difficulty."  aria-label="Create a new game with the hard difficulty"  class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Hard <span>51 Holes</span></button>
                         <button title="Create a new game with the expert difficulty."  aria-label="Create a new game with the expert difficulty" class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Expert <span>58 Holes</span></button>
+						<button title="Create a new game with the master difficulty."  aria-label="Create a new game with the master difficulty"  class="menu-item" type="button" data-difficulty="medium" role="option" aria-selected="false">Master <span>64 Holes</span></button>
+                        <button title="Create a new game with the extreme difficulty."  aria-label="Create a new game with the extreme difficulty"  class="menu-item" type="button" data-difficulty="hard" role="option" aria-selected="false">Extreme <span>70 Holes</span></button>
+                        <button title="Create a new game with the impossible difficulty."  aria-label="Create a new game with the impossible difficulty" class="menu-item" type="button" data-difficulty="expert" role="option" aria-selected="false">Impossible <span>76 Holes</span></button> 
+                    </div>
                     </div>
                 </div>
 				<button class="new-main2" onclick="showmainmenu()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;">Main Menu</button>
@@ -228,10 +238,13 @@
                 <h1 class="win-title" style="color: var(--text2);">Select a difficulty</h1>
 
                 <div style="margin-top: 10px;margin-bottom: 10px;"><div class="difficulty-menu2 urgh open" id="maindifficultyMenu" role="listbox" aria-label="Difficulties">
-                        <button aria-label="Create a new game with the easy difficulty" class="menu-item menu-item2" type="button" data-difficulty="easy" role="option" aria-selected="false" title="Select the easy difficulty.">Easy <span>36 Holes</span></button>
-                        <button aria-label="Create a new game with the medium difficulty" class="menu-item menu-item2"  type="button" data-difficulty="medium" role="option" aria-selected="false" title="Select the medium difficulty.">Medium <span>44 Holes</span></button>
-                        <button aria-label="Create a new game with the hard difficulty" class="menu-item menu-item2"  type="button" data-difficulty="hard" role="option" aria-selected="false" title="Select the hard difficulty.">Hard <span>51 Holes</span></button>
-                        <button aria-label="Create a new game with the expert difficulty" class="menu-item menu-item2"  type="button" data-difficulty="expert" role="option" aria-selected="false" title="Select the expert difficulty.">Expert <span>58 Holes</span></button>
+                        <button aria-label="Select the easy difficulty" class="menu-item menu-item2" type="button" data-difficulty="easy" role="option" aria-selected="false" title="Select the easy difficulty.">Easy <span>36 Holes</span></button>
+                        <button aria-label="Select the medium difficulty" class="menu-item menu-item2"  type="button" data-difficulty="medium" role="option" aria-selected="false" title="Select the medium difficulty.">Medium <span>44 Holes</span></button>
+                        <button aria-label="Select the hard difficulty" class="menu-item menu-item2"  type="button" data-difficulty="hard" role="option" aria-selected="false" title="Select the hard difficulty.">Hard <span>51 Holes</span></button>
+                        <button aria-label="Select the expert difficulty" class="menu-item menu-item2"  type="button" data-difficulty="expert" role="option" aria-selected="false" title="Select the expert difficulty.">Expert <span>58 Holes</span></button>
+                        <button aria-label="Select the master difficulty" class="menu-item menu-item2"  type="button" data-difficulty="expert" role="option" aria-selected="false" title="Select the master difficulty.">Master <span>64 Holes</span></button>
+                        <button aria-label="Select the extreme difficulty" class="menu-item menu-item2"  type="button" data-difficulty="expert" role="option" aria-selected="false" title="Select the extreme difficulty.">Extreme <span>70 Holes</span></button>
+	                    <button aria-label="Select the impossible difficulty" class="menu-item menu-item2"  type="button" data-difficulty="expert" role="option" aria-selected="false" title="Select the impossible difficulty.">Impossible <span>76 Holes</span></button>
 					</div></div>
 		<button class="new-main2" onclick="continuenewGame()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;margin-bottom: 5px;" title="Create a new game with the selected difficulty">New Game</button><button style="width: 100%; border-top-right-radius: 999px; border-bottom-right-radius: 999px; margin-bottom: 5px;font-size: 1.02rem;min-height: 58px;" class="cancel-button number-button" title="Cancel creating a new game." onclick="hidenewgame()">Cancel</button>
                 
