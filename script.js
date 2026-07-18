@@ -14,9 +14,6 @@
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
 let selectedDifficulty = "easy";
-
-    const defaultItem = document.querySelector('#maindifficultyMenu .menu-item[data-difficulty="easy"]');
-    defaultItem.setAttribute("aria-selected", "true");
 document.getElementById("mainmenubutton").style.display = "none"
 			  const mainmenu = document.getElementById("mainmenu");	
 	let runninggame = false	        
@@ -1610,4 +1607,8 @@ function deleteGame() {
 setTimeout(() => {
     document.body.style.visibility = "visible";
 }, 100);
+
+
+    const defaultItem = document.querySelector('#mainDifficultyMenu .menu-item[data-difficulty="easy"]');
+    defaultItem.setAttribute("aria-selected", "true");
 
