@@ -37,7 +37,15 @@ mainmenu.inert = false
             });
         }
 
-              const DIFFICULTIES = {easy: { label: "Easy", holes: 36 },medium: { label: "Medium", holes: 44 },hard: { label: "Hard", holes: 51 },expert: { label: "Expert", holes: 58 }};
+			 const DIFFICULTIES = {
+			   	  easy: { holes: 36 },
+			   	  medium: { holes: 44 },
+			   	  hard: { holes: 51 },
+		 	  	  expert: { holes: 58 },
+ 			  	  master: { holes: 64 },
+ 			 	  extreme: { holes: 70 },
+   			  	  impossible: { holes: 76 }
+			  };
 
               const boardEl = document.getElementById("board");
 			  
