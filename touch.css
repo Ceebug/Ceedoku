@@ -133,11 +133,15 @@
 }
 .new-side:active {
 	border-top-right-radius: 0px!important;
-	border-bottom-right-radius: 0px!important
+	border-bottom-right-radius: 0px!important;
+	border-top-left-radius:999px!important;
+	border-bottom-left-radius:999px!important
 }
 .new-main:active {
 	border-top-left-radius:0px!important;
-	border-bottom-left-radius:0px!important
+	border-bottom-left-radius:0px!important;
+	border-top-right-radius:999px!important;
+	border-bottom-right-radius:999px!important
 }
 	.delete-button:hover {
 		background: var(--delete-save) !important
