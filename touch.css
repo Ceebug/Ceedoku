@@ -33,7 +33,6 @@
           border-radius: var(--radius);
           color: var(--muted);
           background: var(--surface-2) !important;
-          transition: transform .12s ease, background .14s ease, color .14s ease, box-shadow .14s ease;
         }
  .menu-item:hover {
 	 color: var(--text) !important
