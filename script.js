@@ -1258,9 +1258,7 @@ function forcewin() {
                 });
               }
 			                function updatemainDifficultyMenu() {
-                difficultyMenu.querySelectorAll(".menu-item").forEach((item) => {
-                  item.setAttribute("aria-selected", item.dataset.difficulty === difficulty ? "true" : "false");
-                });
+								return
               }
               function updatewinDifficultyMenu() {        
 				        windifficultyMenu.querySelectorAll(".menu-item").forEach((item) => {
