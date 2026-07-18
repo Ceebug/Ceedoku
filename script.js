@@ -1500,7 +1500,7 @@ winDifficultyMenu.addEventListener("click", (event) => {
 let selectedDifficulty = "easy";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const defaultItem = document.querySelector('.menu-item[data-difficulty="easy"]');
+    const defaultItem = document.querySelector('#maindifficultymenu .menu-item[data-difficulty="easy"]');
 
     if (defaultItem) {
         defaultItem.setAttribute("aria-selected", "true");
