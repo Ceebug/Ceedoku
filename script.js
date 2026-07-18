@@ -13,7 +13,7 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
-
+document.getElementById("mainmenubutton").style.display = "none"
 			  const mainmenu = document.getElementById("mainmenu");	
 	let runninggame = false	        
               let menuOpen = false;			  
