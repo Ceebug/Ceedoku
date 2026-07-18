@@ -13,7 +13,7 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
-let selectedDifficulty = "easy";
+let selectedDifficulty = localStorage.getItem("difficulty") || "easy";
 document.getElementById("mainmenubutton").style.display = "none"
 			  const mainmenu = document.getElementById("mainmenu");	
 	let runninggame = false	        
@@ -1370,6 +1370,7 @@ hidemainmenu();
 setInterval(saveGame, 5000);
 
 function newGame(nextDifficulty = difficulty) {
+	localStorage.setItem("difficulty", difficulty);
     runninggame = true
     localStorage.removeItem("save");
 
@@ -1521,7 +1522,7 @@ document.querySelectorAll(".menu-item").forEach(i => {
     selectedDifficulty = item.dataset.difficulty;
 
     console.log("Selected difficulty:", selectedDifficulty);
-
+localStorage.setItem("difficulty", selectedDifficulty);
 });
 function continuenewGame() {
     newGame(selectedDifficulty);
@@ -1595,6 +1596,6 @@ setTimeout(() => {
 }, 100);
 
 
-    const defaultItem = document.querySelector('#mainDifficultyMenu .menu-item[data-difficulty="easy"]');
-    defaultItem.setAttribute("aria-selected", "true");
+const defaultItem = document.querySelector(`#mainDifficultyMenu .menu-item[data-difficulty="${selectedDifficulty}"]`);
+defaultItem.setAttribute("aria-selected", "true");
 
