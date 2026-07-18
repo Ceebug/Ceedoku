@@ -1499,13 +1499,9 @@ winDifficultyMenu.addEventListener("click", (event) => {
 });
 let selectedDifficulty = "easy";
 
-document.addEventListener("DOMContentLoaded", () => {
     const defaultItem = document.querySelector('#maindifficultymenu .menu-item[data-difficulty="easy"]');
-
-    if (defaultItem) {
-        defaultItem.setAttribute("aria-selected", "true");
-    }
-});
+    defaultItem.setAttribute("aria-selected", "true");
+    
 mainDifficultyMenu.addEventListener("click", (event) => {
     const item = event.target.closest(".menu-item");
 
