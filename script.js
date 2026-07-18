@@ -1505,9 +1505,10 @@ mainDifficultyMenu.addEventListener("click", (event) => {
 
     if (!item) return;
 
-    document.querySelectorAll(".menu-item").forEach(i => {
-        i.setAttribute("aria-selected", "false");
-    });
+document.querySelectorAll(".menu-item:not(#maindifficultyMenu .menu-item)").forEach(i => {
+    i.setAttribute("aria-selected", "false");
+});
+
 
     item.setAttribute("aria-selected", "true");
 
