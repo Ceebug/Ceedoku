@@ -26,9 +26,6 @@ document.getElementById("mainmenubutton").style.display = "none"
 
         elapsedMs = Date.now() - startTime;
 
-        pauseBtn.textContent = "▶";
-        document.title = "Ceedoku - Paused";
-
         if (runninggame){saveGame()};
     }
 mainmenu.inert = false
@@ -53,7 +50,7 @@ mainmenu.inert = false
               const winnewGameBand = document.getElementById("winnewgameband");
               const winToast = document.getElementById("winToast");
 			  
-	      const pauseOverlay = document.getElementById("pauseOverlay");
+	          const pauseOverlay = document.getElementById("pauseOverlay");
               const pauseDifficulty = document.getElementById("pauseDifficulty");
               const pauseTime = document.getElementById("pauseTime");
               const pauseMistakes = document.getElementById("pauseMistakes");
@@ -63,13 +60,13 @@ mainmenu.inert = false
               const pausenewGameBand = document.getElementById("pausenewgameband");
 			  
               const mainDifficultyMenu = document.getElementById("maindifficultyMenu");
-	      const mainDifficultyToggle = document.getElementById("mainDifficultyToggle");
+	          const mainDifficultyToggle = document.getElementById("mainDifficultyToggle");
 
 
               const continueDifficulty = document.getElementById("continueDifficulty");
               const continueTime = document.getElementById("continueTime");
               const continueMistakes = document.getElementById("continueMistakes");
-	      const continueOverlay = document.getElementById("continueOverlay");
+	          const continueOverlay = document.getElementById("continueOverlay");
 			  
               const difficultyBadge = document.getElementById("difficultyBadge");
               const difficultyMenu = document.getElementById("difficultyMenu");
@@ -82,18 +79,20 @@ mainmenu.inert = false
               const hintButton = document.getElementById("hintButton");
               const eraseButton = document.getElementById("eraseButton");
               const pencilButton = document.getElementById("pencilButton");
-	      const pauseBtn = document.getElementById("pause-btn");
-	      const modeButton = document.getElementById("mode");			  
+	          const pauseBtn = document.getElementById("pause-btn");
 
-			  
+	          const modeButton = document.getElementById("mode");		
+	          const fullscreenButton = document.getElementById("fullscreen")
+
               const mistakeStatus = document.getElementById("mistakeStatus");
               const emptyStatus = document.getElementById("emptyStatus");
               const timerEl = document.getElementById("timer");
-	      const title = document.getElementById("title");
+	          const title = document.getElementById("title");
               const numberGrid = document.getElementById("numberGrid");	
 
-	      const deleteOverlay = document.getElementById("deleteOverlay")
-	     const fullscreenButton = document.getElementById("fullscreen")
+	          const deleteOverlay = document.getElementById("deleteOverlay")
+
+	          const newoverlay = document.getElementById("newOverlay")
         
               let solution = [];
               let puzzle = [];
@@ -1181,10 +1180,12 @@ function forcewin() {
                 updateDifficultyMenu();
               }
 			                function openmainDifficultyMenu() {
-                maindifficultyMenu.classList.add("open");
-                maindifficultyToggle.setAttribute("aria-expanded", "true");
-                updatemainDifficultyMenu();
+            newOverlay.hidden = false;
+        
+            requestAnimationFrame(() => {
+                newOverlay.classList.add("show");
               }
+			}
 			                function closewinDifficultyMenu() {
                 winmenuOpen = false;
                 winDifficultyMenu.classList.remove("open");
@@ -1210,20 +1211,17 @@ function forcewin() {
                 pauseDifficultyToggle.setAttribute("aria-expanded", "false");
                 updatepauseDifficultyMenu();
               }
-			  			              function openmainDifficultyMenu() {
-                mainmenuOpen = true;
-                mainDifficultyMenu.classList.add("open");
 
-                mainDifficultyToggle.setAttribute("aria-expanded", "false");
-                updatemainDifficultyMenu();
-              }
 			  			  			              function closemainDifficultyMenu() {
-                mainmenuOpen = false;
-                mainDifficultyMenu.classList.remove("open");
-
-                mainDifficultyToggle.setAttribute("aria-expanded", "false");
+            newOverlay.hidden = true;
+            requestAnimationFrame(() => {
+                newOverlay.classList.add("show");
+            });
               }
-        
+
+              function hidenewgame() {
+				  closemainDifficultyMenu()
+			  }
               function toggleDifficultyMenu() {
                 if (menuOpen) {
                   closeDifficultyMenu();
@@ -1483,7 +1481,6 @@ difficultyMenu.addEventListener("click", (event) => {
 
     newGame(item.dataset.difficulty);
 
-    console.log("after newGame");
 });
 winDifficultyMenu.addEventListener("click", (event) => {
     console.log("listener fired");
@@ -1499,24 +1496,35 @@ winDifficultyMenu.addEventListener("click", (event) => {
 
     newGame(item.dataset.difficulty);
 
-    console.log("after newGame");
+});
+let selectedDifficulty = "easy";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const defaultItem = document.querySelector('.menu-item[data-difficulty="easy"]');
+
+    if (defaultItem) {
+        defaultItem.setAttribute("aria-selected", "true");
+    }
 });
 mainDifficultyMenu.addEventListener("click", (event) => {
-    console.log("listener fired");
-
-    console.log("target:", event.target);
-
     const item = event.target.closest(".menu-item");
-    console.log("item:", item);
 
     if (!item) return;
 
-    console.log("difficulty:", item.dataset.difficulty);
+    document.querySelectorAll(".menu-item").forEach(i => {
+        i.setAttribute("aria-selected", "false");
+    });
 
-    newGame(item.dataset.difficulty);
+    item.setAttribute("aria-selected", "true");
 
-    console.log("after newGame");
+    selectedDifficulty = item.dataset.difficulty;
+
+    console.log("Selected difficulty:", selectedDifficulty);
+
 });
+function continuenewgame() {
+    newGame(selectedDifficulty);
+}
               document.addEventListener("click", (event) => {
                 if (!winnewGameBand.contains(event.target)) closeDifficultyMenu();
 				if (timerPaused) return;
