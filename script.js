@@ -1522,7 +1522,7 @@ mainDifficultyMenu.addEventListener("click", (event) => {
     console.log("Selected difficulty:", selectedDifficulty);
 
 });
-function continuenewgame() {
+function continuenewGame() {
     newGame(selectedDifficulty);
 }
               document.addEventListener("click", (event) => {
