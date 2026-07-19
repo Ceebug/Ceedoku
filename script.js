@@ -408,7 +408,7 @@ function changemode(forceMode) {
 				    return `${hours}:${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 				}
 
-				return `${minutes}:${String(secs).padStart(2, "0")}`;
+				return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
               }
 
 
