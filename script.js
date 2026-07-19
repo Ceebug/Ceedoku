@@ -1165,6 +1165,13 @@ function animateIndexes(indexes, origin, kind) {
             "--sweep-delay",
             `${distances[index] * 60}ms`
         );
+	
+	    if (settings.SFX) {
+	        setTimeout(() => {
+  	        	const sound = popSound.cloneNode();
+ 	            sound.play().catch(() => {});
+        	}, distances[index] * 60);
+ 	    }
 
         requestAnimationFrame(() => {
             cell.classList.add("complete-sweep", "column");
