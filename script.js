@@ -1106,7 +1106,6 @@ function animateIndexes(indexes, origin, kind) {
             	: 8;
 
     	const fadeDelay = maxDistance * 60 + 500;
-		const distancesPlayed = new Set();
 	
     	indexes.forEach((index) => {
 
