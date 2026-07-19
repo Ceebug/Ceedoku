@@ -38,6 +38,12 @@ function saveSettings() {
 loadSettings();
 const winSound = new Audio("./sounds/win.ogg");
 const popSound = new Audio("./sounds/pop.ogg");
+const audioContext = new AudioContext();
+const popSource = audioContext.createMediaElementSource(popSound);
+const popGain = audioContext.createGain();
+
+popSource.connect(popGain);
+popGain.connect(audioContext.destination);
 let vibrate;
 
 if (settings.haptics && "vibrate" in navigator) {
@@ -52,6 +58,8 @@ if (settings.haptics && "vibrate" in navigator) {
 
 let popQueue = Promise.resolve();
 let pitchInterval = null;
+let pitchInterval = null;
+
 function playPop(speed = 2) {
     if (!settings.SFX) return;
 
@@ -63,18 +71,31 @@ function playPop(speed = 2) {
     popSound.pause();
     popSound.currentTime = 0;
 
-    popSound.playbackRate = speed;
+    popSound.preservesPitch = false;
+    popSound.mozPreservesPitch = false;
+    popSound.webkitPreservesPitch = false;
+
+    let currentSpeed = speed;
+
+    if (currentSpeed > 2.6) {
+        currentSpeed = 2.6;
+    }
+
+    popSound.playbackRate = currentSpeed;
 
     popSound.play().catch(err => {
         console.log("pop failed", err);
     });
 
-    let currentSpeed = speed;
-
     pitchInterval = setInterval(() => {
-        currentSpeed += 0.05;
+        currentSpeed += 0.1;
+
+        if (currentSpeed > 2.6) {
+            currentSpeed = 2.6;
+        }
+
         popSound.playbackRate = currentSpeed;
-    }, 20);
+    }, 50);
 
     popSound.onended = () => {
         clearInterval(pitchInterval);
