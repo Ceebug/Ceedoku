@@ -1151,15 +1151,6 @@ function animateIndexes(indexes, origin, kind) {
             distance = boardDistances[index];
 
         }
-		if (!distancesPlayed.has(distance)) {
-            distancesPlayed.add(distance);
-
-            if (settings.SFX) {
-                setTimeout(() => {
-                    playPop(2 + distance * 0.15);
-                }, distance * 60);
-            }
-        }
 		// if (settings.SFX && !playedDistances.has(distance)) {
     	//	playedDistances.add(distance);
 
@@ -1170,12 +1161,14 @@ function animateIndexes(indexes, origin, kind) {
         //		.then(() => console.log("played"))
         //		.catch(err => console.log("audio failed", err));
 		//}
-		if (settings.SFX && !playedDistances.has(distance)) {
-  		    playedDistances.add(distance);
+		if (settings.SFX){
+			if (!distancesPlayed.has(distance)) {
+    			distancesPlayed.add(distance);
 
- 		    setTimeout(() => {
-        		playPop(2 + distance * 0.15);
-    		}, distance * 60);
+    			setTimeout(() => {
+        		playPop(Math.min(2 + distance * 0.15, 2.6));
+    			}, distance * 60);
+			}
 		}
         const animationKind =
             kind === "board"
@@ -1725,6 +1718,7 @@ function deleteGame() {
 }
 window.addEventListener("load", () => {
     document.getElementById("aahtheentiregame").style.visibility = "visible";
+	document.getElementById("loader").style.visibility = "hidden";
 });
 
 const defaultItem = document.querySelector(`#mainDifficultyMenu .menu-item[data-difficulty="${selectedDifficulty}"]`);
