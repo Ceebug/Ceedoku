@@ -1101,9 +1101,9 @@ function animateIndexes(indexes, origin, kind) {
         //		.catch(err => console.log("audio failed", err));
 		//}
 		if (settings.SFX) {
-   		    setTimeout(() => {
-        		popSound.currentTime = 0;
-        		popSound.play().catch(() => {});
+    		setTimeout(() => {
+        		const sound = popSound.cloneNode();
+        		sound.play().catch(() => {});
     		}, distance * 60);
 		}
         const animationKind =
