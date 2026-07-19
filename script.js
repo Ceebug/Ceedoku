@@ -1723,10 +1723,9 @@ function deleteGame() {
 	delsave()
 	location.reload()
 }
-setTimeout(() => {
+window.addEventListener("load", () => {
     document.getElementById("aahtheentiregame").style.visibility = "visible";
-}, 100);
-
+});
 
 const defaultItem = document.querySelector(`#mainDifficultyMenu .menu-item[data-difficulty="${selectedDifficulty}"]`);
 defaultItem.setAttribute("aria-selected", "true");
