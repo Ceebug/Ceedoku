@@ -1095,7 +1095,7 @@ function hint() {
               }
         
 function animateIndexes(indexes, origin, kind) {
-		const distancesPlayed = new Set();
+		const playedDistances = new Set();
     	const boardDistances =
         	kind === "board"
             	? getBoardDistances(origin)
