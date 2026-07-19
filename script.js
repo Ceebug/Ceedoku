@@ -13,6 +13,26 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
+const SFX = true;
+const winSound = new Audio("./sounds/win.ogg");
+let vibrate;
+
+if (settings.haptics && "vibrate" in navigator) {
+    vibrate = function (duration = 10) {
+        if (!isTouchDevice) return;
+
+        navigator.vibrate(duration);
+    };
+} else {
+    vibrate = function () {};
+}
+document.addEventListener("pointerdown", (event) => {
+    const button = event.target.closest("button");
+
+    if (!button) return;
+
+    vibrate(button.classList.contains("cell") ? 5 : 10);
+});
 let selectedDifficulty = localStorage.getItem("difficulty") || "easy";
 document.getElementById("mainmenubutton").style.display = "none"
 			  const mainmenu = document.getElementById("mainmenu");	
@@ -1153,34 +1173,23 @@ function checkWin() {
 	
     if (values.every((value, index) => value === solution[index])) {
 		localStorage.removeItem("save");
-        finished = true;   // <-- FIRST thing inside the win block
+        finished = true;
 		winpauseTimer()
-		
+		if (SFX) {
+		winSound.currentTime = 0;
+		winSound.play().catch(() => {});
+		}
+		vibrate([20, 50, 40]);
         clearInterval(timerId);
-
+		
         playBoardRipple();
 
         const maxDistance = Math.max(...getBoardDistances(selected));
 
         setTimeout(showWinScreen, maxDistance * 60 + 900);
-		function clearSave() {
-    localStorage.removeItem("save");
-	}
     }
 }
-function forcewin() {
-		winpauseTimer()
-        clearInterval(timerId);
 
-        playBoardRipple();
-
-        const maxDistance = Math.max(...getBoardDistances(selected));
-
-        setTimeout(showWinScreen, maxDistance * 60 + 900);
-		function clearSave() {
-    localStorage.removeItem("save");
-}
-		}
         
               function closeDifficultyMenu() {
                 menuOpen = false;
