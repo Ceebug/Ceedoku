@@ -13,6 +13,9 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
+const settings = {
+    haptics: true
+};
 const SFX = true;
 const winSound = new Audio("./sounds/win.ogg");
 let vibrate;
