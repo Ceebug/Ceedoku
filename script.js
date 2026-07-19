@@ -1045,20 +1045,19 @@ function hint() {
               }
         
 function animateIndexes(indexes, origin, kind) {
+		const playedDistances = new Set();
+    	const boardDistances =
+        	kind === "board"
+            	? getBoardDistances(origin)
+            	: null;
+    	const maxDistance =
+        	kind === "board"
+           		? Math.max(...boardDistances)
+            	: 8;
 
-    const boardDistances =
-        kind === "board"
-            ? getBoardDistances(origin)
-            : null;
+    	const fadeDelay = maxDistance * 60 + 500;
 
-    const maxDistance =
-        kind === "board"
-            ? Math.max(...boardDistances)
-            : 8;
-
-    const fadeDelay = maxDistance * 60 + 500;
-
-    indexes.forEach((index) => {
+    	indexes.forEach((index) => {
 
         const cell = boardEl.querySelector(`[data-index="${index}"]`);
         if (!cell) return;
@@ -1090,7 +1089,12 @@ function animateIndexes(indexes, origin, kind) {
             distance = boardDistances[index];
 
         }
+		if (settings.SFX && !playedDistances.has(distance)) {
+		    playedDistances.add(distance);
 
+		    popSound.currentTime = 0;
+ 		   popSound.play().catch(() => {});
+		}
         const animationKind =
             kind === "board"
                 ? "board"
