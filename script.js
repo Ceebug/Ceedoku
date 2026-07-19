@@ -50,8 +50,6 @@ if (settings.haptics && "vibrate" in navigator) {
 }
 let popQueue = Promise.resolve();
 
-let popQueue = Promise.resolve();
-
 function playPop(speed = 2) {
     popQueue = popQueue.then(() => {
         return new Promise((resolve) => {
