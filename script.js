@@ -1090,15 +1090,21 @@ function animateIndexes(indexes, origin, kind) {
 
         }
 			console.log("SFX check:", settings.SFX, distance, playedDistances.has(distance));
-		if (settings.SFX && !playedDistances.has(distance)) {
-    		playedDistances.add(distance);
+		// if (settings.SFX && !playedDistances.has(distance)) {
+    	//	playedDistances.add(distance);
 
-    		console.log("POP", distance);
+    	//	console.log("POP", distance);
 
-		    popSound.currentTime = 0;
-    		popSound.play()
-        		.then(() => console.log("played"))
-        		.catch(err => console.log("audio failed", err));
+		//  popSound.currentTime = 0;
+    	//	popSound.play()
+        //		.then(() => console.log("played"))
+        //		.catch(err => console.log("audio failed", err));
+		//}
+		if (settings.SFX) {
+   		    setTimeout(() => {
+        		popSound.currentTime = 0;
+        		popSound.play().catch(() => {});
+    		}, distance * 60);
 		}
         const animationKind =
             kind === "board"
