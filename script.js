@@ -49,37 +49,29 @@ if (settings.haptics && "vibrate" in navigator) {
 } else {
     vibrate = function () {};
 }
-let popQueue = Promise.resolve();
 
 function playPop(speed = 2) {
-    popQueue = popQueue.then(() => {
-        return new Promise((resolve) => {
-            if (!settings.SFX) {
-                resolve();
-                return;
-            }
+    if (!settings.SFX) return;
 
-            popSound.currentTime = 0;
-            popSound.playbackRate = speed;
+    const sound = popSound.cloneNode();
 
-            let currentSpeed = speed;
+    sound.currentTime = 0;
+    sound.playbackRate = speed;
 
-            const pitchInterval = setInterval(() => {
-                currentSpeed += 0.05;
-                popSound.playbackRate = currentSpeed;
-            }, 20);
+    let currentSpeed = speed;
 
-            popSound.play().catch(() => {
-                clearInterval(pitchInterval);
-                resolve();
-            });
+    const pitchInterval = setInterval(() => {
+        currentSpeed += 0.05;
+        sound.playbackRate = currentSpeed;
+    }, 20);
 
-            popSound.onended = () => {
-                clearInterval(pitchInterval);
-                popSound.playbackRate = 2;
-                resolve();
-            };
-        });
+    sound.onended = () => {
+        clearInterval(pitchInterval);
+        sound.playbackRate = 2;
+    };
+
+    sound.play().catch(() => {
+        clearInterval(pitchInterval);
     });
 }
 document.addEventListener("pointerdown", (event) => {
@@ -1140,9 +1132,11 @@ function animateIndexes(indexes, origin, kind) {
         //		.then(() => console.log("played"))
         //		.catch(err => console.log("audio failed", err));
 		//}
-		if (settings.SFX) {
-   	 		setTimeout(() => {
-        		playPop();
+		if (settings.SFX && !playedDistances.has(distance)) {
+  		    playedDistances.add(distance);
+
+ 		    setTimeout(() => {
+        		playPop(2 + distance * 0.15);
     		}, distance * 60);
 		}
         const animationKind =
