@@ -1168,7 +1168,7 @@ body.light .menu-item:hover {
           box-shadow: var(--shadow);
 		  position: absolute;
 		  right: -65%;
-		  top: -250%
+		  top: -502%
         }
     
         .difficulty-menu.open {
