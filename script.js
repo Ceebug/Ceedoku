@@ -53,44 +53,37 @@ if (settings.haptics && "vibrate" in navigator) {
 let popQueue = Promise.resolve();
 let pitchInterval = null;
 
-function playPop(speed = 2, duration = 500) {
-    popQueue = popQueue.then(() => {
-        return new Promise((resolve) => {
-            if (!settings.SFX) {
-                resolve();
-                return;
-            }
+function playPop(speed = 2) {
+    if (!settings.SFX) return;
 
-            popSound.currentTime = 0;
-            popSound.playbackRate = speed;
+    // cancel previous sound
+    popSound.pause();
+    popSound.currentTime = 0;
 
-            popSound.play().catch(() => {
-                resolve();
-            });
+    if (pitchInterval) {
+        clearInterval(pitchInterval);
+        pitchInterval = null;
+    }
 
-            let currentSpeed = speed;
+    popSound.playbackRate = speed;
 
-            pitchInterval = setInterval(() => {
-                currentSpeed += 0.05;
-                popSound.playbackRate = currentSpeed;
-            }, 20);
+    popSound.play().catch(() => {});
 
-            setTimeout(() => {
-                clearInterval(pitchInterval);
-                pitchInterval = null;
+    let currentSpeed = speed;
 
-                popSound.playbackRate = 2;
-            }, duration);
+    pitchInterval = setInterval(() => {
+        currentSpeed += 0.05;
+        popSound.playbackRate = currentSpeed;
+    }, 20);
 
-            popSound.onended = () => {
-                clearInterval(pitchInterval);
-                pitchInterval = null;
+    popSound.onended = () => {
+        if (pitchInterval) {
+            clearInterval(pitchInterval);
+            pitchInterval = null;
+        }
 
-                popSound.playbackRate = 2;
-                resolve();
-            };
-        });
-    });
+        popSound.playbackRate = 2;
+    };
 }
 document.addEventListener("pointerdown", (event) => {
     const button = event.target.closest("button");
