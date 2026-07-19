@@ -1029,7 +1029,7 @@ body.light .menu-item:hover {
 		.cancel-button:active
         .theme-toggle:active,
         .history-button:active:not(:disabled) {
-          transform: translateY(1px);
+          transform: translateY(1px) scale(0.98)
         }
 	.disabled {
 		          transform: translateY(0px);
