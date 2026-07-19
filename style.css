@@ -1432,7 +1432,10 @@ body.light .menu-item:hover {
 	.game-shell {
 		border-radius: 52px;
 	}
-	
+	.something {
+		height: 230px;
+		overflow: scroll;
+		scrollbar-color: transparent transparent;
 	.main {
 		gap: 5px;
 	}
