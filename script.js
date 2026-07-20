@@ -14,15 +14,36 @@
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
 let settings = {
-    haptics: true,
-	SFX: true,
-	VFX: true,
-	unlimitedhints: true,
-	hintstartnumber: 5,
-	hintcooldowntype: "timer",
-	/* Cooldown time in seconds */
-	hintcooldowntime: 60,
-	hintcooldownmoves: 5
+    SFX: {
+        enabled: true,
+        completion: true,
+        win: true
+    },
+
+    VFX: {
+        enabled: true,
+        completion: true,
+        confetti: true,
+    },
+
+    hints: {
+        enabled: true,
+        cooldown: {
+            enabled: false,
+            startinghints: 3,
+            cooldowntype: "time",
+            // Cooldown time in seconds
+            cooldowntime: 60,
+            cooldownmoves: 5
+        }
+    },
+
+    haptics: {
+        enabled: true,
+        buttons: true,
+        cells: true,
+        puzzlecomplete: true
+    }
 };
 function loadSettings() {
     const saved = localStorage.getItem("settings");
@@ -67,10 +88,10 @@ function unlockAudio() {
 document.addEventListener("pointerdown", unlockAudio, { once: true });
 let vibrate;
 
-if (settings.haptics && "vibrate" in navigator) {
+if ("vibrate" in navigator) {
     vibrate = function (duration = 10) {
         if (!isTouchDevice) return;
-
+		if (!settings.haptics) return;
         navigator.vibrate(duration);
     };
 } else {
@@ -242,7 +263,7 @@ mainmenu.inert = false
               function showWinScreen() {
 						winpauseTimer();
 				  		vibrate([20, 50, 40]);
-			if (settings.SFX) {
+			if (settings.SFX.enabled && settings.SFX.win) {
 				winSound.currentTime = 0;
 				winSound.play().catch(() => {});
 			}
@@ -737,6 +758,34 @@ if (runninggame){
                 });
                 return indexes;
               }
+const count = 150,
+  defaults = { origin: { y: .7 } };
+
+function fire(particleRatio, opts) {
+  confetti(Object.assign({}, defaults, opts, { particleCount: Math.floor(count * particleRatio) }));
+}
+function confetti {
+	fire(.25, {
+  spread: 26,
+  startVelocity: 55
+});
+fire(.2, { spread: 60 });
+fire(.35, {
+  spread: 100,
+  decay: .91,
+  scalar: .8
+});
+fire(.1, {
+  spread: 120,
+  startVelocity: 25,
+  decay: .92,
+  scalar: 1.2
+});
+fire(.1, {
+  spread: 120,
+  startVelocity: 45
+});
+}
         function showWinScreen() {
 
             winDifficulty.textContent =
@@ -746,11 +795,16 @@ if (runninggame){
             winMistakes.textContent = mistakes;
         
             winOverlay.hidden = false;
-        
-            requestAnimationFrame(() => {
-                winOverlay.classList.add("show");
-            });
-        
+        	
+    		requestAnimationFrame(() => {
+        		winOverlay.classList.add("show");
+    		});
+
+    		winOverlay.addEventListener("animationend", () => {
+        		if (settings.VFX.enabled && settings.VFX.confetti) {
+            		confetti();
+        		}
+    		}, { once: true });
         }
 						function showPauseScreen() {
             pauseDifficulty.textContent =
@@ -1038,8 +1092,26 @@ function findMoveForCell(index) {
     null
   );
 }
-
+enablehintbutton {
+    document.getElementById("hintButton").classList.remove("disabled");
+    document.getElementById("hintButton").disabled = false;
+}
+disablehintbutton {
+    document.getElementById("hintButton").classList.add("disabled");
+    document.getElementById("hintButton").disabled = true;
+}
+function testHintButton() {
+    if (!settings.hints.enabled) {
+        disableHintButton();
+    } else {
+        enableHintButton();
+    }
+}
+let hintcount = settings.hints.cooldown.startinghints
+testHintButton();
 function hint() {
+  if (!settings.hints.enabled) return;
+  if (hintcount <= 0 && settings.hints.cooldown.enabled) return;
   if (finished) return;
 
   let move = null;
@@ -1066,7 +1138,7 @@ function hint() {
 
   // No logical move found
   if (!move) return;
-
+  hintcount--;
   const target = move.index;
   selected = target;
 
@@ -1132,7 +1204,6 @@ function hint() {
               }
         
 function animateIndexes(indexes, origin, kind) {
-	if (settings.VFX) return;
 		const playedDistances = new Set();
 		const distancesPlayed = new Set();
     	const boardDistances =
@@ -1178,17 +1249,7 @@ function animateIndexes(indexes, origin, kind) {
             distance = boardDistances[index];
 
         }
-		// if (settings.SFX && !playedDistances.has(distance)) {
-    	//	playedDistances.add(distance);
-
-    	//	console.log("POP", distance);
-
-		//  popSound.currentTime = 0;
-    	//	popSound.play()
-        //		.then(() => console.log("played"))
-        //		.catch(err => console.log("audio failed", err));
-		//}
-		if (settings.SFX){
+		if (settings.SFX.enabled && settings.SFX.completion){
 			if (!distancesPlayed.has(distance)) {
     			distancesPlayed.add(distance);
 
@@ -1197,6 +1258,7 @@ function animateIndexes(indexes, origin, kind) {
     			}, distance * 60);
 			}
 		}
+		if (settings.VFX.enabled && settings.VFX.completion){
         const animationKind =
             kind === "board"
                 ? "board"
@@ -1225,8 +1287,8 @@ function animateIndexes(indexes, origin, kind) {
 
             effect.remove();
 
-        });
-
+        	});
+		}
     });
 
 }
@@ -1245,33 +1307,44 @@ function animateIndexes(indexes, origin, kind) {
                   if (done && !previous.boxes[index]) animateIndexes(boxes[index], origin, "box");
                 });
               }
-			  function playBoardRipple() {
-				  if (settings.VFX) return;
+function playBoardRipple() {
     const distances = getBoardDistances(selected);
+    const distancesPlayed = new Set();
 
     boardEl.querySelectorAll(".cell").forEach((cell, index) => {
 
-        cell.classList.remove("complete-sweep", "board");
+        const distance = distances[index];
 
-        cell.style.setProperty(
-            "--sweep-delay",
-            `${distances[index] * 60}ms`
-        );
-	
-	    if (settings.SFX) {
-			setTimeout(() => {
-		    	playPop(2 + distances[index] * 0.15);
-			}, distances[index] * 60);
- 	    }
+        // Sound
+        if (settings.SFX.enabled && settings.SFX.completion) {
+            if (!distancesPlayed.has(distance)) {
+                distancesPlayed.add(distance);
 
-        requestAnimationFrame(() => {
-            cell.classList.add("complete-sweep", "column");
-        });
+                setTimeout(() => {
+                    playPop(Math.min(2 + distance * 0.15, 2.6));
+                }, distance * 60);
+            }
+        }
 
-        setTimeout(() => {
+        // Animation
+        if (settings.VFX.enabled && settings.VFX.completion) {
+
             cell.classList.remove("complete-sweep", "board");
-            cell.style.removeProperty("--sweep-delay");
-        }, 1000 + distances[index] * 60);
+
+            cell.style.setProperty(
+                "--sweep-delay",
+                `${distance * 60}ms`
+            );
+
+            requestAnimationFrame(() => {
+                cell.classList.add("complete-sweep", "board");
+            });
+
+            setTimeout(() => {
+                cell.classList.remove("complete-sweep", "board");
+                cell.style.removeProperty("--sweep-delay");
+            }, 1000 + distance * 60);
+        }
     });
 }
 function getBoardDistances(startIndex) {
