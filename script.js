@@ -19,7 +19,7 @@ const count = 150,
 function fire(particleRatio, opts) {
   confetti(Object.assign({}, defaults, opts, { particleCount: Math.floor(count * particleRatio) }));
 }
-function confetti() {
+function fireconfetti() {
 	fire(.25, {
   spread: 26,
   startVelocity: 55
@@ -308,7 +308,7 @@ mainmenu.inert = false
 
     		winOverlay.addEventListener("animationend", () => {
         		if (settings.VFX.enabled && settings.VFX.confetti) {
-            		confetti();
+            		fireconfetti();
         		}
     		}, { once: true });
         }
@@ -813,7 +813,7 @@ if (runninggame){
 
     		winOverlay.addEventListener("animationend", () => {
         		if (settings.VFX.enabled && settings.VFX.confetti) {
-            		confetti();
+            		fireconfetti();
         		}
     		}, { once: true });
         }
