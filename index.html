@@ -2,6 +2,106 @@
 
 <head>
     <script id="vervar">const version = "5.0.0";</script>
+	<style>
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 20px;
+    box-sizing: border-box;
+}
+
+.setting-name {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+
+/* Toggle */
+.toggle {
+    position: relative;
+    width: 56px;
+    height: 36px;
+    display: inline-block;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.toggle input {
+    display: none;
+}
+
+
+/* Track */
+.toggle-track {
+    position: absolute;
+    width: 56px;
+    height: 20px;
+    top: 8px;
+    left: 0;
+    background: #b7b7b7;
+    border-radius: 999px;
+    transition: background 0.2s ease;
+}
+
+
+/* Thumb */
+.toggle-track::before {
+    content: "";
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: -6px;
+    left: -2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+
+/* ON state */
+.toggle input:checked + .toggle-track {
+    background: #1a73e8;
+}
+
+.toggle input:checked + .toggle-track::before {
+    transform: translateX(28px);
+}
+
+
+/* Press animation */
+.toggle:active .toggle-track::before {
+    transform: scale(0.92);
+}
+
+.toggle:active input:checked + .toggle-track::before {
+    transform: translateX(28px) scale(0.92);
+}
+/* Disabled cursor */
+.toggle input:disabled + .toggle-track {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Grey thumb */
+.toggle input:disabled + .toggle-track::before {
+    background: #bcbcbc;
+}
+
+/* Don't move or animate while disabled */
+.toggle input:disabled + .toggle-track,
+.toggle input:disabled + .toggle-track::before {
+    transition: none;
+}
+
+/* Prevent interaction */
+.toggle input:disabled + .toggle-track {
+    pointer-events: none;
+}
+
+</style>
 	<style>.restart-button {
     width: 400px;
     height: 50px;
@@ -400,6 +500,127 @@
                 
 
             </div>
+
+        </div>
+	<div id="settingsOverlay" class="win-overlay show" style="border-radius: 66px;overflow: clip;">
+
+
+            <div class="win-card" aria-label="Settings Menu" style="width: 92dvw;padding-top: 10px !important;padding: 15px;border: 1px solid var(--outline);">
+
+                
+                <div style="display: flex;padding-left: 10px;"><h1 class="win-title" style="color: var(--text2);">Ceedoku Settings</h1><button onclick="closesettingsmenu()" style="background-color: transparent;font-size: 25px;margin-left: auto;margin-right: 5px;">🗙</button></div><div style="height: 550px;background-color: var(--surface-2);margin-top: 15px;border-radius: 10px;padding: 10px;padding-top: 15px;padding-bottom: 10px;"><div style="height: 100%;overflow: scroll;scrollbar-color: var(--text2);scrollbar-width: thick;"><h1 style="font-size: 50px;text-align: center;">Animations</h1><div class="setting-row" style="padding-bottom: 5px;" title="Whether or not animations should be enabled.">
+    <span class="setting-name" style="text-align: left;"><strong>Enable animations</strong></span>
+
+    <label class="toggle">
+        <input id="animationtoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;">
+<div class="setting-row" style="padding-top: 0px;padding-bottom: 5px;" title="Whether or not to play an animation on completion of a row, column, box or the entire board.">
+    <span class="setting-name" style="text-align: left;"><strong>Completion animations</strong></span>
+
+    <label class="toggle">
+        <input id="completionanimationtoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div>
+<hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class=" setting-row" style="padding-top: 0px;padding-bottom: 5px;" title="Whether or not to play a confetti animation on completion of a puzzle.">
+    <span class="setting-name" style="text-align: left;"><strong>Confetti animation</strong></span>
+
+    <label class="toggle">
+        <input id="confettianimationtoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div><h1 style="font-size: 50px;text-align: center;margin-top: 20px;">SFX</h1><div class="setting-row" style="padding-bottom: 5px;" title="Whether or not sound effects should be enabled.">
+    <span class="setting-name" style="text-align: left;"><strong>Enable sound effects</strong></span>
+
+    <label class="toggle">
+        <input id="sfxtoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div title="Whether or not to play a sound on puzzle completion." class="setting-row" style="padding-top: 0px;padding-bottom: 5px;text-align: left;">
+    <span class="setting-name" style="text-align: left;"><strong style="text-align: left;">Win sound</strong></span>
+
+    <label class="toggle">
+        <input type="checkbox" id="winsoundtoggle">
+        <span class="toggle-track"></span>
+    </label>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-top: 0px;padding-bottom: 5px;text-align: left;" title="Whether or not to play a sound on completion of a row, column, box or the entire board.">
+    <span class="setting-name" style="text-align: left;"><strong style="text-align: left;">Completion sound</strong></span>
+
+    <label class="toggle">
+        <input type="checkbox" id="completionsoundtoggle">
+        <span class="toggle-track"></span>
+    </label>
+</div><h1 style="font-size: 50px;text-align: center;margin-top: 20px;">Haptics</h1><div class="setting-row" style="padding-bottom: 5px;" title="Whether or not to play a small vibration for certain actions.">
+    <span class="setting-name" style="text-align: left;"><strong>Enable haptics</strong></span>
+
+    <label class="toggle">
+        <input id="hapticstoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="Whether or not to play a small vibration when you click a button.">
+    <span class="setting-name" style="text-align: left;"><strong>Button haptics</strong></span>
+
+    <label class="toggle">
+        <input id="buttonhapticstoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="Whether or not to play a small vibration when you select a cell.">
+    <span class="setting-name" style="text-align: left;"><strong>Cell select haptics</strong></span>
+
+    <label class="toggle">
+        <input id="cellhapticstoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="Whether or not to play some small vibrations on puzzle completion.">
+    <span class="setting-name" style="text-align: left;"><strong>Puzzle completed haptics</strong></span>
+
+    <label class="toggle">
+        <input id="winhapticstoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div>
+<h1 style="font-size: 50px;text-align: center;margin-top: 20px;">Hints</h1><div class="setting-row" style="padding-bottom: 5px;" title="Whether or not hints should be enabled.">
+    <span class="setting-name" style="text-align: left;"><strong>Enable hints</strong></span>
+
+    <label class="toggle">
+        <input id="hintstoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="Whether or not hints should have a cooldown.">
+    <span class="setting-name" style="text-align: left;"><strong>Hint cooldown</strong></span>
+
+    <label class="toggle">
+        <input id="hintcooldowntoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="The number of hints the game gives you at the start of a game.">
+    <span class="setting-name" style="text-align: left;"><strong>Starting hints</strong></span>
+
+    
+<input type="number" id="startinghints" placeholder="30" style="height: 40px;border-radius: 10px;background-color: var(--surface-3);border: none;text-align: center;background-color: var(--surface-3);">
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="Whether or not the cooldown for hints should be move-based instead of time based.">
+    <span class="setting-name" style="text-align: left;"><strong>Move-based hint cooldown</strong></span>
+
+    <label class="toggle">
+        <input id="hintmovebasedcooldowntoggle" type="checkbox">
+        <span class="toggle-track"></span>
+    </label>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="The number of moves/seconds until hints are off of cooldown">
+    <span class="setting-name" style="text-align: left;"><strong>Hint cooldown amount</strong></span>
+
+    
+<input type="number" id="hintcooldownamount" placeholder="30" style="height: 40px;border-radius: 10px;background-color: var(--surface-3);border: none;text-align: center;background-color: var(--surface-3);">
+</div>
+
+
+
+</div></div>
+
+                
+		
+                </div>
 
         </div>
 	<div aria-label="site controls" id="sitecontrols" style="z-index: 10000; width: fit-content; position: absolute; top: 0px; right: 0px; background-color: var(--surface); padding: 5px 5px 10px 10px; display: flex; gap: 5px; border-bottom-left-radius: 32px;;border: 1px solid var(--outline);border-top: 0px;border-right: 0;"><button id="mode" title="Switch between light and dark mode." aria-label="switch between light and dark mode" class="bar hint-button" onclick="changemode()" style="font-size:22px;width: 50px;height: 50px !important;"><b>☾</b></button>
