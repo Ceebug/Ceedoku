@@ -183,7 +183,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         opacity: 1;
         pointer-events: auto;
         position: fixed;
-        transform: translateY(-1vh);
+        transform: translateY(0vh);
     }
     .win-overlay2.show {
         opacity: 1;
