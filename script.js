@@ -268,6 +268,8 @@ mainmenu.inert = false
 	          const deleteOverlay = document.getElementById("deleteOverlay")
 
 	          const newoverlay = document.getElementById("newOverlay")
+
+			  const settingsOverlay = document.getElementById("settingsOverlay")
         
               let solution = [];
               let puzzle = [];
@@ -1768,6 +1770,7 @@ function continuenewGame() {
 				if (timerPaused) return;
               });
 document.addEventListener("keyup", (event) => {
+	if (!runninggame) return;
     console.log(event.key);
 
     if (event.code === "Space") {
@@ -1777,14 +1780,9 @@ document.addEventListener("keyup", (event) => {
 });
               document.addEventListener("keydown", (event) => {
 			   if (timerPaused) return;
-                console.log(event.key);
+		       if (!runninggame) return;
+                // console.log(event.key); disabled logging as it isn't currently needed
                 const key = event.key.toLowerCase();
-                if (key === "escape") {
-                  closeDifficultyMenu();
-                  closewinDifficultyMenu();
-                  closepauseDifficultyMenu();
-                  return;
-                }
  
         
                 if ((event.ctrlKey || event.metaKey) && key === "z") {
@@ -1811,6 +1809,7 @@ document.addEventListener("keyup", (event) => {
         	return;
         	}
 			 if (timerPaused) return;
+			 if (!runninggame) return;
                 if (/^[1-9]$/.test(key)) placeNumber(Number(key));
                 if (key === "backspace" || key === "delete" || key === "0") eraseSelected();
                 if (["arrowup", "arrowdown", "arrowleft", "arrowright"].includes(key)) {
