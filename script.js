@@ -129,7 +129,7 @@ if ("vibrate" in navigator) {
 let popQueue = Promise.resolve();
 let pitchInterval = null;
 
-function playPop(speed = 2) {
+function playPop(speed = 1) {
     if (!settings.SFX) return;
 
     if (pitchInterval) {
@@ -146,8 +146,8 @@ function playPop(speed = 2) {
 
     let currentSpeed = speed;
 
-    if (currentSpeed > 2.6) {
-        currentSpeed = 2.6;
+    if (currentSpeed > 7) {
+        currentSpeed = 7;
     }
 
     popSound.playbackRate = currentSpeed;
@@ -159,8 +159,8 @@ function playPop(speed = 2) {
     pitchInterval = setInterval(() => {
         currentSpeed += 0.1;
 
-        if (currentSpeed > 2.6) {
-            currentSpeed = 2.6;
+        if (currentSpeed > 7) {
+            currentSpeed = 7;
         }
 
         popSound.playbackRate = currentSpeed;
@@ -169,7 +169,7 @@ function playPop(speed = 2) {
     popSound.onended = () => {
         clearInterval(pitchInterval);
         pitchInterval = null;
-        popSound.playbackRate = 2;
+        popSound.playbackRate = 1;
     };
 }
 document.addEventListener("pointerdown", (event) => {
@@ -1265,7 +1265,7 @@ function animateIndexes(indexes, origin, kind) {
     			distancesPlayed.add(distance);
 
     			setTimeout(() => {
-        		playPop(Math.min(2 + distance * 0.15, 2.6));
+        		playPop(Math.min(2 + distance * 0.5));
     			}, distance * 60);
 			}
 		}
@@ -1332,7 +1332,7 @@ function playBoardRipple() {
                 distancesPlayed.add(distance);
 
                 setTimeout(() => {
-                    playPop(Math.min(2 + distance * 0.15, 2.6));
+                    playPop(Math.min(2 + distance * 0.25));
                 }, distance * 60);
             }
         }
