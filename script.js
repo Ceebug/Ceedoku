@@ -1833,14 +1833,15 @@ window.addEventListener("load", () => {
     const game = document.getElementById("aahtheentiregame");
     const loader = document.getElementById("loader");
 
+    loader.classList.add("fade-out");
+    setTimeout(() => {
+        loader.style.visibility = "hidden";
+    }, 500);
+	
     game.style.visibility = "visible";
     requestAnimationFrame(() => {
         game.classList.add("loaded");
     });
 
-    loader.classList.add("fade-out");
-
-    setTimeout(() => {
-        loader.style.visibility = "hidden";
-    }, 500);
+	document.title = "Ceedoku"
 });
