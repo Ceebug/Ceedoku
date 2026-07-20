@@ -1103,11 +1103,11 @@ function findMoveForCell(index) {
     null
   );
 }
-enablehintbutton {
+function enablehintbutton() {
     document.getElementById("hintButton").classList.remove("disabled");
     document.getElementById("hintButton").disabled = false;
 }
-disablehintbutton {
+function disablehintbutton() {
     document.getElementById("hintButton").classList.add("disabled");
     document.getElementById("hintButton").disabled = true;
 }
