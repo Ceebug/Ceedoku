@@ -212,7 +212,6 @@ mainmenu.inert = false
  			 	  extreme: { holes: 70 },
    			  	  impossible: { holes: 76 }
 			  };
-
               const boardEl = document.getElementById("board");
 			  
               const winOverlay = document.getElementById("winOverlay");			  
@@ -314,6 +313,13 @@ mainmenu.inert = false
         		}
     		}, { once: true });
         }
+function opensettingsmenu() {
+    document.getElementById("settingsOverlay").classList.add("show");
+}
+
+function closesettingsmenu() {
+    document.getElementById("settingsOverlay").classList.remove("show");
+}
 			function showPauseScreen() {
             pauseDifficulty.textContent =
                 difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
@@ -335,9 +341,7 @@ const isAndroidPWA =
   );
 
 if (isAndroidPWA && fullscreenButton) {
-  fullscreenButton.style.width = "0";
-  fullscreenButton.style.height = "0";
-  fullscreenButton.style.visibility = "hidden";
+  fullscreenButton.style.display = "none";
 }
 function fullscreen() {
   if (!fullscreenButton) return;
