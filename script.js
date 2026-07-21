@@ -379,7 +379,7 @@ winSoundToggle.addEventListener("change", () => {
 	updateSettingsMenu();
 })
 completionSoundToggle.addEventListener("change", () => {
-	settings.SFX.win = completionSoundToggle.checked;
+	settings.SFX.completion = completionSoundToggle.checked;
 	saveSettings();
 	updateSettingsMenu();
 })
@@ -396,12 +396,12 @@ hapticsToggle.addEventListener("change", () => {
     updateSettingsMenu();
 });
 buttonHapticsToggle.addEventListener("change", () => {
-	settings.haptics.button = buttonHapticsToggle.checked;
+	settings.haptics.buttons = buttonHapticsToggle.checked;
 	saveSettings();
 	updateSettingsMenu();
 })
 cellHapticsToggle.addEventListener("change", () => {
-	settings.haptics.cell = cellHapticsToggle.checked;
+	settings.haptics.cells = cellHapticsToggle.checked;
 	saveSettings();
 	updateSettingsMenu();
 })
