@@ -103,8 +103,7 @@
     pointer-events: none;
 }
 
-</style>
-	<style>.restart-button {
+.restart-button {
     width: 400px;
     height: 50px;
     border-radius: 10px;
