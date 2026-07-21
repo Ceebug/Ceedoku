@@ -269,6 +269,93 @@ mainmenu.inert = false
 	          const newoverlay = document.getElementById("newOverlay")
 
 			  const settingsOverlay = document.getElementById("settingsOverlay")
+
+
+			  const animationToggle = document.getElementById("animationtoggle");
+			  const completionAnimationToggle = document.getElementById("completionanimationtoggle");
+			  const confettiAnimationToggle = document.getElementById("confettianimationtoggle");
+
+			  const sfxToggle = document.getElementById("sfxtoggle");
+			  const winSoundToggle = document.getElementById("winsoundtoggle");
+			  const completionSoundToggle = document.getElementById("completionsoundtoggle");
+
+			  const hapticsToggle = document.getElementById("hapticstoggle");
+			  const buttonHapticsToggle = document.getElementById("buttonhapticstoggle");
+			  const cellHapticsToggle = document.getElementById("cellhapticstoggle");
+			  const winHapticsToggle = document.getElementById("winhapticstoggle");
+
+			  const hintsToggle = document.getElementById("hintstoggle");
+			  const hintCooldownToggle = document.getElementById("hintcooldowntoggle");
+			  const startingHintsInput = document.getElementById("startinghints");
+			  const hintCooldownMethod = document.getElementById("hintcooldownmethod");
+			  const hintCooldownAmount = document.getElementById("hintcooldownamount");
+			  function updateSettingsMenu() {
+    animationToggle.checked = settings.VFX.enabled;
+    completionAnimationToggle.checked = settings.VFX.completion;
+    confettiAnimationToggle.checked = settings.VFX.confetti;
+
+    completionAnimationToggle.disabled = !settings.VFX.enabled;
+    confettiAnimationToggle.disabled = !settings.VFX.enabled;
+
+    sfxToggle.checked = settings.SFX.enabled;
+    winSoundToggle.checked = settings.SFX.win;
+    completionSoundToggle.checked = settings.SFX.completion;
+
+    winSoundToggle.disabled = !settings.SFX.enabled;
+    completionSoundToggle.disabled = !settings.SFX.enabled;
+
+
+    hapticsToggle.checked = settings.haptics.enabled;
+    buttonHapticsToggle.checked = settings.haptics.buttons;
+    cellHapticsToggle.checked = settings.haptics.cells;
+    winHapticsToggle.checked = settings.haptics.puzzlecomplete;
+
+    buttonHapticsToggle.disabled = !settings.haptics.enabled;
+    cellHapticsToggle.disabled = !settings.haptics.enabled;
+    winHapticsToggle.disabled = !settings.haptics.enabled;
+
+    hintsToggle.checked = settings.hints.enabled;
+    hintCooldownToggle.checked = settings.hints.cooldown.enabled;
+
+    startingHintsInput.value =
+        settings.hints.cooldown.startinghints;
+
+    hintCooldownMethod.value =
+        settings.hints.cooldown.cooldowntype;
+
+    hintCooldownAmount.value =
+        settings.hints.cooldown.cooldowntype === "time"
+            ? settings.hints.cooldown.cooldowntime
+            : settings.hints.cooldown.cooldownmoves;
+
+    hintCooldownToggle.disabled =
+        !settings.hints.enabled;
+
+    startingHintsInput.disabled =
+        !settings.hints.enabled;
+
+    hintCooldownMethod.disabled =
+        !settings.hints.enabled ||
+        !settings.hints.cooldown.enabled;
+
+    hintCooldownAmount.disabled =
+        !settings.hints.enabled ||
+        !settings.hints.cooldown.enabled;
+}
+updateSettingsMenu();
+
+animationToggle.addEventListener("change", () => {
+    settings.VFX.enabled = animationToggle.checked;
+
+    if (!settings.VFX.enabled) {
+        settings.VFX.completion = false;
+        settings.VFX.confetti = false;
+    }
+
+    saveSettings();
+    updateSettingsMenu();
+});
+
         
               let solution = [];
               let puzzle = [];
