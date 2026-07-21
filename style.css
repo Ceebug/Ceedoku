@@ -114,10 +114,6 @@
     background: var(--muted);
 }
 
-.toggle input:disabled + .toggle-track,
-.toggle input:disabled + .toggle-track::before {
-    transition: none;
-}
 
 .toggle input:disabled + .toggle-track {
     pointer-events: none;
