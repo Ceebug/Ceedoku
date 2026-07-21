@@ -27,7 +27,19 @@
     font-size: 30px;
     font-weight: 500;
 }
-
+.settings-select {
+	width: 160px !important
+}
+@media (orientation:portrait){
+	.setting-name {
+		font-size: 15px !important;
+	}
+}
+@media (width <= 402px){
+	.settings-select{
+		width: 190px
+	}
+}
 .toggle {
     position: relative;
     width: 56px;
