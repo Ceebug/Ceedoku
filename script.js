@@ -324,9 +324,7 @@ mainmenu.inert = false
         settings.hints.cooldown.cooldowntype;
 
     hintCooldownAmount.value =
-        settings.hints.cooldown.cooldowntype === "time"
-            ? settings.hints.cooldown.cooldowntime
-            : settings.hints.cooldown.cooldownmoves;
+    	settings.hints.cooldown.cooldownmoves;
 
     hintCooldownToggle.disabled =
         !settings.hints.enabled;
