@@ -14,6 +14,9 @@
     but it ain't no lie,
     bugs go bye bye bye.
 --------------------------- */
+#hintcooldownamount,#startinghints {
+	color: var(--text2)
+}
 #WHATTHEFUCKDOICALLTHIS\?:hover {
     color: var(--text) !important;
 }
