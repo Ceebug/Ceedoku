@@ -14,8 +14,114 @@
     but it ain't no lie,
     bugs go bye bye bye.
 --------------------------- */
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 20px;
+    box-sizing: border-box;
+}
+
+.setting-name {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.toggle {
+    position: relative;
+    width: 56px;
+    height: 36px;
+    display: inline-block;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.toggle input {
+    display: none;
+}
+
+.toggle-track {
+    position: absolute;
+    width: 56px;
+    height: 20px;
+    top: 8px;
+    left: 0;
+    background: var(--muted);
+    border-radius: 999px;
+    transition: background 0.2s ease;
+}
+
+.toggle-track::before {
+    content: "";
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: -6px;
+    left: -2px;
+    background: var(--toggle-thumb);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+
+/* ON state */
+.toggle input:checked + .toggle-track {
+    background: var(--blue);
+}
+
+.toggle input:checked + .toggle-track::before {
+    transform: translateX(28px);
+}
+
+
+/* Press animation */
+.toggle:active .toggle-track::before {
+    transform: scale(0.92);
+}
+
+.toggle:active input:checked + .toggle-track::before {
+    transform: translateX(28px) scale(0.92);
+}
+/* Disabled cursor */
+.toggle input:disabled + .toggle-track {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.toggle input:disabled + .toggle-track::before {
+    background: var(--muted);
+}
+
+.toggle input:disabled + .toggle-track,
+.toggle input:disabled + .toggle-track::before {
+    transition: none;
+}
+
+.toggle input:disabled + .toggle-track {
+    pointer-events: none;
+}
+
+</style>
+	<style>.restart-button {
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+    .restart-button {
+        width: 90%;
+    }
+	#crashscreenerrormsg {
+		padding-left: 10px;
+		padding-right: 10px
+	}
+}
 .settings-select {
     width: 100px;
+	display: unset;
     height: 40px;
     padding: 0 12px;
 
@@ -77,6 +183,7 @@ button {
           --blue-soft: #d7e8ff;
           --blue-softer: #eaf3ff;
           --lime: #9cff35;
+		  --toggle-thumb: var(--line);
           --lime-soft: #dcffb5;
 		  --pencilerasebutton: #d7e1ee;
           --lime-text: #195700;
@@ -307,6 +414,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
           --line: #4e6177;
           --blue: #73a7ff;
           --blue-soft: #203a5f;
+		  --toggle-thumb: white;
 		  --blue-soft2: var(--blue-soft);
           --blue-softer: #1b2c45;
           --lime: #a7ff48;
