@@ -1,122 +1,7 @@
 <html lang="en">
 
 <head>
-    <script id="vervar">const version = "5.0.0";</script>
-	<style>
-.setting-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 16px 20px;
-    box-sizing: border-box;
-}
-
-.setting-name {
-    font-size: 30px;
-    font-weight: 500;
-}
-
-
-/* Toggle */
-.toggle {
-    position: relative;
-    width: 56px;
-    height: 36px;
-    display: inline-block;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-.toggle input {
-    display: none;
-}
-
-
-/* Track */
-.toggle-track {
-    position: absolute;
-    width: 56px;
-    height: 20px;
-    top: 8px;
-    left: 0;
-    background: #b7b7b7;
-    border-radius: 999px;
-    transition: background 0.2s ease;
-}
-
-
-/* Thumb */
-.toggle-track::before {
-    content: "";
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    top: -6px;
-    left: -2px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    transition: transform 0.2s cubic-bezier(.4,0,.2,1);
-}
-
-
-/* ON state */
-.toggle input:checked + .toggle-track {
-    background: #1a73e8;
-}
-
-.toggle input:checked + .toggle-track::before {
-    transform: translateX(28px);
-}
-
-
-/* Press animation */
-.toggle:active .toggle-track::before {
-    transform: scale(0.92);
-}
-
-.toggle:active input:checked + .toggle-track::before {
-    transform: translateX(28px) scale(0.92);
-}
-/* Disabled cursor */
-.toggle input:disabled + .toggle-track {
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-/* Grey thumb */
-.toggle input:disabled + .toggle-track::before {
-    background: #bcbcbc;
-}
-
-/* Don't move or animate while disabled */
-.toggle input:disabled + .toggle-track,
-.toggle input:disabled + .toggle-track::before {
-    transition: none;
-}
-
-/* Prevent interaction */
-.toggle input:disabled + .toggle-track {
-    pointer-events: none;
-}
-
-</style>
-	<style>.restart-button {
-    width: 400px;
-    height: 50px;
-    border-radius: 10px;
-}
-
-@media (max-width: 600px) {
-    .restart-button {
-        width: 90%;
-    }
-	#crashscreenerrormsg {
-		padding-left: 10px;
-		padding-right: 10px
-	}
-}</style>
+    <script id="vervar">const version = "a-5.0.0 (Some features are still in development!)";</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#101418">
@@ -135,7 +20,7 @@
 
 </head>
 
-<body class="dark"><div id="loader" style="display: flex; flex-direction: column; place-content: center; position: fixed; place-items: center; visibility: visible;height: 100dvh;width: 100dvw;overflow: hidden;"><style>
+<body class="dark"><div id="loader" style="display: flex; flex-direction: column; place-content: center; position: fixed; place-items: center; visibility: visible;height: 100dvh;width: 100dvw;overflow: hidden;"><style id="loadingscreen">
 
 .spinner {
     animation: rotator 1.4s linear infinite;
@@ -502,13 +387,13 @@
             </div>
 
         </div>
-	<div id="settingsOverlay" class="win-overlay show" style="border-radius: 66px;overflow: clip;">
+<div id="settingsOverlay" class="win-overlay show" style="border-radius: 66px;overflow: clip;">
 
 
             <div class="win-card" aria-label="Settings Menu" style="width: 92dvw;padding-top: 10px !important;padding: 15px;border: 1px solid var(--outline);">
 
                 
-                <div style="display: flex;padding-left: 10px;"><h1 class="win-title" style="color: var(--text2);">Ceedoku Settings</h1><button onclick="closesettingsmenu()" style="background-color: transparent;font-size: 25px;margin-left: auto;margin-right: 5px;">🗙</button></div><div style="height: 550px;background-color: var(--surface-2);margin-top: 15px;border-radius: 10px;padding: 10px;padding-top: 15px;padding-bottom: 10px;"><div style="height: 100%;overflow: scroll;scrollbar-color: var(--text2);scrollbar-width: thick;"><h1 style="font-size: 50px;text-align: center;">Animations</h1><div class="setting-row" style="padding-bottom: 5px;" title="Whether or not animations should be enabled.">
+                <div style="display: flex;padding-left: 10px;"><h1 class="win-title" style="color: var(--text2);">Ceedoku Settings</h1><button onclick="closesettingsmenu()" style="background-color: transparent;font-size: 25px;margin-left: auto;margin-right: 5px;color: var(--text2);">🗙</button></div><div style="height: 550px;background-color: var(--surface-2);margin-top: 15px;border-radius: 10px;padding: 10px;padding-top: 15px;padding-bottom: 10px;"><div style="height: 100%;overflow: scroll;scrollbar-color: var(--text2);scrollbar-width: thick;"><h1 style="font-size: 50px;text-align: center;">Animations</h1><div class="setting-row" style="padding-bottom: 5px;" title="Whether or not animations should be enabled.">
     <span class="setting-name" style="text-align: left;"><strong>Enable animations</strong></span>
 
     <label class="toggle">
@@ -599,24 +484,32 @@
     <span class="setting-name" style="text-align: left;"><strong>Starting hints</strong></span>
 
     
-<input type="number" id="startinghints" placeholder="30" style="height: 40px;border-radius: 10px;background-color: var(--surface-3);border: none;text-align: center;background-color: var(--surface-3);">
-</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="Whether or not the cooldown for hints should be move-based instead of time based.">
-    <span class="setting-name" style="text-align: left;"><strong>Move-based hint cooldown</strong></span>
+<input type="number" id="startinghints" placeholder="30" style="height: 40px;border-radius: 10px;background-color: var(--surface-3);border: none;text-align: center;background-color: var(--surface-3);appearance: textfield;">
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="The type of hint cooldownt that should be used">
+       <span class="setting-name">
+        <strong>Hint cooldown type</strong>
+    </span>
 
-    <label class="toggle">
-        <input id="hintmovebasedcooldowntoggle" type="checkbox">
-        <span class="toggle-track"></span>
-    </label>
-</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="The number of moves/seconds until hints are off of cooldown">
+    <select class="settings-select" id="hintcooldownmethod">
+        <option value="time">Time-based</option>
+        <option value="move">Move-based</option>
+    </select>
+</div><hr style="height: 1px;border: none;background-color: var(--muted);margin: auto;margin-bottom: 10px;margin-top: 5px;width: 98%;"><div class="setting-row" style="padding-bottom: 5px;padding-top: 0px;" title="The number of moves/seconds until the hint cooldown ends.">
     <span class="setting-name" style="text-align: left;"><strong>Hint cooldown amount</strong></span>
 
     
-<input type="number" id="hintcooldownamount" placeholder="30" style="height: 40px;border-radius: 10px;background-color: var(--surface-3);border: none;text-align: center;background-color: var(--surface-3);">
+<input type="number" id="hintcooldownamount" placeholder="30" style="height: 40px;border-radius: 10px;background-color: var(--surface-3);border: none;text-align: center;background-color: var(--surface-3);appearance: textfield;">
 </div>
 
 
 
 </div></div>
+
+                
+		
+                </div>
+
+        </div>
 
                 
 		
