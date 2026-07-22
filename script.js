@@ -1401,6 +1401,9 @@ function getHintCooldownText() {
     if (settings.hints.cooldown.cooldowntype === "time") {
         return `${cooldown.seconds} sec${cooldown.seconds === 1 ? "" : "s"}`;
     }
+	
+	return "Pls hold...";
+}
 function updateHintCooldownDisplay() {
     if (!settings.hints.enabled) {
         hintcooldowndisplay.textContent = "Disabled";
