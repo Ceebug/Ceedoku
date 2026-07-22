@@ -16,12 +16,14 @@
 --------------------------- */
 select:disabled {
 	color: var(--muted) !important;
-	cursor: default !important;
+	cursor: not-allowed !important;
+	background-color: var(--disabledbox) !important
 }
 #hintcooldownamount:disabled,
 #startinghints:disabled {
 	color: var(--muted) !important;
-	cursor: default !important;
+	cursor: not-allowed !important;
+	background-color: var(--disabledbox) !important
 }
 #hintcooldownamount,#startinghints {
 	color: var(--text2)
@@ -97,8 +99,6 @@ select:disabled {
     transition: transform 0.2s cubic-bezier(.4,0,.2,1);
 }
 
-
-/* ON state */
 .toggle input:checked + .toggle-track {
     background: var(--blue);
 }
@@ -107,8 +107,6 @@ select:disabled {
     transform: translateX(28px);
 }
 
-
-/* Press animation */
 .toggle:active .toggle-track::before {
     transform: scale(0.92);
 }
@@ -116,7 +114,7 @@ select:disabled {
 .toggle:active input:checked + .toggle-track::before {
     transform: translateX(28px) scale(0.92);
 }
-/* Disabled cursor */
+
 .toggle input:disabled + .toggle-track {
     cursor: not-allowed;
     opacity: 0.7;
@@ -124,11 +122,6 @@ select:disabled {
 
 .toggle input:disabled + .toggle-track::before {
     background: var(--muted);
-}
-
-
-.toggle input:disabled + .toggle-track {
-    pointer-events: none;
 }
 
 .restart-button {
@@ -206,6 +199,7 @@ button {
           --line: #b7c5d6;
           --line-strong: #4c5867;
           --blue: #1a73e8;
+		  --disabledbox: #b6bcc2;
 	  --delete-save: #ff0000;
           --blue-soft: #d7e8ff;
           --blue-softer: #eaf3ff;
@@ -445,6 +439,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
 		  --blue-soft2: var(--blue-soft);
           --blue-softer: #1b2c45;
           --lime: #a7ff48;
+		  --disabledbox: #4e5861;
 	      --pencilerasebutton: #26313f;
           --lime-soft: #263d1d;
 	  --text2: #dce3e9;
