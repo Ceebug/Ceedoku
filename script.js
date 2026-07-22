@@ -1383,7 +1383,7 @@ function hint() {
 }
 function starthintcooldown() {
 	if (settings.hints.cooldown.cooldowntype === "move") {
-    	cooldownmoves = settings.hints.cooldown.amount;	
+    	cooldownmoves = settings.hints.cooldown.cooldowntime;	
 	}
 	if (settings.hints.cooldown.cooldowntype === "time") {
     	console.log("uuuuuh this will exist soon i promise")
