@@ -376,12 +376,12 @@ winSoundToggle.addEventListener("change", () => {
 	settings.SFX.win = winSoundToggle.checked;
 	saveSettings();
 	updateSettingsMenu();
-})
+});
 completionSoundToggle.addEventListener("change", () => {
 	settings.SFX.completion = completionSoundToggle.checked;
 	saveSettings();
 	updateSettingsMenu();
-})
+});
 hapticsToggle.addEventListener("change", () => {
     settings.haptics.enabled = hapticsToggle.checked;
 
@@ -398,17 +398,17 @@ buttonHapticsToggle.addEventListener("change", () => {
 	settings.haptics.buttons = buttonHapticsToggle.checked;
 	saveSettings();
 	updateSettingsMenu();
-})
+});
 cellHapticsToggle.addEventListener("change", () => {
 	settings.haptics.cells = cellHapticsToggle.checked;
 	saveSettings();
 	updateSettingsMenu();
-})
+});
 winHapticsToggle.addEventListener("change", () => {
 	settings.haptics.puzzlecomplete = winHapticsToggle.checked;
 	saveSettings();
 	updateSettingsMenu();
-})
+});
 hintsToggle.addEventListener("change", () => {
 	settings.hints.enabled = hintsToggle.checked;
 
@@ -418,22 +418,22 @@ hintsToggle.addEventListener("change", () => {
 	
 	saveSettings();
 	updateSettingsMenu();
-})
+});
 hintsCooldownToggle.addEventListener("change", () => {
 	settings.hints.cooldown.enabled = hintsCooldownToggle.checked;
 	saveSettings();
 	updateSettingsMenu();
-})
+});
 startingHintsInput.addEventListener("change", () => {
 	settings.hints.cooldown.startinghints = Number(startingHintsInput.value);
 	saveSettings();
 	updateSettingsMenu()
-}
+});
 hintCooldownMethod.addEventListener("change", () => {
 	settings.hints.cooldown.cooldowntype = hintCooldownMethod.value
 	saveSettings();
 	updateSettingsMenu()
-}
+});
               let solution = [];
               let puzzle = [];
               let values = [];
