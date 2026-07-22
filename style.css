@@ -14,8 +14,11 @@
     but it ain't no lie,
     bugs go bye bye bye.
 --------------------------- */
+#fulscreen {
+	transform: rotate(40deg)
+}
 #fullscreen:active {
-	transform: translatey(1px)
+	transform: rotate(40deg)translatey(1px) 
 }
 select:disabled {
 	color: var(--muted) !important;
