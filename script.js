@@ -1598,6 +1598,9 @@ function playBoardRipple() {
         }
     });
 }
+document.addEventListener("pointerup", () => {
+    updateHintCooldownDisplay();
+});
 function getBoardDistances(startIndex) {
     const distances = Array(81).fill(-1);
     const queue = [startIndex];
