@@ -25,7 +25,7 @@
 	transform: rotate(40deg)
 }
 #fullscreen:active {
-	transform: rotate(40deg)translatey(1px) 
+	transform: translatey(1px)rotate(40deg)
 }
 select:disabled {
 	color: var(--muted) !important;
