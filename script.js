@@ -600,13 +600,13 @@ if (solution.length !== 81){localStorage.removeItem("save");nosave=true;updateGi
     undoStack = game.undoStack;
     redoStack = game.redoStack;
 	
-	if (game.cooldowntype === undefined) {
+	if (game.cooldowntypetouse === undefined) {
 		hintcount = settings.hints.cooldown.startinghints;
 		canusecurrenthintsystem = true
-	} else if (game.cooldowntype !== settings.hints.cooldown.cooldowntype) {
+	} else if (game.cooldowntypetouse !== settings.hints.cooldown.cooldowntype) {
 		canusecurrenthintsystem = false;
 		savehintcount = game.hintcount;
-		cooldowntypetouse = game.cooldowntype;
+		cooldowntypetouse = game.cooldowntypetouse;
 		savecooldownmoves = game.cooldownmoves;
 		savecooldowntime = game.cooldowntime
 	}
