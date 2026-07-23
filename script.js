@@ -13,6 +13,9 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
+let hintcount = settings.hints.cooldown.startinghints
+let canusecurrenthintsystem = false
+let usingsavegame = false
 let cooldownmoves = 0
 let cooldowntime = 0
 const count = 150,
@@ -183,10 +186,10 @@ let selectedDifficulty = localStorage.getItem("difficulty") || "easy";
 document.getElementById("mainmenubutton").style.display = "none"
 			  const mainmenu = document.getElementById("mainmenu");	
 	let runninggame = false	        
-              let menuOpen = false;			  
+              let menuOpen = false;		
+let cooldowntypetouse = "just declaring var"
 					  function showmainmenu() {
 						      if (!timerPaused) {
-        // PAUSE
         timerPaused = true;
 
         clearInterval(timerId);
@@ -202,6 +205,11 @@ mainmenu.inert = false
                 mainmenu.classList.add("show");
             });
         }
+window.addEventListener('keydown', function (event) {
+  if (event.key === 'Tab') {
+    event.preventDefault();
+  }
+});
 
 			 const DIFFICULTIES = {
 			   	  easy: { holes: 36 },
@@ -566,6 +574,48 @@ document.addEventListener("fullscreenchange", () => {
                 deleteOverlay.classList.add("show");
             });
         }
+function loadgame() {
+    const save = localStorage.getItem("save");
+	    if (save === null) {
+        nosave = true;
+		updateGiveUpButton();
+        return;
+		}
+    const game = JSON.parse(save);
+	   // ---------------- BOARD ----------------
+    solution = game.solution;
+if (solution.length !== 81){localStorage.removeItem("save");nosave=true;updateGiveUpButton();return;}
+    puzzle = game.puzzle;
+    values = game.values;
+    givens = game.givens;
+    notes = game.notes.map(arr => new Set(arr));
+
+    selected = game.selected;
+    difficulty = game.difficulty;
+    pencilMode = game.pencilMode;
+    eraseMode = game.eraseMode;
+    mistakes = game.mistakes;
+
+    undoStack = game.undoStack;
+    redoStack = game.redoStack;
+	
+	if (game.cooldowntype === undefined) {
+		hintcount = settings.hints.cooldown.startinghints;
+		canusecurrenthintsystem = true
+	} else if (game.cooldowntype !== settings.hints.cooldown.cooldowntype) {
+		canusecurrenthintsystem = false;
+		savehintcount = game.hintcount;
+		cooldowntypetouse = game.cooldowntype;
+		savecooldownmoves = game.cooldownmoves;
+		savecooldowntime = game.cooldowntime
+	}
+	
+    // ---------------- TIMER ----------------
+    elapsedMs = game.elapsedMs || 0;
+    timerPaused = game.timerPaused || false;
+
+    clearInterval(timerId);
+    }
 
 function changemode(forceMode) {
     console.log("changemode function called");
@@ -948,7 +998,11 @@ if (runninggame){
         undoStack,
         redoStack,
         finished,
-        pageMode
+        pageMode,
+		hintcount,
+		cooldownmoves,
+		cooldowntime,
+		cooldowntypetouse
     }));
 }
 }
@@ -1343,7 +1397,7 @@ function testHintButton() {
 
 testHintButton();
 
-let hintcount = settings.hints.cooldown.startinghints
+
 if (hintcount === 0 && settings.hints.cooldown.enabled) {
     startHintCooldown();
 }
@@ -1408,15 +1462,39 @@ function hint() {
   checkWin();
 }
 function starthintcooldown() {
-    if (settings.hints.cooldown.cooldowntype === "move") {
-        cooldownmoves = settings.hints.cooldown.cooldowntime;
-    }
+	if (!usingsavegame) {
+    	if (settings.hints.cooldown.cooldowntype === "move") {
+        	cooldownmoves = settings.hints.cooldown.cooldowntime;
+    	}
 
-    if (settings.hints.cooldown.cooldowntype === "time") {
-        cooldowntime = settings.hints.cooldown.cooldowntime;
-        hintCooldownCounter = 0;
-        updateHintCooldownDisplay();
-    }
+    	if (settings.hints.cooldown.cooldowntype === "time") {
+        	cooldowntime = settings.hints.cooldown.cooldowntime;
+        	hintCooldownCounter = 0;
+        	updateHintCooldownDisplay();
+    	}
+	} else {
+		if (!canusecurrenthintsystem) {
+			if (cooldowntypetouse === "move") {
+        		cooldownmoves = savecooldownmoves;
+    		}
+
+    		if (cooldowntypetouse === "time") {
+        		cooldowntime = savecooldowntime;
+        		hintCooldownCounter = 0;
+        		updateHintCooldownDisplay();
+    		}
+		} else {
+			if (settings.hints.cooldown.cooldowntype === "move") {
+        		cooldownmoves = settings.hints.cooldown.cooldowntime;
+    		}
+
+    		if (settings.hints.cooldown.cooldowntype === "time") {
+        		cooldowntime = settings.hints.cooldown.cooldowntime;
+        		hintCooldownCounter = 0;
+        		updateHintCooldownDisplay();
+    		}
+		}
+	}
 }
 function getHintCooldownText() {
     if (hintcount > 0) {
@@ -1794,38 +1872,6 @@ function deletesavefile(){localStorage.removeItem("save");}
 function deletesave(){deletesavefile();}
 function delsave(){deletesave();}
 function delsavefile(){delsave();}
-
-function loadgame() {
-    const save = localStorage.getItem("save");
-	    if (save === null) {
-        nosave = true;
-		updateGiveUpButton();
-        return;
-		}
-    const game = JSON.parse(save);
-	   // ---------------- BOARD ----------------
-    solution = game.solution;
-if (solution.length !== 81){localStorage.removeItem("save");nosave=true;updateGiveUpButton();return;}
-    puzzle = game.puzzle;
-    values = game.values;
-    givens = game.givens;
-    notes = game.notes.map(arr => new Set(arr));
-
-    selected = game.selected;
-    difficulty = game.difficulty;
-    pencilMode = game.pencilMode;
-    eraseMode = game.eraseMode;
-    mistakes = game.mistakes;
-
-    undoStack = game.undoStack;
-    redoStack = game.redoStack;
-
-    // ---------------- TIMER ----------------
-    elapsedMs = game.elapsedMs || 0;
-    timerPaused = game.timerPaused || false;
-
-    clearInterval(timerId);
-    }
 function loadtheme() {
     const savedTheme = localStorage.getItem("theme");
 
@@ -1857,6 +1903,13 @@ loadgame();
 loadtheme();		
 			
 function continueGame() {
+usingsavegame = true;
+if (savehintcount > 0) {
+	hintcount = savehintcount
+	cooldowntime = 0
+	cooldownmoves = 0
+	canusecurrenthintsystem = true
+}
 updateHintCooldownDisplay();
 runninggame = true;
 hidemainmenu();
@@ -1882,6 +1935,8 @@ hidemainmenu();
 setInterval(saveGame, 1000);
 
 function newGame(nextDifficulty = difficulty) {
+	cooldowntypetouse = settings.hints.cooldown.cooldowntype
+	usingsavegame = false;
 	cooldownmoves = 0;
 	cooldowntime = 0;
 	hintcount = settings.hints.cooldown.startinghints;
