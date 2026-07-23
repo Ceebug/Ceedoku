@@ -119,11 +119,14 @@ function unlockAudio() {
 
 document.addEventListener("pointerdown", unlockAudio, { once: true });
 let vibrate;
+const isElectron = !!window.electronAPI;
 
 if ("vibrate" in navigator) {
     vibrate = function (duration = 10) {
-        if (!isTouchDevice) return;
-		if (!settings.haptics) return;
+        if (typeof isElectron !== "undefined" && isElectron) return;
+        if (!isTouchDevice()) return;
+        if (!settings.haptics) return;
+
         navigator.vibrate(duration);
     };
 } else {
