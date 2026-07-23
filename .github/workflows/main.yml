@@ -26,7 +26,7 @@ jobs:
 
       - name: Copy game files
         run: |
-          cp index.html script.js style.css touch.css sw.js manifest.json code.md website confetticode.js/
+          cp index.html script.js style.css touch.css sw.js manifest.json code.md website confetticode.js website/
           cp -r sounds website/
           cp -r icons website/
       - name: Create sync commit
