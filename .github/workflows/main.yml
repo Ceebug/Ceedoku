@@ -26,9 +26,10 @@ jobs:
 
       - name: Copy game files
         run: |
-          cp -r index.html script.js style.css touch.css sw.js manifest.json code.md website confetticode.js website/
+          cp index.html script.js style.css touch.css sw.js manifest.json code.md confetticode.js website/
           cp -r sounds website/
           cp -r icons website/
+
       - name: Create sync commit
         run: |
           cd website
@@ -36,7 +37,7 @@ jobs:
           git config user.name "Ceebot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add *
+          git add -A
 
           CHANGES=$(git diff --cached --name-only)
 
