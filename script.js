@@ -197,7 +197,12 @@ let cooldowntypetouse = "just declaring var"
 
         elapsedMs = Date.now() - startTime;
 
-        if (runninggame){saveGame()};
+        if (runninggame) {
+			if (cooldowntypetouse !== settings.hints.cooldown.cooldowntype) {
+				canusecurrenthintsystem = false
+			}
+			saveGame();
+		};
     }
 mainmenu.inert = false
 						  document.getElementById("mainmenubutton").style.display = "none"
@@ -1436,6 +1441,7 @@ function hint() {
   if (settings.hints.cooldown.enabled) {
       hintcount--;
       if (hintcount <= 0) {
+		  canusecurrenthintsystem = true
           starthintcooldown();
       }
       updateHintCooldownDisplay();
@@ -1941,6 +1947,7 @@ function newGame(nextDifficulty = difficulty) {
 	cooldownmoves = 0;
 	cooldowntime = 0;
 	hintcount = settings.hints.cooldown.startinghints;
+	canusecurrenthintsystem = true
 	updateHintCooldownDisplay();
 	localStorage.setItem("difficulty", difficulty);
     runninggame = true
