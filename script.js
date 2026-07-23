@@ -1509,14 +1509,19 @@ function starthintcooldown() {
 }
 function getHintCooldownText() {
     if (hintcount > 0) {
+		if (settings.hints.enabled) {
+			enableHintButton()
+		}
         return `${hintcount} hint${hintcount === 1 ? "" : "s"}`;
     }
 
     if (settings.hints.cooldown.cooldowntype === "move") {
+		disableHintButton()
         return `${cooldownmoves} move${cooldownmoves === 1 ? "" : "s"}`;
     }
 
     if (settings.hints.cooldown.cooldowntype === "time") {
+		disableHintButton()
         return `${cooldowntime} sec${cooldowntime === 1 ? "" : "s"}`;
     }
 	
