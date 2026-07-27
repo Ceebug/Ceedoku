@@ -1453,7 +1453,10 @@ function testhistorybuttons() {
 	}
 }
 function testHintButton() {
-    if (!settings.hints.enabled && canusehelp) {
+	if (!canusehelp) { 
+		disableHintButton(); 
+	}
+    if (!settings.hints.enabled) {
         disableHintButton();
     } else {
         enableHintButton();
@@ -1561,7 +1564,7 @@ function starthintcooldown() {
 }
 function getHintCooldownText() {
     if (hintcount > 0) {
-		if (settings.hints.enabled && canusehelp) {
+		if (settings.hints.enabled) {
 			enableHintButton()
 		}
         return `${hintcount} hint${hintcount === 1 ? "" : "s"}`;
@@ -1582,6 +1585,10 @@ function getHintCooldownText() {
 function updateHintCooldownDisplay() {
 	testHintButton();
     if (!settings.hints.enabled) {
+        hintcooldowndisplay.textContent = "Disabled";
+        return;
+    }
+    if (!canusehelp) {
         hintcooldowndisplay.textContent = "Disabled";
         return;
     }
