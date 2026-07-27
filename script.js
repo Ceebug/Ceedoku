@@ -13,6 +13,18 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
+function updateSettingsScale() {
+    const child = document.getElementById("settingsOverlay").firstElementChild;
+
+    if (window.innerHeight < 700) {
+        child.style.transform = "scale(0.87)";
+    } else {
+        child.style.transform = "";
+    }
+}
+
+window.addEventListener("resize", updateSettingsScale);
+updateSettingsScale();
 
 let canusecurrenthintsystem = false
 let usingsavegame = false
@@ -116,11 +128,11 @@ function unlockAudio() {
             popSound.muted = false;
         });
 }
-
+function isTouchDevice() {
+    return window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+}
 document.addEventListener("pointerdown", unlockAudio, { once: true });
 let vibrate;
-const isElectron = !!window.electronAPI;
-
 if ("vibrate" in navigator) {
     vibrate = function (duration = 10) {
         if (typeof isTouchDevice !== "function" || !isTouchDevice()) return;
