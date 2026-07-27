@@ -14,11 +14,6 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
-pencileraserbutton:disabled {
-	background: var(--disabledbox) !important;
-	background-color: var(--disabledbox) !important;
-	cursor: not-allowed !important
-}
 #hintButton:disabled {
 	background-color: var(--disabledbox) !important;
 	cursor: not-allowed !important
@@ -1708,6 +1703,10 @@ body.light .menu-item:hover {
 		max-height: unset
 	}
 }
-
+pencileraserbutton:disabled {
+	background: var(--disabledbox) !important;
+	background-color: var(--disabledbox) !important;
+	cursor: not-allowed !important
+}
 	}
   
