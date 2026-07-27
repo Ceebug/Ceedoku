@@ -242,7 +242,8 @@ window.addEventListener('keydown', function (event) {
 		 	  	  expert: { holes: 58 },
  			  	  master: { holes: 64 },
  			 	  extreme: { holes: 70 },
-   			  	  impossible: { holes: 76 }
+   			  	  impossible: { holes: 76 },
+				  godlike: { holes: 76 }
 			  };
 			  const hintcooldowndisplay = document.getElementById("hintCooldownDisplay")
 
@@ -476,14 +477,14 @@ hintCooldownAmount.addEventListener("change", () => {
 	updateSettingsMenu()
 });
 
-function updateHintCooldownDisplay() {
+function updateHintCooldownDisplay() { if (canusehelp) {
     if (!settings.hints.cooldown.enabled) {
         hintCooldownDisplay.textContent = "∞";
         hintCooldownDisplay.style.fontWeight = "800";
     } else {
         hintCooldownDisplay.style.fontWeight = "unset";
         hintCooldownDisplay.textContent = getHintCooldownText();
-    }
+    }}
 }
               let solution = [];
               let puzzle = [];
@@ -600,6 +601,7 @@ document.addEventListener("fullscreenchange", () => {
                 deleteOverlay.classList.add("show");
             });
         }
+let canusehelp = true
 function loadgame() {
     const save = localStorage.getItem("save");
 	    if (save === null) {
@@ -614,6 +616,7 @@ if (solution.length !== 81){localStorage.removeItem("save");nosave=true;updateGi
     puzzle = game.puzzle;
     values = game.values;
     givens = game.givens;
+	if (game.canusehelp !== undefined) { canusehelp = game.canusehelp; } else { canusehelp = true }
     notes = game.notes.map(arr => new Set(arr));
 
     selected = game.selected;
@@ -642,6 +645,7 @@ if (solution.length !== 81){localStorage.removeItem("save");nosave=true;updateGi
 		savecooldownmoves = game.cooldownmoves
 		savecooldowntime = game.cooldowntime
 	}
+	testhistorybuttons();
 	
     // ---------------- TIMER ----------------
     elapsedMs = game.elapsedMs || 0;
@@ -1035,7 +1039,8 @@ if (runninggame){
 		hintcount,
 		cooldownmoves,
 		cooldowntime,
-		cooldowntypetouse
+		cooldowntypetouse,
+		canusehelp
     }));
 }
 }
@@ -1422,6 +1427,21 @@ function disableHintButton() {
     document.getElementById("hintButton").classList.add("disabled");
     document.getElementById("hintButton").disabled = true;
 }
+disablehistorybuttons() {
+	redoButton.disabled = true;
+	undoButton.disabled = true;
+}
+enablehistorybuttons() {
+	redoButton.disabled = false;
+	undoButton.disabled = false;
+}
+testhistorybuttons() {
+	if (canusehelp) {
+		enablehistorybuttons()
+	} else {
+		disablehistorybuttons()
+	}
+}
 function testHintButton() {
     if (!settings.hints.enabled) {
         disableHintButton();
@@ -1568,8 +1588,13 @@ function updateHintCooldownDisplay() {
 updateHintCooldownDisplay();
         
               function updateHistoryButtons() {
+				if (canusehelp) {
                 undoButton.disabled = undoStack.length === 0;
                 redoButton.disabled = redoStack.length === 0;
+				} else {
+				undoButton.disabled = true
+				redoButton.disabled = true
+				}
               }
         
               function updateNumberCounts() {
@@ -1975,7 +2000,6 @@ hidemainmenu();
 }
 
 setInterval(saveGame, 1000);
-
 function newGame(nextDifficulty = difficulty) {
 	nosave = false
 	cooldowntypetouse = settings.hints.cooldown.cooldowntype
@@ -1984,13 +2008,19 @@ function newGame(nextDifficulty = difficulty) {
 	cooldowntime = 0;
 	hintcount = settings.hints.cooldown.startinghints;
 	canusecurrenthintsystem = true
-	updateHintCooldownDisplay();
 	localStorage.setItem("difficulty", difficulty);
     runninggame = true
 	finished = false
-
-
     difficulty = nextDifficulty;
+	
+	if (difficulty === "godlike") {
+		canusehelp = false
+	} else {
+		canusehelp = true
+	}
+
+	updateHintCooldownDisplay();
+
 	if (window.matchMedia("(orientation: landscape)").matches){
  		 let scaleValue = difficulty === "impossible" ? "1.2" : "1.3";
  		 document.querySelectorAll(".win-stat").forEach(el => el.style.scale = scaleValue);
@@ -2035,6 +2065,7 @@ function newGame(nextDifficulty = difficulty) {
 	hidecontinuegame();
 	hidemainmenu();
 	document.getElementById("igiveup").classList.remove("disabled", !nosave);
+	testhistorybuttons();
 }
         
         
@@ -2058,12 +2089,14 @@ hintButton.addEventListener("click", () => {
 });
 
 eraseButton.addEventListener("click", () => {
+	if (!canusehelp) return;
     if (timerPaused) return;
     toggleEraseMode();
 });
 
 pencilButton.addEventListener("click", () => {
     if (timerPaused) return;
+	if (!canusehelp) return;
     togglePencilMode();
 });
               newGameButton.addEventListener("click", () => newGame());
