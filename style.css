@@ -1539,6 +1539,9 @@ body.light .menu-item:hover {
 	
     
         @media (orientation: portrait) {
+	.settingdescriber {
+        font-size: 20px !important;
+    }
           .topbar {
             align-items: start;
           }
