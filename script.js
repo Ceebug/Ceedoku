@@ -1435,15 +1435,25 @@ function enablehistorybuttons() {
 	redoButton.disabled = false;
 	undoButton.disabled = false;
 }
+function disableotherbuttons() {
+	eraseButton.disabled = true;
+	pencilButton.disabled = true;
+}
+function enableotherbuttons() {
+	eraseButton.disabled = false;
+	pencilButton.disabled = false;
+}
 function testhistorybuttons() {
 	if (canusehelp) {
 		enablehistorybuttons()
+		enableotherbuttons()
 	} else {
 		disablehistorybuttons()
+		disableotherbuttons()
 	}
 }
 function testHintButton() {
-    if (!settings.hints.enabled) {
+    if (!settings.hints.enabled && canusehelp) {
         disableHintButton();
     } else {
         enableHintButton();
@@ -1551,7 +1561,7 @@ function starthintcooldown() {
 }
 function getHintCooldownText() {
     if (hintcount > 0) {
-		if (settings.hints.enabled) {
+		if (settings.hints.enabled && canusehelp) {
 			enableHintButton()
 		}
         return `${hintcount} hint${hintcount === 1 ? "" : "s"}`;
@@ -2084,6 +2094,7 @@ redoButton.addEventListener("click", () => {
 });
 
 hintButton.addEventListener("click", () => {
+	if (!canusehelp) return;
     if (timerPaused) return;
     hint();
 });
@@ -2179,12 +2190,18 @@ localStorage.setItem("difficulty", selectedDifficulty);
 function continuenewGame() {
     newGame(selectedDifficulty);
 }
-              document.addEventListener("click", (event) => {
-                if (!winnewGameBand.contains(event.target)) closeDifficultyMenu();
-				if (timerPaused) return;
-              });
+
+document.addEventListener("click", (event) => {
+    if (!winnewGameBand.contains(event.target)) {
+        closeDifficultyMenu();
+    }
+
+    if (timerPaused) return;
+});
+
 document.addEventListener("keyup", (event) => {
-	if (!runninggame) return;
+    if (!runninggame) return;
+
     console.log(event.key);
 
     if (event.code === "Space") {
@@ -2192,49 +2209,100 @@ document.addEventListener("keyup", (event) => {
         pauseTimer();
     }
 });
-              document.addEventListener("keydown", (event) => {
-			   if (timerPaused) return;
-		       if (!runninggame) return;
-                // console.log(event.key); disabled logging as it isn't currently needed
-                const key = event.key.toLowerCase();
- 
-        
-                if ((event.ctrlKey || event.metaKey) && key === "z") {
-                  event.preventDefault();
-                  if (event.shiftKey) redo();
-                  else undo();
-                  return;
-                }
-                if ((event.ctrlKey || event.metaKey) && key === "y") {
-                  event.preventDefault();
-                  redo();
-                  return;
-                }
-                if (event.ctrlKey || event.metaKey) return;
-        
-                if (key === "p") {
-                  event.preventDefault();
-                  togglePencilMode();
-                  return;
-                }
-        	if (key === "e") {
-          	event.preventDefault();
-         	toggleEraseMode();
-        	return;
-        	}
-			 if (timerPaused) return;
-			 if (!runninggame) return;
-                if (/^[1-9]$/.test(key)) placeNumber(Number(key));
-                if (key === "backspace" || key === "delete" || key === "0") eraseSelected();
-                if (["arrowup", "arrowdown", "arrowleft", "arrowright"].includes(key)) {
-                  event.preventDefault();
-                  const row = Math.floor(selected / 9);
-                  const col = selected % 9;
-                  const nextRow = key === "arrowup" ? Math.max(0, row - 1) : key === "arrowdown" ? Math.min(8, row + 1) : row;
-                  const nextCol = key === "arrowleft" ? Math.max(0, col - 1) : key === "arrowright" ? Math.min(8, col + 1) : col;
-                  selectCell(nextRow * 9 + nextCol);
-                }
-              });   
+
+document.addEventListener("keydown", (event) => {
+    if (timerPaused) return;
+    if (!runninggame) return;
+
+    // console.log(event.key); disabled logging as it isn't currently needed
+    const key = event.key.toLowerCase();
+
+    if ((event.ctrlKey || event.metaKey) && key === "z") {
+        event.preventDefault();
+
+        if (event.shiftKey) {
+            if (!canusehelp) return;
+            redo();
+        } else {
+            if (!canusehelp) return;
+            undo();
+        }
+
+        return;
+    }
+
+    if ((event.ctrlKey || event.metaKey) && key === "y") {
+        event.preventDefault();
+
+        if (!canusehelp) return;
+        redo();
+
+        return;
+    }
+
+    if (event.ctrlKey || event.metaKey) return;
+
+    if (key === "p") {
+        event.preventDefault();
+
+        if (!canusehelp) return;
+        togglePencilMode();
+
+        return;
+    }
+
+    if (key === "h") {
+        event.preventDefault();
+
+        if (!canusehelp) return;
+        hint();
+
+        return;
+    }
+
+    if (key === "e") {
+        event.preventDefault();
+
+        if (!canusehelp) return;
+        toggleEraseMode();
+
+        return;
+    }
+
+    if (/^[1-9]$/.test(key)) {
+        placeNumber(Number(key));
+        return;
+    }
+
+    if (key === "backspace" || key === "delete" || key === "0") {
+        if (!canusehelp) return;
+        eraseSelected();
+        return;
+    }
+
+    if (["arrowup", "arrowdown", "arrowleft", "arrowright"].includes(key)) {
+        event.preventDefault();
+
+        const row = Math.floor(selected / 9);
+        const col = selected % 9;
+
+        const nextRow =
+            key === "arrowup"
+                ? Math.max(0, row - 1)
+                : key === "arrowdown"
+                    ? Math.min(8, row + 1)
+                    : row;
+
+        const nextCol =
+            key === "arrowleft"
+                ? Math.max(0, col - 1)
+                : key === "arrowright"
+                    ? Math.min(8, col + 1)
+                    : col;
+
+        selectCell(nextRow * 9 + nextCol);
+    }
+});
 
 function deleteGame() {
 	delsave()
