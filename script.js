@@ -1456,14 +1456,14 @@ function testhistorybuttons() {
 	}
 }
 function testHintButton() {
-	if (!canusehelp) { 
-		disableHintButton(); 
-	}
     if (!settings.hints.enabled) {
         disableHintButton();
     } else {
         enableHintButton();
     }
+	if (!canusehelp) { 
+		disableHintButton(); 
+	}
 }
 
 testHintButton();
@@ -1593,7 +1593,7 @@ function updateHintCooldownDisplay() {
     }
     if (!canusehelp) {
         hintcooldowndisplay.textContent = "Disabled";
-		disableHintButton;
+		disableHintButton();
         return;
     }
 
