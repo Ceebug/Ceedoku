@@ -1703,7 +1703,7 @@ body.light .menu-item:hover {
 		max-height: unset
 	}
 }
-pencileraserbutton:disabled {
+.pencileraserbutton:disabled {
 	background: var(--disabledbox) !important;
 	background-color: var(--disabledbox) !important;
 	cursor: not-allowed !important
