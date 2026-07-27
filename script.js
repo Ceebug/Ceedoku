@@ -1427,15 +1427,15 @@ function disableHintButton() {
     document.getElementById("hintButton").classList.add("disabled");
     document.getElementById("hintButton").disabled = true;
 }
-disablehistorybuttons() {
+function disablehistorybuttons() {
 	redoButton.disabled = true;
 	undoButton.disabled = true;
 }
-enablehistorybuttons() {
+function enablehistorybuttons() {
 	redoButton.disabled = false;
 	undoButton.disabled = false;
 }
-testhistorybuttons() {
+function testhistorybuttons() {
 	if (canusehelp) {
 		enablehistorybuttons()
 	} else {
