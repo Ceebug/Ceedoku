@@ -152,3 +152,8 @@
 .menu-item2[aria-selected="true"]:active {
     color: var(--blue) !important;
 }
+pencileraserbutton:disabled {
+	background: var(--disabledbox) !important;
+	background-color: var(--disabledbox) !important;
+	cursor: not-allowed !important
+}
