@@ -25,14 +25,16 @@
 .cancel-button:hover,
         .number-button:hover,
         .menu-item:hover,
-        .theme-toggle:hover,
-        .history-button:hover:not(:disabled) {
+        .theme-toggle:hover {
           border-radius: var(--radius);
           color: var(--muted);
           background: var(--surface-2) !important;
 		  transition: transform .12s ease, background .14s ease, color .14s ease, box-shadow .14s ease;
         }
-
+        .history-button:hover:not(:disabled) {           color: var(--muted);
+          background: var(--surface-2) !important;
+		  transition: transform .12s ease, background .14s ease, color .14s ease, box-shadow .14s ease;
+		}						
         .new-main:hover,
         .new-side:hover,
 		.new-main2:hover {
@@ -122,14 +124,17 @@
 .cancel-button:active,
 .erase-button:active:not([aria-pressed="true"]),
 .menu-item:active,
-.theme-toggle:active,
-.history-button:active:not(:disabled) {
+.theme-toggle:active {
     background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2)) !important;
     color: var(--muted);
     transform: translateY(1px);
     border-radius: 999px;
 }
-
+.history-button:active:not(:disabled) { 
+    background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2)) !important;
+    color: var(--muted);
+    transform: translateY(1px);
+}
 .new-main:active,
 .new-side:active {
     background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2)) !important;
