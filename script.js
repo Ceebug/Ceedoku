@@ -103,7 +103,10 @@ loadSettings();
 let hintcount = settings.hints.cooldown.startinghints
 const winSound = new Audio("./sounds/win.ogg");
 const popSound = new Audio("./sounds/pop.ogg");
-
+popSound.preload = "auto";
+popSound.load();
+winSound.preload = "auto";
+winSound.load();
 const audioContext = new AudioContext();
 const popSource = audioContext.createMediaElementSource(popSound);
 const popGain = audioContext.createGain();
@@ -1100,30 +1103,30 @@ if (runninggame){
 
               function showWinScreen() {
 				winpauseTimer();
-				  
-				if (settings.haptics.puzzlecomplete) {
+	  						if (settings.haptics.puzzlecomplete) {
 				  		vibrate([20, 50, 40]);
 				}
-				  
-				if (settings.SFX.enabled && settings.SFX.win) {
-					winSound.currentTime = 0;
-					winSound.play().catch(() => {});
-				}
-				  
-            	winDifficulty.textContent = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
-            	winMistakes.textContent = mistakes;
-            	winOverlay.hidden = false;
+			if (settings.SFX.enabled && settings.SFX.win) {
+				winSound.currentTime = 0;
+				winSound.play().catch(() => {});
+			}
+            winDifficulty.textContent =
+                difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+		
+			
+            winMistakes.textContent = mistakes;
+            winOverlay.hidden = false;
         
     		requestAnimationFrame(() => {
-        			winOverlay.classList.add("show");
-    			});
+        		winOverlay.classList.add("show");
+    		});
+			setTimeout(() => {
+        		if (settings.VFX.enabled && settings.VFX.confetti) {
+            		fireconfetti();
+        		}
+			}, 200); 
+			  }
 
-    			winOverlay.addEventListener("animationend", () => {
-        			if (settings.VFX.enabled && settings.VFX.confetti) {
-            			fireconfetti();
-        			}
-    			}, { once: true });
-        	}
 						function showPauseScreen() {
             pauseDifficulty.textContent =
                 difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
@@ -1590,6 +1593,7 @@ function updateHintCooldownDisplay() {
     }
     if (!canusehelp) {
         hintcooldowndisplay.textContent = "Disabled";
+		disableHintButton;
         return;
     }
 
