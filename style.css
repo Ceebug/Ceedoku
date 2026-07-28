@@ -246,6 +246,7 @@ button {
 	  --shadow-color2: #bebebe;
           --cell-size: clamp(34px, 8.2vmin, 64px);
           --board-size: calc(var(--cell-size) * 9);
+		  --scrollbar: #00000075;
           font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 .brand {
@@ -479,6 +480,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
 	  --shadow-color: #232930;
 	  --shadow-color2: #343c45;
           --danger-soft: #4c2424;
+		  --scrollbar: #ffffff75;
           --shell: rgba(255, 255, 255, .045);
           --shadow: 0 5px 48px rgba(0, 0, 0, .32);
         }
