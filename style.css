@@ -1708,5 +1708,16 @@ body.light .menu-item:hover {
 	background-color: var(--disabledbox) !important;
 	cursor: not-allowed !important
 }
+.pencileraserbutton:disabled:active {
+	background: var(--disabledbox) !important;
+	background-color: var(--disabledbox) !important;
+	cursor: not-allowed !important;
+	transform: none
+}
+button,
+.menu-item,
+.icon-button {
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
 	}
   
