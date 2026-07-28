@@ -14,6 +14,12 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
+@media (orientation: portrait) {
+	#version {
+		width: 100dvw;
+		text-align: center
+	}
+}
 #hintButton:disabled {
 	background-color: var(--disabledbox) !important;
 	cursor: not-allowed !important
