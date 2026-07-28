@@ -992,7 +992,12 @@ if (value) {
                 cell.classList.toggle("completed", complete);
                 cell.classList.toggle("correct", userValue && value === solution[i] && !complete);
                 cell.classList.toggle("error", userValue && value !== solution[i] && !complete);
-        
+
+				if (!canusehelp) {
+					cell.classList.remove("error")
+					cell.classList.remove("correct")
+				}
+				
                 // Highlight same row, column and box
                 cell.classList.toggle(
                     "related",
