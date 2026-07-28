@@ -14,11 +14,33 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            color-mix(in srgb, var(--blue) 10%, transparent),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            var(--bg),
+            color-mix(in srgb, var(--surface-2) 40%, var(--bg))
+        );
+
+    transition: opacity 0.2s ease;
+}
 * {
     transition:
         background-color 0.2s ease,
         color 0.2s ease,
-        border-color 0.2s ease;
+        border-color 0.2s ease,
+		background 0.2s ease,
+		border 0.2s ease;
 }
 @media (orientation: portrait) {
 	#version {
