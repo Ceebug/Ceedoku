@@ -686,7 +686,7 @@ position: relative;
           color: var(--muted);
           font-weight: 700;
           font-size: .95rem;
-          margin-top: 5px;
+          margin-top: 0px;
         }
     
         .theme-toggle {
