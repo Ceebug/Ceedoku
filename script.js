@@ -2031,9 +2031,14 @@ function newGame(nextDifficulty = difficulty) {
 	cooldowntypetouse = settings.hints.cooldown.cooldowntype
 	usingsavegame = false;
 	cooldownmoves = 0;
-	cooldowntime = 0;
+	cooldowntime = 0;	
 	hintcount = settings.hints.cooldown.startinghints;
 	canusecurrenthintsystem = true
+	
+	if (settings.hints.cooldown.startinghints === 0) {
+		starthintcooldown()
+	}
+	
 	localStorage.setItem("difficulty", difficulty);
     runninggame = true
 	finished = false
