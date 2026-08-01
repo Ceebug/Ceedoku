@@ -14,6 +14,16 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
+#feedbacklink {
+	   color: var(--text);
+    text-decoration: none;
+}
+#feedbacklink:visited {
+	color: var(--text)
+}
+#feedbacklink:hover {
+    color: var(--blue);
+}
 body {
     transition:
         --bg 0.2s ease,
@@ -22,12 +32,6 @@ body {
 }
 #whatdoievencallthis {
     transition: filter 0.2s ease;
-}
-@media (orientation: portrait) {
-	#version {
-		width: 100dvw;
-		text-align: center
-	}
 }
 #hintButton:disabled {
 	background-color: var(--disabledbox) !important;
