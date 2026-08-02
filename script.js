@@ -13,6 +13,62 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
+ function checkTime() {
+    let besttimes = JSON.parse(localStorage.getItem("besttimes"));
+
+    // Create besttimes if it doesn't exist
+    if (!besttimes) {
+        besttimes = {
+            easy: null,
+            medium: null,
+            hard: null,
+            expert: null,
+            master: null,
+            extreme: null,
+            impossible: null,
+            godlike: null
+        };
+
+        localStorage.setItem("besttimes", JSON.stringify(besttimes));
+    }
+
+    const oldTime = besttimes[difficulty];
+
+    // No previous best time
+    if (oldTime === null || oldTime === undefined) {
+        document.getElementById("oldwintime").textContent = "00:00";
+        updateBestTime(besttimes);
+        return;
+    }
+
+    // Not a new best
+    if (oldTime <= elapsedMs) {
+        return;
+    }
+
+    // New best time
+    document.getElementById("oldwintime").textContent = formatTime(Math.floor(oldTime / 1000));
+
+    updateBestTime(besttimes);
+}
+
+function updateBestTime(besttimes) {
+    document.getElementById("newwintime").textContent =
+        formatTime(Math.floor(elapsedMs / 1000));
+
+    besttimes[difficulty] = elapsedMs;
+
+    localStorage.setItem("besttimes", JSON.stringify(besttimes));
+
+    showBestTime();
+}
+
+function showBestTime() {
+    document.querySelector(".besttime").style.display = "flex";
+}
+function hideBestTime() {
+    document.querySelector(".besttime").style.display = "none";
+}
 function updateSettingsScale() {
     const child = document.getElementById("settingsOverlay").firstElementChild;
 
@@ -211,6 +267,7 @@ document.getElementById("mainmenubutton").style.display = "none"
               let menuOpen = false;		
 let cooldowntypetouse = "just declaring var"
 					  function showmainmenu() {
+						  	hideBestTime();
 						  pauseBtn2.style.display = "none"
 						      if (!timerPaused) {
         timerPaused = true;
@@ -1844,7 +1901,7 @@ function checkWin() {
         clearInterval(timerId);
 		
         playBoardRipple();
-
+		checkTime()
         const maxDistance = Math.max(...getBoardDistances(selected));
 
         setTimeout(showWinScreen, maxDistance * 60 + 900);
@@ -1990,6 +2047,7 @@ loadgame();
 loadtheme();		
 			
 function continueGame() {
+hideBestTime();
 updatePauseBtn2();
 usingsavegame = true;
 if (savehintcount > 0) {
@@ -2026,6 +2084,7 @@ hidemainmenu();
 
 setInterval(saveGame, 1000);
 function newGame(nextDifficulty = difficulty) {
+	hideBestTime();
 	updatePauseBtn2();
 	nosave = false
 	cooldowntypetouse = settings.hints.cooldown.cooldowntype

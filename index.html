@@ -1,9 +1,10 @@
 <html lang="en">
 
 <head>
+    <!-- I'm very suprised that this codebase still fucking works to this day --!>
 	<meta name="description" content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more.">
 	<meta name="google-site-verification" content="TIoixSj4h36QZAk_mHgQDXcUvwi8SHvCRLlZoKBVsbE" />
-    <script id="vervar">const version = "5.2.1";</script>
+    <script id="vervar">const version = "6.0.0";</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta name="theme-color" content="#101418">
@@ -251,6 +252,17 @@
                 </div>
 				<button class="new-main2" onclick="showmainmenu()" style="width: 100%;border-top-right-radius: 999px;border-bottom-right-radius: 999px;">Main Menu</button>
             </div>
+<div class="besttime">
+    <h2 style="color: var(--text2); margin: 0; height: 25px; width: 172px;">
+        <strong>New best time</strong>
+    </h2>
+
+    <div style="display: flex; flex-direction: row; height: 25px;">
+        <h3 id="oldwintime" style="margin: 0; margin-right: 5px;">00:00</h3>
+        <h3 style="margin: 0;">➜</h3>
+        <h3 id="newwintime" style="margin: 0; color: var(--text); margin-left: 5px;">00:00</h3>
+    </div>
+</div>
 
         </div>
 	<div id="pauseOverlay" aria-label="Pause Overlay" class="win-overlay" style="border-radius: 66px;">

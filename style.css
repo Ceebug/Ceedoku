@@ -14,6 +14,32 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
+.besttime {
+  height: 100px;
+  width: min(420px, calc(100vw - 32px));
+  margin-top: 5px;
+  border-radius: 22px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  outline-offset: -5px;
+  outline: 1px solid rgb(255, 227, 0);
+  transition: background 0.2s ease, box-shadow 0.2s ease, outline 0.2s ease;
+}
+body.dark .besttime {
+  background: color-mix( in srgb, rgb(255, 227, 0) 8%, var(--surface) 92% );
+  box-shadow: inset 0 0 12px 1px color-mix(in srgb, rgb(255, 227, 0) 35%, transparent), 0 0 18px 1px color-mix(in srgb, rgb(255, 227, 0) 45%, transparent);
+}
+body.light .besttime {
+  background: color-mix( in srgb, rgb(255, 227, 0) 6%, var(--surface) 94% );
+  box-shadow: inset 0 0 8px 1px color-mix( in srgb, rgb(255, 227, 0) 75%, transparent ), 0 0 18px 1px color-mix( in srgb, rgb(255, 227, 0) 90%, transparent );
+}
+#winoverlay {
+	display: flex;
+	flex-direction: column;
+}
 .feedbacklink,
 .feedbacklink:visited {
     color: var(--text);
