@@ -14,14 +14,21 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
-#feedbacklink {
-	   color: var(--text);
-    text-decoration: none;
+.feedbacklink,
+.feedbacklink:visited {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+    cursor: pointer;
 }
-#feedbacklink:visited {
-	color: var(--text)
+.feedbacklink:hover,
+.feedbacklink:focus-visible {
+    color: var(--blue);
 }
-#feedbacklink:hover {
+
+.feedbacklink:active {
     color: var(--blue);
 }
 body {
@@ -29,6 +36,20 @@ body {
         --bg 0.2s ease,
         --surface-2 0.2s ease,
         --blue 0.2s ease;
+}
+#sitecontrols {
+	transition: 
+		--surface 0.2s ease,
+		--outline 0.2s ease,
+		border 0.2s ease;
+}
+#mode,
+#fullscreen {
+	transition:
+		background 0.2s ease,
+		border 0.2s ease,
+		--blue-soft2 0.2s ease,
+		--surface-2 0.2s ease;
 }
 #whatdoievencallthis {
     transition: filter 0.2s ease;
@@ -1137,9 +1158,9 @@ position: relative;
         rippleFade .35s ease
             var(--fade-delay,1000ms) forwards;
 }
-body.light .whatdoievencallthis {
+/* body.light .whatdoievencallthis {
     filter: brightness(0.1);
-}
+} */
     
         .control-card {
           min-height: 44px;
@@ -1497,7 +1518,26 @@ body.light .menu-item:hover {
     inherits: true;
     initial-value: #007aff;
 }
-    
+@property --surface {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #ffffff
+}
+@property --surface-3 {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: dde852
+}
+@property --outline {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: f4f7fb
+}
+@property --blue-soft2 {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: accfff
+}	
         .erase-button svg {
           width: 18px;
           height: 18px;
@@ -1704,6 +1744,7 @@ body.light .menu-item:hover {
 	.aah {
 		width: 33.3%;
 	}
+
     
           .hint-button,
           .number-grid {
@@ -1728,8 +1769,17 @@ body.light .menu-item:hover {
 			.whatdoievencallthis {
 		width: 100
 			}
+	#pause-btn2 {
+		display: none
+	}
+	#pause-btn {
+		display: unset
+	}
 
 @media (orientation: portrait) {
+	#pause-btn {
+		display: none
+	}
 	.something {
 		height: 230px;
 		overflow: scroll;
@@ -1738,7 +1788,17 @@ body.light .menu-item:hover {
 	.sidebar {
 		max-height: unset
 	}
+	#version {
+		bottom: max(8px, env(safe-area-inset-bottom)) !important;
+		left: max(10px, env(safe-area-inset-left)) !important;
+	}
+
+	.feedbacklinkh {
+		bottom: max(8px, env(safe-area-inset-bottom)) !important;
+		right: max(10px, env(safe-area-inset-right)) !important;
+	}
 }
+
 .pencileraserbutton:disabled {
 	background: var(--disabledbox) !important;
 	background-color: var(--disabledbox) !important;
@@ -1757,7 +1817,7 @@ button,
 }
 * {
     transition:
-        background-color 0.2s ease,
+        background-color 5s ease,
         color 0.2s ease,
         border-color 0.2s ease,
 		background 0.2s ease,

@@ -211,6 +211,7 @@ document.getElementById("mainmenubutton").style.display = "none"
               let menuOpen = false;		
 let cooldowntypetouse = "just declaring var"
 					  function showmainmenu() {
+						  pauseBtn2.style.display = "none"
 						      if (!timerPaused) {
         timerPaused = true;
 
@@ -293,6 +294,7 @@ window.addEventListener('keydown', function (event) {
               const pencilButton = document.getElementById("pencilButton");
 	          const pauseBtn = document.getElementById("pause-btn");
 
+	          const pauseBtn2 = document.getElementById("pause-btn2");
 	          const modeButton = document.getElementById("mode");		
 	          const fullscreenButton = document.getElementById("fullscreen")
 
@@ -326,7 +328,13 @@ window.addEventListener('keydown', function (event) {
 			  const startingHintsInput = document.getElementById("startinghints");
 			  const hintCooldownMethod = document.getElementById("hintcooldownmethod");
 			  const hintCooldownAmount = document.getElementById("hintcooldownamount");
-			  function updateSettingsMenu() {
+function updatePauseBtn2() {
+    pauseBtn2.style.display =
+        window.matchMedia("(orientation: portrait)").matches
+            ? "unset"
+            : "none";
+}
+function updateSettingsMenu() {
     animationToggle.checked = settings.VFX.enabled;
     completionAnimationToggle.checked = settings.VFX.completion;
     confettiAnimationToggle.checked = settings.VFX.confetti;
@@ -346,36 +354,20 @@ window.addEventListener('keydown', function (event) {
     buttonHapticsToggle.checked = settings.haptics.buttons;
     cellHapticsToggle.checked = settings.haptics.cells;
     winHapticsToggle.checked = settings.haptics.puzzlecomplete;
-
     buttonHapticsToggle.disabled = !settings.haptics.enabled;
+    hintsToggle.checked = settings.hints.enabled;
+	
+    hintCooldownToggle.checked = settings.hints.cooldown.enabled;
+    startingHintsInput.value = settings.hints.cooldown.startinghints;
+    hintCooldownMethod.value = settings.hints.cooldown.cooldowntype;
+    hintCooldownAmount.value = settings.hints.cooldown.cooldowntime;
+
     cellHapticsToggle.disabled = !settings.haptics.enabled;
     winHapticsToggle.disabled = !settings.haptics.enabled;
-
-    hintsToggle.checked = settings.hints.enabled;
-    hintCooldownToggle.checked = settings.hints.cooldown.enabled;
-
-    startingHintsInput.value =
-        settings.hints.cooldown.startinghints;
-
-    hintCooldownMethod.value =
-        settings.hints.cooldown.cooldowntype;
-
-    hintCooldownAmount.value =
-    	settings.hints.cooldown.cooldowntime;
-
-    hintCooldownToggle.disabled =
-        !settings.hints.enabled;
-
-    startingHintsInput.disabled =
-        !settings.hints.cooldown.enabled;
-
-    hintCooldownMethod.disabled =
-        !settings.hints.enabled ||
-        !settings.hints.cooldown.enabled;
-
-    hintCooldownAmount.disabled =
-        !settings.hints.enabled ||
-        !settings.hints.cooldown.enabled;
+    hintCooldownToggle.disabled = !settings.hints.enabled;
+    startingHintsInput.disabled = !settings.hints.cooldown.enabled;
+    hintCooldownMethod.disabled = !settings.hints.enabled || !settings.hints.cooldown.enabled;
+    hintCooldownAmount.disabled = !settings.hints.enabled || !settings.hints.cooldown.enabled;
 }
 updateSettingsMenu();
 
@@ -831,6 +823,7 @@ function pauseTimer() {
         elapsedMs = Date.now() - startTime;
 
         pauseBtn.textContent = "▶";
+		pauseBtn2.textContent = "▶";
         document.title = "Ceedoku - Paused";
 
         if (runninggame){saveGame()};
@@ -842,6 +835,7 @@ function pauseTimer() {
         startTimer();
 
         pauseBtn.textContent = "❚❚";
+		pauseBtn2.textContent = "❚❚";
         document.title = `Ceedoku - ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`
 		hidepausescreen()
     }
@@ -858,6 +852,7 @@ function pauseTimer() {
         elapsedMs = Date.now() - startTime;
 
         pauseBtn.textContent = "▶";
+		pauseBtn2.textContent = "▶";
         document.title = "Ceedoku - Paused";
 		showPauseScreen()
 		}
@@ -875,6 +870,7 @@ function pauseTimer() {
         elapsedMs = Date.now() - startTime;
 
         pauseBtn.textContent = "▶";
+		pauseBtn2.textContent = "▶";
         document.title = "Ceedoku - Paused";
 		}
 };
@@ -886,6 +882,7 @@ function pauseTimer() {
     startTimer();
 
     pauseBtn.textContent = "❚❚";
+	pauseBtn2.textContent = "❚❚"; 
     document.title = `Ceedoku - ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`
 	hidepausescreen()
 }
@@ -1993,6 +1990,7 @@ loadgame();
 loadtheme();		
 			
 function continueGame() {
+updatePauseBtn2();
 usingsavegame = true;
 if (savehintcount > 0) {
 	hintcount = savehintcount
@@ -2006,7 +2004,8 @@ if (savehintcount > 0) {
 updateHintCooldownDisplay();
 runninggame = true;
 hidemainmenu();
-    pauseBtn.textContent = "❚❚"; 
+    pauseBtn.textContent = "❚❚";
+	pauseBtn2.textContent = "❚❚"; 
     // ---------------- TIMER UI ----------------
 		winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
         timerEl.textContent =
@@ -2027,6 +2026,7 @@ hidemainmenu();
 
 setInterval(saveGame, 1000);
 function newGame(nextDifficulty = difficulty) {
+	updatePauseBtn2();
 	nosave = false
 	cooldowntypetouse = settings.hints.cooldown.cooldowntype
 	usingsavegame = false;
@@ -2087,6 +2087,7 @@ function newGame(nextDifficulty = difficulty) {
 	pauseTime.textContent = "00:00";
 	continueTime.textContent = "00:00"
     pauseBtn.textContent = "❚❚";
+	pauseBtn2.textContent = "❚❚";
 	title.textContent = "Ceedoku"
     hidewinscreen();
     hidepausescreen();
@@ -2329,6 +2330,56 @@ function deleteGame() {
 	delsave()
 	location.reload()
 }
+
+const elementstoanimate = document.querySelectorAll(".whatdoievencallthis");
+
+const observer = new MutationObserver(() => {
+    const isDark = document.body.classList.contains("dark");
+
+    elementstoanimate.forEach(element => {
+        element.animate(
+            isDark
+                ? [
+                    { filter: "brightness(0.1)" },
+                    { filter: "brightness(1)" }
+                ]
+                : [
+                    { filter: "brightness(1)" },
+                    { filter: "brightness(0.1)" }
+                ],
+            {
+                duration: 200,
+                easing: "ease",
+                fill: "forwards"
+            }
+        );
+    });
+});
+
+    const isDark2 = document.body.classList.contains("dark");
+    elementstoanimate.forEach(element => {
+        element.animate(
+            isDark2
+                ? [
+                    { filter: "brightness(0.1)" },
+                    { filter: "brightness(1)" }
+                ]
+                : [
+                    { filter: "brightness(1)" },
+                    { filter: "brightness(0.1)" }
+                ],
+            {
+                duration: 200,
+                easing: "ease",
+                fill: "forwards"
+            }
+        );
+    });
+observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"]
+});
+pauseBtn2.style.display = "none"
 const defaultItem = document.querySelector(`#mainDifficultyMenu .menu-item[data-difficulty="${selectedDifficulty}"]`);
 defaultItem.setAttribute("aria-selected", "true");
 window.addEventListener("load", () => {
@@ -2347,3 +2398,6 @@ window.addEventListener("load", () => {
 
 	document.title = "Ceedoku"
 });
+
+
+
