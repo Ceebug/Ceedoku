@@ -1894,6 +1894,7 @@ function checkWin() {
 	
     if (values.every((value, index) => value === solution[index])) {
 		popSound.playbackRate = 2;
+		pauseBtn2.style.display = "none"
 		runninggame = false
 		localStorage.removeItem("save");
         finished = true;
