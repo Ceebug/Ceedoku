@@ -1811,6 +1811,11 @@ body.light .menu-item:hover {
 		overflow: scroll;
 		scrollbar-color: transparent transparent;
 	}
+	.thisissomething {
+		height: 230px;
+		overflow: scroll;
+		scrollbar-color: transparent transparent;
+	}
 	.sidebar {
 		max-height: unset
 	}
