@@ -847,11 +847,20 @@ position: relative;
         }
     
 		.cell.selected {
-		  background: var(--blue-soft);
-  		  box-shadow: 0 0 0 4px var(--blue);
-		  border-radius: 6px;
-		  z-index: 1;
-		}
+  background: var(--blue-soft);
+  border-radius: 5.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.cell.selected::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--blue);
+  border-radius: 7.5px;
+  pointer-events: none;
+}
     
         .cell.error {
           color: var(--danger);
