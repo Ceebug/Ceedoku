@@ -848,8 +848,8 @@ position: relative;
     
 		.cell.selected {
 		  background: var(--blue-soft);
-  		  box-shadow: 0 0 0 3px var(--blue);
-		  border-radius: 5px;
+  		  box-shadow: 0 0 0 4px var(--blue);
+		  border-radius: 6px;
 		  z-index: 1;
 		}
     
