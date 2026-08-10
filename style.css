@@ -822,7 +822,7 @@ position: relative;
           border-right: 0;
         }
 	.cell.selected.related {
-		border-width: 0px !important
+		/* border-width: 0px !important */
 	}
     
         .cell:nth-child(n + 19):nth-child(-n + 27),
