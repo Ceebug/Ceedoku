@@ -1,3 +1,4 @@
+
 /* ---------------------------
 # Bye Bye Bugs
 
@@ -787,7 +788,6 @@ position: relative;
           background: var(--line-strong);
           border: 4px solid var(--line-strong);
           border-radius: 4px;
-          overflow: hidden;
           touch-action: manipulation;
         }
 		body.light .board {
