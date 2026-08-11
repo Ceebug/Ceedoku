@@ -807,7 +807,7 @@ position: relative;
           line-height: 1;
           border-right: 1px solid var(--line);
           border-bottom: 1px solid var(--line);
-          transition: background .14s ease, color .14s ease, box-shadow .14s ease;
+          transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
           user-select: none;
           overflow: hidden;
           isolation: isolate;
@@ -823,6 +823,7 @@ position: relative;
         }
 	.cell.selected.related {
 		/* border-width: 0px !important */
+		background: var(--blue-soft) !important
 	}
     
         .cell:nth-child(n + 19):nth-child(-n + 27),
@@ -851,6 +852,7 @@ position: relative;
   		  box-shadow: 0 0 0 3.5px var(--blue);
 		  border-radius: 5.5px;
 		  z-index: 1;
+		  border-color: transparent
 				}
     
         .cell.error {
