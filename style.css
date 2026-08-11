@@ -823,7 +823,8 @@ position: relative;
         }
 	.cell.selected.related {
 		/* border-width: 0px !important */
-		background: var(--blue-soft) !important
+		background: var(--blue-soft) !important;
+		background-color: var(--blue-soft) !important
 	}
     
         .cell:nth-child(n + 19):nth-child(-n + 27),
@@ -852,7 +853,7 @@ position: relative;
   		  box-shadow: 0 0 0 3.5px var(--blue);
 		  border-radius: 5.5px;
 		  z-index: 1;
-		  border-color: transparent
+		  border-color: transparent !important
 				}
     
         .cell.error {
