@@ -1,4 +1,3 @@
-
 /* ---------------------------
 # Bye Bye Bugs
 
@@ -855,10 +854,10 @@ position: relative;
 		  border-radius: 5.5px;
 		  z-index: 1;
 		  border-left-color: transparent;
-		  border-bottom-color: transparent;
+		  border-bottom-color: transparent !important;
 		  border-top-color: transparent;
 		  border-right-color: transparent;
-		  border-color: transparent	
+		  border-color: transparent	!important
 				} 
     
         .cell.error {
