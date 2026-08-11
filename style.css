@@ -854,7 +854,7 @@ position: relative;
   		  box-shadow: 0 0 0 3.5px var(--blue);
 		  border-radius: 5.5px;
 		  z-index: 1;
-		  border-width: 1px !important
+		  border-width: 0px !important
 				} 
     
         .cell.error {
