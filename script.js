@@ -1500,6 +1500,8 @@ function enablehistorybuttons() {
 function disableotherbuttons() {
 	eraseButton.disabled = true;
 	pencilButton.disabled = true;
+ pencilMode = false;
+ eraseMode = false;
 }
 function enableotherbuttons() {
 	eraseButton.disabled = false;
