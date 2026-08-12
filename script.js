@@ -2106,8 +2106,8 @@ function newGame(nextDifficulty = difficulty) {
 	
 	if (difficulty === "godlike") {
 		canusehelp = false
-		pencilmode = false
-		erasemode = false
+		pencilMode = false
+		eraseMode = false
 	} else {
 		canusehelp = true
 	}
