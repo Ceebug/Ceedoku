@@ -5,43 +5,43 @@
   {
     "purpose": "maskable",
     "sizes": "48x48",
-    "src": "48.png",
+    "src": "icons/48.png",
     "type": "image/png"
   },
   {
     "purpose": "maskable",
     "sizes": "72x72",
-    "src": "72.png",
+    "src": "icons/72.png",
     "type": "image/png"
   },
   {
     "purpose": "maskable",
     "sizes": "96x96",
-    "src": "96.png",
+    "src": "icons/96.png",
     "type": "image/png"
   },
   {
     "purpose": "maskable",
     "sizes": "128x128",
-    "src": "128.png",
+    "src": "icons/128.png",
     "type": "image/png"
   },
   {
     "purpose": "maskable",
     "sizes": "192x192",
-    "src": "192.png",
+    "src": "icons/192.png",
     "type": "image/png"
   },
   {
     "purpose": "maskable",
     "sizes": "384x384",
-    "src": "384.png",
+    "src": "icons/384.png",
     "type": "image/png"
   },
   {
     "purpose": "maskable",
     "sizes": "512x512",
-    "src": "512.png",
+    "src": "icons/512.png",
     "type": "image/png"
   }
 ],
