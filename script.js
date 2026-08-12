@@ -1502,6 +1502,8 @@ function disableotherbuttons() {
 	pencilButton.disabled = true;
  pencilMode = false;
  eraseMode = false;
+ pencilButton.setAttribute("aria-pressed", "false");
+ eraseButton.setAttribute("aria-pressed", "false");
 }
 function enableotherbuttons() {
 	eraseButton.disabled = false;
