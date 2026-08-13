@@ -1547,6 +1547,12 @@ body.light .menu-item:hover {
     initial-value: #f5f5f5;
 }
 
+@property --surface {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #ffffff;
+}
+
 @property --blue {
     syntax: "<color>";
     inherits: true;
