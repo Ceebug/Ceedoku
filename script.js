@@ -1,4 +1,4 @@
-/******************************************************************************
+/*****************************************************************************
  * THE SCRIPT - IT FINALLY FUCKING WORKS!
  *
  * DO NOT:
@@ -12,7 +12,7 @@
  * Nobody knows why.
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
- ******************************************************************************/
+ *****************************************************************************/
 window.addEventListener("load", () => {
     const game = document.getElementById("aahtheentiregame");
     const loader = document.getElementById("loader");
