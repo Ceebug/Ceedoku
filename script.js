@@ -13,6 +13,22 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  ******************************************************************************/
+window.addEventListener("load", () => {
+    const game = document.getElementById("aahtheentiregame");
+    const loader = document.getElementById("loader");
+
+    loader.classList.add("fade-out");
+    setTimeout(() => {
+        loader.style.visibility = "hidden";
+    }, 500);
+
+    game.style.visibility = "visible";
+    requestAnimationFrame(() => {
+        game.classList.add("loaded");
+    });
+
+    document.title = "Ceedoku"
+});
 function checkTime() {
     let besttimes = JSON.parse(localStorage.getItem("besttimes"));
 
@@ -2600,19 +2616,9 @@ observer.observe(document.body, {
 pauseBtn2.style.display = "none"
 const defaultItem = document.querySelector(`#mainDifficultyMenu .menu-item[data-difficulty="${selectedDifficulty}"]`);
 defaultItem.setAttribute("aria-selected", "true");
-window.addEventListener("load", () => {
-    const game = document.getElementById("aahtheentiregame");
-    const loader = document.getElementById("loader");
+const bestTimesa = JSON.parse(localStorage.getItem("besttimes")) || {};
+const bestTimea = bestTimesa[selectedDifficulty];
 
-    loader.classList.add("fade-out");
-    setTimeout(() => {
-        loader.style.visibility = "hidden";
-    }, 500);
+document.getElementById("besttimedisplay").textContent =
+    `Best Time: ${typeof bestTimea === "number" ? formatTime(Math.floor(bestTimea / 1000)) : "**:**"}`;
 
-    game.style.visibility = "visible";
-    requestAnimationFrame(() => {
-        game.classList.add("loaded");
-    });
-
-    document.title = "Ceedoku"
-});
