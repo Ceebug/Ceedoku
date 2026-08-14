@@ -1815,7 +1815,11 @@ body.light .menu-item:hover {
 	#pause-btn {
 		display: unset
 	}
-
+@media (orientation: landscape {
+	.cell.selected {
+		box-shadow: 0 0 0 8px var(--blue) !important
+	}
+}
 @media (orientation: portrait) {
 	#pause-btn {
 		display: none
