@@ -2415,6 +2415,10 @@ mainDifficultyMenu.addEventListener("click", (event) => {
 
     console.log("Selected difficulty:", selectedDifficulty);
     localStorage.setItem("difficulty", selectedDifficulty);
+    const bestTimes = JSON.parse(localStorage.getItem("besttimes")) || {};
+    const bestTime = bestTimes[selectedDifficulty];
+
+    document.getElementById("besttimedisplay").textContent = `Best Time: ${typeof bestTime === "number" ? formatTime(Math.floor(bestTime / 1000)) : "**:**"}`;
 });
 
 function continuenewGame() {
