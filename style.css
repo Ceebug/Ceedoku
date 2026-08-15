@@ -14,15 +14,17 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
-.win-card {
-	transition:
+* {
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+		background 0.2s ease,
+		border 0.2s ease,
+		box-shadow 0.2s ease,
 		--surface 0.2s ease,
-}
-.numbers-band,
-.control-band {
-	transition:
-		--surface 0.2s ease,
-		box-shadow 0.2s ease;
+		--surface2 0.2s ease,
+		--surface3 0.2s ease;
 }
 .besttime {
   height: 100px;
@@ -1874,12 +1876,5 @@ button,
 .icon-button {
     transition: color 0.2s ease, background-color 0.2s ease;
 }
-* {
-    transition:
-        background-color 5s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-		background 0.2s ease,
-		border 0.2s ease,
-}
+
 	}
