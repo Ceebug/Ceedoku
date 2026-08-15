@@ -19,7 +19,7 @@ if (releaseReady) {
 	<meta content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more." name=description>
 	<meta content=TIoixSj4h36QZAk_mHgQDXcUvwi8SHvCRLlZoKBVsbE name=google-site-verification>
 	<script id=vervar>
-		const version = "6.1.0"
+		const version = "6.2.0"
 	</script>
 	<meta charset=utf-8>
 	<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name=viewport>
@@ -296,6 +296,8 @@ if (releaseReady) {
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Whether or not hints should have a cooldown."><span class=setting-name style=text-align:left><strong>Hint cooldown</strong></span> <label class=toggle><input id=hintcooldowntoggle type=checkbox> <span class=toggle-track></span></label></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of hints the game gives you at the start of a game."><span class=setting-name style=text-align:left><strong>Starting hints</strong></span> <input id=startinghints type=number placeholder=30 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
+					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
+					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of hints the game gives you after the hint cooldown ends."><span class=setting-name style=text-align:left><strong>Hints after cooldown</strong></span> <input id=hintsaftercooldown type=number placeholder=1 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The type of hint cooldownt that should be used"><span class=setting-name style=text-align:left><strong>Hint cooldown type</strong> </span><select class=settings-select id=hintcooldownmethod>
 							<option value=time>Time-based
