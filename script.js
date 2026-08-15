@@ -13,7 +13,7 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  *****************************************************************************/
-const printbtn = document.getElementById("print")
+const printBtn = document.getElementById("print")
 printBtn.style.display = "none";
 window.addEventListener("load", () => {
     const game = document.getElementById("aahtheentiregame");
