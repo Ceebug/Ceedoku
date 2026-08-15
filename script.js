@@ -13,6 +13,8 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  *****************************************************************************/
+const printbtn = document.getElementById("print")
+print.Btn.style.display = "none";
 window.addEventListener("load", () => {
     const game = document.getElementById("aahtheentiregame");
     const loader = document.getElementById("loader");
@@ -324,6 +326,7 @@ let menuOpen = false;
 let cooldowntypetouse = "just declaring var"
 
 function showmainmenu() {
+    print.Btn.style.display = "none";
     hideBestTime();
     pauseBtn2.style.display = "none"
     if (!timerPaused) {
@@ -2300,6 +2303,7 @@ loadgame();
 loadtheme();
 
 function continueGame() {
+    printBtn.style.display = "";
     hideBestTime();
     updatePauseBtn2();
     usingsavegame = true;
@@ -2339,6 +2343,7 @@ function continueGame() {
 setInterval(saveGame, 1000);
 
 function newGame(nextDifficulty = difficulty) {
+    printBtn.style.display = "";
     hideBestTime();
     updatePauseBtn2();
     nosave = false
