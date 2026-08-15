@@ -989,6 +989,7 @@ function startTimer() {
         if (hintcounter == settings.hints.hintlimit.limit && !hintlimitreached) {
             hintlimitreached = true
         }
+        updateHintCooldownDisplay();
         hintCooldownCounter++;
 
         if (hintCooldownCounter >= 10) {
