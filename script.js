@@ -501,6 +501,7 @@ function updateSettingsMenu() {
 
     hintlimit.checked = settings.hints.hintlimit.enabled
     hintlimitinput.value = settings.hints.hintlimit.limit
+
     
     hintlimit.disabled = !settings.hints.enabled
     hintlimitinput.disabled = !settings.hints.hintlimit.enabled
@@ -588,6 +589,7 @@ hintsToggle.addEventListener("change", () => {
     testHintButton();
     if (!settings.hints.enabled) {
         settings.hints.cooldown.enabled = false;
+        settings.hints.hintlimit.enabled = false;
     }
 
     saveSettings();
