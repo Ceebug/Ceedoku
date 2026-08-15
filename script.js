@@ -484,6 +484,7 @@ function updateSettingsMenu() {
     startingHintsInput.disabled = !settings.hints.cooldown.enabled;
     hintCooldownMethod.disabled = !settings.hints.enabled || !settings.hints.cooldown.enabled;
     hintCooldownAmount.disabled = !settings.hints.enabled || !settings.hints.cooldown.enabled;
+    hintsaftercooldown.disabled = !settings.hints.enabled || !settings.hints.cooldown.enabled;
 }
 updateSettingsMenu();
 
