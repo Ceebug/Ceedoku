@@ -1716,6 +1716,11 @@ testHintButton();
 function hint() {
     updateHintCooldownDisplay();
     if (!settings.hints.enabled) return;
+    if (hintlimitreached) {
+        updateHintCooldownDisplay();
+        getHintCooldownText()
+        return 
+    };
     if (hintcount <= 0 && settings.hints.cooldown.enabled) return;
     if (finished) return;
 
@@ -1859,6 +1864,10 @@ function getHintCooldownText() {
 
 function updateHintCooldownDisplay() {
     testHintButton();
+    if (hintlimitreached) {
+        getHintCooldownText();
+        return
+    }
     if (!settings.hints.enabled) {
         hintcooldowndisplay.textContent = "Disabled";
         return;
