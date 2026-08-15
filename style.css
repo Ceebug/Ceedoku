@@ -14,96 +14,6 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
-    .foo,
-    aside,
-    #sitecontrols,
-    .status-line,
-    .sidebar,
-    .mark,
-    .theme-toggle,
-	.win-overlay,
-	.win-overlay2 {
-        display: none !important;
-    }
-
-    body,
-    body.dark,
-    body.light {
-        background: white !important;
-        color: black !important;
-        overflow: visible !important;
-    }
-
-    .game-shell {
-        width: 100% !important;
-        border: none !important;
-        border-radius: 0 !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-    }
-
-    .app {
-        display: block !important;
-        width: 100% !important;
-    }
-    .cell.selected {
-	border-radius: 2px !important;
-    }
-
-    main {
-        display: flex !important;
-        justify-content: center !important;
-    }
-
-    .main {
-        width: min(var(--board-size), 100%) !important;
-    }
-
-    .topbar {
-        width: min(var(--board-size), 100%) !important;
-        justify-content: center !important;
-    }
-
-    .cell {
-        background: white !important;
-        color: black !important;
-    }
-
-    .cell.selected {
-        background: white !important;
-        outline: none !important;
-        box-shadow: none !important;
-        border-color: var(--line) !important;
-    }
-
-    .cell.error,
-    .cell.correct {
-        color: black !important;
-        background: white !important;
-    }
-
-    * {
-        transition: none !important;
-        animation: none !important;
-    }
-
-    @page {
-        margin: 10mm;
-    }
-
-    body {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-    }
-	.game-shell {
-		height: 100vh !important;
-		width: 100vw !important;
-		align-content:center
-	}
-	.app {
-		display: flex !important
-	}
 * {
     transition:
         background-color 0.2s ease,
@@ -1164,96 +1074,7 @@ position: relative;
             opacity: 1;
         }
     }
-    .foo,
-    aside,
-    #sitecontrols,
-    .status-line,
-    .sidebar,
-    .mark,
-    .theme-toggle,
-	.win-overlay,
-	.win-overlay2 {
-        display: none !important;
-    }
 
-    body,
-    body.dark,
-    body.light {
-        background: white !important;
-        color: black !important;
-        overflow: visible !important;
-    }
-
-    .game-shell {
-        width: 100% !important;
-        border: none !important;
-        border-radius: 0 !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-    }
-
-    .app {
-        display: block !important;
-        width: 100% !important;
-    }
-    .cell.selected {
-	border-radius: 2px !important;
-    }
-
-    main {
-        display: flex !important;
-        justify-content: center !important;
-    }
-
-    .main {
-        width: min(var(--board-size), 100%) !important;
-    }
-
-    .topbar {
-        width: min(var(--board-size), 100%) !important;
-        justify-content: center !important;
-    }
-
-    .cell {
-        background: white !important;
-        color: black !important;
-    }
-
-    .cell.selected {
-        background: white !important;
-        outline: none !important;
-        box-shadow: none !important;
-        border-color: var(--line) !important;
-    }
-
-    .cell.error,
-    .cell.correct {
-        color: black !important;
-        background: white !important;
-    }
-
-    * {
-        transition: none !important;
-        animation: none !important;
-    }
-
-    @page {
-        margin: 10mm;
-    }
-
-    body {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-    }
-	.game-shell {
-		height: 100vh !important;
-		width: 100vw !important;
-		align-content:center
-	}
-	.app {
-		display: flex !important
-	}
     @keyframes boxGrow2 {
         0% {
             transform: scale(.15) rotate(0deg);
@@ -2039,6 +1860,9 @@ body.light .menu-item:hover {
         display: block !important;
         width: 100% !important;
     }
+    .cell.selected {
+	border-radius: 2px !important;
+    }
 
     main {
         display: flex !important;
@@ -2085,6 +1909,24 @@ body.light .menu-item:hover {
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
     }
+	.game-shell {
+		height: 100vh !important;
+		width: 100vw !important;
+		align-content:center
+	}
+	.app {
+		display: flex !important
+	}
+#difficultyBadge {
+color: #2e3843;
+  font-weight: 1000;
+  font-size: 25px;
+  margin-top: 0px;
+  text-align: center;
+}
+#title {
+color: #1a212c
+}
 }
     .foo,
     aside,
