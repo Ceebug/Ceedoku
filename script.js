@@ -957,7 +957,7 @@ function startTimer() {
                 cooldowntime--;
 
                 if (cooldowntime === 0) {
-                    hintcount++;
+                    hintcount = settings.hints.cooldown.hintsaftercooldown;
                 }
 
                 updateHintCooldownDisplay();
