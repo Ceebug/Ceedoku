@@ -864,18 +864,13 @@ position: relative;
           color: var(--lime-text);
         }
 
-    
-				.cell.selected {
-		  background: var(--blue-soft);
-  		  box-shadow: 0 0 0 3.5px var(--blue);
-		  border-radius: 5.5px;
-		  z-index: 1;
-		  border-left-color: transparent;
-		  border-bottom-color: transparent !important;
-		  border-top-color: transparent;
-		  border-right-color: transparent;
-		  border-color: transparent	!important
-				} 
+.cell.selected {
+	border-radius: 5.5px;
+	z-index: 1;
+	border-color: transparent !important;
+	outline: 5px solid var(--blue);
+	outline-offset: -1.5px;
+} 
     
         .cell.error {
           color: var(--danger);
