@@ -161,6 +161,7 @@ let settings = {
             startinghints: 3,
             cooldowntype: "time",
             cooldowntime: 30,
+            hintsaftercooldown: 1
         }
     },
 
@@ -174,9 +175,15 @@ let settings = {
 
 function loadSettings() {
     const saved = localStorage.getItem("settings");
-
+    
     if (saved) {
-        Object.assign(settings, JSON.parse(saved));
+        const savedSettings = JSON.parse(saved);
+
+        for (const key in savedSettings) {
+            if (key in settings) {
+                settings[key] = savedSettings[key];
+            }
+        }
     }
 }
 
@@ -433,6 +440,7 @@ const hintCooldownToggle = document.getElementById("hintcooldowntoggle");
 const startingHintsInput = document.getElementById("startinghints");
 const hintCooldownMethod = document.getElementById("hintcooldownmethod");
 const hintCooldownAmount = document.getElementById("hintcooldownamount");
+const hintsaftercooldown = document.getElementById("hintsaftercooldown");
 
 function updatePauseBtn2() {
     pauseBtn2.style.display =
@@ -468,6 +476,7 @@ function updateSettingsMenu() {
     startingHintsInput.value = settings.hints.cooldown.startinghints;
     hintCooldownMethod.value = settings.hints.cooldown.cooldowntype;
     hintCooldownAmount.value = settings.hints.cooldown.cooldowntime;
+    hintsaftercooldown.value = settings.hints.cooldown.hintsaftercooldown;
 
     cellHapticsToggle.disabled = !settings.haptics.enabled;
     winHapticsToggle.disabled = !settings.haptics.enabled;
@@ -578,7 +587,11 @@ hintCooldownAmount.addEventListener("change", () => {
     saveSettings();
     updateSettingsMenu()
 });
-
+hintsaftercooldown.addEventListener("change", () => {
+    settings.hints.cooldown.hintsaftercooldown = Number(hintsaftercooldown.value) || 1;
+    saveSettings();
+    updateSettingsMenu()
+});
 function updateHintCooldownDisplay() {
     if (canusehelp) {
         if (!settings.hints.cooldown.enabled) {
@@ -1393,7 +1406,7 @@ function placeNumber(value, options = {}) {
         cooldownmoves--;
         updateHintCooldownDisplay();
         if (cooldownmoves === 0) {
-            hintcount = 1;
+            hintcount = settings.hints.cooldown.hintsaftercooldown;
             enableHintButton();
             updateHintCooldownDisplay();
         }
