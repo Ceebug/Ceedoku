@@ -176,26 +176,32 @@ let settings = {
         puzzlecomplete: true
     }
 };
+function mergeSettings(target, source) {
+    for (const key in source) {
+        if (
+            source[key] !== null &&
+            typeof source[key] === "object" &&
+            !Array.isArray(source[key])
+        ) {
+            if (
+                target[key] === null ||
+                typeof target[key] !== "object" ||
+                Array.isArray(target[key])
+            ) {
+                target[key] = {};
+            }
 
+            mergeSettings(target[key], source[key]);
+        } else {
+            target[key] = source[key];
+        }
+    }
+}
 function loadSettings() {
     const saved = localStorage.getItem("settings");
     
     if (saved) {
-        const savedSettings = JSON.parse(saved);
-
-        Object.assign(settings, savedSettings);
-
-        if (savedSettings.hints) {
-            Object.assign(settings.hints, savedSettings.hints);
-
-            if (savedSettings.hints.cooldown) {
-                Object.assign(settings.hints.cooldown, savedSettings.hints.cooldown);
-            }
-
-            if (savedSettings.hints.hintlimit) {
-                Object.assign(settings.hints.hintlimit, savedSettings.hints.hintlimit);
-            }
-        }
+        mergeSettings(settings, JSON.parse(saved));
     }
 }
 
