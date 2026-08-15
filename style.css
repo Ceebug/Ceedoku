@@ -15,6 +15,9 @@
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
 @media print {
+	.foo {
+		display: none
+	}
 	aside {
 		display: none
 	}
