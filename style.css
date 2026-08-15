@@ -549,7 +549,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
           --lime-soft: #263d1d;
 	  --text2: #dce3e9;
 	  --text3: #bec9da;
-			--selectedcell: --blue-soft
+			--selectedcell: --blue-soft;
 	  --text4: #bbc6d4;
           --lime-text: #bcff76;
           --lime-glow: rgba(167, 255, 72, .46);
