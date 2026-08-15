@@ -120,12 +120,17 @@ select:disabled {
 	background-color: var(--disabledbox) !important
 }
 #hintcooldownamount:disabled,
-#startinghints:disabled {
+#startinghints:disabled,
+#hintsaftercooldown:disabled,
+#hintlimitinput:disabled {
 	color: var(--muted) !important;
 	cursor: not-allowed !important;
 	background-color: var(--disabledbox) !important
 }
-#hintcooldownamount,#startinghints {
+#hintcooldownamount,
+#startinghints,
+#hintsaftercooldown,
+#hintlimitinput {
 	color: var(--text2)
 }
 #WHATTHEFUCKDOICALLTHIS\?:hover {
