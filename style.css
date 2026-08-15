@@ -1933,6 +1933,9 @@ color: #2e3843;
 color: #1a212c !important
 }
 }
+#print {
+	padding: unset !important
+}
 
 @media (orientation: portrait) {
 	#pause-btn {
