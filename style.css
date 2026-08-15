@@ -839,11 +839,6 @@ position: relative;
         .cell:nth-child(9n) {
           border-right: 0;
         }
-	.cell.selected.related {
-		/* border-width: 0px !important */
-		background: var(--blue-soft) !important;
-		background-color: var(--blue-soft) !important
-	}
     
         .cell:nth-child(n + 19):nth-child(-n + 27),
         .cell:nth-child(n + 46):nth-child(-n + 54) {
