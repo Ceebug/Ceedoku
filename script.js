@@ -988,6 +988,7 @@ function startTimer() {
             `Time: ${formatTime(Math.floor(elapsedMs / 1000))}`;
         if (hintcounter == settings.hints.hintlimit.limit && !hintlimitreached) {
             hintlimitreached = true
+            updateHintCooldownDisplay();
         }
         updateHintCooldownDisplay();
         hintCooldownCounter++;
@@ -1744,8 +1745,10 @@ function hint() {
         hintcount--;
         if (settings.hints.hintlimit.enabled) {
             hintcounter++
+            updateHintCooldownDisplay();
             if (hintcounter == settings.hints.hintlimit.limit) {
                 hintlimitreached = true
+                updateHintCooldownDisplay();
                 return
             }
         }
@@ -1756,7 +1759,16 @@ function hint() {
             saveGame();
         }
         updateHintCooldownDisplay();
+    } else if (!hintlimitreached && settings.hints.hintlimit.enabled) {
+        hintcounter++
+        updateHintCooldownDisplay();        
+        if (hintcounter == settings.hints.hintlimit.limit) {
+            hintlimitreached = true
+            updateHintCooldownDisplay();
+            return
+        }
     }
+        
     const target = move.index;
     selected = target;
 
