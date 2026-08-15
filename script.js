@@ -161,7 +161,7 @@ let settings = {
             startinghints: 3,
             cooldowntype: "time",
             cooldowntime: 30,
-            hintsaftercooldown: 1
+            hintsaftercooldown: 1,
         }
     },
 
