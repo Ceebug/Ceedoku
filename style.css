@@ -1662,7 +1662,114 @@ body.light .menu-item:hover {
             grid-template-columns: repeat(9, minmax(30px, 1fr));
           }
         }
-
+@media print {
+	aside {
+		display: none
+	}
+	body.dark {
+		          --bg: #f4f7fb;
+		  --outline: #f4f7fb;
+          --surface: #ffffff;
+          --surface-2: #edf3f9;
+          --surface-3: #dde8f2;
+          --text: #213044;
+	  --text2: #000000;
+	  --text3: var(--muted);
+	  --text4: #435368;
+		 --blue-soft2: #accfff;
+          --muted: #66778c;
+          --line: #b7c5d6;
+          --line-strong: #4c5867;
+          --blue: #1a73e8;
+		  --disabledbox: #b6bcc2;
+	  --delete-save: #ff0000;
+          --blue-soft: #d7e8ff;
+          --blue-softer: #eaf3ff;
+          --lime: #9cff35;
+		  --toggle-thumb: var(--line);
+          --lime-soft: #dcffb5;
+		  --pencilerasebutton: #d7e1ee;
+          --lime-text: #195700;
+          --lime-glow: rgba(156, 255, 53, .56);
+          --danger: #d93025;
+		  --selectedcell: color-mix(in srgb, var(--blue) 40%, var(--surface));
+          --danger-soft: #ffe7e5;
+          --shell: rgba(255, 255, 255, .48);
+          --shadow: 0 0px 46px rgba(28, 48, 74, .12);
+          --radius: 999px;
+	  --shadow-color: #bebebe;
+	  --shadow-color2: #bebebe;
+          --cell-size: clamp(34px, 8.2vmin, 64px);
+          --board-size: calc(var(--cell-size) * 9);
+		  --scrollbar: #00000075;
+	}
+	        .cell {
+          position: relative;
+          display: grid;
+          place-items: center;
+          min-width: 0;
+          min-height: 0;
+          background: var(--surface);
+          color: var(--blue);
+          font-size: clamp(1.25rem, 4.5vmin, 2.2rem);
+          font-weight: 600;
+          line-height: 1;
+          border-right: 1px solid var(--line);
+          border-bottom: 1px solid var(--line);
+          transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+          user-select: none;
+          overflow: hidden;
+          /* isolation: isolate; */
+        }
+		        .cell.selected {
+          position: relative;
+          display: grid;
+          place-items: center;
+          min-width: 0;
+          min-height: 0;
+          background: var(--surface);
+          color: var(--blue);
+          font-size: clamp(1.25rem, 4.5vmin, 2.2rem);
+          font-weight: 600;
+          line-height: 1;
+		  outline: none !important;
+          border-right: 1px solid var(--line);
+          border-bottom: 1px solid var(--line);
+          transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+          user-select: none;
+          overflow: hidden;
+          /* isolation: isolate; */
+        }
+	.cell.error {
+		color: var(--text)
+	}
+	.cell.correct {
+		color: var(--text)}
+	.mark {
+		display:none}
+	.game-shell {
+		box-shadow: none;
+		border: none;
+		background: transparent}
+	.site-controls {
+		display: none
+	}
+	.status-line {
+		display: none
+	}
+	.app {
+		display: unset
+	}
+	.game-shell {
+		width: 100vw
+	}
+	main {
+		display: flex
+	}
+	.main {
+		width: min(var(--board-size), 100%)
+	}
+}
 	
     
         @media (orientation: portrait) {
