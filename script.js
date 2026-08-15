@@ -183,9 +183,17 @@ function loadSettings() {
     if (saved) {
         const savedSettings = JSON.parse(saved);
 
-        for (const key in savedSettings) {
-            if (key in settings) {
-                settings[key] = savedSettings[key];
+        Object.assign(settings, savedSettings);
+
+        if (savedSettings.hints) {
+            Object.assign(settings.hints, savedSettings.hints);
+
+            if (savedSettings.hints.cooldown) {
+                Object.assign(settings.hints.cooldown, savedSettings.hints.cooldown);
+            }
+
+            if (savedSettings.hints.hintlimit) {
+                Object.assign(settings.hints.hintlimit, savedSettings.hints.hintlimit);
             }
         }
     }
