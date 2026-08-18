@@ -13,6 +13,26 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  *****************************************************************************/
+class CeedokuSpinner extends HTMLElement {
+	connectedCallback() {
+		this.innerHTML = `
+			<svg
+				class="spinner"
+				viewBox="0 0 66 66"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<circle
+					class="path"
+					cx="33"
+					cy="33"
+					r="30"
+				></circle>
+			</svg>
+		`;
+	}
+}
+
+customElements.define("ceedoku-spinner", CeedokuSpinner);
 const printBtn = document.getElementById("print")
 printBtn.style.display = "none";
 window.addEventListener("load", () => {
