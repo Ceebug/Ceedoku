@@ -361,25 +361,25 @@ const DIFFICULTIES = {
         holes: 36
     },
     medium: {
-        holes: 44
+        holes: 39
     },
     hard: {
-        holes: 51
+        holes: 42
     },
     expert: {
-        holes: 58
+        holes: 45
     },
     master: {
-        holes: 64
+        holes: 48
     },
     extreme: {
-        holes: 70
+        holes: 51
     },
     impossible: {
-        holes: 76
+        holes: 54
     },
     godlike: {
-        holes: 76
+        holes: 54
     }
 };
 const hintcooldowndisplay = document.getElementById("hintCooldownDisplay")
