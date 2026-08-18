@@ -13,7 +13,7 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  *****************************************************************************/
-const puzzleWorker = new Worker("puzzle-worker.js");
+
 class CeedokuSpinner extends HTMLElement {
 	connectedCallback() {
 		this.innerHTML = `
@@ -32,8 +32,6 @@ class CeedokuSpinner extends HTMLElement {
 }
 
 customElements.define("ceedoku-spinner", CeedokuSpinner);
-const printBtn = document.getElementById("print")
-printBtn.style.display = "none";
 window.addEventListener("load", () => {
     const game = document.getElementById("aahtheentiregame");
     const loader = document.getElementById("loader");
@@ -50,6 +48,12 @@ window.addEventListener("load", () => {
 
     document.title = "Ceedoku"
 });
+let puzzleWorker = null;
+if (typeof Worker !== "undefined") {
+    puzzleWorker = new Worker("puzzle-worker.js");
+}
+const printBtn = document.getElementById("print")
+printBtn.style.display = "none";
 function checkTime() {
     let besttimes = JSON.parse(localStorage.getItem("besttimes"));
 
