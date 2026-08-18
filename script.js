@@ -16,19 +16,17 @@
 class CeedokuSpinner extends HTMLElement {
 	connectedCallback() {
 		this.innerHTML = `
-			<svg
-				class="spinner"
-				viewBox="0 0 66 66"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<circle
-					class="path"
-					cx="33"
-					cy="33"
-					r="30"
-				></circle>
-			</svg>
-		`;
+		<svg viewBox="0 0 66 66" height="65px" width="65px" class="spinner">
+			<circle
+				class="path"
+				cx="33"
+				cy="33"
+				fill="none"
+				r="30"
+				stroke-linecap="round"
+				stroke-width="6"
+			></circle>
+		</svg>`;
 	}
 }
 
