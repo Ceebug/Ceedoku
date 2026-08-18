@@ -13,6 +13,7 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  *****************************************************************************/
+const puzzleWorker = new Worker("puzzle-worker.js");
 class CeedokuSpinner extends HTMLElement {
 	connectedCallback() {
 		this.innerHTML = `
