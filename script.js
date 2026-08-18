@@ -949,30 +949,16 @@ function countSolutions(grid, limit = 2) {
 }
 
 function makePuzzle(holes) {
-    const full = Array(81).fill(0);
-    fillGrid(full);
-    const draft = [...full];
-    const order = shuffle(Array.from({
-        length: 81
-    }, (_, i) => i));
-    let removed = 0;
+	return new Promise((resolve) => {
+		otherspinnythingo.classList.add("visible");
 
-    for (const index of order) {
-        if (removed >= holes) break;
-        const keep = draft[index];
-        draft[index] = 0;
-        const probe = [...draft];
-        if (countSolutions(probe, 2) === 1) {
-            removed += 1;
-        } else {
-            draft[index] = keep;
-        }
-    }
+		puzzleWorker.onmessage = (event) => {
+			otherspinnythingo.classList.remove("visible");
+			resolve(event.data);
+		};
 
-    return {
-        full,
-        draft
-    };
+		puzzleWorker.postMessage({ holes });
+	});
 }
 
 function formatTime(seconds) {
@@ -2361,7 +2347,7 @@ function continueGame() {
 
 setInterval(saveGame, 1000);
 
-function newGame(nextDifficulty = difficulty) {
+async function newGame(nextDifficulty = difficulty) {
     printBtn.style.display = "";
     hideBestTime();
     updatePauseBtn2();
@@ -2399,7 +2385,7 @@ function newGame(nextDifficulty = difficulty) {
         document.querySelectorAll(".win-stat").forEach(el => el.style.scale = scaleValue);
     }
 
-    const built = makePuzzle(DIFFICULTIES[difficulty].holes);
+    const built = await makePuzzle(DIFFICULTIES[difficulty].holes);
 
     document.title = `Ceedoku - ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`;
     difficultyBadge.textContent = difficulty.charAt(0).toUpperCase() + difficulty.slice(1)
