@@ -89,7 +89,7 @@ importSaveInput.onchange = async () => {
 
     localStorage.setItem("save", tmp);
 
-    loadGame();
+    loadgame();
 
     title.style.color = "var(--text2)";
     title.textContent = "Imported Save File";
