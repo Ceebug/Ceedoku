@@ -87,6 +87,11 @@ importSaveInput.onchange = async () => {
         return;
     }
 
+const test = JSON.parse(tmp);
+
+console.log(test);
+console.log("solution:", test.solution);
+console.log("solution length:", test.solution?.length);
     localStorage.setItem("save", tmp);
 
     loadgame();
