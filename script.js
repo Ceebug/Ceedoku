@@ -1194,7 +1194,8 @@ function exportsave() {
 	importexportOverlay.querySelector("h1").textContent = "Save Exported";
 	
 	setTimeout(() => {
-    	importexportOverlay.querySelector("h1").textContent.textContent = "Import/Export Saves";
+    	importexportOverlay.querySelector("h1").textContent = "Import/Export Saves";
+		hideimportexportgame()
 	}, 5000);
 }
 function getCompletedCellSet(units = getCompletedUnits()) {
