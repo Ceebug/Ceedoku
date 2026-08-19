@@ -1427,7 +1427,7 @@ function hideimportexportgame() {
 	importexportOverlay.hidden = true;
 	importexportOverlay.classList.remove("show");
 }
-function openimportexportmenu() {
+function showimportexportmenu() {
 	importexportOverlay.hidden = false;
 	requestAnimationFrame(() => {
         importexportOverlay.classList.add("show");
