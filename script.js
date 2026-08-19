@@ -1189,7 +1189,7 @@ function renderNotes(noteSet) {
     }
     return grid;
 }
-exportsave() {
+function exportsave() {
 	FSJ(localStorage.getItem("save"));
 	importexportOverlay.querySelector("h1").textContent = "Save Exported";
 	
