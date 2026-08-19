@@ -461,10 +461,9 @@ const title = document.getElementById("title");
 const numberGrid = document.getElementById("numberGrid");
 
 const deleteOverlay = document.getElementById("deleteOverlay")
-
 const newoverlay = document.getElementById("newOverlay")
-
 const settingsOverlay = document.getElementById("settingsOverlay")
+const importexportOverlay = document.getElementById("importexportOverlay")
 
 const animationToggle = document.getElementById("animationtoggle");
 const completionAnimationToggle = document.getElementById("completionanimationtoggle");
@@ -1424,7 +1423,16 @@ function hidecontinuegame() {
 
 
 }
-
+function hideimportexportgame()
+	importexportOverlay.hidden = true;
+	importexportOverlay.classList.remove("show");
+}
+function openimportexportmenu()
+	importexportOverlay.hidden = false;
+	requestAnimationFrame(() => {
+        importexportOverlay.classList.add("show");
+    });
+}
 function hidedeleteGame() {
     deleteOverlay.classList.remove("show");
 
