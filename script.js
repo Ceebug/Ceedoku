@@ -1423,11 +1423,11 @@ function hidecontinuegame() {
 
 
 }
-function hideimportexportgame()
+function hideimportexportgame() {
 	importexportOverlay.hidden = true;
 	importexportOverlay.classList.remove("show");
 }
-function openimportexportmenu()
+function openimportexportmenu() {
 	importexportOverlay.hidden = false;
 	requestAnimationFrame(() => {
         importexportOverlay.classList.add("show");
@@ -1435,8 +1435,6 @@ function openimportexportmenu()
 }
 function hidedeleteGame() {
     deleteOverlay.classList.remove("show");
-
-
 }
 
 function hidemainmenu() {
@@ -1448,8 +1446,6 @@ function hidemainmenu() {
 
 function hidepausescreen() {
     pauseOverlay.classList.remove("show");
-
-
 }
 
 function scrubNotes(indexes, beforeStates) {
@@ -1458,7 +1454,6 @@ function scrubNotes(indexes, beforeStates) {
         notes[index].clear();
     });
 }
-
 
 function togglePencilMode(force) {
     pencilMode = typeof force === "boolean" ? force : !pencilMode;
