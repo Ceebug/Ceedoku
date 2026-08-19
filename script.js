@@ -48,6 +48,63 @@ window.addEventListener("load", () => {
 
     document.title = "Ceedoku"
 });
+const importSaveInput = document.createElement("input");
+
+importSaveInput.type = "file";
+importSaveInput.accept = ".csf";
+importSaveInput.style.display = "none";
+
+document.body.appendChild(importSaveInput);
+
+importSaveInput.onchange = async () => {
+
+    const file = importSaveInput.files[0];
+
+    if (!file) return;
+
+    const title =
+        importexportOverlay.querySelector("h1");
+
+    if (!file.name.toLowerCase().endsWith(".csf")) {
+
+        title.textContent = "Not A .CSF File";
+        title.style.color = "#f04c42";
+
+        return;
+    }
+
+    let tmp;
+
+    try {
+
+        tmp = await JSF(file);
+
+    } catch (error) {
+
+        title.textContent = error.message;
+        title.style.color = "#f04c42";
+
+        return;
+    }
+
+    localStorage.setItem("save", tmp);
+
+    loadGame();
+
+    title.style.color = "var(--text2)";
+    title.textContent = "Imported Save File";
+
+    setTimeout(() => {
+
+        title.textContent = "Import/Export Saves";
+        title.style.color = "var(--text2)";
+
+        hideimportexportgame();
+
+    }, 2500);
+};
+
+
 let puzzleWorker = null;
 if (typeof Worker !== "undefined") {
     puzzleWorker = new Worker("puzzle-worker.js");
@@ -1192,11 +1249,16 @@ function renderNotes(noteSet) {
 function exportsave() {
 	FSJ(localStorage.getItem("save"));
 	importexportOverlay.querySelector("h1").textContent = "Save Exported";
+	importexportOverlay.querySelector("h1").style.color = "var(--text2)";
 	
 	setTimeout(() => {
     	importexportOverlay.querySelector("h1").textContent = "Import/Export Saves";
 		hideimportexportgame()
 	}, 5000);
+}
+function importsave() {
+    importSaveInput.value = "";
+    importSaveInput.click();
 }
 function getCompletedCellSet(units = getCompletedUnits()) {
     const completed = new Set();
