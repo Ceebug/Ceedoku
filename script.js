@@ -1189,7 +1189,14 @@ function renderNotes(noteSet) {
     }
     return grid;
 }
-
+exportsave() {
+	FSJ(localStorage.getItem("save"));
+	importexportOverlay.querySelector("h1").textContent = "Save Exported";
+	
+	setTimeout(() => {
+    	importexportOverlay.querySelector("h1").textContent.textContent = "Import/Export Saves";
+	}, 5000);
+}
 function getCompletedCellSet(units = getCompletedUnits()) {
     const completed = new Set();
     units.rows.forEach((done, index) => {
