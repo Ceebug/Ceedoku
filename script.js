@@ -873,7 +873,6 @@ function loadgame() {
     } else {
         hintcounter = 0
     }
-    puzzle = game.puzzle;
     values = game.values;
     givens = game.givens;
     if (game.canusehelp !== undefined) {
@@ -1362,7 +1361,6 @@ function saveGame() {
         if (solution.length !== 81) return;
         localStorage.setItem("save", JSON.stringify({
             solution,
-            puzzle,
             values,
             givens,
             notes: notes.map(set => [...set]),
