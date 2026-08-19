@@ -915,6 +915,8 @@ function loadgame() {
     timerPaused = game.timerPaused || false;
 
     clearInterval(timerId);
+	nosave = false;
+	updateGiveUpButton();
 }
 
 function changemode(forceMode) {
