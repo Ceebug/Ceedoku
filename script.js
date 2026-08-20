@@ -1253,6 +1253,7 @@ function renderNotes(noteSet) {
     return grid;
 }
 function exportsave() {
+	if (nosave) return;
 	FSJ(localStorage.getItem("save"));
 	importexportOverlay.querySelector("h1").textContent = "Save Exported";
 	importexportOverlay.querySelector("h1").style.color = "var(--text2)";
@@ -2420,10 +2421,22 @@ function loadtheme() {
 }
 
 function updateGiveUpButton() {
-    document.getElementById("igiveup").classList.toggle("disabled", nosave);
+	const igiveup = document.getElementById("igiveup")
+	const exportbutton = document.getElementById("exportbutton")
+	
+    igiveup.classList.toggle("disabled", nosave);
+	exportbutton.classList.toggle("disabled", nosave);
+	exportbutton.disabled = nosave
+	igiveup.disabled = nosave
+	
     if (nosave) {
-        document.getElementById("igiveup").title = "No save found"
+        igiveup.title = "No save found!"
+		exportbutton.title = "No save found!"
     };
+	if (!nosave) {
+		igiveup.title = "Continue your current save game."
+		exportbutton.title = "Export your current save game."
+	}
 }
 loadgame();
 loadtheme();
