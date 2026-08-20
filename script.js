@@ -83,22 +83,19 @@ importSaveInput.onchange = async () => {
 
         title.textContent = error.message;
         title.style.color = "#f04c42";
-
         return;
     }
 
-const test = JSON.parse(tmp);
-
-console.log(test);
-console.log("solution:", test.solution);
-console.log("solution length:", test.solution?.length);
+    timerEl.textContent = "Time: 00:00";
+    winTime.textContent = "00:00";
+    pauseTime.textContent = "00:00";
+    continueTime.textContent = "00:00"
     localStorage.setItem("save", tmp);
-
-    loadgame();
-
     title.style.color = "var(--text2)";
     title.textContent = "Imported Save File";
 
+    loadgame();
+	
     setTimeout(() => {
 
         title.textContent = "Import/Export Saves";
@@ -2459,19 +2456,21 @@ function continueGame() {
         hintcount = 0;
         starthintcooldown()
     }
+	// update soo many ui elements and stuff on continuing a game
     updateHintCooldownDisplay();
     runninggame = true;
     hidemainmenu();
     pauseBtn.textContent = "❚❚";
     pauseBtn2.textContent = "❚❚";
-    // ---------------- TIMER UI ----------------
+	document.title = `Ceedoku - ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`;
+    difficultyBadge.textContent = difficulty.charAt(0).toUpperCase() + difficulty.slice(1)
     winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
     timerEl.textContent =
         `Time: ${formatTime(Math.floor(elapsedMs / 1000))}`;
     continueTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
     pauseTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
-    pauseMistakes.textContent = formatTime(Math.floor(elapsedMs / 1000));
-    continueMistakes.textContent = formatTime(Math.floor(elapsedMs / 1000));
+    pauseMistakes.textContent = mistakes
+    continueMistakes.textContent = mistakes
     timerPaused = false;
     hidewinscreen();
     hidepausescreen();
