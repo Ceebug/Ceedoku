@@ -1500,6 +1500,9 @@ function hidecontinuegame() {
 
 }
 function hideimportexportgame() {
+	// reset the title of the import/export game menu back to default on close of the menu.
+	importexportOverlay.querySelector("h1").textContent = "Import/Export Saves";
+	importexportOverlay.querySelector("h1").style.color = "var(--text2)";
 	importexportOverlay.hidden = true;
 	importexportOverlay.classList.remove("show");
 }
