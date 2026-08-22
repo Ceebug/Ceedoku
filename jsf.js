@@ -1,3 +1,4 @@
+// This code comes from JSF - https://github.com/ceebug/jsf/jsf.js
 const JSF = (() => {
 
     const HEADER = "CEEDOKU-CSF/1";
