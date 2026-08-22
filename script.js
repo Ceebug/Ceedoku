@@ -56,7 +56,7 @@ function showNotification(text, duration = 5000) {
 
     setTimeout(() => {
         document.getElementById("notification").classList.remove("show");
-		notificationContent.style.color = "var(--text2)";
+		document.getElementById("notification-content").style.color = "var(--text2)";
     }, duration);
 }
 if (window.electronAPI) {
