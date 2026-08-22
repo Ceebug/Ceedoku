@@ -1,3 +1,4 @@
+// This code comes from FSJ - https://github.com/ceebug/fsj/fsj.js
 const FSJ = (() => {
 
     const HEADER = "CEEDOKU-CSF/1";
