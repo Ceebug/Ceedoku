@@ -56,7 +56,67 @@ function showNotification(text, duration = 5000) {
 
     setTimeout(() => {
         document.getElementById("notification").classList.remove("show");
+		notificationContent.style.color = "var(--text2)";
     }, duration);
+}
+if (window.electronAPI) {
+
+    window.electronAPI.onCSFOpen(async (filePath) => {
+
+        try {
+
+            const response = await fetch(
+                `file://${filePath.replace(/\\/g, "/")}`
+            );
+
+            const blob = await response.blob();
+
+            const file = new File(
+                [blob],
+                filePath.split("\\").pop(),
+                { type: "application/octet-stream" }
+            );
+
+            let tmp;
+
+            try {
+
+                tmp = await JSF(file);
+
+            } catch (error) {
+
+                showNotification(error.message);
+
+                const notificationContent =
+                    document.getElementById("notification-content");
+
+                notificationContent.style.color = "#f04c42";
+
+
+                return;
+            }
+
+            localStorage.setItem("save", tmp);
+
+            loadgame();
+
+            showNotification("Imported Save File");
+
+        } catch (error) {
+
+            console.error("Failed to open CSF:", error);
+
+            const notificationContent =
+                document.getElementById("notification-content");
+
+            notificationContent.style.color = "#f04c42";
+
+            showNotification(error.message);
+
+        }
+
+    });
+
 }
 const importSaveInput = document.createElement("input");
 
@@ -302,6 +362,7 @@ function loadSettings() {
 function saveSettings() {
     localStorage.setItem("settings", JSON.stringify(settings));
 }
+let disableprint = true
 loadSettings();
 let hintcount = settings.hints.cooldown.startinghints
 const winSound = new Audio("./sounds/win.ogg");
@@ -419,6 +480,7 @@ let cooldowntypetouse = "just declaring var"
 
 function showmainmenu() {
     printBtn.style.display = "none";
+	disableprint = true
     hideBestTime();
     pauseBtn2.style.display = "none"
     if (!timerPaused) {
@@ -1086,7 +1148,29 @@ function formatTime(seconds) {
 }
 
 
+document.addEventListener("keydown", (event) => {
 
+    const printShortcut =
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase() === "p";
+
+    if (!printShortcut) return;
+
+    event.preventDefault();
+
+    if (disableprint) {
+
+        showNotification(
+            "Print mode cannot be used when a game is not active",
+            5000
+        );
+
+        return;
+    }
+
+    window.print();
+
+});
 
 let elapsedMs = 0;
 let startTime = 0;
@@ -2453,6 +2537,7 @@ loadtheme();
 
 function continueGame() {
     printBtn.style.display = "";
+	disableprint = false
     hideBestTime();
     updatePauseBtn2();
     usingsavegame = true;
@@ -2495,6 +2580,7 @@ setInterval(saveGame, 1000);
 
 async function newGame(nextDifficulty = difficulty) {
     printBtn.style.display = "";
+	disableprint = false
     hideBestTime();
     updatePauseBtn2();
     nosave = false
