@@ -48,6 +48,16 @@ window.addEventListener("load", () => {
 
     document.title = "Ceedoku"
 });
+function showNotification(text, duration = 5000) {
+
+    document.getElementById("notification-content").textContent = text;
+
+    document.getElementById("notification").classList.add("show");
+
+    setTimeout(() => {
+        document.getElementById("notification").classList.remove("show");
+    }, duration);
+}
 const importSaveInput = document.createElement("input");
 
 importSaveInput.type = "file";
