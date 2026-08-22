@@ -156,10 +156,6 @@ importSaveInput.onchange = async () => {
         return;
     }
 
-    timerEl.textContent = "Time: 00:00";
-    winTime.textContent = "00:00";
-    pauseTime.textContent = "00:00";
-    continueTime.textContent = "00:00"
     localStorage.setItem("save", tmp);
     title.style.color = "var(--text2)";
     title.textContent = "Imported Save File";
@@ -956,6 +952,7 @@ function loadgame() {
     pencilMode = game.pencilMode;
     eraseMode = game.eraseMode;
     mistakes = game.mistakes;
+	continueMistakes.textContent = mistakes;
 
     undoStack = game.undoStack;
     redoStack = game.redoStack;
@@ -982,6 +979,7 @@ function loadgame() {
     // ---------------- TIMER ----------------
     elapsedMs = game.elapsedMs || 0;
     timerPaused = game.timerPaused || false;
+	continueTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
 
     clearInterval(timerId);
 	nosave = false;
