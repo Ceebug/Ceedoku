@@ -806,6 +806,7 @@ hintlimitinput.addEventListener("change", () => {
     saveSettings();
     updateSettingsMenu()
 });
+settings.hints.hintlimit.limit = Number(hintlimitinput.value) || 1;
 let hintlimitreached = false
 let hintcounter = 0
 function updateHintCooldownDisplay() {
@@ -3039,3 +3040,5 @@ exportnamemenuinput.addEventListener("keydown", (event) => {
         }
     }
 });
+
+
