@@ -19,7 +19,7 @@ if (releaseReady) {
 	<meta content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more." name=description>
 	<meta content=TIoixSj4h36QZAk_mHgQDXcUvwi8SHvCRLlZoKBVsbE name=google-site-verification>
 	<script id=vervar>
-		const version = "8.3.0"
+		const version = "8.3.1"
 	</script>
 	<script src="fsj.js"></script>
 	<script src="jsf.js"></script>
@@ -493,7 +493,7 @@ if (releaseReady) {
 			.catch(() => {
 				// If GitHub can't be reached, don't make it a link.
 				versionElement.innerHTML =
-					`<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;
+					`<strong>Version:</strong> <a class="feedbacklink" title="GitHub could not be reached so we couldn't check if there was a GitHub release or not.">${version}</a>`;
 			});
 	</script>
 	<script id=crash-detector>
