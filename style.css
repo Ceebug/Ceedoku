@@ -1953,7 +1953,7 @@ color: #1a212c !important
 }
 }
 #print {
-	padding: unset !important
+	padding: 12px !important
 }
 
 @media (orientation: portrait) {

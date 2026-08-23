@@ -174,8 +174,31 @@ importSaveInput.onchange = async () => {
 
 
 let puzzleWorker = null;
+
 if (typeof Worker !== "undefined") {
-    puzzleWorker = new Worker("puzzle-worker.js");
+    try {
+        const worker = new Worker("puzzle-worker.js");
+
+        const handleReady = (event) => {
+            if (event.data?.type !== "ready") return;
+
+            puzzleWorker = worker;
+            worker.removeEventListener("message", handleReady);
+
+            console.log("Puzzle worker loaded successfully.");
+        };
+
+        worker.addEventListener("message", handleReady);
+
+        worker.onerror = () => {
+            worker.terminate();
+            puzzleWorker = null;
+
+            console.warn("Puzzle worker failed to load.");
+        };
+    } catch {
+        puzzleWorker = null;
+    }
 }
 const printBtn = document.getElementById("print")
 printBtn.style.display = "none";
@@ -1082,19 +1105,27 @@ function countSolutions(grid, limit = 2) {
 }
 
 function makePuzzle(holes) {
-    if (typeof Worker !== "undefined") {
+    if (puzzleWorker) {
         return new Promise((resolve, reject) => {
-            const worker = new Worker("puzzle-worker.js");
+            const worker = puzzleWorker;
 
-            worker.onmessage = (event) => {
-                worker.terminate();
+            const handleMessage = (event) => {
+                worker.removeEventListener("message", handleMessage);
+                worker.removeEventListener("error", handleError);
+
                 resolve(event.data);
             };
 
-            worker.onerror = (error) => {
-                worker.terminate();
+            const handleError = (error) => {
+                worker.removeEventListener("message", handleMessage);
+                worker.removeEventListener("error", handleError);
+
+                puzzleWorker = null;
                 reject(error);
             };
+
+            worker.addEventListener("message", handleMessage);
+            worker.addEventListener("error", handleError);
 
             worker.postMessage({ holes });
         });
@@ -1105,9 +1136,13 @@ function makePuzzle(holes) {
         fillGrid(full);
 
         const draft = [...full];
-        const order = shuffle(Array.from({
-            length: 81
-        }, (_, i) => i));
+
+        const order = shuffle(
+            Array.from(
+                { length: 81 },
+                (_, i) => i
+            )
+        );
 
         let removed = 0;
 
@@ -1115,6 +1150,7 @@ function makePuzzle(holes) {
             if (removed >= holes) break;
 
             const keep = draft[index];
+
             draft[index] = 0;
 
             const probe = [...draft];
