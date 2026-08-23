@@ -19,7 +19,7 @@ if (releaseReady) {
 	<meta content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more." name=description>
 	<meta content=TIoixSj4h36QZAk_mHgQDXcUvwi8SHvCRLlZoKBVsbE name=google-site-verification>
 	<script id=vervar>
-		const version = "8.1.2"
+		const version = "8.2.0"
 	</script>
 	<script src="fsj.js"></script>
 	<script src="jsf.js"></script>
@@ -329,6 +329,19 @@ if (releaseReady) {
 			<button title="Import a save game." class="new-main2" onclick="importsave()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">Import Save</button>
 			<button id="exportbutton" title="Export your current save game." class="new-main2" onclick="exportsave()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">Export Save</button>
 			<button title="Cancel importing and/or exporting save games." class="number-button cancel-button" onclick="hideimportexportgame()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px">Cancel</button>
+		</div>
+	</div>
+	<div class="win-overlay" style="border-radius:66px;overflow:clip" id="namefileOverlay">
+		<div class="win-card">
+			<h1 style="color:var(--text2);margin-bottom: 0px;" class="win-title">Name your save game</h1>
+			<h3 style="margin-top: 10px;">Please type a name for your save game.</h3>
+			<div style="display: flex;">
+				<input id="savenameinput" placeholder="Enter filename here..." class="input" type="text" style="margin-bottom: 10px;min-height: 58px;background: var(--surface-2);border-radius: 20px;border: 3px solid var(--surface-3);padding-left: 10px;padding-right: 10px;color: var(--text2);width: 100%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-right: 1px solid var(--surface-3);">
+				<div style="width: 20%;margin-bottom: 10px;background: var(--surface-2);border: 3px solid var(--surface-3);border-left: 1px solid var(--surface-3);border-radius: 20px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;align-content: center;justify-content: center;">
+					<p style="color: var(--text2);font-size: 14px;">.csf</p>
+				</div>
+			</div>
+			<button id="savenamebutton" title="Export your current save game." class="new-main2" onclick="exportsavename()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">OK</button>
 		</div>
 	</div>
 	<div class=win-overlay style=border-radius:66px;overflow:clip id=newOverlay>

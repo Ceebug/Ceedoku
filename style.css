@@ -17,6 +17,10 @@
 #notification.show {
 	transform: translatex(-50%)translatey(0px) !important
 }
+#savenameinput {
+    pointer-events: auto;
+	outline: none !important
+}
 #otherspinnythingo {
 	position: fixed;
 	top: 50%;

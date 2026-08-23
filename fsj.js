@@ -192,7 +192,7 @@ const FSJ = (() => {
     // Main FSJ function
     // ========================================================
 
-    function FSJ(json) {
+    function FSJ(json, filename = "ceedoku-save") {
 
         if (typeof json !== "string") {
 
@@ -200,6 +200,11 @@ const FSJ = (() => {
                 "FSJ: expected a JSON string."
             );
 
+        }
+        if (typeof filename !== "string" || filename.length === 0) {
+            throw new TypeError(
+                "FSJ: filename must be a non-empty string."
+            );
         }
 
 
@@ -669,8 +674,7 @@ const FSJ = (() => {
 
         a.href = url;
 
-        a.download =
-            "ceedoku-save.csf";
+        a.download = filename + ".csf";
 
         document.body.appendChild(a);
 

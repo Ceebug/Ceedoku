@@ -1377,12 +1377,16 @@ function renderNotes(noteSet) {
     }
     return grid;
 }
+
 function exportsave() {
+	showexportnamemenu()
+};
+function exportsavename() {
 	if (nosave) return;
-	FSJ(localStorage.getItem("save"));
+	FSJ(localStorage.getItem("save"), exportnameinput.value);
 	importexportOverlay.querySelector("h1").textContent = "Save Exported";
 	importexportOverlay.querySelector("h1").style.color = "var(--text2)";
-	
+	hideexportnamemenu();
 	setTimeout(() => {
     	importexportOverlay.querySelector("h1").textContent = "Import/Export Saves";
 		hideimportexportgame()
@@ -1630,6 +1634,21 @@ function hideimportexportgame() {
 	importexportOverlay.querySelector("h1").style.color = "var(--text2)";
 	importexportOverlay.hidden = true;
 	importexportOverlay.classList.remove("show");
+}
+const exportnamemenu = document.getElementById("namefileOverlay")
+const exportnamemenuinput = document.getElementById("savenameinput")
+const exportnameinput = exportnamemenuinput
+function showexportnamemenu() {
+	exportnamemenu.hidden = false;
+	requestAnimationFrame(() => {
+        exportnamemenu.classList.add("show");
+		exportnamemenuinput.focus();
+    });
+}
+function hideexportnamemenu() {
+	exportnamemenu.hidden = true;
+	exportnamemenu.classList.remove("show");
+	exportnameinput.value = ""
 }
 function showimportexportmenu() {
 	importexportOverlay.hidden = false;
@@ -2997,3 +3016,26 @@ const bestTimea = bestTimesa[selectedDifficulty];
 
 document.getElementById("besttimedisplay").textContent =
     `Best Time: ${typeof bestTimea === "number" ? formatTime(Math.floor(bestTimea / 1000)) : "**:**"}`;
+exportnamemenuinput.addEventListener("input", () => {
+    if (exportnamemenuinput.value === "") {
+		document.getElementById("savenamebutton").classList.add("disabled")
+		document.getElementById("savenamebutton").disabled = true
+		return
+	}
+	if (exportnamemenuinput.value != "") {
+		document.getElementById("savenamebutton").classList.remove("disabled")
+		document.getElementById("savenamebutton").disabled = false
+		return
+	}
+});
+if (exportnamemenuinput.value === "") {
+	document.getElementById("savenamebutton").classList.add("disabled")
+	document.getElementById("savenamebutton").disabled = true
+}
+exportnamemenuinput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        if (!exportnamemenuinput.disabled && exportnamemenuinput.value !== "") {
+            exportsavename();
+        }
+    }
+});
