@@ -19,7 +19,7 @@ if (releaseReady) {
 	<meta content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more." name=description>
 	<meta content=TIoixSj4h36QZAk_mHgQDXcUvwi8SHvCRLlZoKBVsbE name=google-site-verification>
 	<script id=vervar>
-		const version = "8.2.0"
+		const version = "8.3.0"
 	</script>
 	<script src="fsj.js"></script>
 	<script src="jsf.js"></script>
@@ -476,8 +476,25 @@ if (releaseReady) {
 			"touch" === e.pointerType && (touchStyles.disabled = !1)
 		})
 	</script>
-	<script id=setver>
-		document.getElementById("version").innerHTML = `<strong>Version:</strong> ${version}`
+	<script id="setver">
+		const link = `https://github.com/ceebug/ceedoku/releases/tag/v${version}`;
+		const versionElement = document.getElementById("version");
+
+		fetch(`https://api.github.com/repos/ceebug/ceedoku/releases/tags/v${version}`)
+			.then(response => {
+				if (response.ok) {
+					versionElement.innerHTML =
+						`<strong>Version:</strong> <a class="feedbacklink" title="Go to the GitHub release for the current version." href="${link}">${version}</a>`;
+				} else {
+					versionElement.innerHTML =
+						`<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;
+				}
+			})
+			.catch(() => {
+				// If GitHub can't be reached, don't make it a link.
+				versionElement.innerHTML =
+					`<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;
+			});
 	</script>
 	<script id=crash-detector>
 		window.addEventListener("error", e => {
