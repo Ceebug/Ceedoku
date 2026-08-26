@@ -805,6 +805,7 @@ toolsToggle.addEventListener("change", () => {
 	
     if (!settings.tools.enabled) {
 		settings.hints.hintlimit.enabled = false;
+		settings.hints.cooldown.enabled = false
         settings.hints.enabled = false;
         settings.tools.pencil.enabled = false;
         settings.tools.erase.enabled = false;
