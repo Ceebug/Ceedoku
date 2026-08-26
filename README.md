@@ -1,6 +1,6 @@
-<p align="center">
-  <img src="readmetitle.png" alt="Ceedoku" width="600">
-</p>
+<h1>
+  <img src="https://ceedoku.github.io/home/title.png" alt="Ceedoku" aria-label="Ceedoku" width="600px">
+</h1>
 
 
 **Ceedoku** is a free, lightweight Sudoku game designed to provide a simple and powerful Sudoku experience without unnecessary distractions.
