@@ -14,6 +14,14 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
+.loadingdiv {
+	width: 70vw
+}
+@media (orientation: portrait) {
+	.loadingdiv {
+		width: 100vw
+	}
+}
 #notification.show {
 	transform: translatex(-50%)translatey(0px) !important
 }
@@ -370,7 +378,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
 	border-radius: 2px
 }
 
-    @keyframes cellPulse {
+    /* @keyframes cellPulse {
         0% {
             transform: scale(1);
         }
@@ -380,7 +388,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         100% {
             transform: scale(1);
         }
-    }
+    } */
 .sidebar {
 	max-height: calc(100% - 82px)
 }
@@ -964,7 +972,7 @@ position: relative;
     
         background: var(--lime);
     
-        z-index: -1;
+        z-index: 0;
     
         transform-origin: center;
         animation:
@@ -983,7 +991,7 @@ position: relative;
     border-radius: 8px;
     background: var(--lime);
 
-    z-index: -1;
+    z-index: 0;
 }
 #crashscreen {
 	text-align: center
@@ -1080,7 +1088,7 @@ position: relative;
     
         border: 3px solid var(--lime);
         border-radius: 8px;
-    z-index: -1;
+    z-index: 0;
     
         background: var(--lime);
     

@@ -341,7 +341,19 @@ let settings = {
             amount: 10,
         }
     },
-
+	
+	tools: {
+		enabled: true,
+		pencil: {
+			enabled: true
+		},
+		erase: {
+			enabled: true
+		},
+		history: {
+			enabled: true
+		}
+	},
     haptics: {
         enabled: true,
         buttons: true,
@@ -460,7 +472,7 @@ function playPop(speed = 1) {
     popSound.playbackRate = currentSpeed;
 
     popSound.play().catch(err => {
-        console.log("pop failed", err);
+        console.log("pop failed -", err);
     });
 
     pitchInterval = setInterval(() => {
@@ -638,6 +650,11 @@ const hintsaftercooldown = document.getElementById("hintsaftercooldown");
 const hintlimit = document.getElementById("hintlimit");
 const hintlimitinput = document.getElementById("hintlimitinput");
 
+const pencilToggle = document.getElementById("penciltoggle");
+const eraseToggle = document.getElementById("erasetoggle");
+const toolsToggle = document.getElementById("toolstoggle");
+const historyToggle = document.getElementById("historytoggle");
+
 function updatePauseBtn2() {
     pauseBtn2.style.display =
         window.matchMedia("(orientation: portrait)").matches ?
@@ -667,6 +684,17 @@ function updateSettingsMenu() {
     winHapticsToggle.checked = settings.haptics.puzzlecomplete;
     buttonHapticsToggle.disabled = !settings.haptics.enabled;
     hintsToggle.checked = settings.hints.enabled;
+	hintsToggle.disabled = !settings.tools.enabled
+	
+	toolsToggle.checked = settings.tools.enabled;
+
+	pencilToggle.checked = settings.tools.pencil.enabled;
+	eraseToggle.checked = settings.tools.erase.enabled;
+	historyToggle.checked = settings.tools.history.enabled;
+
+	pencilToggle.disabled = !settings.tools.enabled;
+	eraseToggle.disabled = !settings.tools.enabled;
+	historyToggle.disabled = !settings.tools.enabled;
 
     hintCooldownToggle.checked = settings.hints.cooldown.enabled;
     startingHintsInput.value = settings.hints.cooldown.startinghints;
@@ -675,7 +703,7 @@ function updateSettingsMenu() {
     hintsaftercooldown.value = settings.hints.cooldown.hintsaftercooldown;
 
     hintlimit.checked = settings.hints.hintlimit.enabled
-    hintlimitinput.value = settings.hints.hintlimit.limit
+    hintlimitinput.value = settings.hints.hintlimit.amount
 
     
     hintlimit.disabled = !settings.hints.enabled
@@ -762,9 +790,25 @@ winHapticsToggle.addEventListener("change", () => {
 hintsToggle.addEventListener("change", () => {
     settings.hints.enabled = hintsToggle.checked;
     testHintButton();
+
     if (!settings.hints.enabled) {
         settings.hints.cooldown.enabled = false;
         settings.hints.hintlimit.enabled = false;
+    }
+
+    saveSettings();
+    updateSettingsMenu();
+});
+toolsToggle.addEventListener("change", () => {
+    settings.tools.enabled = toolsToggle.checked;
+    testHintButton();
+	
+    if (!settings.tools.enabled) {
+		settings.hints.hintlimit.enabled = false;
+        settings.hints.enabled = false;
+        settings.tools.pencil.enabled = false;
+        settings.tools.erase.enabled = false;
+		settings.tools.history.enabled = false;
     }
 
     saveSettings();
@@ -805,6 +849,23 @@ hintlimitinput.addEventListener("change", () => {
     settings.hints.hintlimit.limit = Number(hintlimitinput.value) || 1;
     saveSettings();
     updateSettingsMenu()
+});
+pencilToggle.addEventListener("change", () => {
+    settings.tools.pencil.enabled = pencilToggle.checked;
+    saveSettings();
+    updateSettingsMenu();
+});
+
+eraseToggle.addEventListener("change", () => {
+    settings.tools.erase.enabled = eraseToggle.checked;
+    saveSettings();
+    updateSettingsMenu();
+});
+
+historyToggle.addEventListener("change", () => {
+    settings.tools.history.enabled = historyToggle.checked;
+    saveSettings();
+    updateSettingsMenu();
 });
 settings.hints.hintlimit.limit = Number(hintlimitinput.value) || 1;
 let hintlimitreached = false
@@ -1011,8 +1072,7 @@ function loadgame() {
 }
 
 function changemode(forceMode) {
-    console.log("changemode function called");
-
+    
     if (forceMode) {
         pageMode = forceMode;
     } else {
@@ -1020,7 +1080,6 @@ function changemode(forceMode) {
         pageMode = (pageMode === "light") ? "dark" : "light";
     }
 
-    console.log("mode is now:", pageMode);
 
     document.body.classList.remove("light", "dark");
     document.body.classList.add(pageMode);
@@ -1290,7 +1349,6 @@ window.addEventListener("visibilitychange", lostfocuspause)
 function lostfocuspause() {
     if (runninggame) {
         if (!timerPaused) {
-            console.log('Window lost focus; paused game');
             timerPaused = true;
 
             clearInterval(timerId);
@@ -1964,17 +2022,22 @@ function disableotherbuttons() {
 }
 
 function enableotherbuttons() {
-    eraseButton.disabled = false;
-    pencilButton.disabled = false;
+    pencilButton.disabled = !settings.tools.enabled || !settings.tools.pencil.enabled;
+    eraseButton.disabled = !settings.tools.enabled || !settings.tools.erase.enabled;
 }
 
 function testhistorybuttons() {
-    if (canusehelp) {
-        enablehistorybuttons()
-        enableotherbuttons()
+    if (canusehelp && settings.tools.enabled) {
+        if (settings.tools.history.enabled) {
+            enablehistorybuttons();
+        } else {
+            disablehistorybuttons();
+        }
+
+        enableotherbuttons();
     } else {
-        disablehistorybuttons()
-        disableotherbuttons()
+        disablehistorybuttons();
+        disableotherbuttons();
     }
 }
 
@@ -2168,7 +2231,7 @@ function updateHintCooldownDisplay() {
 updateHintCooldownDisplay();
 
 function updateHistoryButtons() {
-    if (canusehelp) {
+    if (canusehelp && settings.tools.enabled && settings.tools.history.enabled) {
         undoButton.disabled = undoStack.length === 0;
         redoButton.disabled = redoStack.length === 0;
     } else {
@@ -2213,22 +2276,27 @@ function getCompletedUnits() {
 }
 
 function animateIndexes(indexes, origin, kind) {
-    const playedDistances = new Set();
     const distancesPlayed = new Set();
+
     const boardDistances =
-        kind === "board" ?
-        getBoardDistances(origin) :
-        null;
+        kind === "board"
+            ? getBoardDistances(origin)
+            : null;
+
+
     const maxDistance =
-        kind === "board" ?
-        Math.max(...boardDistances) :
-        8;
+        kind === "board"
+            ? Math.max(...boardDistances)
+            : 8;
 
     const fadeDelay = maxDistance * 60 + 500;
 
     indexes.forEach((index) => {
 
-        const cell = boardEl.querySelector(`[data-index="${index}"]`);
+        const cell = boardEl.querySelector(
+            `[data-index="${index}"]`
+        );
+
         if (!cell) return;
 
         const row = Math.floor(index / 9);
@@ -2258,24 +2326,39 @@ function animateIndexes(indexes, origin, kind) {
             distance = boardDistances[index];
 
         }
-        if (settings.SFX.enabled && settings.SFX.completion) {
+
+        // Play one sound per distance.
+        if (
+            settings.SFX.enabled &&
+            settings.SFX.completion
+        ) {
             if (!distancesPlayed.has(distance)) {
+
                 distancesPlayed.add(distance);
 
                 setTimeout(() => {
-                    playPop(Math.min(1 + distance * 0.5));
+                    playPop(
+                        Math.min(1 + distance * 0.5)
+                    );
                 }, distance * 60);
             }
         }
-        if (settings.VFX.enabled && settings.VFX.completion) {
-            const animationKind =
-                kind === "board" ?
-                "board" :
-                kind;
 
+        if (
+            settings.VFX.enabled &&
+            settings.VFX.completion
+        ) {
+
+            const animationKind =
+                kind === "board"
+                    ? "board"
+                    : kind;
+
+            // Create the animation effect.
             const effect = document.createElement("div");
 
-            effect.className = `complete-effect ${animationKind}`;
+            effect.className =
+                `complete-effect ${animationKind}`;
 
             effect.style.setProperty(
                 "--sweep-delay",
@@ -2287,19 +2370,58 @@ function animateIndexes(indexes, origin, kind) {
                 `${fadeDelay}ms`
             );
 
+            // Effect goes first.
             cell.appendChild(effect);
 
-            effect.addEventListener("animationend", (e) => {
+            // Create a new number on top of the effect.
+            const number = document.createElement("p");
 
-                // Remove after the fade finishes.
-                if (e.animationName !== "rippleFade") return;
+            number.textContent = values[index];
 
-                effect.remove();
+            number.style.margin = "0px";
+            number.style.position = "absolute";
+            number.style.zIndex = "2";
 
-            });
+            // Given cells get the heavier font weight.
+            if (givens[index]) {
+                number.style.fontWeight = "760";
+            }
+
+            // Match the cell's current state.
+            if (cell.classList.contains("error")) {
+
+                number.style.color = "var(--danger)";
+
+            } else if (cell.classList.contains("correct")) {
+
+                number.style.color = "var(--lime-text)";
+
+            } else {
+
+                number.style.color = "var(--text)";
+            }
+
+            // Number goes after the effect.
+            cell.appendChild(number);
+
+            effect.addEventListener(
+                "animationend",
+                (e) => {
+
+                    // Remove the effect after fading.
+                    if (
+                        e.animationName !==
+                        "rippleFade"
+                    ) {
+                        return;
+                    }
+
+                    effect.remove();
+                    number.remove();
+                }
+            );
         }
     });
-
 }
 const allIndexes = [...Array(81).keys()];
 animateIndexes(allIndexes, selected, "board");
@@ -2738,14 +2860,14 @@ hintButton.addEventListener("click", () => {
 });
 
 eraseButton.addEventListener("click", () => {
-    if (!canusehelp) return;
+    if (!canusehelp || !settings.tools.enabled || !settings.tools.erase.enabled) return;
     if (timerPaused) return;
     toggleEraseMode();
 });
 
 pencilButton.addEventListener("click", () => {
     if (timerPaused) return;
-    if (!canusehelp) return;
+    if (!canusehelp || !settings.tools.enabled || !settings.tools.pencil.enabled) return;
     togglePencilMode();
 });
 newGameButton.addEventListener("click", () => newGame());
@@ -2764,50 +2886,19 @@ pauseDifficultyToggle.addEventListener("click", (event) => {
     togglewinDifficultyMenu();
 });
 difficultyMenu.addEventListener("click", (event) => {
-    console.log("listener fired");
-
-    console.log("target:", event.target);
-
     const item = event.target.closest(".menu-item");
-    console.log("item:", item);
-
     if (!item) return;
-
-    console.log("difficulty:", item.dataset.difficulty);
-
     newGame(item.dataset.difficulty);
-
-    console.log("after newGame");
 });
 pausedifficultyMenu.addEventListener("click", (event) => {
-    console.log("listener fired");
-
-    console.log("target:", event.target);
-
     const item = event.target.closest(".menu-item");
-    console.log("item:", item);
-
     if (!item) return;
-
-    console.log("difficulty:", item.dataset.difficulty);
-
     newGame(item.dataset.difficulty);
-
 });
 winDifficultyMenu.addEventListener("click", (event) => {
-    console.log("listener fired");
-
-    console.log("target:", event.target);
-
     const item = event.target.closest(".menu-item");
-    console.log("item:", item);
-
     if (!item) return;
-
-    console.log("difficulty:", item.dataset.difficulty);
-
     newGame(item.dataset.difficulty);
-
 });
 
 
@@ -2825,7 +2916,6 @@ mainDifficultyMenu.addEventListener("click", (event) => {
 
     selectedDifficulty = item.dataset.difficulty;
 
-    console.log("Selected difficulty:", selectedDifficulty);
     localStorage.setItem("difficulty", selectedDifficulty);
     const bestTimes = JSON.parse(localStorage.getItem("besttimes")) || {};
     const bestTime = bestTimes[selectedDifficulty];
@@ -2848,8 +2938,6 @@ document.addEventListener("click", (event) => {
 document.addEventListener("keyup", (event) => {
     if (!runninggame) return;
 
-    console.log(event.key);
-
     if (event.code === "Space") {
         event.preventDefault();
         pauseTimer();
@@ -2860,14 +2948,13 @@ document.addEventListener("keydown", (event) => {
     if (timerPaused) return;
     if (!runninggame) return;
 
-    // console.log(event.key); disabled logging as it isn't currently needed
     const key = event.key.toLowerCase();
 
     if ((event.ctrlKey || event.metaKey) && key === "z") {
         event.preventDefault();
 
         if (event.shiftKey) {
-            if (!canusehelp) return;
+            if (!canusehelp || !settings.tools.enabled || !settings.tools.history.enabled) return;
             redo();
         } else {
             if (!canusehelp) return;
@@ -2880,7 +2967,7 @@ document.addEventListener("keydown", (event) => {
     if ((event.ctrlKey || event.metaKey) && key === "y") {
         event.preventDefault();
 
-        if (!canusehelp) return;
+        if (!canusehelp || !settings.tools.enabled || !settings.tools.history.enabled) return;
         redo();
 
         return;
@@ -2891,7 +2978,7 @@ document.addEventListener("keydown", (event) => {
     if (key === "p") {
         event.preventDefault();
 
-        if (!canusehelp) return;
+        if (!canusehelp || !settings.tools.enabled || !settings.tools.pencil.enabled) return;
         togglePencilMode();
 
         return;
@@ -2909,7 +2996,7 @@ document.addEventListener("keydown", (event) => {
     if (key === "e") {
         event.preventDefault();
 
-        if (!canusehelp) return;
+        if (!canusehelp || !settings.tools.enabled || !settings.tools.erase.enabled) return;
         toggleEraseMode();
 
         return;
@@ -2921,7 +3008,7 @@ document.addEventListener("keydown", (event) => {
     }
 
     if (key === "backspace" || key === "delete" || key === "0") {
-        if (!canusehelp) return;
+        if (!canusehelp || !settings.tools.enabled || !settings.tools.erase.enabled) return;
         eraseSelected();
         return;
     }
@@ -2934,16 +3021,16 @@ document.addEventListener("keydown", (event) => {
 
         const nextRow =
             key === "arrowup" ?
-            Math.max(0, row - 1) :
+            (row + 8) % 9 :
             key === "arrowdown" ?
-            Math.min(8, row + 1) :
+            (row + 1) % 9 :
             row;
 
         const nextCol =
             key === "arrowleft" ?
-            Math.max(0, col - 1) :
+            (col + 8) % 9 :
             key === "arrowright" ?
-            Math.min(8, col + 1) :
+            (col + 1) % 9 :
             col;
 
         selectCell(nextRow * 9 + nextCol);

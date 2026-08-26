@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38" width="38" height="38">
+
+  <defs>
+    <clipPath id="clip">
+      
+    <rect height="38" rx="10" width="38"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#clip)">
+    <rect width="38" height="38" fill="#1a73e8"/>
+
+    <g transform="translate(19 19)">
+      <!-- 24 rainbow wedges -->
+      <path d="M0,0 L0,-30 A30,30 0 0,1 7.76,-28.98 Z" fill="#1a73e8"/>
+      <path d="M0,0 L7.76,-28.98 A30,30 0 0,1 15,-25.98 Z" fill="#2180d8"/>
+      <path d="M0,0 L15,-25.98 A30,30 0 0,1 21.21,-21.21 Z" fill="#2b8dd0"/>
+      <path d="M0,0 L21.21,-21.21 A30,30 0 0,1 25.98,-15 Z" fill="#35a28a"/>
+      <path d="M0,0 L25.98,-15 A30,30 0 0,1 28.98,-7.76 Z" fill="#40b56a"/>
+      <path d="M0,0 L28.98,-7.76 A30,30 0 0,1 30,0 Z" fill="#68bf55"/>
+
+      <path d="M0,0 L30,0 A30,30 0 0,1 28.98,7.76 Z" fill="#8fc840"/>
+      <path d="M0,0 L28.98,7.76 A30,30 0 0,1 25.98,15 Z" fill="#b7d12a"/>
+      <path d="M0,0 L25.98,15 A30,30 0 0,1 21.21,21.21 Z" fill="#dbc714"/>
+      <path d="M0,0 L21.21,21.21 A30,30 0 0,1 15,25.98 Z" fill="#fbbc04"/>
+      <path d="M0,0 L15,25.98 A30,30 0 0,1 7.76,28.98 Z" fill="#f4a204"/>
+      <path d="M0,0 L7.76,28.98 A30,30 0 0,1 0,30 Z" fill="#ec860b"/>
+
+      <path d="M0,0 L0,30 A30,30 0 0,1 -7.76,28.98 Z" fill="#e56a13"/>
+      <path d="M0,0 L-7.76,28.98 A30,30 0 0,1 -15,25.98 Z" fill="#df531a"/>
+      <path d="M0,0 L-15,25.98 A30,30 0 0,1 -21.21,21.21 Z" fill="#d93025"/>
+      <path d="M0,0 L-21.21,21.21 A30,30 0 0,1 -25.98,15 Z" fill="#cf2f4d"/>
+      <path d="M0,0 L-25.98,15 A30,30 0 0,1 -28.98,7.76 Z" fill="#c63076"/>
+      <path d="M0,0 L-28.98,7.76 A30,30 0 0,1 -30,0 Z" fill="#b8349c"/>
+
+      <path d="M0,0 L-30,0 A30,30 0 0,1 -28.98,-7.76 Z" fill="#a53cbf"/>
+      <path d="M0,0 L-28.98,-7.76 A30,30 0 0,1 -25.98,-15 Z" fill="#8d49d4"/>
+      <path d="M0,0 L-25.98,-15 A30,30 0 0,1 -21.21,-21.21 Z" fill="#6f5de3"/>
+      <path d="M0,0 L-21.21,-21.21 A30,30 0 0,1 -15,-25.98 Z" fill="#4f6deb"/>
+      <path d="M0,0 L-15,-25.98 A30,30 0 0,1 -7.76,-28.98 Z" fill="#337bee"/>
+      <path d="M0,0 L-7.76,-28.98 A30,30 0 0,1 0,-30 Z" fill="#1a73e8"/>
+    </g>
+  </g>
+
+  
+  <g fill="rgba(255,255,255,.92)">
+    <rect x="7" y="7" width="6" height="6" rx="2"/>
+    <rect x="16" y="7" width="6" height="6" rx="2"/>
+    <rect x="25" y="7" width="6" height="6" rx="2"/>
+
+    <rect x="7" y="16" width="6" height="6" rx="2"/>
+    <rect x="16" y="16" width="6" height="6" rx="2"/>
+    <rect x="25" y="16" width="6" height="6" rx="2"/>
+
+    <rect x="7" y="25" width="6" height="6" rx="2"/>
+    <rect x="16" y="25" width="6" height="6" rx="2"/>
+    <rect x="25" y="25" width="6" height="6" rx="2"/>
+  </g>
+
+</svg>

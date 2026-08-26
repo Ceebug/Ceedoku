@@ -16,25 +16,38 @@ if (releaseReady) {
 <html lang=en>
 
 <head>
-	<meta content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more." name=description>
-	<meta content=TIoixSj4h36QZAk_mHgQDXcUvwi8SHvCRLlZoKBVsbE name=google-site-verification>
-	<script id=vervar>
-		const version = "8.4.2"
+	
+	<!-- Sets the variable that declares the version -->
+	<script>
+		const version = "9.0.0"
 	</script>
+	<!-- Loads FSJ as it is a dependency -->
+	<!-- https://github.com/ceebug/fsj -->
 	<script src="fsj.js"></script>
+	<!-- Loads JSF as it is also a dependency -->
+	<!-- https://github.com/ceebug/jsf -->
 	<script src="jsf.js"></script>
+	<!-- Page description so Google knows WTF the game is -->
+	<meta content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more." name=description>
+	<!-- Sets the character set to UNICODE TEXT FOUNDATION v8 BECAUSE FOR SOME REASON IT ISNT THE DEFAULT -->
 	<meta charset=utf-8>
 	<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name=viewport>
 	<meta content=#101418 name=theme-color>
-	<link href=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzOCAzOCIgd2lkdGg9IjM4IiBoZWlnaHQ9IjM4Ij4KCiAgPGRlZnM+CiAgICA8Y2xpcFBhdGggaWQ9ImNsaXAiPgogICAgICA8cmVjdCB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHJ4PSIxMCI+PC9yZWN0PgogICAgPC9jbGlwUGF0aD4KICA8L2RlZnM+CgogIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8cmVjdCB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIGZpbGw9IiMxYTczZTgiPjwvcmVjdD4KCiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOSAxOSkiPgogICAgICA8IS0tIDI0IHJhaW5ib3cgd2VkZ2VzIC0tPgogICAgICA8cGF0aCBkPSJNMCwwIEwwLC0zMCBBMzAsMzAgMCAwLDEgNy43NiwtMjguOTggWiIgZmlsbD0iIzFhNzNlOCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEw3Ljc2LC0yOC45OCBBMzAsMzAgMCAwLDEgMTUsLTI1Ljk4IFoiIGZpbGw9IiMyMTgwZDgiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMMTUsLTI1Ljk4IEEzMCwzMCAwIDAsMSAyMS4yMSwtMjEuMjEgWiIgZmlsbD0iIzJiOGRkMCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyMS4yMSwtMjEuMjEgQTMwLDMwIDAgMCwxIDI1Ljk4LC0xNSBaIiBmaWxsPSIjMzVhMjhhIj48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTDI1Ljk4LC0xNSBBMzAsMzAgMCAwLDEgMjguOTgsLTcuNzYgWiIgZmlsbD0iIzQwYjU2YSI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyOC45OCwtNy43NiBBMzAsMzAgMCAwLDEgMzAsMCBaIiBmaWxsPSIjNjhiZjU1Ij48L3BhdGg+CgogICAgICA8cGF0aCBkPSJNMCwwIEwzMCwwIEEzMCwzMCAwIDAsMSAyOC45OCw3Ljc2IFoiIGZpbGw9IiM4ZmM4NDAiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMMjguOTgsNy43NiBBMzAsMzAgMCAwLDEgMjUuOTgsMTUgWiIgZmlsbD0iI2I3ZDEyYSI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyNS45OCwxNSBBMzAsMzAgMCAwLDEgMjEuMjEsMjEuMjEgWiIgZmlsbD0iI2RiYzcxNCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwyMS4yMSwyMS4yMSBBMzAsMzAgMCAwLDEgMTUsMjUuOTggWiIgZmlsbD0iI2ZiYmMwNCI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwxNSwyNS45OCBBMzAsMzAgMCAwLDEgNy43NiwyOC45OCBaIiBmaWxsPSIjZjRhMjA0Ij48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTDcuNzYsMjguOTggQTMwLDMwIDAgMCwxIDAsMzAgWiIgZmlsbD0iI2VjODYwYiI+PC9wYXRoPgoKICAgICAgPHBhdGggZD0iTTAsMCBMMCwzMCBBMzAsMzAgMCAwLDEgLTcuNzYsMjguOTggWiIgZmlsbD0iI2U1NmExMyI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtNy43NiwyOC45OCBBMzAsMzAgMCAwLDEgLTE1LDI1Ljk4IFoiIGZpbGw9IiNkZjUzMWEiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMLTE1LDI1Ljk4IEEzMCwzMCAwIDAsMSAtMjEuMjEsMjEuMjEgWiIgZmlsbD0iI2Q5MzAyNSI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtMjEuMjEsMjEuMjEgQTMwLDMwIDAgMCwxIC0yNS45OCwxNSBaIiBmaWxsPSIjY2YyZjRkIj48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTC0yNS45OCwxNSBBMzAsMzAgMCAwLDEgLTI4Ljk4LDcuNzYgWiIgZmlsbD0iI2M2MzA3NiI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtMjguOTgsNy43NiBBMzAsMzAgMCAwLDEgLTMwLDAgWiIgZmlsbD0iI2I4MzQ5YyI+PC9wYXRoPgoKICAgICAgPHBhdGggZD0iTTAsMCBMLTMwLDAgQTMwLDMwIDAgMCwxIC0yOC45OCwtNy43NiBaIiBmaWxsPSIjYTUzY2JmIj48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTC0yOC45OCwtNy43NiBBMzAsMzAgMCAwLDEgLTI1Ljk4LC0xNSBaIiBmaWxsPSIjOGQ0OWQ0Ij48L3BhdGg+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTC0yNS45OCwtMTUgQTMwLDMwIDAgMCwxIC0yMS4yMSwtMjEuMjEgWiIgZmlsbD0iIzZmNWRlMyI+PC9wYXRoPgogICAgICA8cGF0aCBkPSJNMCwwIEwtMjEuMjEsLTIxLjIxIEEzMCwzMCAwIDAsMSAtMTUsLTI1Ljk4IFoiIGZpbGw9IiM0ZjZkZWIiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMLTE1LC0yNS45OCBBMzAsMzAgMCAwLDEgLTcuNzYsLTI4Ljk4IFoiIGZpbGw9IiMzMzdiZWUiPjwvcGF0aD4KICAgICAgPHBhdGggZD0iTTAsMCBMLTcuNzYsLTI4Ljk4IEEzMCwzMCAwIDAsMSAwLC0zMCBaIiBmaWxsPSIjMWE3M2U4Ij48L3BhdGg+CiAgICA8L2c+CiAgPC9nPgoKICA8IS0tIDPDlzMgZ3JpZCAtLT4KICA8ZyBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC45MikiPgogICAgPHJlY3QgeD0iNyIgeT0iNyIgd2lkdGg9IjYiIGhlaWdodD0iNiIgcng9IjIiPjwvcmVjdD4KICAgIDxyZWN0IHg9IjE2IiB5PSI3IiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiByeD0iMiI+PC9yZWN0PgogICAgPHJlY3QgeD0iMjUiIHk9IjciIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CgogICAgPHJlY3QgeD0iNyIgeT0iMTYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIxNiIgeT0iMTYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIyNSIgeT0iMTYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CgogICAgPHJlY3QgeD0iNyIgeT0iMjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIxNiIgeT0iMjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgICA8cmVjdCB4PSIyNSIgeT0iMjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIyIj48L3JlY3Q+CiAgPC9nPgoKPC9zdmc+ rel=icon type=image/svg+xml>
-	<link href=/icons/128-nocut.png rel=icon type=image/png sizes=128x128>
-	<link href=/icons/144nocut.png rel=icon type=image/png sizes=144x144>
+	<link href="icons/favicon.svg" rel="icon" type="image/svg+xml">
+	<!-- Loads 2 other png icons because Google's indexers are STUPID and can't understand svgs -->
+	<link href="icons/128-nocut.png" rel="icon" type="image/png" sizes="128x128">
+	<link href="icons/144nocut.png" rel="icon" type="image/png" sizes="144x144">
+	<!-- if u cant figure out what this does you're an idiot -->
 	<title>Ceedoku - Loading</title>
-	<link href=style.css rel=stylesheet id=Style>
+	<!-- loads the main stylesheet -->
+	<link href=style.css rel=stylesheet>
+	<!-- Loads the touch stylesheet that will be toggled on and of by the script at the bottom of the page depending on if the users input method supports hover or not - this is only needed because CSS IS FUCKING STUPID AND FOR DEVICES THAT DONT SUPPORT HOVER JUST KEEPS HOVER ON UNTIL THEY CLICK SOMEWHERE ELSE, FUCK CSS-->
 	<link href=touch.css rel=stylesheet id=touchStyles>
-	<script>
+	<!-- registers the serviceworker on supported devices -->
+	<script>        
 		"serviceWorker" in navigator && navigator.serviceWorker.register("./sw.js").then(() => console.log("Service Worker Registered")).catch(e => console.log("Service Worker Registration Failed", e))
 	</script>
+	<!-- Registers the PWAs manifest to the browser -->
 	<link href=./manifest.json rel=manifest>
 </head>
 
@@ -107,7 +120,7 @@ if (releaseReady) {
 				}
 			}
 		</style>
-		<div style=display:flex;justify-content:center;margin-bottom:10px><img alt=Ceedoku class=whatdoievencallthis src=./title.png style=width:90% aria-label="Ceedoku Logo"></div><ceedoku-spinner></ceedoku-spinner>
+		<div class="loadingdiv" style=display:flex;justify-content:center;margin-bottom:10px><img alt=Ceedoku class=whatdoievencallthis src=title.png style=width:90%;image-rendering:pixelated aria-label="Ceedoku"></div><ceedoku-spinner></ceedoku-spinner>
 	</div>
 	<div style="visibility:hidden;scrollbar-color:transparent transparent" id=aahtheentiregame><div id="notification" style="z-index: 9999999;background-color: var(--surface);position: absolute;top: 10px;left: 50%;padding: 10px;transform: translatex(-50%)translatey(-60px);border-radius: 100px;transition: transform 0.2s ease-in-out, background-color 0.2s ease;"><strong id="notification-content" style="margin: 0px;color: var(--text2);">Where is the text?</strong></div>
 		<div class=null>
@@ -314,7 +327,7 @@ if (releaseReady) {
 			<h3 style="position:fixed;bottom:calc(0px + env(safe-area-inset-bottom));left:calc(6px + env(safe-area-inset-left));z-index:9999;margin:0" id=version><strong>Version:</strong> *loading*</h3>
 			<h3 style="position:absolute;z-index:9999;margin-bottom:2px;bottom:calc(0px + env(safe-area-inset-bottom));right:6px" class=feedbacklinkh><a class=feedbacklink href=https://ceedoku.github.io/feedbacklite title="Provide feedback on Ceedoku.">Feedback Form</a></h3>
 			<div class=cmon style=display:flex;flex-direction:column;align-content:center>
-				<div style=display:flex;justify-content:center><img alt=Ceedoku alt=CEEDOKU class=whatdoievencallthis src=./title.png style=width:90% aria-label="Ceedoku Logo"></div>
+				<div style=display:flex;justify-content:center><img alt=Ceedoku alt=CEEDOKU class=whatdoievencallthis src=./title.png style=width:90%;image-rendering:pixelated; aria-label="Ceedoku"></div>
 				<div style=margin-top:20px><button title="Open the save stats menu." class=new-main2 onclick=showcontinueGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px id=igiveup>Continue Game</button></div>
 				<div style=margin-top:5px><button title="Create a new game." title="Create a new game." class=new-main2 type=button id=mainDifficultyToggle aria-expanded=false onclick=openmainDifficultyMenu() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px>New Game</button><button title="Import and/or export save files." class=new-main2 type=button id=importexportbutton onclick="showimportexportmenu()" style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px>Import/Export Saves</button><button title="Change the settings." class=new-main2 type=button id=settingsbutton aria-expanded=false onclick=opensettingsmenu() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px>Settings</button></div>
 			</div>
@@ -420,6 +433,7 @@ if (releaseReady) {
 			</div>
 			<div style=height:550px;background-color:var(--surface-2);margin-top:15px;border-radius:10px;padding:10px;padding-top:15px;padding-bottom:10px>
 				<div style="height:100%;overflow:scroll;scrollbar-color:var(--scrollbar) transparent;scrollbar-width:thick">
+					<!-- i wish that this wasnt what the html code for the settings menu was -->
 					<h1 style=font-size:50px;text-align:center class=settindescriber>Animations</h1>
 					<div class=setting-row style=padding-bottom:5px title="Whether or not animations should be enabled."><span class=setting-name style=text-align:left><strong>Enable animations</strong></span> <label class=toggle><input id=animationtoggle type=checkbox> <span class=toggle-track></span></label></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
@@ -440,14 +454,20 @@ if (releaseReady) {
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Whether or not to play a small vibration when you select a cell."><span class=setting-name style=text-align:left><strong>Cell select haptics</strong></span> <label class=toggle><input id=cellhapticstoggle type=checkbox> <span class=toggle-track></span></label></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Whether or not to play some small vibrations on puzzle completion."><span class=setting-name style=text-align:left><strong>Puzzle completed haptics</strong></span> <label class=toggle><input id=winhapticstoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<h1 style=font-size:50px;text-align:center;margin-top:20px class=settindescriber>Hints</h1>
-					<div class=setting-row style=padding-bottom:5px title="Whether or not hints should be enabled."><span class=setting-name style=text-align:left><strong>Enable hints</strong></span> <label class=toggle><input id=hintstoggle type=checkbox> <span class=toggle-track></span></label></div>
+					<h1 style=font-size:50px;text-align:center;margin-top:20px class=settindescriber>Tools</h1>	
+					<div class=setting-row style=padding-bottom:5px; title="Whether or not tools should be enabled."><span class=setting-name style=text-align:left><strong>Enable tools</strong></span> <label class=toggle><input id=toolstoggle type=checkbox> <span class=toggle-track></span></label></div>
+					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
+					<div class=setting-row style=padding-bottom:5px;padding-top:0px title="Whether or not pencil mode should be enabled."><span class=setting-name style=text-align:left><strong>Enable pencil mode</strong></span> <label class=toggle><input id=penciltoggle type=checkbox> <span class=toggle-track></span></label></div>
+					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
+					<div class=setting-row style=padding-bottom:5px;padding-top:0px title="Whether or not erase mode should be enabled."><span class=setting-name style=text-align:left><strong>Enable erase mode</strong></span> <label class=toggle><input id=erasetoggle type=checkbox> <span class=toggle-track></span></label></div>
+					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
+					<div class=setting-row style=padding-bottom:5px;padding-top:0px title="Whether or not undo and redo should be enabled."><span class=setting-name style=text-align:left><strong>Enable undo and redo</strong></span> <label class=toggle><input id=historytoggle type=checkbox> <span class=toggle-track></span></label></div>
+					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
+					<div class=setting-row style=padding-bottom:5px;padding-top:0px title="Whether or not hints should be enabled."><span class=setting-name style=text-align:left><strong>Enable hints</strong></span> <label class=toggle><input id=hintstoggle type=checkbox> <span class=toggle-track></span></label></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Whether or not hints should have a cooldown."><span class=setting-name style=text-align:left><strong>Hint cooldown</strong></span> <label class=toggle><input id=hintcooldowntoggle type=checkbox> <span class=toggle-track></span></label></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of hints the game gives you at the start of a game."><span class=setting-name style=text-align:left><strong>Starting hints</strong></span> <input id=startinghints type=number placeholder=30 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of hints the game gives you after the hint cooldown ends."><span class=setting-name style=text-align:left><strong>Hints after cooldown</strong></span> <input id=hintsaftercooldown type=number placeholder=1 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The type of hint cooldown that should be used"><span class=setting-name style=text-align:left><strong>Hint cooldown type</strong> </span><select class=settings-select id=hintcooldownmethod>
 							<option value=time>Time-based
@@ -456,6 +476,8 @@ if (releaseReady) {
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of moves/seconds until the hint cooldown ends."><span class=setting-name style=text-align:left><strong>Hint cooldown amount</strong></span> <input id=hintcooldownamount type=number placeholder=30 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
+					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of hints the game gives you after the hint cooldown ends."><span class=setting-name style=text-align:left><strong>Hints after cooldown</strong></span> <input id=hintsaftercooldown type=number placeholder=1 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
+					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style="padding-bottom:5px;padding-top:0px" title="Whether or not hints should be limited."><span class=setting-name style=text-align:left><strong>Enable Limited Hints</strong></span> <label class=toggle><input id=hintlimit type=checkbox> <span class=toggle-track></span></label></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The maximum amount of hints that you can use in a single game."><span class=setting-name style=text-align:left><strong>Hint Limit</strong></span> <input id=hintlimitinput type=number placeholder=1 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
@@ -463,13 +485,15 @@ if (releaseReady) {
 			</div>
 		</div>
 	</div>
+	<!-- this will load a spinner but it cant be <spinner> because html doesnt let us do that -->
 	<ceedoku-spinner id="otherspinnythingo"></ceedoku-spinner>
 	<div style=visibility:hidden;width:100dvw;height:100dvh;position:absolute;background-color:#000;z-index:10000000;display:flex;flex-direction:column;justify-content:center;align-items:center id=crashscreen aria-label="Crash screen">
 		<h1 style=font-size:150px;margin-bottom:50px>:(</h1>
 		<h1>Ceedoku has crashed</h1>
 		<h2 id=crashscreenerrormsg>There was no crash message</h2><button onclick=location.reload() class=restart-button><strong>Restart Ceedoku</strong></button>
 	</div>
-	<script id=touchormousedetector>
+	<!-- Toggles touch styles depending on if using touch or not -->
+	<script>
 		const touchStyles = document.getElementById("touchStyles");
 		touchStyles.disabled = !window.matchMedia("(hover: none) and (pointer: coarse)").matches, window.addEventListener("pointermove", e => {
 			"mouse" === e.pointerType && (touchStyles.disabled = !0)
@@ -477,27 +501,48 @@ if (releaseReady) {
 			"touch" === e.pointerType && (touchStyles.disabled = !1)
 		})
 	</script>
-	<script id="setver">
-		const link = `https://github.com/ceebug/ceedoku/releases/tag/v${version}`;
-		const versionElement = document.getElementById("version");
+	<!-- Sets the version and the link for the version thingo -->
+	<script>
+        const link = `https://github.com/ceebug/ceedoku/releases/tag/v${version}`;
+        const versionElement = document.getElementById("version");
+		
+        const cacheKey = `githubReleaseExists_${version}`;
+        const cached = localStorage.getItem(cacheKey);
+		
+        // Display the version immediately.
+        versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="Checking GitHub for release.">${version}</a>`;
 
-		fetch(`https://api.github.com/repos/ceebug/ceedoku/releases/tags/v${version}`)
-			.then(response => {
-				if (response.ok) {
-					versionElement.innerHTML =
-						`<strong>Version:</strong> <a class="feedbacklink" title="Go to the GitHub release for the current version." href="${link}">${version}</a>`;
-				} else {
-					versionElement.innerHTML =
-						`<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;
+        if (cached !== null) {
+            // We already know whether this version exists.
+            if (cached === "true") {
+                 versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="Go to the GitHub release for the current version." href="${link}">${version}</a>`;
+			} else {
+				versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;        
+			}
+        }
+
+        // Ping GitHub in the background.
+        fetch(`https://api.github.com/repos/ceebug/ceedoku/releases/tags/v${version}`)
+            .then(response => {
+                if (response.ok) {
+                    localStorage.setItem(cacheKey, "true");
+					if (cached == null) {
+						versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="Go to the GitHub release for the current version." href="${link}">${version}</a>`;
+					}
+                } else {
+					localStorage.setItem(cacheKey, "false");
+					if (cached == null) {
+						versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;
+					}
 				}
-			})
-			.catch(() => {
-				// If GitHub can't be reached, don't make it a link.
-				versionElement.innerHTML =
-					`<strong>Version:</strong> <a class="feedbacklink" title="GitHub could not be reached so we couldn't check if there was a GitHub release or not.">${version}</a>`;
-			});
+            })
+            .catch(() => {
+				// Keep the version visible even if GitHub cannot be reached.
+				versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="GitHub could not be reached so we couldn't check if there was a GitHub release or not.">${version}</a>`;
+            });
 	</script>
-	<script id=crash-detector>
+	<!-- Shows crash screen on detection of crash -->
+	<script>
 		window.addEventListener("error", e => {
 			document.body.style.visibility = "visible", document.title = "Ceedoku - Crashed", document.getElementById("crashscreen").style.visibility = "visible";
 			const t = document.getElementById("crashscreenerrormsg");
@@ -512,8 +557,10 @@ if (releaseReady) {
 			})
 		})
 	</script>
-	<script id=tsParticles.Confetti src=confetticode.js></script>
-	<script id=mainscript src=script.js></script>
+	<!-- TSparticles.confetti becuase i cant be bothered to make confetti myself-->
+	<script src=confetticode.js></script>
+	<!-- Main script -->
+	<script src=script.js></script>
 </body>
 
 </html>
