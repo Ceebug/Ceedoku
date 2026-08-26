@@ -170,14 +170,16 @@ Ceedoku is developed primarily using HTML, CSS, and JavaScript.
 To work on Ceedoku, clone the repository and open the project in your preferred development environment.
 
 Because Ceedoku is a web application, most development can be tested directly in a modern web browser.
-
 ## Website
 
-The official Ceedoku website is:
+The official Ceedoku website homepage is:
 
-**https://ceedoku.github.io**
+**https://ceedoku.github.io/home**
 
 The website contains information about the game, installation instructions, downloads, the changelog, and other project information.
+
+> **Note:** `https://ceedoku.github.io` is the direct link to the Ceedoku game. It does **not** open the website homepage.
+
 
 ## Changelog
 
