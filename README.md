@@ -181,7 +181,9 @@ The official Ceedoku website homepage is:
 
 The website contains information about the game, installation instructions, downloads, the changelog, and other project information.
 
-> **Note:** `https://ceedoku.github.io` is the direct link to the Ceedoku game. It does **not** open the website homepage.
+> [!NOTE]
+> `https://ceedoku.github.io` is the direct link to play Ceedoku.
+It does **not** open the website homepage.
 
 
 ## Changelog
