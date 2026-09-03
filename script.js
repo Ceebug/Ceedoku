@@ -13,7 +13,7 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  *****************************************************************************/
-
+document.title = Ceedoku - Loading
 class CeedokuSpinner extends HTMLElement {
 	connectedCallback() {
 		this.innerHTML = `
