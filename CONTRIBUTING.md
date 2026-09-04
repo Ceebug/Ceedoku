@@ -29,17 +29,23 @@ You can edit the Feedback Edits spreadsheet directly. Suggestions will be review
 
 ## Reporting bugs
 
-If you find a bug in Ceedoku, describe it clearly so that it can be reproduced and fixed.
+If you find a bug in Ceedoku, report it through the [**Ceedoku feedback page**](https://ceedoku.github.io/feedback).
 
 A useful bug report should include:
 
-* What happened.
-* What you expected to happen.
-* The steps needed to reproduce the problem.
-* The browser or platform where the problem occurred, if relevant.
-* Screenshots or other useful information when applicable.
+* A useful title.
+* A useful description that clearly explains what the bug is and how to reproduce it.
 
-If the bug relates to an existing entry in the feedback tracker, use the **Feedback Edits** spreadsheet to suggest an update rather than editing the main tracker.
+The feedback form will collect the other required information, including:
+
+* Device.
+* Operating system.
+* Type of bug.
+* Other required information.
+
+You can also add screenshots or other images when they are useful. The form will prompt you to add them, but they are optional.
+
+If the bug relates to an existing entry in the feedback tracker, mention the existing entry in your report so it can be updated appropriately.
 
 ## Fixing bugs
 
@@ -121,6 +127,9 @@ In particular:
 * Remove temporary debugging code before submitting a pull request.
 
 If a file already follows a particular formatting style, follow that style instead of reformatting the entire file.
+
+Or go haywire, I don't give a sh*t how u format your code, if it works, it works. 
+I can barely be bothered to indent stuff myself so I won't force you to indent your own code; I merely advise that you do to make things easier for yourself and others in the future, you will probably thank yourself for it.
 
 ## Commit messages
 
