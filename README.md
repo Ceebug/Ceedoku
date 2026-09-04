@@ -166,6 +166,70 @@ Some of the important parts of the project include:
 * Service-worker/offline functionality
 * CSF save-file support
 
+## Languages
+
+This repository is primarily a static web app. The main languages used are:
+
+* JavaScript — 52.3%
+* HTML — 28.5%
+* CSS — 19.2%
+
+If you add other languages or tools later (for example a build system or scripts), update this section.
+
+## Getting started (run locally)
+
+These instructions will get a local copy of the project running for development and testing.
+
+Prerequisites:
+
+* A modern web browser (Chrome, Firefox, Safari, Edge)
+* Git (to clone the repository)
+* Optional: Python 3 or Node.js if you want a simple local static server
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Ceebug/Ceedoku.git
+cd Ceedoku
+```
+
+Open in a browser (quick, no server):
+
+* Double-click `index.html` or open it from your browser's File > Open menu.
+
+Recommended (runs a local static server so Service Worker and fetches behave properly):
+
+* With Python 3:
+
+```bash
+python3 -m http.server 8000
+# then open http://localhost:8000 in your browser
+```
+
+* With Node (http-server):
+
+```bash
+npx http-server -p 8000
+# then open http://localhost:8000
+```
+
+Development notes:
+
+* This is a static web project — there is no build step by default. Edit the HTML/CSS/JS files and reload the browser to see changes.
+* Service Worker caching can serve stale files while developing. To avoid this:
+  * Open DevTools → Application → Service Workers and unregister the service worker, or
+  * Use a private/incognito window, or
+  * Use DevTools → Application → Clear storage and then hard reload (Ctrl/Cmd+Shift+R).
+* The game loads local dependency files such as `fsj.js` and `jsf.js` from the repo root. Ensure those files are present when testing locally.
+
+Contributing:
+
+If you'd like to contribute:
+
+* Fork the repo, create a branch, make changes, and open a pull request.
+* Keep changes small and focused. If you're changing UI behavior, explain the motivation in the PR description.
+* If adding new code that must be loaded at runtime, test the change with the local server so the Service Worker won't interfere.
+
 ## Development
 
 Ceedoku is developed primarily using HTML, CSS, and JavaScript.
