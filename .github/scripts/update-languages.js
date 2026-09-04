@@ -78,8 +78,8 @@ if (start === -1 || end === -1 || end < start) {
     throw new Error("LANGUAGES_START or LANGUAGES_END marker not found.");
 }
 
-const languages = `- JavaScript - ${percentages.JavaScript}%
-- CSS - ${percentages.CSS}%
+const languages = `- JavaScript - ${percentages.JavaScript}%<br>
+- CSS - ${percentages.CSS}%<br>
 - HTML - ${percentages.HTML}%`;
 
 const updatedReadme =
