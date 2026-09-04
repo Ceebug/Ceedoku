@@ -131,6 +131,20 @@ If a file already follows a particular formatting style, follow that style inste
 Or go haywire, I don't give a sh*t how u format your code, if it works, it works. 
 I can barely be bothered to indent stuff myself so I won't force you to indent your own code; I merely advise that you do to make things easier for yourself and others in the future, you will probably thank yourself for it.
 
+## Coding with the help of an LLM (Large Language Model)
+
+Ceedoku allows, and will support, development with coding agents, but **purely vibe-coding is not allowed**.
+
+If you use an AI coding agent to make changes to Ceedoku, you must actually understand the code you are adding or changing. An agent can help you write code, investigate problems, or suggest solutions, but you are still responsible for understanding what the code does and making sure it works correctly.
+
+The Ceedoku repository supports multiple coding agents. Each supported agent is provided with a guide file that directs it to the shared [`AGENTS.md`](AGENTS.md) instructions.
+
+Before using an agent, make sure it has access to its appropriate guide file and that the guide points it to [`AGENTS.md`](AGENTS.md). These files contain important information about how agents should work with the repository.
+
+**Do not blindly accept generated code.** Read it, understand it, test it, and make sure it fits the existing project before submitting your changes.
+
+You might be asked something like: "What does this line of code do?" in your pull request. This is a measure to make sure that you are not vibe-coding and that you actually understand the changes you have made. It is not a "I hate this person and just want to annoy them." measure.
+
 ## Commit messages
 
 Use clear and descriptive commit messages.
