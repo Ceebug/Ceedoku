@@ -176,6 +176,12 @@ This repository is primarily a static web app. The main languages used are:
 - **HTML:** 7.13%
 <!-- LANGUAGES_END -->
 
+## Contributing
+
+If you'd like to contribute to Ceedoku, please read the contributing guidelines before submitting a change.
+
+See [**CONTRIBUTING.md**](CONTRIBUTING.md) for information about contributing to the project.
+
 ## Getting started (run locally)
 
 These instructions will get a local copy of the project running for development and testing.
