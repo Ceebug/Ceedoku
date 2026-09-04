@@ -131,7 +131,7 @@ If a file already follows a particular formatting style, follow that style inste
 Or go haywire, I don't give a sh*t how u format your code, if it works, it works. 
 I can barely be bothered to indent stuff myself so I won't force you to indent your own code; I merely advise that you do to make things easier for yourself and others in the future, you will probably thank yourself for it.
 
-## Coding with the help of an LLM (Large Language Model)
+## Coding with agents
 
 Ceedoku allows, and will support, development with coding agents, but **purely vibe-coding is not allowed**.
 
