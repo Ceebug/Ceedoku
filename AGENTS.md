@@ -1,12 +1,16 @@
 # Ceedoku — Agent Instructions
 
+Hello, agents! Welcome to the **Ceedoku** repository.
+
+If you're working on this repository, you're working on Ceedoku: a free, lightweight Sudoku game built to provide a simple and powerful Sudoku experience without unnecessary distractions.
+
 ## What is Ceedoku?
 
-Ceedoku is a free, lightweight Sudoku game designed to provide a simple and powerful Sudoku experience without unnecessary distractions.
+Ceedoku is primarily a web application built with **HTML, CSS, and JavaScript**. It runs directly in a web browser and can also be installed as an app for offline use.
 
-It is primarily a static web application built with **HTML, CSS, and JavaScript**. It runs directly in a web browser and can also be installed as an app for offline use.
+The project is intentionally lightweight. It does not use a large framework or complicated build system unless one is explicitly added to the repository. Most of the application is made up of the source files in this repository, so changes to existing HTML, CSS, and JavaScript can directly affect the game.
 
-Ceedoku has eight difficulty levels:
+Ceedoku includes eight difficulty levels:
 
 - Easy
 - Medium
@@ -17,70 +21,89 @@ Ceedoku has eight difficulty levels:
 - Impossible
 - Godlike
 
-The project includes features such as saving and loading games, undo and redo, pencil mode, erase mode, hints, timers, keyboard controls, animations, sound effects, haptics, dark and light modes, responsive layouts, offline support, and the Ceedoku Save Format (`.csf`).
+The game includes features such as:
 
-## Project structure
+- Puzzle generation and solving.
+- Saving and loading games.
+- Undo and redo.
+- Pencil mode.
+- Erase mode.
+- Hints and hint cooldowns.
+- Timers and best times.
+- Keyboard controls and arrow-key navigation.
+- Animations.
+- Sound effects.
+- Haptics.
+- Light and dark modes.
+- Responsive desktop and mobile layouts.
+- Offline support.
+- The Ceedoku Save Format (`.csf`).
 
-The repository contains the source code for the Ceedoku web application and supporting files.
+## The project
 
-Important parts of the project include:
+Ceedoku is more than just the Sudoku board. The repository contains the code that makes the game work, along with the files used by the Ceedoku website and supporting systems.
+
+Some important parts include:
 
 - The main Sudoku game interface.
 - Sudoku puzzle generation and solving logic.
 - Save and load functionality.
-- Settings and UI controls.
+- Settings and menus.
 - Keyboard navigation.
-- Animations.
+- UI animations and interactions.
 - Audio and haptic features.
-- Service-worker/offline functionality.
+- Service-worker and offline functionality.
 - CSF save-file support.
-- Website pages and project documentation.
+- Website pages such as the home, download, install, changelog, and CSF specification pages.
+- GitHub Actions and other project tooling.
 
-## Main technologies
+## How the code is organized
 
-Ceedoku is primarily written using:
+The main application is a static web project. HTML provides the structure, CSS controls the appearance and responsive layouts, and JavaScript provides the game logic and interactions.
 
-- HTML
-- CSS
-- JavaScript
+The repository may also contain supporting JavaScript files, workers, website assets, configuration, and project automation. Before changing something, look at how the existing code works rather than assuming a conventional framework structure.
 
-Do not assume a framework or build system is being used unless the repository explicitly contains one.
+## Important project principles
 
-## Development principles
+Ceedoku has existing behavior, styling, and conventions for a reason. When making changes:
 
-- Preserve the existing design and behavior unless the change specifically requires modifying them.
+- Preserve existing behavior unless the task requires changing it.
+- Make the smallest reasonable change needed.
 - Keep changes focused on the task.
-- Avoid unnecessary dependencies.
-- Avoid unrelated refactoring or reformatting.
-- Follow the existing code style of the file being edited.
+- Do not add unnecessary dependencies.
+- Do not perform unrelated refactoring.
+- Do not reformat unrelated code.
+- Follow the existing style of the file being edited.
 - Preserve existing indentation and formatting.
-- Test changes that affect functionality before considering the work complete.
-- When changing UI behavior, consider both desktop and mobile layouts.
-- When changing appearance, consider both light and dark modes where applicable.
+- Do not replace working implementations with a different approach without a reason.
+- Consider desktop and mobile behavior when changing the UI.
+- Consider light and dark modes when changing appearance.
 
 ## Code changes
 
-Make the smallest reasonable change needed to solve the task.
+Existing code may be deliberately structured or formatted in a particular way. Do not rewrite large sections simply because you prefer a different style.
 
-Do not rewrite large sections of code simply to make them look different. Existing code may intentionally be structured or formatted in a particular way.
+When modifying code, preserve the indentation and formatting already used by the surrounding code unless reformatting is specifically requested.
 
-When returning or modifying code, preserve the indentation and formatting already used by the surrounding code unless the task explicitly asks for reformatting.
+If a change can be made by modifying a few lines, prefer that over rewriting the entire function or component.
 
 ## UI changes
 
-Ceedoku is intended to remain lightweight and straightforward.
+Ceedoku is designed to be simple and unobtrusive.
 
-When modifying the UI:
+When changing the interface:
 
 - Keep the existing visual language consistent.
-- Do not introduce unnecessary UI elements.
-- Make interactive controls usable on both desktop and mobile.
-- Check that changes do not interfere with existing animations or interactions.
-- Avoid changing unrelated controls or layouts.
+- Avoid unnecessary UI elements.
+- Keep controls usable on desktop and mobile.
+- Make sure interactive states still work correctly.
+- Do not accidentally break existing animations.
+- Check both light and dark modes when relevant.
+- Avoid changing unrelated UI elements.
 
 ## Testing
 
-For changes affecting the game, test the affected functionality in a modern browser.
+For changes that affect the game, test the affected functionality in a modern browser.
 
 Where applicable, verify that:
 
@@ -92,24 +115,23 @@ Where applicable, verify that:
 - The timer behaves correctly.
 - Settings and menus work correctly.
 - Light and dark modes continue to work.
+- Desktop and mobile layouts remain usable.
 - No new browser-console errors are introduced.
-
-For UI changes, test relevant desktop and mobile layouts.
 
 ## Automatically updated files
 
-Some repository content may be generated or updated automatically by tooling or GitHub Actions.
+Some repository content may be generated or updated automatically by GitHub Actions or other project tooling.
 
-Do not manually overwrite automatically generated content unless the task specifically requires changing the source or generation process.
+Do not manually overwrite automatically generated content when the source or automation is what should be changed instead.
 
 ## Contributions
 
-Contribution guidelines are documented in [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Contribution guidelines are in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-Follow those guidelines when making changes intended for contribution to the project.
+If you are making changes intended to be contributed to the project, follow those guidelines.
 
 ## Important
 
-`AGENTS.md` is the shared instruction file for coding agents working on Ceedoku.
+This file is the shared set of instructions for agents working on Ceedoku.
 
-Agent-specific instruction files such as `CLAUDE.md`, `.cursor/rules/agents.mdc`, and `.github/copilot-instructions.md` point to this file so that the same project instructions can be used across different agents.
+Agent-specific files such as `CLAUDE.md`, `.cursor/rules/agents.mdc`, and `.github/copilot-instructions.md` direct agents here so that Claude, Cursor, GitHub Copilot, and other supported agents can use the same project information and instructions.
