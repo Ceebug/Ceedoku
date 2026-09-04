@@ -59,13 +59,13 @@ hintselectvalue.addEventListener("click", () => {
 
         setTimeout(() => {
             hintselectvalue.classList.remove("opening");
-        }, 300);
+        }, 500);
     } else {
         hintselectvalue.classList.add("opening");
 
         setTimeout(() => {
             hintselectbox.classList.add("open");
-        }, 100);
+        }, 250);
     }
 });
 function showNotification(text, duration = 5000) {
@@ -755,7 +755,7 @@ const hintselectObserver = new MutationObserver(() => {
         setTimeout(() => {
             hintselectvalue.classList.remove("opening");
 			hintselectvalue.classList.add("disabled");
-        }, 300);
+        }, 500);
     } else if (hintselectvalue.disabled === false) {
 		hintselectvalue.classList.remove("disabled");
     }
