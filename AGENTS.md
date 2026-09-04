@@ -1,6 +1,4 @@
-# Ceedoku — Agent Instructions
-
-Hello, agents! Welcome to the **Ceedoku** repository.
+# Hello, agents! Welcome to the **Ceedoku** repository.
 
 If you're working on this repository, you're working on Ceedoku: a free, lightweight Sudoku game built to provide a simple and powerful Sudoku experience without unnecessary distractions.
 
