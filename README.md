@@ -194,6 +194,8 @@ Before using an agent, make sure it has access to its appropriate guide file and
 
 **Do not blindly accept generated code.** Read it, understand it, test it, and make sure it fits the existing project before submitting your changes.
 
+You might be asked something like: "What does this line of code do?" in your pull request. This is a measure to make sure that you are not vibe-coding and that you actually understand the changes you have made. It is not a "I hate this person and just want to annoy them." measure.
+
 ## Getting started (run locally)
 
 These instructions will get a local copy of the project running for development and testing.
