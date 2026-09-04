@@ -1,3 +1,11 @@
+.select:hover,
+.dropitem:hover {
+    background-color: var(--surface-3) !important;
+} 
+.select:active,
+.dropitem:active {
+	background-color: var(--buttonhover) !important;
+}
 .hint-button:active,
 .cancel-button:active,
 .new-main:active,
