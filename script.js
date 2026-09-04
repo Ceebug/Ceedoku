@@ -13,7 +13,6 @@
  * Let's keep it that way.
  * If it ain't broke, don't fix it. It WILL break.
  *****************************************************************************/
-
 class CeedokuSpinner extends HTMLElement {
 	connectedCallback() {
 		this.innerHTML = `
@@ -47,6 +46,26 @@ window.addEventListener("load", () => {
     });
 
     document.title = "Ceedoku"
+});
+
+const hintselectvaluetext = document.getElementById("hintselectvaluetext");
+const hintselectvalue = document.getElementById("hintselectvalue");
+const hintselectbox = document.getElementById("hintselectbox");
+
+hintselectvalue.addEventListener("click", () => {
+    if (hintselectbox.classList.contains("open")) {
+        hintselectbox.classList.remove("open");
+
+        setTimeout(() => {
+            hintselectvalue.classList.remove("opening");
+        }, 300);
+    } else {
+        hintselectvalue.classList.add("opening");
+
+        setTimeout(() => {
+            hintselectbox.classList.add("open");
+        }, 100);
+    }
 });
 function showNotification(text, duration = 5000) {
 
@@ -388,6 +407,11 @@ function loadSettings() {
     if (saved) {
         mergeSettings(settings, JSON.parse(saved));
     }
+	if (settings.hints.cooldown.cooldowntype === "moves") {
+		hintselectvaluetext.textContent = "Move-Based"
+	} else {
+		hintselectvaluetext.textContent = "Time-Based"
+	}
 }
 
 function saveSettings() {
@@ -701,7 +725,12 @@ function updateSettingsMenu() {
     hintCooldownMethod.value = settings.hints.cooldown.cooldowntype;
     hintCooldownAmount.value = settings.hints.cooldown.cooldowntime;
     hintsaftercooldown.value = settings.hints.cooldown.hintsaftercooldown;
-
+	if (settings.hints.cooldown.cooldowntype === "moves") {
+		hintselectvaluetext.textContent = "Move-Based"
+	} else {
+		hintselectvaluetext.textContent = "Time-Based"
+	}
+	
     hintlimit.checked = settings.hints.hintlimit.enabled
     hintlimitinput.value = settings.hints.hintlimit.amount
 
@@ -713,9 +742,28 @@ function updateSettingsMenu() {
     hintCooldownToggle.disabled = !settings.hints.enabled;
     startingHintsInput.disabled = !settings.hints.cooldown.enabled;
     hintCooldownMethod.disabled = !settings.hints.enabled || !settings.hints.cooldown.enabled;
+	hintselectvalue.disabled = !settings.hints.enabled || !settings.hints.cooldown.enabled;
     hintCooldownAmount.disabled = !settings.hints.enabled || !settings.hints.cooldown.enabled;
     hintsaftercooldown.disabled = !settings.hints.enabled || !settings.hints.cooldown.enabled;
 }
+
+const hintselectObserver = new MutationObserver(() => {
+    if (hintselectvalue.disabled === true) {
+        hintselectbox.classList.remove("open");
+
+        setTimeout(() => {
+            hintselectvalue.classList.remove("opening");
+			hintselectvalue.classList.add("disabled");
+        }, 300);
+    } else if (hintselectvalue.disabled === false) {
+		hintselectvalue.classList.remove("disabled");
+    }
+});
+
+hintselectObserver.observe(hintselectvalue, {
+    attributes: true,
+    attributeFilter: ["disabled"]
+});
 updateSettingsMenu();
 
 animationToggle.addEventListener("change", () => {
@@ -966,18 +1014,17 @@ function fullscreen() {
 
     if (document.fullscreenElement) {
         document.exitFullscreen();
-        fullscreenButton.textContent = "❮ ❯";
     } else {
         document.documentElement.requestFullscreen();
-        fullscreenButton.textContent = "❯ ❮";
     }
 }
+
 document.addEventListener("fullscreenchange", () => {
     if (!fullscreenButton) return;
 
-    fullscreenButton.textContent = document.fullscreenElement ?
-        "❯ ❮" :
-        "❮ ❯";
+    fullscreenButton.innerHTML = document.fullscreenElement
+        ? '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7L9 12L4 17"/><path d="M20 7L15 12L20 17"/></svg>'
+        : '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5L2 12L8 19"></path><path d="M16 5L22 12L16 19"></path></svg>';
 });
 
 function showcontinueGame() {
@@ -1087,9 +1134,11 @@ function changemode(forceMode) {
 
     localStorage.setItem("theme", pageMode);
 
-    if (modeButton) {
-        modeButton.innerHTML = pageMode === "dark" ? "☀" : "<b>☾</b>";
-    }
+	if (modeButton) {
+		modeButton.innerHTML = pageMode === "dark"
+			? '<svg style="transform:translatey(1px)" viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" style="fill: currentColor;"></circle><path d="M12 2V4"></path><path d="M12 20V22"></path><path d="M4.93 4.93L6.34 6.34"></path><path d="M17.66 17.66L19.07 19.07"></path><path d="M2 12H4"></path><path d="M20 12H22"></path><path d="M4.93 19.07L6.34 17.66"></path><path d="M17.66 6.34L19.07 4.93"></path></svg>'
+			: '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5C19.4 15.05 18.16 15.35 16.85 15.35C12.33 15.35 8.65 11.67 8.65 7.15C8.65 5.84 8.95 4.6 9.5 3.5C5.6 4.45 2.7 7.97 2.7 12.15C2.7 17.06 6.68 21.05 11.6 21.05C15.78 21.05 19.55 18.4 20.5 14.5Z"></path></svg>';
+	}
 }
 
 const rows = Array.from({
@@ -1325,8 +1374,8 @@ function pauseTimer() {
 
         elapsedMs = Date.now() - startTime;
 
-        pauseBtn.textContent = "▶";
-        pauseBtn2.textContent = "▶";
+        pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M4 2C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22C4.3 22 4.6 21.93 4.87 21.79L21.2 13.25C22.27 12.69 22.27 11.31 21.2 10.75L4.87 2.21C4.6 2.07 4.3 2 4 2Z"></path></svg>';
+        pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M4 2C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22C4.3 22 4.6 21.93 4.87 21.79L21.2 13.25C22.27 12.69 22.27 11.31 21.2 10.75L4.87 2.21C4.6 2.07 4.3 2 4 2Z"></path></svg>';
         document.title = "Ceedoku - Paused";
 
         if (runninggame) {
@@ -1339,8 +1388,8 @@ function pauseTimer() {
 
         startTimer();
 
-        pauseBtn.textContent = "❚❚";
-        pauseBtn2.textContent = "❚❚";
+        pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
+        pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
         document.title = `Ceedoku - ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`
         hidepausescreen()
     }
@@ -1356,8 +1405,8 @@ function lostfocuspause() {
 
             elapsedMs = Date.now() - startTime;
 
-            pauseBtn.textContent = "▶";
-            pauseBtn2.textContent = "▶";
+            pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
+            pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
             document.title = "Ceedoku - Paused";
             showPauseScreen()
         }
@@ -1374,8 +1423,8 @@ function winpauseTimer() {
 
         elapsedMs = Date.now() - startTime;
 
-        pauseBtn.textContent = "▶";
-        pauseBtn2.textContent = "▶";
+        pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M4 2C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22C4.3 22 4.6 21.93 4.87 21.79L21.2 13.25C22.27 12.69 22.27 11.31 21.2 10.75L4.87 2.21C4.6 2.07 4.3 2 4 2Z"></path></svg>';
+        pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M4 2C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22C4.3 22 4.6 21.93 4.87 21.79L21.2 13.25C22.27 12.69 22.27 11.31 21.2 10.75L4.87 2.21C4.6 2.07 4.3 2 4 2Z"></path></svg>';
         document.title = "Ceedoku - Paused";
     }
 };
@@ -1387,8 +1436,8 @@ function resumeTimer() {
 
     startTimer();
 
-    pauseBtn.textContent = "❚❚";
-    pauseBtn2.textContent = "❚❚";
+    pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
+    pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
     document.title = `Ceedoku - ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`
     hidepausescreen()
 }
@@ -2676,9 +2725,11 @@ function loadtheme() {
         document.body.classList.remove("light", "dark");
         document.body.classList.add(pageMode);
 
-        if (modeButton) {
-            modeButton.innerHTML = pageMode === "dark" ? "☀" : "<b>☾</b>";
-        }
+		if (modeButton) {
+			modeButton.innerHTML = pageMode === "dark"
+				? '<svg style="transform:translatey(1px)" viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" style="fill: currentColor;"></circle><path d="M12 2V4"></path><path d="M12 20V22"></path><path d="M4.93 4.93L6.34 6.34"></path><path d="M17.66 17.66L19.07 19.07"></path><path d="M2 12H4"></path><path d="M20 12H22"></path><path d="M4.93 19.07L6.34 17.66"></path><path d="M17.66 6.34L19.07 4.93"></path></svg>'
+				: '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5C19.4 15.05 18.16 15.35 16.85 15.35C12.33 15.35 8.65 11.67 8.65 7.15C8.65 5.84 8.95 4.6 9.5 3.5C5.6 4.45 2.7 7.97 2.7 12.15C2.7 17.06 6.68 21.05 11.6 21.05C15.78 21.05 19.55 18.4 20.5 14.5Z"></path></svg>';
+		}
     }
 
     // ---------------- TIMER UI ----------------
@@ -2732,8 +2783,8 @@ function continueGame() {
     updateHintCooldownDisplay();
     runninggame = true;
     hidemainmenu();
-    pauseBtn.textContent = "❚❚";
-    pauseBtn2.textContent = "❚❚";
+    pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
+    pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
 	document.title = `Ceedoku - ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`;
     difficultyBadge.textContent = difficulty.charAt(0).toUpperCase() + difficulty.slice(1)
     winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
@@ -2825,8 +2876,8 @@ async function newGame(nextDifficulty = difficulty) {
     winTime.textContent = "00:00";
     pauseTime.textContent = "00:00";
     continueTime.textContent = "00:00"
-    pauseBtn.textContent = "❚❚";
-    pauseBtn2.textContent = "❚❚";
+    pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
+    pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
     title.textContent = "Ceedoku"
     hidewinscreen();
     hidepausescreen();
@@ -3129,4 +3180,15 @@ exportnamemenuinput.addEventListener("keydown", (event) => {
     }
 });
 
-
+function setcooldownvalue(input) {
+	if (input === "time") {
+		hintCooldownMethod.value = "time"
+		return
+	} else if (input === "move") {
+		hintCooldownMethod.value = "moves"
+		return
+	}
+	
+	return
+}
+		
