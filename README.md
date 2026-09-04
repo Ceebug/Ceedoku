@@ -182,6 +182,18 @@ If you'd like to contribute to Ceedoku, please read the contributing guidelines 
 
 See [**CONTRIBUTING.md**](CONTRIBUTING.md) for information about contributing to the project.
 
+## Agentic Engineering
+
+Ceedoku allows, and will support, development with coding agents, but **purely vibe-coding is not allowed**.
+
+If you use an AI coding agent to make changes to Ceedoku, you must actually understand the code you are adding or changing. An agent can help you write code, investigate problems, or suggest solutions, but you are still responsible for understanding what the code does and making sure it works correctly.
+
+The Ceedoku repository supports multiple coding agents. Each supported agent is provided with a guide file that directs it to the shared [`AGENTS.md`](AGENTS.md) instructions.
+
+Before using an agent, make sure it has access to its appropriate guide file and that the guide points it to [`AGENTS.md`](AGENTS.md). These files contain important information about how agents should work with the repository.
+
+**Do not blindly accept generated code.** Read it, understand it, test it, and make sure it fits the existing project before submitting your changes.
+
 ## Getting started (run locally)
 
 These instructions will get a local copy of the project running for development and testing.
