@@ -104,15 +104,30 @@ No installation is required to play the web version.
 
 Ceedoku can be installed in several ways.
 
+> [!NOTE]
+> **Ceedoku does not have to be installed to use**<br>
+> Ceedoku can be accessed and used simply by going to the [website](https://ceedoku.github.io), or by downloading the latest version from the [GitHub Releases Page](https://github.com/ceebug/ceedoku/releases/latest)
+
+If you would like to install Ceedoku, the two methods of doing so are below:
+
 ### Install from a browser
+Supported browsers can install the website as an application, allowing Ceedoku to appear like a normal app on your device.<br>
+A tutorial on how to do that can be found [here](https://ceedoku.github.io/install/).
 
-Supported browsers can install the website as an application, allowing Ceedoku to appear like a normal app on your device.
+### Install as a desktop application
+Ceedoku has a desktop version packaged as an executable application.<br>
+The desktop application supports Linux, macOS and Windows 10+ across every major architecture (Type of CPU).<br>
+Installers for the Ceedoku desktop can be found [here](https://ceedoku.github.io/downloadinstaller/)
+  
 
-### Desktop application
-
-Ceedoku also has a desktop version packaged as an executable application.
-
-See the installation and download pages on the Ceedoku website for more information.
+The benefits of using the desktop application to play Ceedoku include:
+  - The [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** file extension will be given a nice, beautiful icon, so that you can identify it quickly.
+  - Files ending in [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** will have their file type show as "Ceedoku Save File" for easier identification.
+  - [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** files can be opened directly into the app using a double click, and upon doing so will import the save file.
+> [!IMPORTANT]
+> **Your OS may warn you that the app could be malicious.**<br>
+> This warning is primarily because the application is not code-signed. Please note that an unsigned application can trigger security warnings even when it is not malicious. Code signing certificates also cost money, and maybe - just maybe - some people don't want to spend upwards of $1000 on one.
+---
 
 ## Offline Support
 
