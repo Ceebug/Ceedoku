@@ -94,19 +94,12 @@ The goal is to keep the game focused on Sudoku instead of filling the interface 
 
 ## Play Ceedoku
 
-You can play Ceedoku directly in your browser:
-
-**https://ceedoku.github.io**
-
-No installation is required to play the web version.
-
-## Installing Ceedoku
-
-Ceedoku can be installed in several ways.
+Ceedoku can be played in several ways.
 
 > [!NOTE]
 > **Ceedoku does not have to be installed to use**<br>
-> Ceedoku can be accessed and used simply by going to the [website](https://ceedoku.github.io), or by downloading the latest version from the [GitHub Releases Page](https://github.com/ceebug/ceedoku/releases/latest)
+> Ceedoku can be accessed and used simply by going to the [website](https://ceedoku.github.io), or by downloading the latest version from the [GitHub Releases Page](https://github.com/ceebug/ceedoku/releases/latest) if you want a local copy of the game.
+> No installation is required to play this website version.
 
 If you would like to install Ceedoku, the two methods of doing so are below:
 
