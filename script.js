@@ -48,15 +48,6 @@ window.addEventListener("load", () => {
 
     document.title = "Ceedoku"
 });
-function updateViewportHeight() {
-    const height = window.visualViewport?.height ?? window.innerHeight;
-    document.documentElement.style.setProperty('--app-height', `${height}px`);
-}
-
-window.visualViewport?.addEventListener('resize', updateViewportHeight);
-window.addEventListener('resize', updateViewportHeight);
-
-updateViewportHeight();
 
 const hintselectvaluetext = document.getElementById("hintselectvaluetext");
 const hintselectvalue = document.getElementById("hintselectvalue");
