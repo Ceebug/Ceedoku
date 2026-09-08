@@ -197,7 +197,7 @@ let puzzleWorker = null;
 
 if (typeof Worker !== "undefined") {
     try {
-        const worker = new Worker("puzzle-worker.js");
+        const worker = new Worker("src/js/puzzleGen.js");
 
         const handleReady = (event) => {
             if (event.data?.type !== "ready") return;
@@ -280,18 +280,6 @@ function hideBestTime() {
     document.querySelector(".besttime").style.display = "none";
 }
 
-function updateSettingsScale() {
-    const child = document.getElementById("settingsOverlay").firstElementChild;
-
-    if (window.innerHeight < 700) {
-        child.style.transform = "scale(0.87)";
-    } else {
-        child.style.transform = "";
-    }
-}
-
-window.addEventListener("resize", updateSettingsScale);
-updateSettingsScale();
 
 let canusecurrenthintsystem = false
 let usingsavegame = false
@@ -421,8 +409,8 @@ function saveSettings() {
 let disableprint = true
 loadSettings();
 let hintcount = settings.hints.cooldown.startinghints
-const winSound = new Audio("./sounds/win.ogg");
-const popSound = new Audio("./sounds/pop.ogg");
+const winSound = new Audio("./src/sounds/win.ogg");
+const popSound = new Audio("./src/sounds/pop.ogg");
 popSound.preload = "auto";
 popSound.load();
 winSound.preload = "auto";

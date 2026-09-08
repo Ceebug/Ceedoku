@@ -505,6 +505,14 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         z-index: 5000;
     }
     
+	#namefileOverlay > .win-card > h1.win-title {
+		font-size: 23px;
+	}
+	
+	#namefileOverlay > .win-card > h3 {
+		font-size: 13px;
+	}
+	
 	    .win-overlay2 {
         position: fixed;
         inset: 0;
@@ -528,6 +536,11 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         position: fixed;
         transform: translateY(0dvh);
     }
+	
+	#settingsOverlay.show {
+		transform: translatey(27px);
+	}
+	
     .win-overlay2.show {
         opacity: 1;
         pointer-events: auto;
