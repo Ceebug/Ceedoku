@@ -26,70 +26,162 @@ let counts = {
 };
 
 function scanDirectory(dir) {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+
+    for (const entry of fs.readdirSync(
+        dir,
+        { withFileTypes: true }
+    )) {
+
         if (ignored.has(entry.name)) {
             continue;
         }
 
-        const fullPath = path.join(dir, entry.name);
+        const fullPath =
+            path.join(dir, entry.name);
+
+
+        /*
+         * Scan every subdirectory.
+         *
+         * This includes:
+         *
+         * ./src/
+         * ./src/js/
+         * ./src/js/lib/
+         * ./src/css/
+         * ./src/pwa/
+         * etc.
+         */
 
         if (entry.isDirectory()) {
             scanDirectory(fullPath);
             continue;
         }
 
-        const extension = path.extname(entry.name).toLowerCase();
-        const language = extensions[extension];
+
+        /*
+         * Only count supported file types.
+         */
+
+        const extension =
+            path.extname(entry.name).toLowerCase();
+
+        const language =
+            extensions[extension];
 
         if (!language) {
             continue;
         }
 
-        const content = fs.readFileSync(fullPath, "utf8");
-        const lines = content.split(/\r?\n/).length;
+
+        /*
+         * Count lines.
+         */
+
+        const content =
+            fs.readFileSync(fullPath, "utf8");
+
+        const lines =
+            content.split(/\r?\n/).length;
 
         counts[language] += lines;
+
     }
+
 }
 
 scanDirectory(root);
 
-const total = counts.JavaScript + counts.CSS + counts.HTML;
+
+const total =
+    counts.JavaScript +
+    counts.CSS +
+    counts.HTML;
+
 
 if (total === 0) {
-    throw new Error("No JavaScript, CSS, or HTML files were found.");
+    throw new Error(
+        "No JavaScript, CSS, or HTML files were found."
+    );
 }
+
 
 const percentages = {
-    JavaScript: ((counts.JavaScript / total) * 100).toFixed(2),
-    CSS: ((counts.CSS / total) * 100).toFixed(2),
-    HTML: ((counts.HTML / total) * 100).toFixed(2)
+
+    JavaScript:
+        ((counts.JavaScript / total) * 100)
+            .toFixed(2),
+
+    CSS:
+        ((counts.CSS / total) * 100)
+            .toFixed(2),
+
+    HTML:
+        ((counts.HTML / total) * 100)
+            .toFixed(2)
+
 };
 
-const readme = fs.readFileSync(readmePath, "utf8");
 
-const startMarker = "<!-- LANGUAGES_START -->";
-const endMarker = "<!-- LANGUAGES_END -->";
+const readme =
+    fs.readFileSync(
+        readmePath,
+        "utf8"
+    );
 
-const start = readme.indexOf(startMarker);
-const end = readme.indexOf(endMarker);
 
-if (start === -1 || end === -1 || end < start) {
-    throw new Error("LANGUAGES_START or LANGUAGES_END marker not found.");
+const startMarker =
+    "<!-- LANGUAGES_START -->";
+
+const endMarker =
+    "<!-- LANGUAGES_END -->";
+
+
+const start =
+    readme.indexOf(startMarker);
+
+const end =
+    readme.indexOf(endMarker);
+
+
+if (
+    start === -1 ||
+    end === -1 ||
+    end < start
+) {
+
+    throw new Error(
+        "LANGUAGES_START or LANGUAGES_END marker not found."
+    );
+
 }
 
-const languages = `- **JavaScript:** ${percentages.JavaScript}%<br>
+
+const languages =
+`- **JavaScript:** ${percentages.JavaScript}%<br>
 - **CSS:** ${percentages.CSS}%<br>
 - **HTML:** ${percentages.HTML}%`;
 
+
 const updatedReadme =
-    readme.slice(0, start + startMarker.length) +
+    readme.slice(
+        0,
+        start + startMarker.length
+    ) +
     "\n" +
     languages +
     "\n" +
     readme.slice(end);
 
-fs.writeFileSync(readmePath, updatedReadme);
 
-console.log("Language breakdown updated:");
+fs.writeFileSync(
+    readmePath,
+    updatedReadme
+);
+
+
+console.log(
+    "Language breakdown updated:"
+);
+
 console.log(languages);
