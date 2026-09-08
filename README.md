@@ -94,25 +94,33 @@ The goal is to keep the game focused on Sudoku instead of filling the interface 
 
 ## Play Ceedoku
 
-You can play Ceedoku directly in your browser:
+Ceedoku can be played in several ways.
 
-**https://ceedoku.github.io**
+> [!NOTE]
+> **Ceedoku does not have to be installed to use**<br>
+> Ceedoku can be accessed and used simply by going to the [website](https://ceedoku.github.io), or by downloading the latest version from the [GitHub Releases Page](https://github.com/ceebug/ceedoku/releases/latest) if you want a local copy of the game.
+> No installation is required to play this website version.
 
-No installation is required to play the web version.
-
-## Installing Ceedoku
-
-Ceedoku can be installed in several ways.
+If you would like to install Ceedoku, the two methods of doing so are below:
 
 ### Install from a browser
+Supported browsers can install the website as an application, allowing Ceedoku to appear like a normal app on your device.<br>
+A tutorial on how to do that can be found [here](https://ceedoku.github.io/install/).
 
-Supported browsers can install the website as an application, allowing Ceedoku to appear like a normal app on your device.
+### Install as a desktop application
+Ceedoku has a desktop version packaged as an executable application.<br>
+The desktop application supports Linux, macOS and Windows 10+ across every major architecture (Type of CPU).<br>
+Installers for the Ceedoku desktop can be found [here](https://ceedoku.github.io/downloadinstaller/)
+  
 
-### Desktop application
-
-Ceedoku also has a desktop version packaged as an executable application.
-
-See the installation and download pages on the Ceedoku website for more information.
+The benefits of using the desktop application to play Ceedoku include:
+  - The [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** file extension will be given a nice, beautiful icon, so that you can identify it quickly.
+  - Files ending in [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** will have their file type show as "Ceedoku Save File" for easier identification.
+  - [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** files can be opened directly into the app using a double click, and upon doing so will import the save file.
+> [!IMPORTANT]
+> **Your OS may warn you that the app could be malicious.**<br>
+> This warning is primarily because the application is not code-signed. Please note that an unsigned application can trigger security warnings even when it is not malicious. Code signing certificates also cost money, and maybe - just maybe - some people don't want to spend upwards of $1000 on one.
+---
 
 ## Offline Support
 
@@ -165,6 +173,76 @@ Some of the important parts of the project include:
 * Audio and haptic features
 * Service-worker/offline functionality
 * CSF save-file support
+
+## Languages
+
+This repository is primarily a static web app. The main languages used are:
+
+<!-- LANGUAGES_START -->
+- **JavaScript:** 65.67%<br>
+- **CSS:** 27.20%<br>
+- **HTML:** 7.13%
+<!-- LANGUAGES_END -->
+
+## Contributing
+
+If you'd like to contribute to Ceedoku, please read the contributing guidelines before submitting a change.
+
+See [**CONTRIBUTING.md**](CONTRIBUTING.md) for information about contributing to the project.
+
+## Getting started (run locally)
+
+These instructions will get a local copy of the project running for development and testing.
+
+Prerequisites:
+
+* A modern web browser (Chrome, Firefox, Safari, Edge)
+* Git (to clone the repository)
+* Optional: Python 3 or Node.js if you want a simple local static server
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Ceebug/Ceedoku.git
+cd Ceedoku
+```
+
+Open in a browser (quick, no server):
+
+* Double-click `index.html` or open it from your browser's File > Open menu.
+
+Recommended (runs a local static server so Service Worker and fetches behave properly):
+
+* With Python 3:
+
+```bash
+python3 -m http.server 8000
+# then open http://localhost:8000 in your browser
+```
+
+* With Node (http-server):
+
+```bash
+npx http-server -p 8000
+# then open http://localhost:8000
+```
+
+Development notes:
+
+* This is a static web project — there is no build step by default. Edit the HTML/CSS/JS files and reload the browser to see changes.
+* Service Worker caching can serve stale files while developing. To avoid this:
+  * Open DevTools → Application → Service Workers and unregister the service worker, or
+  * Use a private/incognito window, or
+  * Use DevTools → Application → Clear storage and then hard reload (Ctrl/Cmd+Shift+R).
+* The game loads local dependency files such as `fsj.js` and `jsf.js` from the repo root. Ensure those files are present when testing locally.
+
+Contributing:
+
+If you'd like to contribute:
+
+* Fork the repo, create a branch, make changes, and open a pull request.
+* Keep changes small and focused. If you're changing UI behavior, explain the motivation in the PR description.
+* If adding new code that must be loaded at runtime, test the change with the local server so the Service Worker won't interfere.
 
 ## Development
 

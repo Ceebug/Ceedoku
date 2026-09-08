@@ -19,7 +19,7 @@ if (releaseReady) {
 	
 	<!-- Sets the variable that declares the version -->
 	<script>
-		const version = "9.1.1"
+		const version = "9.1.3"
 	</script>
 	<!-- Loads FSJ as it is a dependency -->
 	<!-- https://github.com/ceebug/fsj -->
@@ -31,7 +31,7 @@ if (releaseReady) {
 	<meta content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more." name=description>
 	<!-- Sets the character set to UNICODE TEXT FOUNDATION v8 BECAUSE FOR SOME REASON IT ISNT THE DEFAULT -->
 	<meta charset=utf-8>
-	<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name=viewport>
+ <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 	<meta content=#101418 name=theme-color>
 	<link href="icons/favicon.svg" rel="icon" type="image/svg+xml">
 	<!-- Loads 2 other png icons because Google's indexers are STUPID and can't understand svgs -->
@@ -449,15 +449,15 @@ if (releaseReady) {
 			</div><button title="Delete your save." class="new-main2 delete-button" onclick=deleteGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;background-color:var(--delete-save)>Delete Save File</button><button title="Cancel deleting your save file." class="number-button cancel-button" onclick=hidedeleteGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px>Cancel</button>
 		</div>
 	</div>
-	<div class=win-overlay style=border-radius:66px;overflow:clip id=settingsOverlay>
-		<div class=win-card style="width:92dvw;padding-top:10px!important;padding:15px;border:1px solid var(--outline)" aria-label="Settings Menu">
-			<div style=display:flex;padding-left:10px>
+	<div class=win-overlay style=border-radius:66px id=settingsOverlay>
+		<div class=win-card style="display:flex;gap:15px;flex-direction:column;height:80dvh;width:92vw!important;padding-top:10px!important;padding:15px;border:1px solid var(--outline)" aria-label="Settings Menu">
+			<div style=display:flex;height:35px;padding-left:10px>
 				<h1 style=color:var(--text2) class=win-title>Settings</h1><button title="Close the settings menu" aria-label=Close id=WHATTHEFUCKDOICALLTHIS? onclick=closesettingsmenu() style=background-color:transparent;margin-left:auto;margin-right:5px;color:var(--text2)>
 					<h1 style=font-size:45px;height:35px;padding-bottom:8px;text-align:center;align-content:center;justify-content:center;display:flex;flex-direction:column class=win-title>×</h1>
 				</button>
 			</div>
-			<div style=height:550px;background-color:var(--surface-2);margin-top:15px;border-radius:10px;padding:10px;padding-top:15px;padding-bottom:10px>
-				<div style="height:100%;overflow:scroll;scrollbar-color:var(--scrollbar) transparent;scrollbar-width:thick">
+			<div style=flex:1;display:flex;flex-direction:column;min-height:0;background-color:var(--surface-2);border-radius:10px;padding:10px;padding-top:15px;padding-bottom:10px>
+				<div style="flex:1;min-height:0;overflow:auto;scrollbar-color:var(--scrollbar) transparent;scrollbar-width:thick">
 					<!-- i wish that this wasnt what the html code for the settings menu was -->
 					<h1 style=font-size:50px;text-align:center class=settindescriber>Animations</h1>
 					<div class=setting-row style=padding-bottom:5px title="Whether or not animations should be enabled."><span class=setting-name style=text-align:left><strong>Enable animations</strong></span> <label class=toggle><input id=animationtoggle type=checkbox> <span class=toggle-track></span></label></div>
