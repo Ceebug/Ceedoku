@@ -612,9 +612,6 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
             opacity: 0;
         }
     }
-:root {
-    --app-height: 100dvh
-}
         body.dark {
     color-scheme: dark;
 		  overflow: hidden;
@@ -693,12 +690,12 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
     
         html,
         body {
-          height: var(--app-height);
+          height: 100dvh;
         }
     
         body {
           margin: 0;
-          min-height: 0;
+          min-height: 100dvh;
           background:
             radial-gradient(circle at 15% 15%, color-mix(in srgb, var(--blue) 10%, transparent), transparent 30%),
             linear-gradient(135deg, var(--bg), color-mix(in srgb, var(--surface-2) 40%, var(--bg)));
