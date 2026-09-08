@@ -449,14 +449,14 @@ if (releaseReady) {
 			</div><button title="Delete your save." class="new-main2 delete-button" onclick=deleteGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;background-color:var(--delete-save)>Delete Save File</button><button title="Cancel deleting your save file." class="number-button cancel-button" onclick=hidedeleteGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px>Cancel</button>
 		</div>
 	</div>
-	<div class=win-overlay style=border-radius:66px id=settingsOverlay>+
+	<div class=win-overlay style=border-radius:66px id=settingsOverlay>
 		<div class=win-card style="display:flex;gap:15px;flex-direction:column;height:80dvh;width:92dvw;padding-top:10px!important;padding:15px;border:1px solid var(--outline)" aria-label="Settings Menu">
 			<div style=display:flex;height:35px;padding-left:10px>
 				<h1 style=color:var(--text2) class=win-title>Settings</h1><button title="Close the settings menu" aria-label=Close id=WHATTHEFUCKDOICALLTHIS? onclick=closesettingsmenu() style=background-color:transparent;margin-left:auto;margin-right:5px;color:var(--text2)>
 					<h1 style=font-size:45px;height:35px;padding-bottom:8px;text-align:center;align-content:center;justify-content:center;display:flex;flex-direction:column class=win-title>×</h1>
 				</button>
 			</div>
-			<div style=height:100%;background-color:var(--surface-2);border-radius:10px;padding:10px;padding-top:15px;padding-bottom:10px>
+			<div style=height:calc(80dvh - 60px);background-color:var(--surface-2);border-radius:10px;padding:10px;padding-top:15px;padding-bottom:10px>
 				<div style="height:100%;overflow:scroll;scrollbar-color:var(--scrollbar) transparent;scrollbar-width:thick">
 					<!-- i wish that this wasnt what the html code for the settings menu was -->
 					<h1 style=font-size:50px;text-align:center class=settindescriber>Animations</h1>
