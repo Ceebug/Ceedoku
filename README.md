@@ -3,9 +3,9 @@
 </h1>
 
 
-**Ceedoku** is a free, lightweight Sudoku game designed to provide a simple and powerful Sudoku experience without unnecessary distractions.
+A free, lightweight Sudoku game designed to provide a simple and powerful Sudoku experience without unnecessary distractions.
 
-Ceedoku runs directly in your web browser and can also be installed as an app for offline use.
+It runs directly in your web browser and can also be installed as an app for offline use.
 
 ## What is Ceedoku?
 
