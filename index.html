@@ -19,7 +19,7 @@ if (releaseReady) {
 	
 	<!-- Sets the variable that declares the version -->
 	<script>
-		const version = "9.1.3"
+		const version = "9.2.0"
 	</script>
 	<!-- Loads FSJ as it is a dependency -->
 	<!-- https://github.com/ceebug/FSJ -->
@@ -531,43 +531,54 @@ if (releaseReady) {
 	</script>
 	<!-- Sets the version and the link for the version thingo -->
 	<script>
-        const link = `https://github.com/ceebug/ceedoku/releases/tag/v${version}`;
-        const versionElement = document.getElementById("version");
-		
-        const cacheKey = `githubReleaseExists_${version}`;
-        const cached = localStorage.getItem(cacheKey);
-		
-        // Display the version immediately.
-        versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="Checking GitHub for release.">${version}</a>`;
+		const link = `https://ceedoku.github.io/changelog?v=${version}`;
+		const versionElement = document.getElementById("version");
 
-        if (cached !== null) {
-            // We already know whether this version exists.
-            if (cached === "true") {
-                 versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="Go to the GitHub release for the current version." href="${link}">${version}</a>`;
+		const cacheKey = `githubReleaseExists_${version}`;
+		const cached = localStorage.getItem(cacheKey);
+
+		// Display the version immediately.
+		versionElement.innerHTML =
+			`<strong>Version:</strong> <a class="feedbacklink" title="Checking GitHub for release.">${version}</a>`;
+
+		if (cached !== null) {
+			// We already know whether this version exists.
+			if (cached === "true") {
+				versionElement.innerHTML =
+					`<strong>Version:</strong> <a class="feedbacklink" title="View the changelog for this version." href="${link}">${version}</a>`;
 			} else {
-				versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;        
+				versionElement.innerHTML =
+					`<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;
 			}
-        }
+		}
 
-        // Ping GitHub in the background.
-        fetch(`https://api.github.com/repos/ceebug/ceedoku/releases/tags/v${version}`)
-            .then(response => {
-                if (response.ok) {
-                    localStorage.setItem(cacheKey, "true");
+		// Ping GitHub in the background.
+		fetch(`https://api.github.com/repos/ceebug/ceedoku/releases/tags/v${version}`)
+			.then(response => {
+				if (response.ok) {
+
+					localStorage.setItem(cacheKey, "true");
+
 					if (cached == null) {
-						versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="Go to the GitHub release for the current version." href="${link}">${version}</a>`;
+						versionElement.innerHTML =
+							`<strong>Version:</strong> <a class="feedbacklink" title="View the changelog for this version." href="${link}">${version}</a>`;
 					}
-                } else {
+
+				} else {
+
 					localStorage.setItem(cacheKey, "false");
+
 					if (cached == null) {
-						versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;
+						versionElement.innerHTML =
+							`<strong>Version:</strong> <a class="feedbacklink" title="No GitHub release for this version of Ceedoku exists yet.">${version}</a>`;
 					}
 				}
-            })
-            .catch(() => {
+			})
+			.catch(() => {
 				// Keep the version visible even if GitHub cannot be reached.
-				versionElement.innerHTML = `<strong>Version:</strong> <a class="feedbacklink" title="GitHub could not be reached so we couldn't check if there was a GitHub release or not.">${version}</a>`;
-            });
+				versionElement.innerHTML =
+					`<strong>Version:</strong> <a class="feedbacklink" title="GitHub could not be reached so we couldn't check if there was a GitHub release or not.">${version}</a>`;
+			});
 	</script>
 	<!-- Shows crash screen on detection of crash -->
 	<script>
