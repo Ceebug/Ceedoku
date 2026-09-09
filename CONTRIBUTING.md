@@ -47,6 +47,14 @@ npx http-server -p 8000
 # then open http://localhost:8000 in your browser
 ```
 
+## Development
+
+Ceedoku is developed primarily using HTML, CSS, and JavaScript.
+
+To work on Ceedoku, refer to the [Getting Started](https://github.com/Ceebug/Ceedoku/edit/main/CONTRIBUTING.md#getting-started-run-locally) section.
+
+Because Ceedoku is a web application, most development can be tested directly in a modern web browser.
+
 ## Before contributing
 
 Before making a change, take a look at the existing project and make sure your idea has not already been addressed.
