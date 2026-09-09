@@ -17,7 +17,7 @@ Whether you want to play a quick Sudoku puzzle or work through one of the harder
 
 ## Features
 
-### Sudoku
+### Difficulties
 
 Ceedoku includes eight difficulty levels:
 
@@ -223,13 +223,7 @@ Development notes:
   * Use DevTools → Application → Clear storage and then hard reload (Ctrl/Cmd+Shift+R).
 * The game loads local dependency files such as `fsj.js` and `jsf.js` from the repo root. Ensure those files are present when testing locally.
 
-## Development
 
-Ceedoku is developed primarily using HTML, CSS, and JavaScript.
-
-To work on Ceedoku, clone the repository and open the project in your preferred development environment.
-
-Because Ceedoku is a web application, most development can be tested directly in a modern web browser.
 ## Website
 
 The official Ceedoku website homepage is:
@@ -256,6 +250,7 @@ The current version is displayed on the Ceedoku website and in the project's rel
 For the latest release, see the GitHub releases page:
 
 **https://github.com/ceebug/ceedoku/releases**
+
 
 ## Project Status
 
