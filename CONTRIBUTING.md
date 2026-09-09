@@ -4,6 +4,49 @@ Thank you for your interest in contributing to Ceedoku!
 
 Ceedoku is a free, lightweight Sudoku game built with HTML, CSS, and JavaScript. Contributions are welcome, whether you're fixing a bug, improving the interface, adding a feature, improving documentation, or suggesting an improvement.
 
+If you'd like to contribute:
+
+* Fork the repo, create a branch, make changes, and open a pull request.
+* Keep changes small and focused. If you're changing UI behavior, explain the motivation in the PR description.
+* If adding new code that must be loaded at runtime, test the change with the local server so the Service Worker won't interfere.
+
+## Getting started (run locally)
+
+These instructions will get a local copy of the project running for development and testing.
+
+Prerequisites:
+
+* A modern web browser (Chrome, Firefox, Safari, Edge)
+* Git (to clone the repository)
+* Optional: Python 3 or Node.js if you want a simple local static server
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Ceebug/Ceedoku.git
+cd Ceedoku
+```
+
+Open in a browser (quick, no server):
+
+* Double-click `index.html` or open it from your browser's File > Open menu.
+
+Recommended (runs a local static server so Service Worker and fetches behave properly):
+
+* With Python 3:
+
+```bash
+python3 -m http.server 8000
+# then open http://localhost:8000 in your browser
+```
+
+* With Node (http-server):
+
+```bash
+npx http-server -p 8000
+# then open http://localhost:8000
+```
+
 ## Before contributing
 
 Before making a change, take a look at the existing project and make sure your idea has not already been addressed.
