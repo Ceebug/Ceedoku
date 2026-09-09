@@ -131,7 +131,7 @@ The desktop application provides some additional integration with your operating
 >
 > This can happen because the application is currently **not code-signed**. An unsigned application can trigger security warnings even when the application itself is not malicious.
 >
-> Code-signing certificates can also be expensive, so Ceedoku is currently distributed without one.
+> Code-signing certificates can also be pretty expensive, and maybe - just maybe - some people don't want to spend upwards of $500 *per **year*** on one.
 
 ### Which should I use?
 
