@@ -94,7 +94,7 @@ The goal is to keep the game focused on Sudoku instead of filling the interface 
 
 ## Play Ceedoku
 
-Ceedoku can be played in several ways, and **you do not need to install anything to play it.**
+Ceedoku can be played in several ways, and they are all listed below.
 
 > [!NOTE]
 > **No installation is required.**
