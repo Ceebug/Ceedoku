@@ -94,32 +94,56 @@ The goal is to keep the game focused on Sudoku instead of filling the interface 
 
 ## Play Ceedoku
 
-Ceedoku can be played in several ways.
+Ceedoku can be played in several ways, and **you do not need to install anything to play it.**
 
 > [!NOTE]
-> **Ceedoku does not have to be installed to use**<br>
-> Ceedoku can be accessed and used simply by going to the [website](https://ceedoku.github.io), or by downloading the latest version from the [GitHub Releases Page](https://github.com/ceebug/ceedoku/releases/latest) if you want a local copy of the game.
-> No installation is required to play this website version.
+> **No installation is required.**
+> Ceedoku can be played directly from the [website](https://ceedoku.github.io). You can also download the latest version from the [GitHub Releases Page](https://github.com/ceebug/ceedoku/releases/latest) if you want a local copy of the game.
+>
+> The website version works without installing Ceedoku as an application.
 
-If you would like to install Ceedoku, the two methods of doing so are below:
+If you would like to install Ceedoku, there are two options:
 
 ### Install from a browser
-Supported browsers can install the website as an application, allowing Ceedoku to appear like a normal app on your device.<br>
-A tutorial on how to do that can be found [here](https://ceedoku.github.io/install/).
+
+Supported browsers can install Ceedoku as a **Progressive Web App (PWA)**. This allows Ceedoku to appear and behave more like a normal application on your device while still using the website version.
+For instructions on installing Ceedoku from your browser, see the **[installation guide](https://ceedoku.github.io/install#pwa)**.
+The installation guide also explains which browsers and devices support this method.
 
 ### Install as a desktop application
-Ceedoku has a desktop version packaged as an executable application.<br>
-The desktop application supports Linux, macOS and Windows 10+ across every major architecture (Type of CPU).<br>
-Installers for the Ceedoku desktop can be found [here](https://ceedoku.github.io/downloadinstaller/)
-  
 
-The benefits of using the desktop application to play Ceedoku include:
-  - The [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** file extension will be given a nice, beautiful icon, so that you can identify it quickly.
-  - Files ending in [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** will have their file type show as "Ceedoku Save File" for easier identification.
-  - [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** files can be opened directly into the app using a double click, and upon doing so will import the save file.
+Ceedoku also has a **native desktop application** for Linux, macOS and Windows 10+.
+Installers are available for multiple operating systems and CPU architectures. The installation guide explains how to determine which platform and architecture your device uses and which installer you should choose.
+You can find the available installers on the **[Ceedoku Desktop Installer page](https://ceedoku.github.io/downloadinstaller/)**.
+
+For detailed instructions on installing the desktop application, see the **[installation guide](https://ceedoku.github.io/install#native)**.
+
+#### Benefits of the desktop application
+
+The desktop application provides some additional integration with your operating system, including:
+
+* The [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** file extension is given a dedicated icon, making save files easy to identify.
+* Files using the [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** extension are identified as **"Ceedoku Save File"** by the operating system.
+* [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)** files can be opened directly in Ceedoku by double-clicking them, automatically importing the save.
+
 > [!IMPORTANT]
-> **Your OS may warn you that the app could be malicious.**<br>
-> This warning is primarily because the application is not code-signed. Please note that an unsigned application can trigger security warnings even when it is not malicious. Code signing certificates also cost money, and maybe - just maybe - some people don't want to spend upwards of $1000 on one.
+> **Your operating system may warn you that the application could be unsafe or malicious.**
+>
+> This can happen because the application is currently **not code-signed**. An unsigned application can trigger security warnings even when the application itself is not malicious.
+>
+> Code-signing certificates can also be expensive, so Ceedoku is currently distributed without one.
+
+### Which should I use?
+
+**Just want to play?**
+Use the [Ceedoku website](https://ceedoku.github.io). Nothing needs to be installed.
+
+**Want Ceedoku to appear as an app?**
+Use the [browser/PWA installation method](https://ceedoku.github.io/install#pwa).
+
+**Want a full desktop application with `.csf` file integration?**
+Use the [desktop application](https://ceedoku.github.io/downloadinstaller/) and follow the [installation guide](https://ceedoku.github.io/install#native).
+
 ---
 
 ## Offline Support
@@ -190,43 +214,6 @@ If you'd like to contribute to Ceedoku, please read the contributing guidelines 
 
 See [**CONTRIBUTING.md**](CONTRIBUTING.md) for information about contributing to the project.
 
-## Getting started (run locally)
-
-These instructions will get a local copy of the project running for development and testing.
-
-Prerequisites:
-
-* A modern web browser (Chrome, Firefox, Safari, Edge)
-* Git (to clone the repository)
-* Optional: Python 3 or Node.js if you want a simple local static server
-
-Clone the repository:
-
-```bash
-git clone https://github.com/Ceebug/Ceedoku.git
-cd Ceedoku
-```
-
-Open in a browser (quick, no server):
-
-* Double-click `index.html` or open it from your browser's File > Open menu.
-
-Recommended (runs a local static server so Service Worker and fetches behave properly):
-
-* With Python 3:
-
-```bash
-python3 -m http.server 8000
-# then open http://localhost:8000 in your browser
-```
-
-* With Node (http-server):
-
-```bash
-npx http-server -p 8000
-# then open http://localhost:8000
-```
-
 Development notes:
 
 * This is a static web project — there is no build step by default. Edit the HTML/CSS/JS files and reload the browser to see changes.
@@ -235,14 +222,6 @@ Development notes:
   * Use a private/incognito window, or
   * Use DevTools → Application → Clear storage and then hard reload (Ctrl/Cmd+Shift+R).
 * The game loads local dependency files such as `fsj.js` and `jsf.js` from the repo root. Ensure those files are present when testing locally.
-
-Contributing:
-
-If you'd like to contribute:
-
-* Fork the repo, create a branch, make changes, and open a pull request.
-* Keep changes small and focused. If you're changing UI behavior, explain the motivation in the PR description.
-* If adding new code that must be loaded at runtime, test the change with the local server so the Service Worker won't interfere.
 
 ## Development
 
