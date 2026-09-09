@@ -14,13 +14,19 @@
     but it ain't no lie,
     bugs go bye bye bye. (Bye Bugs!)
 --------------------------- */
+.spinner {
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+}
+
 #pauseOverlay {
 	z-index: 4998;
 }
+
 #pause-btn {
 	padding: 15px !important;
 	z-index: 4999;
 }
+
 svg {
   shape-rendering: geometricPrecision;
   transform: translateZ(0);
@@ -31,30 +37,37 @@ svg {
 #hintcooldownmethod {
 	display: none !important
 }
+
 .select:active,
 .dropitem:active {
     transform: translateY(1px);
 }
+
 .dropbox.open {
 	height: 95px !important;
 	border-top: 1px solid var(--buttonhover)
 }
+
 #hintselectvalue {
 	color: var(--text2);
 	align-items: center;
 	display: flex;
 }
+
 #hintselectvalue.disabled {
 	background-color: var(--disabledbox) !important;
 	color: var(--muted) !important;
 	cursor: not-allowed !important
 }
+
 .svg {
 	transition: color 0.2s ease
 }
+
 #hintselectvalue.disabled > .svg {
     color: var(--muted);
 }
+
 #hintselectvalue.opening {
     border-bottom-right-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
@@ -67,18 +80,22 @@ input {
 .loadingdiv {
 	width: 70vw
 }
+
 @media (orientation: portrait) {
 	.loadingdiv {
 		width: 100vw
 	}
 }
+
 #notification.show {
 	transform: translatex(-50%)translatey(0px) !important
 }
+
 #savenameinput {
     pointer-events: auto;
 	outline: none !important
 }
+
 #otherspinnythingo {
 	position: fixed;
 	top: 50%;
@@ -95,11 +112,13 @@ input {
 #otherspinnythingo.visible {
 	opacity: 1;
 }
+
 @media (orientation: portrait) {
 	#print {
 		display: none
 	}
 }
+
 * {
     transition:
         background-color 0.2s ease,
