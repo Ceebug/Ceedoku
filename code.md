@@ -11,4 +11,4 @@
 >
 > **Features:** Most, Best
 
-*Joke file BTW, not actually the code of Ceedoku, for that look in [`index.html`](./index.html) or any file in [`src/`](./src/).*
+*Joke file BTW, not actually the code of Ceedoku, for that look in [`index.html`](./index.html) or anything in the [`src`](./src) folder.*
