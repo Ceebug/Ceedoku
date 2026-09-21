@@ -48,7 +48,7 @@ jobs:
           cp src/pwa/serviceWorker.js website/src/pwa/
 
           cp src/sounds/* website/src/sounds/
-          CO src/js/lib/* website/src/js/lib/
+          cp src/js/lib/* website/src/js/lib/
 
       - name: Create sync commit
         run: |
