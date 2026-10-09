@@ -1,7 +1,6 @@
 name: "🐛 Bug Report"
 description: "Report a bug or issue in Ceedoku."
-title: "[Bug]: "
-labels: ["bug"]
+type: bug
 body:
   - type: markdown
     attributes:
@@ -14,12 +13,12 @@ body:
       label: Bug Type
       description: What kind of issue are you experiencing?
       options:
-        - Gameplay / Rules Bug
-        - UI / Visual Glitch
-        - Crash / Freeze
-        - Performance / Lag
-        - Audio Issue
-        - Other
+        - "🎮 Gameplay / Rules Bug"
+        - "📺 UI / Visual Glitch"
+        - "💥 Crash / Freeze"
+        - "⏳ Performance / Lag"
+        - "🔊 Audio Issue"
+        - "❓ Other"
     validations:
       required: true
 
@@ -49,9 +48,3 @@ body:
       placeholder: e.g., iOS 18
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value: |
-        ### Attached Files
-        You can attach logs, screenshots, or screen recordings by dragging and dropping them directly into the Description box above.
