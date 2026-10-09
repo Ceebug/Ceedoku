@@ -1,0 +1,44 @@
+name: "💡 Feature Request"
+description: Propose a new idea or improvement for Ceedoku.
+type: feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea to make Ceedoku even better? Tell us about it below!
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: What feature is wanted?
+      description: Provide a clear and concise description of the feature or improvement you would like to see.
+      placeholder: Describe your idea here...
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-justification
+    attributes:
+      label: Why is it wanted?
+      description: Explain the problem this feature solves or why it would make Ceedoku a better game.
+      placeholder: Tell us why this would be awesome...
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-implementation
+    attributes:
+      label: How might it be incorporated?
+      description: Describe how you imagine this working inside the game or how it should be implemented.
+      placeholder: Share your implementation thoughts or layout concepts...
+    validations:
+      required: false
+
+  - type: textarea
+    id: feature-mockups
+    attributes:
+      label: Mock-ups
+      description: If you have visual ideas, drag and drop your drawings, diagrams, mock-ups, or screenshots directly into this box.
+      placeholder: Drop files or paste images here...
+    validations:
+      required: false
