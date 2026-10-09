@@ -1,0 +1,43 @@
+# GitHub Issue Template for Ceedoku Bug Reports
+name: "🐛 Bug Report"
+description: File a bug report for Ceedoku
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please fill out the form below to help us investigate and fix the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Provide a clear and concise description of what the bug is.
+      placeholder: Tell us what happened...
+    validations:
+      required: true
+
+  - type: input
+    id: affected-devices
+    attributes:
+      label: Affected Devices
+      description: List the devices where this issue occurs.
+      placeholder: e.g., iPhone 14 Pro, Samsung Galaxy S23, Custom PC
+    validations:
+      required: true
+
+  - type: input
+    id: operating-systems
+    attributes:
+      label: Operating Systems
+      description: Specify the OS versions where the bug was observed.
+      placeholder: e.g., iOS 17.4, Android 14, Windows 11
+    validations:
+      required: true
+
+  - type: footnotes
+    attributes:
+      value: |
+        ### Attached Files
+        Please drag and drop any relevant screenshots, screen recordings, or log files directly into the **Description** box above before submitting.
