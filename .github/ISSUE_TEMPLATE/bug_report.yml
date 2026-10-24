@@ -7,6 +7,38 @@ body:
       value: |
         Thanks for taking the time to file a bug report for Ceedoku!
 
+  - type: input
+    id: affected-devices
+    attributes:
+      label: Affected Devices
+      description: What devices did this happen on? (e.g., iPhone 15, Samsung Galaxy S24, Custom PC)
+      placeholder: e.g., iPhone 14 Pro
+    validations:
+      required: true
+
+  - type: input
+    id: operating-systems
+    attributes:
+      label: Operating Systems
+      description: What OS versions are affected? (e.g., iOS 17.4, Android 14, Windows 11)
+      placeholder: e.g., iOS 18
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Chrome (including Arc, Brave, Opera, Vivaldi)
+        - Microsoft Edge
+        - Firefox
+        - Safari
+        - Other (please specify)
+    validations:
+      required: true
+
   - type: dropdown
     id: bug-type
     attributes:
@@ -28,23 +60,5 @@ body:
       label: Description
       description: A clear and concise description of what the bug is.
       placeholder: Tell us what happened...
-    validations:
-      required: true
-
-  - type: input
-    id: affected-devices
-    attributes:
-      label: Affected Devices
-      description: What devices did this happen on? (e.g., iPhone 15, Samsung Galaxy S24, Custom PC)
-      placeholder: e.g., iPhone 14 Pro
-    validations:
-      required: true
-
-  - type: input
-    id: operating-systems
-    attributes:
-      label: Operating Systems
-      description: What OS versions are affected? (e.g., iOS 17.4, Android 14, Windows 11)
-      placeholder: e.g., iOS 18
     validations:
       required: true
