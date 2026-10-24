@@ -1,15 +1,17 @@
 const CACHE_NAME = 'ceedoku-cache-v3';
 
 const ASSETS_TO_CACHE = [
-    './',
-    './index.html',
-    './manifest.json',
-    './script.js',
-    './confettilib.js',
-    './style.css',
-    './touch.css',
-    './sw.js',
-    './title.png'
+    '../../',
+    '../../index.html',
+    '../../src/pwa/manifest.json',
+    '../js/script.js',
+    '../js/lib/TSparticles.confetti.js',
+    '../js/lib/FSJ.js',
+    '../js/lib/JSF.js',
+    '../css/style.css',
+    '../css/hoverPatch.css',
+    './serviceWorker.js',
+    '../../title.png'
 ];
 
 // Helper function to detect mobile data / metered connections
