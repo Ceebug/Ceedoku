@@ -1322,9 +1322,7 @@ function startTimer() {
         winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
         pauseTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
         continueTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
-
-        timerEl.textContent =
-            `Time: ${formatTime(Math.floor(elapsedMs / 1000))}`;
+        timerEl.textContent = formatTime(Math.floor(elapsedMs / 1000));
         if (hintcounter == settings.hints.hintlimit.limit && !hintlimitreached) {
             hintlimitreached = true
             updateHintCooldownDisplay();
@@ -2722,11 +2720,10 @@ function loadtheme() {
     }
 
     // ---------------- TIMER UI ----------------
-    winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
-    timerEl.textContent =
-        `Time: ${formatTime(Math.floor(elapsedMs / 1000))}`;
-    continueTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
-    pauseTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
+	winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
+	pauseTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
+	continueTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
+	timerEl.textContent = formatTime(Math.floor(elapsedMs / 1000));
     pauseMistakes.textContent = formatTime(Math.floor(elapsedMs / 1000));
     continueMistakes.textContent = formatTime(Math.floor(elapsedMs / 1000));
 }
@@ -2776,11 +2773,10 @@ function continueGame() {
     pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
 	document.title = `Ceedoku - ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}`;
     difficultyBadge.textContent = difficulty.charAt(0).toUpperCase() + difficulty.slice(1)
-    winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
-    timerEl.textContent =
-        `Time: ${formatTime(Math.floor(elapsedMs / 1000))}`;
-    continueTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
-    pauseTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
+	winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
+	pauseTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
+	continueTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
+	timerEl.textContent = formatTime(Math.floor(elapsedMs / 1000));
     pauseMistakes.textContent = mistakes
     continueMistakes.textContent = mistakes
     timerPaused = false;
@@ -2861,7 +2857,7 @@ async function newGame(nextDifficulty = difficulty) {
 
     renderBoard();
 
-    timerEl.textContent = "Time: 00:00";
+    timerEl.textContent = "00:00";
     winTime.textContent = "00:00";
     pauseTime.textContent = "00:00";
     continueTime.textContent = "00:00"
