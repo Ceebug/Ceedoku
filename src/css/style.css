@@ -24,8 +24,8 @@
 }
 
 @font-face {
-    font-family: "Roboto Mono";
-    src: url("../fonts/robotomono/font.woff2") format("woff2");
+    font-family: "Ceedoku Mono";
+    src: url("../fonts/ceedokumono/font.woff2") format("woff2");
     font-style: normal;
     font-weight: 100 700;
     font-display: swap;
@@ -450,7 +450,7 @@ select:disabled {
         }
 
 .font-mono {
-	font-family: "Roboto Mono", monospace;
+	font-family: "Ceedoku Mono", monospace;
 }
 
 .brand {
