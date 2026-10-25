@@ -13,7 +13,7 @@ const ASSETS_TO_CACHE = [
     '../../src/css/hoverPatch.css',
     '../../src/pwa/serviceWorker.js',
     '../../src/fonts/roboto/font.woff2',
-    '../../src/fonts/robotomono/font.woff2',
+    '../../src/fonts/ceedokumono/font.woff2',
     '../../src/images/trophy.png',
     '../../src/images/logo/wordmark.png',
     '../../src/images/logo/icon/128.png',
