@@ -1,0 +1,5 @@
+version: "9.0.2"
+changelog: |
+  Fixed puzzle loading.
+  Added self-hosted fonts.
+  Improved the download page.
