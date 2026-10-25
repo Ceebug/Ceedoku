@@ -2957,7 +2957,7 @@ mainDifficultyMenu.addEventListener("click", (event) => {
     const bestTimes = JSON.parse(localStorage.getItem("besttimes")) || {};
     const bestTime = bestTimes[selectedDifficulty];
 
-    document.getElementById("besttimedisplay").textContent = {typeof bestTime === "number" ? formatTime(Math.floor(bestTime / 1000)) : "**:**"};
+    document.getElementById("besttimedisplay").textContent = typeof bestTime === "number" ? formatTime(Math.floor(bestTime / 1000)) : "**:**";
 });
 
 function continuenewGame() {
