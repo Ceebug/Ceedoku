@@ -113,7 +113,10 @@ jobs:
                               title = item.get("title")
                               children = item.get("items")
 
-                              if not isinstance(title, str) or not isinstance(children, list):
+                              if (
+                                  not isinstance(title, str)
+                                  or not isinstance(children, list)
+                              ):
                                   raise ValueError(
                                       "Grouped items need a title and an items list."
                                   )
@@ -136,13 +139,13 @@ jobs:
               return "\n".join(lines) + "\n"
 
           release_notes = render(version)
+
           website_heading = (
               f"[{version}]"
               f"(https://ceedoku.github.io/changelog/release?v={version})"
           )
           website_notes = render(website_heading)
 
-          # Find all source files before creating our output directory.
           excluded_files = {
               "claude.md",
               "agents.md",
@@ -163,7 +166,10 @@ jobs:
 
               relative = path.relative_to(root)
 
-              if any(part.lower() in excluded_dirs for part in relative.parts[:-1]):
+              if any(
+                  part.lower() in excluded_dirs
+                  for part in relative.parts[:-1]
+              ):
                   continue
 
               if relative.name.lower() in excluded_files:
@@ -172,6 +178,7 @@ jobs:
               files.append(path)
 
           shutil.rmtree(output, ignore_errors=True)
+
           sync_dir = output / "sync-files"
           sync_dir.mkdir(parents=True)
 
@@ -227,6 +234,7 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ needs.prepare.outputs.version }}
           name: ${{ needs.prepare.outputs.version }}
           body_path: release-output/release-notes.md
@@ -234,8 +242,8 @@ jobs:
           make_latest: true
           fail_on_unmatched_files: true
 
-  website:
-    name: Sync website
+  sync-site:
+    name: Sync site
     runs-on: ubuntu-latest
     needs: prepare
 
@@ -254,44 +262,11 @@ jobs:
           name: release-package
           path: release-output
 
-      - name: Sync game files and update changelog
+      - name: Sync game files
         shell: bash
-        env:
-          VERSION: ${{ needs.prepare.outputs.version }}
         run: |
-          # Copy and overwrite matching files without deleting anything.
+          # Overwrite matching files and add new files without deleting anything.
           rsync -a release-output/sync-files/ website/
-
-          python - <<'PY'
-          import os
-          from pathlib import Path
-
-          version = os.environ["VERSION"]
-          changelog = Path("website/changelog/Changelogs.md")
-          new_entry = Path("release-output/website-notes.md").read_text(
-              encoding="utf-8"
-          ).rstrip()
-
-          if not changelog.is_file():
-              raise SystemExit("website/changelog/changelog.md was not found.")
-
-          existing = changelog.read_text(encoding="utf-8")
-          first_line = existing.lstrip("\n").splitlines()[0] if existing.strip() else ""
-
-          expected_heading = (
-              f"### [{version}]"
-              f"(https://ceedoku.github.io/changelog/release?v={version})"
-          )
-
-          if first_line != expected_heading:
-              changelog.write_text(
-                  new_entry + "\n\n" + existing.lstrip("\n"),
-                  encoding="utf-8",
-              )
-              print(f"Added {version} to the website changelog.")
-          else:
-              print(f"{version} is already at the top of the website changelog.")
-          PY
 
       - name: Commit and push website changes
         working-directory: website
@@ -304,7 +279,7 @@ jobs:
           CHANGES=$(git diff --cached --name-only)
 
           if [ -z "$CHANGES" ]; then
-            echo "No website changes to sync"
+            echo "No website files changed."
             exit 0
           fi
 
@@ -314,4 +289,87 @@ jobs:
           done <<< "$CHANGES"
 
           git commit -m "$MESSAGE"
+          git push
+
+  update-site-changelogs:
+    name: Update site changelogs
+    runs-on: ubuntu-latest
+    needs: [prepare, sync-site]
+
+    steps:
+      - name: Checkout website repo
+        uses: actions/checkout@v4
+        with:
+          repository: ceedoku/ceedoku.github.io
+          token: ${{ secrets.sync }}
+          path: website
+          fetch-depth: 0
+
+      - name: Download prepared files
+        uses: actions/download-artifact@v4
+        with:
+          name: release-package
+          path: release-output
+
+      - name: Update website changelog
+        working-directory: website
+        shell: bash
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          version = os.environ["VERSION"]
+          changelog = Path("Changelogs.md")
+          new_entry = Path("../release-output/website-notes.md").read_text(
+              encoding="utf-8"
+          ).rstrip()
+
+          if not changelog.is_file():
+              raise SystemExit(
+                  f"Changelog file was not found: {changelog.resolve()}"
+              )
+
+          existing = changelog.read_text(encoding="utf-8")
+          existing_content = existing.lstrip("\n")
+          first_line = (
+              existing_content.splitlines()[0]
+              if existing_content.strip()
+              else ""
+          )
+
+          expected_heading = (
+              f"### [{version}]"
+              f"(https://ceedoku.github.io/changelog/release?v={version})"
+          )
+
+          if first_line == expected_heading:
+              print(
+                  f"{version} is already at the top of the website changelog."
+              )
+          else:
+              changelog.write_text(
+                  new_entry + "\n\n" + existing_content,
+                  encoding="utf-8",
+              )
+              print(f"Added {version} to the website changelog.")
+          PY
+
+      - name: Commit and push changelog
+        working-directory: website
+        shell: bash
+        run: |
+          git config user.name "Ceebot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add Changelogs.md
+
+          if git diff --cached --quiet; then
+            echo "No changelog changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Update changelog for Ceedoku ${{ needs.prepare.outputs.version }}"
           git push
