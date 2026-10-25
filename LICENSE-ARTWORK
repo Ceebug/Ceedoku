@@ -5,13 +5,19 @@ Copyright (c) 2026 Ceebug
 The source code text, underlying code logic, and functional files of this project are open source under the terms of the MIT License. This License governs exclusively the official project branding assets (collectively, the "Brand Assets"), including the project name "Ceedoku," the ".csf" file format branding name, official logo files, repository banners, and layout typography graphics created by the copyright holder.
 
 1. THIRD-PARTY ASSET EXCLUSIONS
-This License applies strictly to the original design assets created by the copyright holder. It expressly excludes any third-party graphic files, public-domain icons, or open-licence assets utilized within the application's user interface, including but not limited to the file "src/images/trophy.png". Ownership and licensing of excluded third-party assets remain with their respective original creators.
+This License applies strictly to the original design assets created by the copyright holder. It expressly excludes any third-party graphic files, public-domain icons, or open-license assets utilized within the application's user interface, including but not limited to the file "src/images/trophy.png". Ownership and licensing of excluded third-party assets remain with their respective original creators.
+
+All files contained within the "src/fonts/" directory are also excluded from this License and are governed by their respective licenses and copyright notices.
+
+This includes Ceedoku Mono, a modified version of Roboto Mono, which is distributed under the SIL Open Font License, Version 1.1. The original copyright notice and complete license text are provided in "src/fonts/ceedokumono/OFL.txt". The font and its derivatives remain subject to the terms of that license.
+
+These exclusions apply only to the specified third-party assets and font files. All other Brand Assets remain subject to this License.
 
 2. COMMERCIAL RESTRICTIONS
 The Brand Assets shall not be used, sold, leased, or sublicensed for any commercial purpose, monetization, or paid distribution, including use on physical merchandise, without prior written authorization from the copyright holder.
 
 3. FRAUD AND MALICIOUS USE PROHIBITION
-The Brand Assets shall not be used in connection with any software, distribution platform, repository, or service configured for malicious activity, phishing, or user deception. 
+The Brand Assets shall not be used in connection with any software, distribution platform, repository, or service configured for malicious activity, phishing, or user deception.
 
 4. DERIVATIVE WORKS AND FORKS
 If the underlying software repository is forked, modified, or redistributed to create an alternative variant, clone, client, or tool that incorporates hacks, exploits, cheats, or hidden fees, all visual Brand Assets (including the official logo banners and title image files) must be completely removed from the file structure, distribution packages, and visual user interfaces prior to distribution. This restriction applies strictly to graphical brand assets and does not prohibit the inclusion of the project name within raw source code strings or compilation configuration metadata.
