@@ -247,7 +247,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ needs.prepare.outputs.version }}
+          tag_name: v${{ needs.prepare.outputs.version }}
           name: ${{ needs.prepare.outputs.version }}
           body_path: release-output/release-notes.md
           files: release-output/Ceedoku_${{ needs.prepare.outputs.version }}.zip
