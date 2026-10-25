@@ -267,7 +267,7 @@ jobs:
           from pathlib import Path
 
           version = os.environ["VERSION"]
-          changelog = Path("website/changelog/changelog.md")
+          changelog = Path("website/changelog/Changelogs.md")
           new_entry = Path("release-output/website-notes.md").read_text(
               encoding="utf-8"
           ).rstrip()
