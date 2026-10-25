@@ -1,5 +1,23 @@
-version: "9.0.2"
-changelog: |
-  Fixed puzzle loading.
-  Added self-hosted fonts.
-  Improved the download page.
+# Ceedoku release configuration
+# Set the version number for this release.
+# Changelog categories: add, fix, remove, change, improve.
+# Each category is optional. Use "-" for each item.
+# Use "title" and "items" to group related items under a heading.
+# Example:
+# add:
+#   - A new feature.
+#   - title: "New settings"
+#     items:
+#       - Enable pencil mode.
+#       - Enable erase mode.
+# Developer notes use the same categories and structure as the changelog.
+
+version: "9.4.0"
+changelog:
+  fix:
+    - Offline mode not working correctly.
+  change:
+    - Font to Roboto.
+    - The timer to use a monospace font.
+  add:
+    - A monospace font
