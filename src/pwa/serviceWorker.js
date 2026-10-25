@@ -1,17 +1,33 @@
-const CACHE_NAME = 'ceedoku-cache-v3';
+const CACHE_NAME = 'ceedoku-cache-v4';
 
 const ASSETS_TO_CACHE = [
     '../../',
     '../../index.html',
     '../../src/pwa/manifest.json',
-    '../js/script.js',
-    '../js/lib/TSparticles.confetti.js',
-    '../js/lib/FSJ.js',
-    '../js/lib/JSF.js',
-    '../css/style.css',
-    '../css/hoverPatch.css',
-    './serviceWorker.js',
-    '../../title.png'
+    '../../src/js/puzzleGen.js',
+    '../../src/js/script.js',
+    '../../src/js/lib/TSparticles.confetti.js',
+    '../../src/js/lib/FSJ.js',
+    '../../src/js/lib/JSF.js',
+    '../../src/css/style.css',
+    '../../src/css/hoverPatch.css',
+    '../../src/pwa/serviceWorker.js',
+    '../../src/fonts/roboto/font.woff2',
+    '../../src/fonts/robotomono/font.woff2',
+    '../../src/images/trophy.png',
+    '../../src/images/logo/wordmark.png',
+    '../../src/images/logo/icon/128.png',
+    '../../src/images/logo/icon/144.png',
+    '../../src/images/logo/icon/resizable.svg',
+    '../../src/images/logo/icon/maskable/48.png',
+    '../../src/images/logo/icon/maskable/72.png',
+    '../../src/images/logo/icon/maskable/96.png',
+    '../../src/images/logo/icon/maskable/128.png',
+    '../../src/images/logo/icon/maskable/192.png',
+    '../../src/images/logo/icon/maskable/384.png',
+    '../../src/images/logo/icon/maskable/512.png',
+    '../../src/sounds/pop.ogg',
+    '../../src/sounds/win.ogg'
 ];
 
 // Helper function to detect mobile data / metered connections
