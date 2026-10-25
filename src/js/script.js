@@ -245,7 +245,7 @@ function checkTime() {
 
     // No previous best time
     if (oldTime === null || oldTime === undefined) {
-        document.getElementById("oldwintime").textContent = "00:00";
+        document.getElementById("oldwintime").textContent = "**:**";
         updateBestTime(besttimes);
         return;
     }
@@ -2957,7 +2957,7 @@ mainDifficultyMenu.addEventListener("click", (event) => {
     const bestTimes = JSON.parse(localStorage.getItem("besttimes")) || {};
     const bestTime = bestTimes[selectedDifficulty];
 
-    document.getElementById("besttimedisplay").textContent = `Best Time: ${typeof bestTime === "number" ? formatTime(Math.floor(bestTime / 1000)) : "**:**"}`;
+    document.getElementById("besttimedisplay").textContent = {typeof bestTime === "number" ? formatTime(Math.floor(bestTime / 1000)) : "**:**"};
 });
 
 function continuenewGame() {
@@ -3140,7 +3140,7 @@ const bestTimesa = JSON.parse(localStorage.getItem("besttimes")) || {};
 const bestTimea = bestTimesa[selectedDifficulty];
 
 document.getElementById("besttimedisplay").textContent =
-    `Best Time: ${typeof bestTimea === "number" ? formatTime(Math.floor(bestTimea / 1000)) : "**:**"}`;
+    {typeof bestTimea === "number" ? formatTime(Math.floor(bestTimea / 1000)) : "**:**"};
 exportnamemenuinput.addEventListener("input", () => {
     if (exportnamemenuinput.value === "") {
 		document.getElementById("savenamebutton").classList.add("disabled")
