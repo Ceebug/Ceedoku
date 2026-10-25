@@ -18,7 +18,7 @@ changelog:
     - Offline mode not working correctly.
   change:
     - Font to Roboto.
-    - The timer to use a monospace font.
+    - Time values to use a monospace font.
     - The timer to not say 'time' before the time.
   add:
     - A monospace font.
