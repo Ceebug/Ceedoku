@@ -229,7 +229,7 @@ if (releaseReady) {
 						<div>
 							<div class=win-stats>
 								<div class=win-stat style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;scale:1.3;box-shadow:0 0 5px 5px var(--shadow-color2)">
-									<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style=color:var(--blue)>Difficulty: </strong><span style=color:var(--text3) id=winDifficulty>Easy</span><strong style=color:var(--blue)><br>Time: </strong><span style=color:var(--text3) id=winTime>00:00</span><strong style=color:var(--blue)><br>Mistakes: </strong><span style=color:var(--text3) id=winMistakes>0</span></h2>
+									<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style=color:var(--blue)>Difficulty: </strong><span style=color:var(--text3) id=winDifficulty>Easy</span><strong style=color:var(--blue)><br>Time: </strong><span class="font-mono" style=color:var(--text3) id=winTime>00:00</span><strong style=color:var(--blue)><br>Mistakes: </strong><span style=color:var(--text3) id=winMistakes>0</span></h2>
 								</div>
 							</div>
 						</div>
@@ -274,9 +274,9 @@ if (releaseReady) {
 					<div class=besttime>
 						<h2 style=text-align:center;color:var(--text2);margin:0;height:25px;width:172px><strong>New best time</strong></h2>
 						<div style=display:flex;flex-direction:row;height:25px>
-							<h3 style=margin:0;margin-right:5px id=oldwintime>00:00</h3>
+							<h3 style=margin:0;margin-right:5px id=oldwintime class="font-mono">00:00</h3>
 							<h3 style=margin:0>➜</h3>
-							<h3 style=margin:0;color:var(--text);margin-left:5px id=newwintime>00:00</h3>
+							<h3 style=margin:0;color:var(--text);margin-left:5px id=newwintime class="font-mono">00:00</h3>
 						</div>
 					</div>
 				</div>
@@ -286,7 +286,7 @@ if (releaseReady) {
 						<div>
 							<div class=win-stats>
 								<div class=win-stat style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;scale:1.3;box-shadow:0 0 5px 5px var(--shadow-color2)">
-									<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style=color:var(--blue)>Difficulty: </strong><span style=color:var(--text3) id=pauseDifficulty>Easy</span><strong style=color:var(--blue)><br>Paused at: </strong><span style=color:var(--text3) id=pauseTime>00:00</span><strong style=color:var(--blue)><br>Mistakes: </strong><span style=color:var(--text3) id=pauseMistakes>0</span></h2>
+									<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style=color:var(--blue)>Difficulty: </strong><span style=color:var(--text3) id=pauseDifficulty>Easy</span><strong style=color:var(--blue)><br>Paused at: </strong><span style=color:var(--text3) id=pauseTime class="font-mono">00:00</span><strong style=color:var(--blue)><br>Mistakes: </strong><span style=color:var(--text3) id=pauseMistakes>0</span></h2>
 								</div>
 							</div>
 						</div><button onclick=resumeTimer() class=new-main2 style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px>Continue Game</button>
@@ -430,7 +430,7 @@ if (releaseReady) {
 			<div>
 				<div class=win-stats>
 					<div class=win-stat style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;scale:1.3;box-shadow:0 0 5px 5px var(--shadow-color2)">
-						<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style=color:var(--blue)>Difficulty: </strong><span style=color:var(--text3) id=continueDifficulty>Easy</span><strong style=color:var(--blue)><br>Stopped at: </strong><span style=color:var(--text3) id=continueTime>00:00</span><strong style=color:var(--blue)><br>Mistakes: </strong><span style=color:var(--text3) id=continueMistakes>0</span></h2>
+						<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style=color:var(--blue)>Difficulty: </strong><span style=color:var(--text3) id=continueDifficulty>Easy</span><strong style=color:var(--blue)><br>Stopped at: </strong><span style=color:var(--text3) id=continueTime class="font-mono">00:00</span><strong style=color:var(--blue)><br>Mistakes: </strong><span style=color:var(--text3) id=continueMistakes>0</span></h2>
 					</div>
 				</div>
 			</div><button title="Continue your save game." class=new-main2 onclick=continueGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px>Continue Game</button><button title="Open the save deletion confirmation menu." class="new-main2 delete-button" onclick=showdeleteGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;background-color:var(--delete-save)>Delete Save File</button><button title="Cancel continuing your save game." class="number-button cancel-button" onclick=hidecontinuegame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px>Cancel</button>
