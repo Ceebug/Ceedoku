@@ -15,4 +15,4 @@
 version: "9.5.2"
 changelog:
   fix:
-    - ['Best time:' showing in monospace in the new game screen. (Only the time value should)](https://github.com/ceebug/ceedoku/issue/10)
+    - "['Best time:' showing in monospace in the new game screen. (Only the time value should)](https://github.com/ceebug/ceedoku/issue/10)"
