@@ -12,7 +12,7 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "9.5.0"
+version: "9.5.1"
 changelog:
-  change:
-    - The monospace font to Ceedoku Mono (A custom version of Roboto Mono)
+  fix:
+    - The best time not showing in monospace.
