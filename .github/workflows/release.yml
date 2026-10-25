@@ -1,0 +1,317 @@
+name: Release Ceedoku
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    name: Prepare release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.prepare.outputs.version }}
+
+    steps:
+      - name: Checkout game repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install YAML parser
+        run: pip install pyyaml
+
+      - name: Prepare release files
+        id: prepare
+        shell: bash
+        run: |
+          cat > /tmp/prepare_release.py <<'PY'
+          import os
+          import re
+          import shutil
+          import zipfile
+          from pathlib import Path
+          import yaml
+
+          root = Path.cwd()
+          output = root / "release-output"
+          details_file = root / "release_details.yaml"
+
+          if not details_file.is_file():
+              raise SystemExit("release_details.yaml was not found.")
+
+          details = yaml.safe_load(details_file.read_text(encoding="utf-8"))
+
+          if not isinstance(details, dict):
+              raise SystemExit("release_details.yaml must contain a YAML mapping.")
+
+          version = str(details.get("version", "")).strip()
+
+          if not re.fullmatch(r"\d+\.\d+\.\d+", version):
+              raise SystemExit("Version must use the format x.x.x.")
+
+          categories = [
+              ("add", "Added"),
+              ("fix", "Fixed"),
+              ("remove", "Removed"),
+              ("change", "Changed"),
+              ("improve", "Improved"),
+          ]
+
+          def get_sections(section_name):
+              section = details.get(section_name) or {}
+
+              if not isinstance(section, dict):
+                  raise ValueError(f"{section_name} must be a mapping.")
+
+              result = []
+
+              for key, label in categories:
+                  items = section.get(key) or []
+
+                  if not isinstance(items, list):
+                      raise ValueError(
+                          f"{section_name}.{key} must be a list."
+                      )
+
+                  if items:
+                      result.append((label, items))
+
+              unknown = set(section) - {key for key, _ in categories}
+
+              if unknown:
+                  raise ValueError(
+                      f"Unknown categories in {section_name}: "
+                      + ", ".join(sorted(unknown))
+                  )
+
+              return result
+
+          def render(version_heading):
+              lines = [f"### {version_heading}"]
+
+              sections = [
+                  ("Changes:", get_sections("changelog")),
+                  ("Developer Changes:", get_sections("devnotes")),
+              ]
+
+              for heading, groups in sections:
+                  if not groups:
+                      continue
+
+                  lines.append(f"> #### {heading}")
+
+                  for label, items in groups:
+                      lines.append(f"> > ##### {label}:")
+
+                      for item in items:
+                          if isinstance(item, str):
+                              lines.append(f"> > > - {item}")
+
+                          elif isinstance(item, dict):
+                              title = item.get("title")
+                              children = item.get("items")
+
+                              if not isinstance(title, str) or not isinstance(children, list):
+                                  raise ValueError(
+                                      "Grouped items need a title and an items list."
+                                  )
+
+                              lines.append(f"> > > - **{title}:**")
+
+                              for child in children:
+                                  if not isinstance(child, str):
+                                      raise ValueError(
+                                          "Grouped items must contain text."
+                                      )
+
+                                  lines.append(f"> > >   > - {child}")
+
+                          else:
+                              raise ValueError(
+                                  "Each changelog item must be text or a group."
+                              )
+
+              return "\n".join(lines) + "\n"
+
+          release_notes = render(version)
+          website_heading = (
+              f"[{version}]"
+              f"(https://ceedoku.github.io/changelog/release?v={version})"
+          )
+          website_notes = render(website_heading)
+
+          # Find all source files before creating our output directory.
+          excluded_files = {
+              "claude.md",
+              "agents.md",
+              "release_details.yaml",
+          }
+          excluded_dirs = {
+              ".git",
+              ".github",
+              ".cursor",
+              "release-output",
+          }
+
+          files = []
+
+          for path in root.rglob("*"):
+              if not path.is_file() or path.is_symlink():
+                  continue
+
+              relative = path.relative_to(root)
+
+              if any(part.lower() in excluded_dirs for part in relative.parts[:-1]):
+                  continue
+
+              if relative.name.lower() in excluded_files:
+                  continue
+
+              files.append(path)
+
+          shutil.rmtree(output, ignore_errors=True)
+          sync_dir = output / "sync-files"
+          sync_dir.mkdir(parents=True)
+
+          zip_path = output / f"Ceedoku_{version}.zip"
+
+          with zipfile.ZipFile(
+              zip_path, "w", compression=zipfile.ZIP_DEFLATED
+          ) as archive:
+              for source in files:
+                  relative = source.relative_to(root)
+
+                  destination = sync_dir / relative
+                  destination.parent.mkdir(parents=True, exist_ok=True)
+                  shutil.copy2(source, destination)
+
+                  archive.write(source, relative.as_posix())
+
+          (output / "release-notes.md").write_text(
+              release_notes, encoding="utf-8"
+          )
+          (output / "website-notes.md").write_text(
+              website_notes, encoding="utf-8"
+          )
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"version={version}\n")
+
+          print(f"Prepared Ceedoku {version}: {len(files)} files.")
+          PY
+
+          python /tmp/prepare_release.py
+
+      - name: Upload prepared files
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-package
+          path: release-output/
+          if-no-files-found: error
+          retention-days: 1
+
+  release:
+    name: Publish GitHub release
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    steps:
+      - name: Download prepared files
+        uses: actions/download-artifact@v4
+        with:
+          name: release-package
+          path: release-output
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.prepare.outputs.version }}
+          name: ${{ needs.prepare.outputs.version }}
+          body_path: release-output/release-notes.md
+          files: release-output/Ceedoku_${{ needs.prepare.outputs.version }}.zip
+          make_latest: true
+          fail_on_unmatched_files: true
+
+  website:
+    name: Sync website
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    steps:
+      - name: Checkout website repo
+        uses: actions/checkout@v4
+        with:
+          repository: ceedoku/ceedoku.github.io
+          token: ${{ secrets.sync }}
+          path: website
+          fetch-depth: 0
+
+      - name: Download prepared files
+        uses: actions/download-artifact@v4
+        with:
+          name: release-package
+          path: release-output
+
+      - name: Sync game files and update changelog
+        shell: bash
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          # Copy and overwrite matching files without deleting anything.
+          rsync -a release-output/sync-files/ website/
+
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          version = os.environ["VERSION"]
+          changelog = Path("website/changelog/changelog.md")
+          new_entry = Path("release-output/website-notes.md").read_text(
+              encoding="utf-8"
+          ).rstrip()
+
+          if not changelog.is_file():
+              raise SystemExit("website/changelog/changelog.md was not found.")
+
+          existing = changelog.read_text(encoding="utf-8")
+          first_line = existing.lstrip("\n").splitlines()[0] if existing.strip() else ""
+
+          expected_heading = (
+              f"### [{version}]"
+              f"(https://ceedoku.github.io/changelog/release?v={version})"
+          )
+
+          if first_line != expected_heading:
+              changelog.write_text(
+                  new_entry + "\n\n" + existing.lstrip("\n"),
+                  encoding="utf-8",
+              )
+              print(f"Added {version} to the website changelog.")
+          else:
+              print(f"{version} is already at the top of the website changelog.")
+          PY
+
+      - name: Commit and push website changes
+        working-directory: website
+        shell: bash
+        run: |
+          git config user.name "Ceebot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+          CHANGES=$(git diff --cached --name-only)
+
+          if [ -z "$CHANGES" ]; then
+            echo "No website changes to sync"
+            exit 0
+          fi
+
+          MESSAGE="Sync game from Ceedoku"$'\n\n'"Synced:"
+          while IFS= read -r file; do
+            MESSAGE="$MESSAGE"$'\n'"- $file"
+          done <<< "$CHANGES"
+
+          git commit -m "$MESSAGE"
+          git push
