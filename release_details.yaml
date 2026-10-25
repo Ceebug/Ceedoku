@@ -12,13 +12,7 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "9.4.0"
+version: "9.5.0"
 changelog:
-  fix:
-    - Offline mode not working correctly.
   change:
-    - Font to Roboto.
-    - Time values to use a monospace font.
-    - The timer to not say 'time' before the time.
-  add:
-    - A monospace font.
+    - The monospace font to Ceedoku Mono (A custom version of Roboto Mono)
