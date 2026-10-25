@@ -12,7 +12,7 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "9.5.2"
+version: "9.5.3"
 changelog:
   fix:
-    - "['Best time:' showing in monospace in the new game screen. (Only the time value should)](https://github.com/ceebug/ceedoku/issue/10)"
+    - "[9.5.2 game crash.](https://github.com/ceebug/ceedoku/issues/11) (Wow I need to actually test things here. - Ceebug, Main Developer)"
