@@ -44,7 +44,9 @@ jobs:
           details = yaml.safe_load(details_file.read_text(encoding="utf-8"))
 
           if not isinstance(details, dict):
-              raise SystemExit("release_details.yaml must contain a YAML mapping.")
+              raise SystemExit(
+                  "release_details.yaml must contain a YAML mapping."
+              )
 
           version = str(details.get("version", "")).strip()
 
@@ -78,7 +80,9 @@ jobs:
                   if items:
                       result.append((label, items))
 
-              unknown = set(section) - {key for key, _ in categories}
+              unknown = set(section) - {
+                  key for key, _ in categories
+              }
 
               if unknown:
                   raise ValueError(
@@ -89,7 +93,7 @@ jobs:
               return result
 
           def render(version_heading):
-              lines = [f"### {version_heading}"]
+              lines = [f"- ### {version_heading}"]
 
               sections = [
                   ("Changes:", get_sections("changelog")),
@@ -100,14 +104,14 @@ jobs:
                   if not groups:
                       continue
 
-                  lines.append(f"> #### {heading}")
+                  lines.append(f"  > #### {heading}")
 
                   for label, items in groups:
-                      lines.append(f"> > ##### {label}:")
+                      lines.append(f"  >> ##### {label}:")
 
                       for item in items:
                           if isinstance(item, str):
-                              lines.append(f"> > > - {item}")
+                              lines.append(f"  >>> - {item}")
 
                           elif isinstance(item, dict):
                               title = item.get("title")
@@ -118,10 +122,11 @@ jobs:
                                   or not isinstance(children, list)
                               ):
                                   raise ValueError(
-                                      "Grouped items need a title and an items list."
+                                      "Grouped items need a title "
+                                      "and an items list."
                                   )
 
-                              lines.append(f"> > > - **{title}:**")
+                              lines.append(f"  >>> - **{title}:**")
 
                               for child in children:
                                   if not isinstance(child, str):
@@ -129,17 +134,22 @@ jobs:
                                           "Grouped items must contain text."
                                       )
 
-                                  lines.append(f"> > >   > - {child}")
+                                  lines.append(
+                                      f"  >>>   > - {child}"
+                                  )
 
                           else:
                               raise ValueError(
-                                  "Each changelog item must be text or a group."
+                                  "Each changelog item must be "
+                                  "text or a group."
                               )
 
               return "\n".join(lines) + "\n"
 
+          # GitHub release: plain version heading, without a link.
           release_notes = render(version)
 
+          # Website changelog: linked version heading.
           website_heading = (
               f"[{version}]"
               f"(https://ceedoku.github.io/changelog/release?v={version})"
@@ -151,6 +161,7 @@ jobs:
               "agents.md",
               "release_details.yaml",
           }
+
           excluded_dirs = {
               ".git",
               ".github",
@@ -199,6 +210,7 @@ jobs:
           (output / "release-notes.md").write_text(
               release_notes, encoding="utf-8"
           )
+
           (output / "website-notes.md").write_text(
               website_notes, encoding="utf-8"
           )
@@ -323,9 +335,10 @@ jobs:
 
           version = os.environ["VERSION"]
           changelog = Path("changelog/Changelogs.md")
-          new_entry = Path("../release-output/website-notes.md").read_text(
-              encoding="utf-8"
-          ).rstrip()
+
+          new_entry = Path(
+              "../release-output/website-notes.md"
+          ).read_text(encoding="utf-8").rstrip()
 
           if not changelog.is_file():
               raise SystemExit(
@@ -334,6 +347,7 @@ jobs:
 
           existing = changelog.read_text(encoding="utf-8")
           existing_content = existing.lstrip("\n")
+
           first_line = (
               existing_content.splitlines()[0]
               if existing_content.strip()
@@ -341,7 +355,7 @@ jobs:
           )
 
           expected_heading = (
-              f"### [{version}]"
+              f"- ### [{version}]"
               f"(https://ceedoku.github.io/changelog/release?v={version})"
           )
 
@@ -351,7 +365,7 @@ jobs:
               )
           else:
               changelog.write_text(
-                  new_entry + "\n\n" + existing_content,
+                  new_entry.rstrip() + "\n" + existing_content,
                   encoding="utf-8",
               )
               print(f"Added {version} to the website changelog.")
