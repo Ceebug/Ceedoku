@@ -19,7 +19,7 @@ if (releaseReady) {
 	
 	<!-- Sets the variable that declares the version -->
 	<script>
-		const version = "9.5.3"
+		const version = "9.6.0"
 	</script>
 	<!-- Loads FSJ as it is a dependency -->
 	<!-- https://github.com/ceebug/FSJ -->
@@ -52,6 +52,60 @@ if (releaseReady) {
 </head>
 
 <body class=dark style="scrollbar-color:transparent transparent;display:flex;align-items:center;justify-content:center">
+	<noscript><div style="
+    background-color: var(--surface);
+    padding: clamp(20px, 5vmin, 70px);
+    border: 1.5px solid var(--surface-2);
+    border-radius: clamp(12px, 2vmin, 24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    z-index: 1;
+    width: 90vw;
+    height: 85dvh;
+    box-sizing: border-box;
+    gap: clamp(10px, 2vmin, 24px);
+">
+    <h2 style="
+        margin: 0;
+        text-align: center;
+        font-size: clamp(24px, 7vmin, 100px);
+    ">Ceedoku can't load</h2>
+
+    <strong style="
+        text-align: center;
+        font-size: clamp(16px, 4vmin, 56px);
+    ">Ceedoku requires JavaScript to be enabled to work.</strong>
+
+    <p style="
+        margin: 0;
+        text-align: center;
+        font-size: clamp(14px, 3vmin, 42px);
+    ">Please go enable JavaScript for Ceedoku so you can actually play the game.</p><strong style="
+    text-align: center;
+    font-size: clamp(16px, 3vmin, 36px);
+    margin-top: clamp(12px, 3vmin, 30px);
+">
+    How to enable JavaScript
+</strong>
+
+<div style="
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(8px, 1.5vmin, 16px);
+    font-size: clamp(14px, 2.5vmin, 28px);
+">
+    <a href="https://support.mozilla.org/en-US/kb/javascript-settings-for-interactive-web-pages" target="_blank" rel="noopener noreferrer" style="padding: clamp(10px, 2vmin, 20px) clamp(16px, 3vmin, 32px); background-color: var(--surface-2); background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-image: ; background-size: ; background-origin: ; background-clip: ; border-top-width: ; border-top-style: ; border-color: var(--surface-2); border-right-width: ; border-right-style: ; border-bottom-width: ; border-bottom-style: ; border-left-width: ; border-left-style: ; border-image-outset: ; border-image-repeat: ; border-image-slice: ; border-image-source: ; border-image-width: ; border-radius: clamp(8px, 1.5vmin, 14px); color: inherit; text-decoration: none; font-weight: 600; transition: background-color 180ms, border-color 180ms, transform 180ms;" onmouseover="this.style.backgroundColor='var(--surface-3)'; this.style.borderColor='#73a7ff';" onmouseout="this.style.backgroundColor='var(--surface-2)'; this.style.borderColor='var(--surface-2)';" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'" onfocus="this.style.outline='3px solid #73a7ff'; this.style.outlineOffset='3px';" onblur="this.style.outline='none';">Firefox</a>
+
+    <a href="https://support.google.com/chrome/answer/114662" target="_blank" rel="noopener noreferrer" style="padding: clamp(10px, 2vmin, 20px) clamp(16px, 3vmin, 32px); background-color: var(--surface-2); background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-image: ; background-size: ; background-origin: ; background-clip: ; border-top-width: ; border-top-style: ; border-color: var(--surface-2); border-right-width: ; border-right-style: ; border-bottom-width: ; border-bottom-style: ; border-left-width: ; border-left-style: ; border-image-outset: ; border-image-repeat: ; border-image-slice: ; border-image-source: ; border-image-width: ; border-radius: clamp(8px, 1.5vmin, 14px); color: inherit; text-decoration: none; font-weight: 600; transition: background-color 180ms, border-color 180ms, transform 180ms;" onmouseover="this.style.backgroundColor='var(--surface-3)'; this.style.borderColor='#73a7ff';" onmouseout="this.style.backgroundColor='var(--surface-2)'; this.style.borderColor='var(--surface-2)';" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'" onfocus="this.style.outline='3px solid #73a7ff'; this.style.outlineOffset='3px';" onblur="this.style.outline='none';">Chrome</a>
+
+    <a href="https://support.apple.com/guide/safari/customize-settings-sfri11471/mac" target="_blank" rel="noopener noreferrer" style="padding: clamp(10px, 2vmin, 20px) clamp(16px, 3vmin, 32px); background-color: var(--surface-2); background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-image: ; background-size: ; background-origin: ; background-clip: ; border-top-width: ; border-top-style: ; border-color: var(--surface-2); border-right-width: ; border-right-style: ; border-bottom-width: ; border-bottom-style: ; border-left-width: ; border-left-style: ; border-image-outset: ; border-image-repeat: ; border-image-slice: ; border-image-source: ; border-image-width: ; border-radius: clamp(8px, 1.5vmin, 14px); color: inherit; text-decoration: none; font-weight: 600; transition: background-color 180ms, border-color 180ms, transform 180ms;" onmouseover="this.style.backgroundColor='var(--surface-3)'; this.style.borderColor='#73a7ff';" onmouseout="this.style.backgroundColor='var(--surface-2)'; this.style.borderColor='var(--surface-2)';" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'" onfocus="this.style.outline='3px solid #73a7ff'; this.style.outlineOffset='3px';" onblur="this.style.outline='none';">Safari</a>
+
+    <a href="https://support.microsoft.com/microsoft-edge" target="_blank" rel="noopener noreferrer" style="padding: clamp(10px, 2vmin, 20px) clamp(16px, 3vmin, 32px); background-color: var(--surface-2); background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-image: ; background-size: ; background-origin: ; background-clip: ; border-top-width: ; border-top-style: ; border-color: var(--surface-2); border-right-width: ; border-right-style: ; border-bottom-width: ; border-bottom-style: ; border-left-width: ; border-left-style: ; border-image-outset: ; border-image-repeat: ; border-image-slice: ; border-image-source: ; border-image-width: ; border-radius: clamp(8px, 1.5vmin, 14px); color: inherit; text-decoration: none; font-weight: 600; transition: background-color 180ms, border-color 180ms, transform 180ms;" onmouseover="this.style.backgroundColor='var(--surface-3)'; this.style.borderColor='#73a7ff';" onmouseout="this.style.backgroundColor='var(--surface-2)'; this.style.borderColor='var(--surface-2)';" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'" onfocus="this.style.outline='3px solid #73a7ff'; this.style.outlineOffset='3px';" onblur="this.style.outline='none';">Edge</a>
+</div>
+</div></noscript>
 	<div style=display:flex;flex-direction:column;place-content:center;position:fixed;place-items:center;visibility:visible;height:100dvh;width:100dvw;overflow:hidden id=loader>
 		<style id=loadingscreen>
 			.spinner {
