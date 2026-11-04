@@ -12,7 +12,7 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "9.5.3"
+version: "9.6.0"
 changelog:
-  fix:
-    - "[9.5.2 game crash.](https://github.com/ceebug/ceedoku/issues/11) (Wow I need to actually test things here. - Ceebug, Main Developer)"
+  add:
+    - Popup that shows when JavaScript is disabled informing the user that they should go enable JavaScript for Ceedoku to work.
