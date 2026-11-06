@@ -12,19 +12,9 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "10.0.0"
+version: "10.0.1"
 changelog:
-  add:
-    - Multiple independent saved games with editable titles and per-save actions, and reordering like trello cards.
-    - Customisable keyboard bindings for every game keyboard shortcut.
-    - Explain Hints - Enabled by default, can be disabled by a setting, helps you learn the methods the hint system knows.
-    - Report crash button on the crash menu that directs you to the bug report page.
-    - The ability to create custom difficulty save games, where you can change both if tools are enabled and the amount of holes the puzzle has.
   change:
-    - The name of the Continue Game button to Play.
-    - The position of the New Game button to inside the new play menu.
-    - The select difficulty popup going offscreen.
-    - "'Feedback Form' to 'Provide Feedback'."
+    - The error message wording on the crash screen.
   fix:
-    - The game lagging if you switched the theme and didn't have a god PC.
-    - The dropdown for selecting hint cooldown type taking longer to get disabled and undisabled visually.
+    - A crash bug involving custom difficulties.
