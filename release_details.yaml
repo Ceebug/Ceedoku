@@ -27,3 +27,4 @@ changelog:
     - "'Feedback Form' to 'Provide Feedback'."
   fix:
     - The game lagging if you switched the theme and didn't have a god PC.
+    - The dropdown for selecting hint cooldown type taking longer to get disabled and undisabled visually.
