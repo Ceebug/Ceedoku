@@ -12,9 +12,7 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "10.0.1"
+version: "10.0.2"
 changelog:
-  change:
-    - The error message wording on the crash screen.
   fix:
-    - A crash bug involving custom difficulties.
+    - 10.0.1 game crash
