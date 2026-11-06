@@ -2,6 +2,9 @@ import js from "@eslint/js";
 
 export default [
   {
+    ignores: ["src/js/lib/TSparticles.confetti.js"]
+  },
+  {
     files: ["**/*.js"],
     ...js.configs.recommended,
     rules: {
