@@ -1,4 +1,4 @@
-name: Tests
+name: CI: Lint/Test
 
 on:
   pull_request:
@@ -48,7 +48,7 @@ jobs:
           fi
           ./node_modules/.bin/eslint "${files[@]}"
 
-      - name: Run all tests
+      - name: Test JavaScript
         run: |
           mapfile -d '' tests < <(find test -type f -name '*.js' -print0)
           if [ ${#tests[@]} -eq 0 ]; then
