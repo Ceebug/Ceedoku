@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ceedoku-cache-v5';
+const CACHE_NAME = 'ceedoku-cache-v18';
 
 const ASSETS_TO_CACHE = [
     '../../',
@@ -6,6 +6,9 @@ const ASSETS_TO_CACHE = [
     '../../src/pwa/manifest.json',
     '../../src/js/puzzleGen.js',
     '../../src/js/script.js',
+    '../../src/js/saveManager.js',
+    '../../src/js/keybindManager.js',
+    '../../src/js/hintEngine.js',
     '../../src/js/lib/TSparticles.confetti.js',
     '../../src/js/lib/FSJ.js',
     '../../src/js/lib/JSF.js',

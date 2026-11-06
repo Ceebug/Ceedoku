@@ -71,6 +71,10 @@ svg {
 	display: flex;
 }
 
+#hintselectvalue > .svg {
+    transition: none;
+}
+
 #hintselectvalue.disabled {
 	background-color: var(--disabledbox) !important;
 	color: var(--muted) !important;
@@ -136,18 +140,6 @@ input {
 	}
 }
 
-* {
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-		background 0.2s ease,
-		border 0.2s ease,
-		box-shadow 0.2s ease,
-		--surface 0.2s ease,
-		--surface-2 0.2s ease,
-		--surface-3 0.2s ease;
-}
 .besttime {
   height: 100px;
   width: min(420px, calc(100vw - 32px));
@@ -191,11 +183,22 @@ body.light .besttime {
 .feedbacklink:active {
     color: var(--blue);
 }
-body {
-    transition:
-        --bg 0.2s ease,
-        --surface-2 0.2s ease,
-        --blue 0.2s ease;
+.theme-switching,
+.theme-switching * {
+    transition: none !important;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 180ms;
+    animation-timing-function: ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation-duration: 1ms;
+    }
 }
 #sitecontrols {
 	transition: 
@@ -389,7 +392,7 @@ select:disabled {
 
 .settings-select:focus {
     outline: 2px solid var(--text2);
-}ansition: transform 0.1s ease;
+transition: transform 0.1s ease;
 }
 #loader {
     opacity: 1;
@@ -1417,7 +1420,9 @@ position: relative;
         .number-button:hover,
         .erase-button:hover,
         .menu-item:hover,
-		.cancel-button:hover
+		.cancel-button:hover,
+        .keybind-assign:hover:not(.listening),
+        .keybind-reset:hover,
         .theme-toggle:hover,
         .history-button:hover:not(:disabled) {
           background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2));
@@ -1438,7 +1443,9 @@ body.light .menu-item:hover {
         .number-button:active,
         .erase-button:active,
         .menu-item:active,
-		.cancel-button:active
+		.cancel-button:active,
+        .keybind-assign:active:not(.listening),
+        .keybind-reset:active,
         .theme-toggle:active,
         .history-button:active:not(:disabled) {
           transform: translateY(1px)
@@ -1559,7 +1566,6 @@ body.light .menu-item:hover {
           color: #fff;
           font-size: 1.02rem;
           font-weight: 850;
-          border-radius:
         }
 		        .new-main2 {
           border-top-right-radius: 999px;
@@ -1569,7 +1575,6 @@ body.light .menu-item:hover {
           color: #fff;
           font-size: 1.02rem;
           font-weight: 850;
-          border-radius:
         }
     
         .new-side {
@@ -1603,6 +1608,19 @@ body.light .menu-item:hover {
         .difficulty-menu.open {
           display: grid;
           gap: 4px;
+        }
+        #pausedifficultyMenu.something.viewport-menu {
+            position: fixed;
+            z-index: 5001;
+            height: auto !important;
+            top: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            left: auto !important;
+            width: min(230px, calc(100vw - 24px));
+            max-height: calc(100dvh - 24px);
+            overflow-y: auto;
+            overscroll-behavior: contain;
         }
             .difficulty-menu2 {
           z-index: 5;
@@ -1715,15 +1733,10 @@ body.light .menu-item:hover {
     inherits: true;
     initial-value: #007aff;
 }
-@property --surface {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #ffffff
-}
 @property --surface-3 {
 	syntax: "<color>";
 	inherits: true;
-	initial-value: #dde852
+	initial-value: #dde8f2
 }
 @property --outline {
 	syntax: "<color>";
@@ -1734,7 +1747,112 @@ body.light .menu-item:hover {
 	syntax: "<color>";
 	inherits: true;
 	initial-value: #accfff
-}	
+}
+@property --text {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #213044;
+}
+@property --text2 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #000000;
+}
+@property --text3 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #66778c;
+}
+@property --text4 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #435368;
+}
+@property --muted {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #66778c;
+}
+@property --line {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #b7c5d6;
+}
+@property --line-strong {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #4c5867;
+}
+@property --blue-soft {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #d7e8ff;
+}
+@property --blue-softer {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #eaf3ff;
+}
+@property --toggle-thumb {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #b7c5d6;
+}
+@property --lime {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #9cff35;
+}
+@property --lime-text {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #195700;
+}
+@property --danger {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #d93025;
+}
+@property --danger-soft {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #ffe7e5;
+}
+@property --delete-save {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #ff0000;
+}
+@property --disabledbox {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #b6bcc2;
+}
+@property --pencilerasebutton {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #d7e1ee;
+}
+@property --selectedcell {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #accfff;
+}
+@property --buttonhover {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #d3dce7;
+}
+@property --shell {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: rgb(255 255 255 / 48%);
+}
+@property --scrollbar {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: rgb(0 0 0 / 46%);
+}
         .erase-button svg {
           width: 20px;
           height: 20px;
@@ -1959,7 +2077,7 @@ body.light .menu-item:hover {
 
           .pencilanderaserbutton {
     	flex: 1;
-    	padding: 20px
+    	padding: 20px;
     	border-radius: 6px
           }
 			.whatdoievencallthis {
@@ -2081,6 +2199,13 @@ color: #1a212c !important
 	#pause-btn {
 		display: none
 	}
+	.difficulty-menu,
+	.difficulty-menu2 {
+		max-height: calc(100dvh - 90px);
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		scrollbar-width: thin;
+	}
 	.something {
 		height: 230px;
 		overflow: scroll;
@@ -2123,4 +2248,792 @@ button,
     transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-	}
+.save-manager-overlay {
+    z-index: 5002;
+}
+
+.save-export-picker {
+    z-index: 5002;
+}
+
+.save-export-picker-card {
+    width: min(460px, calc(100vw - 24px));
+    max-height: min(82dvh, 720px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.save-export-picker-card .win-title {
+    margin: 0;
+}
+
+.save-export-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.save-export-card {
+    flex: 0 0 auto;
+    cursor: default;
+    touch-action: auto;
+    user-select: auto;
+}
+
+.save-export-card .save-play-button {
+    min-width: 90px;
+}
+
+.save-export-empty {
+    margin: 0;
+    color: var(--text3);
+}
+
+#newOverlay {
+    z-index: 5003;
+}
+
+#renameSaveOverlay {
+    z-index: 5004;
+}
+
+#deleteOverlay {
+    z-index: 5005;
+}
+
+.save-rename-card {
+    width: min(420px, calc(100vw - 24px));
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.save-rename-card .win-title {
+    margin: 0;
+}
+
+.save-rename-label {
+    color: var(--text2);
+}
+
+.save-rename-input {
+    width: 100%;
+    min-height: 46px;
+    padding: 8px 12px;
+    border: 1px solid var(--outline);
+    border-radius: 10px;
+    background: var(--surface-2);
+    color: var(--text2);
+}
+
+.save-rename-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.save-manager-card {
+    width: min(760px, calc(100vw - 24px));
+    max-height: min(88dvh, 900px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px;
+    text-align: left;
+    transition: opacity .15s ease, border-color .15s ease, transform .15s ease;
+}
+
+.save-card.dragging {
+    opacity: .98;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+    cursor: grabbing;
+    transform: rotate(1.5deg);
+    transform-origin: center;
+    transition: none;
+}
+
+.save-card-placeholder {
+    flex: 0 0 auto;
+    border: 2px dashed var(--blue);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--blue) 10%, var(--surface-2));
+    pointer-events: none;
+}
+
+.save-manager-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.save-manager-heading .win-title {
+    margin: 0;
+}
+
+.save-close-button,
+.save-square-button,
+.save-action-button {
+    min-width: 42px;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--outline);
+    border-radius: 10px;
+    color: var(--text2);
+    background: var(--surface-2);
+    cursor: pointer;
+    font: inherit;
+}
+
+.save-close-button {
+    font-size: 30px;
+}
+
+.save-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-color: var(--scrollbar) transparent;
+    min-height: 0;
+    padding: 2px;
+}
+
+.save-card-list:not(:has(> *)) {
+    display: none;
+}
+
+.save-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px;
+    border: 1px solid var(--outline);
+    border-radius: 16px;
+    background: var(--surface-2);
+    text-align: left;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+
+.save-card-info {
+    min-width: 0;
+}
+
+.save-card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    margin-bottom: 10px;
+}
+
+.save-card-title {
+    overflow: hidden;
+    min-width: 0;
+    margin: 0;
+    color: var(--text2);
+    font-size: 1.05rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.save-difficulty-chip {
+    flex: 0 0 auto;
+    max-width: 45%;
+    overflow: hidden;
+    padding: 3px 8px;
+    border-radius: 999px;
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.difficulty-easy { background: #368a68; }
+.difficulty-medium { background: #397bbd; }
+.difficulty-hard { background: #aa7a12; }
+.difficulty-expert { background: #bd6638; }
+.difficulty-master { background: #ad4761; }
+.difficulty-extreme { background: #8154af; }
+.difficulty-impossible { background: #a53d91; }
+.difficulty-godlike { background: #983f42; }
+.difficulty-custom { background: #6552a8; }
+
+.save-card-meta {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    grid-template-rows: repeat(2, 20px);
+    align-items: center;
+    column-gap: 7px;
+    row-gap: 3px;
+}
+
+.save-progress-ring {
+    --progress: 0%;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: conic-gradient(var(--blue) var(--progress), var(--surface-3) 0);
+}
+
+.save-progress-ring::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--surface-2);
+}
+
+.save-progress-label {
+    color: var(--text2);
+    font-size: .9rem;
+}
+
+.save-last-played {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+    color: var(--muted);
+    font-size: .78rem;
+}
+
+.save-calendar-icon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    justify-self: center;
+}
+
+.save-card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.save-card-action-row {
+    display: flex;
+    gap: 8px;
+}
+
+.save-card-action-row:last-child {
+    align-items: center;
+}
+
+.save-play-button {
+    min-width: 116px;
+    height: 42px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.save-play-button:hover {
+    filter: brightness(1.08);
+}
+
+.save-delete-button {
+    color: var(--danger);
+}
+
+.save-more-wrap {
+    position: relative;
+}
+
+.save-more-menu {
+    position: fixed;
+    z-index: 5006;
+    min-width: 150px;
+    max-width: calc(100vw - 16px);
+    max-height: calc(100dvh - 16px);
+    overflow-y: auto;
+    padding: 5px;
+    border: 1px solid var(--outline);
+    border-radius: 10px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.save-more-menu button {
+    width: 100%;
+    padding: 9px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text2);
+    text-align: left;
+    cursor: pointer;
+}
+
+.save-more-menu button:hover,
+.save-square-button:hover,
+.save-close-button:hover {
+    background: var(--buttonhover);
+}
+
+.save-more-menu button:disabled {
+    color: var(--muted);
+    cursor: not-allowed;
+    opacity: .55;
+}
+
+.save-more-menu button:disabled:hover {
+    background: transparent;
+}
+
+.save-new-game {
+    flex: 0 0 auto;
+    min-height: 48px;
+    border-radius: 12px;
+}
+
+.empty-save-message {
+    padding: 20px 8px;
+    color: var(--muted);
+    text-align: center;
+}
+
+.custom-difficulty-overlay {
+    z-index: 5010;
+}
+
+.custom-difficulty-card {
+    width: min(440px, calc(100vw - 24px));
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px;
+    text-align: left;
+}
+
+.custom-difficulty-card .win-title {
+    text-align: center;
+}
+
+.custom-holes-label {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text2);
+}
+
+.custom-holes-label strong {
+    color: var(--blue);
+    font-family: "Ceedoku Mono", monospace;
+}
+
+.custom-holes-slider {
+    margin-left: 0px !important;
+    width: 100%;
+    accent-color: var(--blue);
+    cursor: pointer;
+}
+
+.custom-tools-row {
+    padding: 0;
+    gap: 12px;
+}
+
+.custom-tools-row .setting-name {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.custom-difficulty-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.custom-difficulty-actions button {
+    flex: 1;
+    min-height: 48px;
+    border-radius: 10px;
+    font-size: 1.02rem;
+    font-weight: 850;
+}
+
+.hint-connector {
+    position: fixed;
+    z-index: 5010;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.hint-connector[hidden] {
+    display: none;
+}
+
+.hint-connector path {
+    fill: none;
+    stroke: #f3c94f;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.hint-connector circle {
+    fill: #ffe17b;
+    stroke: #7a5a08;
+    stroke-width: 2;
+}
+
+.hint-explanation-panel {
+    position: fixed;
+    z-index: 5011;
+    width: min(360px, calc(100vw - 24px));
+    max-height: min(62dvh, 420px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid var(--surface-3);
+    border-left: 3px solid #f3c94f;
+    border-radius: 14px;
+    background: var(--surface);
+    color: var(--text2);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .32), 0 2px 8px rgba(0, 0, 0, .18);
+    text-align: left;
+}
+
+.hint-explanation-panel[hidden] {
+    display: none;
+}
+
+.hint-explanation-content {
+    min-width: 0;
+}
+
+.hint-callout-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.hint-callout-kicker {
+    color: var(--text3);
+    font-size: .68rem;
+    font-weight: 750;
+    letter-spacing: .12em;
+}
+
+.hint-technique {
+    flex: 0 0 auto;
+    padding: 4px 8px;
+    border: 1px solid rgba(243, 201, 79, .35);
+    border-radius: 999px;
+    background: rgba(243, 201, 79, .12);
+    color: var(--text4);
+    font-size: .76rem;
+    font-weight: 700;
+}
+
+.hint-recommendation {
+    margin: 0;
+    color: var(--text4);
+    font-size: 1.08rem;
+    font-weight: 750;
+    line-height: 1.3;
+}
+
+.hint-explanation-steps {
+    display: grid;
+    gap: 10px;
+    margin: 14px 0 0;
+    padding: 0;
+    color: var(--text2);
+    font-size: .86rem;
+    line-height: 1.5;
+    list-style: none;
+    counter-reset: hint-step;
+}
+
+.hint-explanation-steps li {
+    position: relative;
+    min-height: 24px;
+    padding-left: 34px;
+    counter-increment: hint-step;
+}
+
+.hint-explanation-steps li::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--surface-3);
+    border-radius: 50%;
+    background: var(--surface-2);
+    color: var(--text3);
+    content: counter(hint-step);
+    font-size: .7rem;
+    font-weight: 750;
+    line-height: 1;
+    place-items: center;
+}
+
+.hint-explanation-actions {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 8px;
+}
+
+.hint-explanation-actions button {
+    min-height: 40px;
+    padding: 7px 12px;
+    border-radius: 10px;
+    font-size: .88rem;
+}
+
+.cell.hint-related {
+    background-color: rgba(243, 201, 79, .16) !important;
+    border-color: transparent !important;
+    outline: 3px solid rgba(243, 201, 79, .85) !important;
+    outline-offset: -1.5px;
+    box-shadow: none !important;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.cell.hint-related.selected {
+    border-radius: 5px;
+    outline: 5px solid var(--blue) !important;
+    z-index: 2;
+}
+
+.cell.hint-target {
+    position: relative;
+    z-index: 1;
+    border-color: transparent !important;
+    outline: 5px solid #f0b900 !important;
+    outline-offset: -1.5px;
+    color: #211900 !important;
+    background: #ffe17b !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 560px) {
+    .hint-explanation-panel {
+        width: min(340px, calc(100vw - 24px));
+        max-height: min(50dvh, 360px);
+        padding: 16px;
+    }
+
+    .hint-explanation-actions button {
+        flex: 1;
+    }
+}
+
+#resetAllKeybinds {
+    width: calc(100% - 40px);
+    margin: 0 20px;
+    box-sizing: border-box;
+    border: 1px solid var(--outline);
+    border-radius: 9px;
+    background: var(--surface-3);
+    color: var(--text);
+}
+
+#resetAllKeybinds:hover {
+    background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2));
+    color: var(--muted);
+}
+
+#resetAllKeybinds:active {
+    transform: translateY(1px);
+}
+
+.keybind-list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 19px;
+}
+
+.keybind-row {
+    padding: 0 20px 5px;
+    text-align: left;
+}
+
+.keybind-divider {
+    height: 1px;
+    width: 98%;
+    margin: 5px auto 10px;
+    border: 0;
+    background: var(--muted);
+}
+
+.keybind-label {
+    flex: 1;
+    min-width: 0;
+}
+
+.keybind-assign {
+    min-width: 150px;
+    min-height: 40px;
+    padding: 5px 10px;
+    border: 1px solid var(--outline);
+    border-radius: 9px;
+    background: var(--surface-3);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.keybind-assign.listening {
+    outline: 2px solid var(--blue);
+}
+
+kbd {
+    display: inline-block;
+    padding: 3px 6px;
+    line-height: normal;
+    line-height: 10px;
+    color: var(--text2);
+    background-color: var(--surface);
+    border: 1px solid var(--surface-3);
+    border-bottom-color: var(--line);
+    border-radius: 6px;
+    box-shadow: inset 0 -1px 0 var(--line-strong);
+    font-family: "Ceedoku Mono", monospace;
+    font-size: 14px;
+    font-weight: 300;
+    white-space: nowrap;
+}
+
+.keybind-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.keybind-reset {
+    display: grid;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    flex: 0 0 40px;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid var(--outline);
+    border-radius: 9px;
+    background: var(--surface-3);
+    color: var(--text);
+    cursor: pointer;
+    place-items: center;
+}
+
+.keybind-reset svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.keybind-assign:focus-visible,
+.keybind-reset:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+    .keybind-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .keybind-label {
+        width: 100%;
+    }
+
+    .keybind-controls {
+        width: 100%;
+    }
+
+    .keybind-assign {
+        flex: 1;
+        min-width: 112px;
+        padding: 5px 6px;
+        font-size: .82rem;
+    }
+
+    .keybind-reset {
+        width: 40px;
+        min-width: 40px;
+    }
+
+    .keybind-controls {
+        gap: 5px;
+    }
+
+    .save-manager-card {
+        width: calc(100vw - 16px);
+        max-height: 90dvh;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .save-card {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .save-card-actions {
+        gap: 6px;
+    }
+
+    .save-card-action-row {
+        gap: 5px;
+    }
+
+    .save-close-button,
+    .save-square-button,
+    .save-action-button {
+        min-width: 36px;
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+    }
+
+    .save-play-button {
+        min-width: 64px;
+        height: 36px;
+    }
+
+    .save-card-title-row {
+        gap: 5px;
+        margin-bottom: 8px;
+    }
+
+    .save-card-title {
+        font-size: .94rem;
+    }
+
+    .save-card-meta {
+        column-gap: 5px;
+    }
+}

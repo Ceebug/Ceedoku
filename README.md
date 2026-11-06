@@ -29,6 +29,7 @@ Ceedoku includes eight difficulty levels:
 * **Extreme**
 * **Impossible**
 * **Godlike**
+* **Custom**, with a selectable number of empty cells and a per-game tools toggle
 
 Each difficulty provides a different challenge, with Godlike being the most restrictive difficulty.
 
@@ -40,7 +41,8 @@ Ceedoku includes several tools to help with solving puzzles:
 * Erase mode
 * Undo
 * Redo
-* Hints
+* Hints with an anchored explanation callout and yellow highlights for the cells involved, including singles, locked candidates, subsets, X-Wing/Swordfish/Jellyfish, XY-Wing, W-Wing, simple coloring, and bounded backtracking
+* Hint explanations can be toggled in the Hints section of settings
 
 These tools can be enabled or disabled through the settings.
 
@@ -48,7 +50,9 @@ These tools can be enabled or disabled through the settings.
 
 Ceedoku can save your current game so you can leave and return to it later.
 
-The save system stores things such as:
+The Play menu keeps multiple independent saved games. Each save has its own title, difficulty, progress, and last-played time, and can be resumed, renamed, reordered by dragging, exported, duplicated, or deleted without affecting other saves. Existing browser saves are migrated automatically.
+
+Each save stores things such as:
 
 * The puzzle
 * The solution
@@ -62,6 +66,10 @@ The save system stores things such as:
 * Game state
 
 Ceedoku also has its own save-file format, [**Ceedoku Save Format**](https://ceedoku.github.io/csfspec) **(`.csf`)**, which can be used to export and import saves.
+
+### Keyboard bindings
+
+Every keyboard shortcut can be changed in **Settings → Keyboard bindings**. Choose an action, press the key combination to assign it, and reset individual or all bindings at any time. Bindings are saved separately from game saves; browser and operating-system shortcuts that cannot be handled reliably are reserved.
 
 ### Appearance
 

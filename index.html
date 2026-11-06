@@ -19,7 +19,7 @@ if (releaseReady) {
 	
 	<!-- Sets the variable that declares the version -->
 	<script>
-		const version = "9.5.3"
+		const version = "10.0.0"
 	</script>
 	<!-- Loads FSJ as it is a dependency -->
 	<!-- https://github.com/ceebug/FSJ -->
@@ -142,6 +142,24 @@ if (releaseReady) {
 						<div class=board-wrap>
 							<div class=board id=board aria-label="Ceedoku board" role=grid></div>
 						</div>
+						<svg class="hint-connector" id="hintConnector" aria-hidden="true" hidden>
+							<path id="hintConnectorPath"></path>
+							<circle id="hintConnectorTarget" r="3"></circle>
+						</svg>
+						<div class="hint-explanation-panel" id="hintExplanationPanel" hidden aria-live="polite" aria-labelledby="hintTechnique">
+							<div class="hint-explanation-content">
+								<div class="hint-callout-heading">
+									<span class="hint-callout-kicker">LOGIC STEP</span>
+									<strong class="hint-technique" id="hintTechnique"></strong>
+								</div>
+								<p class="hint-recommendation" id="hintRecommendation"></p>
+								<ol class="hint-explanation-steps" id="hintExplanationSteps"></ol>
+							</div>
+							<div class="hint-explanation-actions">
+								<button id="applyHintButton" class="new-main2" type="button">Apply hint</button>
+								<button id="dismissHintButton" class="number-button cancel-button" type="button">Dismiss</button>
+							</div>
+						</div>
 						<div class=status-line style=padding:3px;display:flex;justify-content:space-between><span id=mistakeStatus>Mistakes: 0</span> <span id=emptyStatus>Empty: 36</span></div>
 					</section>
 					<aside aria-label="Game controls" class=sidebar style="box-shadow:0 0 5px 5px var(--shadow-color)">
@@ -196,6 +214,9 @@ if (releaseReady) {
 
     <button title="Create a new game with the god-like difficulty." class="menu-item" type="button" aria-label="Create a new game with the god-like difficulty." aria-selected="false" data-difficulty="godlike" role="option">
         Godlike <span>No Tools</span>
+    </button>
+    <button title="Choose a custom number of holes and whether tools are available." class="menu-item" type="button" aria-label="Set up a custom difficulty" data-difficulty="custom" role="option">
+        Custom <span>Pick Stuff!</span>
     </button>
 </div>
 						</div>
@@ -268,6 +289,9 @@ if (releaseReady) {
     <button title="Create a new game with the god-like difficulty." class="menu-item" type="button" aria-label="Create a new game with the god-like difficulty." aria-selected="false" data-difficulty="godlike" role="option">
         Godlike <span>No Tools</span>
     </button>
+    <button title="Choose a custom number of holes and whether tools are available." class="menu-item" type="button" aria-label="Set up a custom difficulty" data-difficulty="custom" role="option">
+        Custom <span>Pick Stuff!</span>
+    </button>
 </div>
 						</div><button onclick=showmainmenu() class=new-main2 style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px>Main Menu</button>
 					</div>
@@ -290,7 +314,7 @@ if (releaseReady) {
 								</div>
 							</div>
 						</div><button onclick=resumeTimer() class=new-main2 style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px>Continue Game</button>
-						<div class=new-game-band style=margin-bottom:5px id=pausenewgameband><button title="Create a new game with the previously selected difficulty." class=new-main type=button id=pauseNewGameButton>New Game</button> <button title="Toggle the difficulty menu." title=Difficulty class=new-side type=button aria-label="Choose difficulty" id=pauseDifficultyToggle aria-expanded=false onclick=togglepauseDifficultyMenu()><svg viewBox="0 0 24 24" aria-hidden=true>
+						<div class=new-game-band style=margin-bottom:5px id=pausenewgameband><button title="Create a new game with the previously selected difficulty." class=new-main type=button id=pauseNewGameButton>New Game</button> <button title="Toggle the difficulty menu." title=Difficulty class=new-side type=button aria-label="Choose difficulty" id=pauseDifficultyToggle aria-expanded=false><svg viewBox="0 0 24 24" aria-hidden=true>
 									<path d="m6 9 6 6 6-6"></path>
 								</svg></button>
 							<div class="difficulty-menu something" id="pausedifficultyMenu" aria-label="Difficulty Menu" role="listbox">
@@ -325,6 +349,9 @@ if (releaseReady) {
     <button title="Create a new game with the god-like difficulty." class="menu-item" type="button" aria-label="Create a new game with the god-like difficulty." aria-selected="false" data-difficulty="godlike" role="option">
         Godlike <span>No Tools</span>
     </button>
+    <button title="Choose a custom number of holes and whether tools are available." class="menu-item" type="button" aria-label="Set up a custom difficulty" data-difficulty="custom" role="option">
+        Custom <span>Pick Stuff!</span>
+    </button>
 </div>
 						</div><button onclick=showmainmenu() class=new-main2 style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px>Main Menu</button>
 					</div>
@@ -333,11 +360,11 @@ if (releaseReady) {
 		</div>
 		<div class="show win-overlay2" style=align-items:normal;height:101dvh;position:absolute;width:100dvw;background-color:var(--bg);display:flex;flex-direction:column;padding:20px;justify-content:center;z-index:4999 id=mainmenu aria-label="Main Menu" tabIndex=-1>
 			<h3 style="position:fixed;bottom:calc(0px + env(safe-area-inset-bottom));left:calc(6px + env(safe-area-inset-left));z-index:9999;margin:0" id=version><strong>Version:</strong> *loading*</h3>
-			<h3 style="position:absolute;z-index:9999;margin-bottom:2px;bottom:calc(0px + env(safe-area-inset-bottom));right:6px" class=feedbacklinkh><a class=feedbacklink href=https://ceedoku.github.io/feedbacklite title="Provide feedback on Ceedoku.">Feedback Form</a></h3>
+			<h3 style="position:absolute;z-index:9999;margin-bottom:2px;bottom:calc(0px + env(safe-area-inset-bottom));right:6px" class=feedbacklinkh><a class=feedbacklink href=https://ceedoku.github.io/feedbacklite title="Provide feedback on Ceedoku.">Provide Feedback</a></h3>
 			<div class=cmon style=display:flex;flex-direction:column;align-content:center>
 				<div style=display:flex;justify-content:center><img alt=Ceedoku alt=CEEDOKU class=whatdoievencallthis src=./src/images/logo/wordmark.png style=width:90%;image-rendering:pixelated; aria-label="Ceedoku"></div>
-				<div style=margin-top:20px><button title="Open the save stats menu." class=new-main2 onclick=showcontinueGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px id=igiveup>Continue Game</button></div>
-				<div style=margin-top:5px><button title="Create a new game." title="Create a new game." class=new-main2 type=button id=mainDifficultyToggle aria-expanded=false onclick=openmainDifficultyMenu() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px>New Game</button><button title="Import and/or export save files." class=new-main2 type=button id=importexportbutton onclick="showimportexportmenu()" style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px>Import/Export Saves</button><button title="Change the settings." class=new-main2 type=button id=settingsbutton aria-expanded=false onclick=opensettingsmenu() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px>Settings</button></div>
+				<div style=margin-top:20px><button title="Open your saved games and start a new one." class=new-main2 onclick=showPlayMenu() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px id=igiveup>Play</button></div>
+				<div style=margin-top:5px><button title="Import and/or export save files." class=new-main2 type=button id=importexportbutton onclick="showimportexportmenu()" style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px>Import/Export Saves</button><button title="Change the settings." class=new-main2 type=button id=settingsbutton aria-expanded=false onclick=opensettingsmenu() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px>Settings</button></div>
 			</div>
 		</div>
 		<div style="z-index:10000;width:fit-content;position:absolute;top:0;right:0;background-color:var(--surface);padding:5px 5px 10px 10px;display:flex;gap:5px;border-bottom-left-radius:32px;border:1px solid var(--outline);border-top:0;border-right:0" id=sitecontrols aria-label="site controls"><button title="Pause the game." class="hint-button bar" aria-label="Pause the game" id=pause-btn2 onclick=pauseTimer() style=justify-self:left;width:50px;height:50px;right:20px;top:20px>▶</button>
@@ -365,8 +392,16 @@ if (releaseReady) {
 		<div class="win-card" aria-label="Importing and Exporting saves menu">
 			<h1 style="color:var(--text2);margin-bottom: 25px;" class="win-title">Import/Export Saves</h1>
 			<button title="Import a save game." class="new-main2" onclick="importsave()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">Import Save</button>
-			<button id="exportbutton" title="Export your current save game." class="new-main2" onclick="exportsave()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">Export Save</button>
+			<button id="exportbutton" title="Choose a saved game to export." class="new-main2" onclick="exportsave()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">Export Save</button>
 			<button title="Cancel importing and/or exporting save games." class="number-button cancel-button" onclick="hideimportexportgame()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px">Cancel</button>
+		</div>
+	</div>
+	<div class="win-overlay save-export-picker" id="exportSavePicker" hidden aria-label="Choose a saved game to export">
+		<div class="win-card save-export-picker-card" role="dialog" aria-modal="true" aria-labelledby="exportSavePickerTitle">
+			<h1 id="exportSavePickerTitle" class="win-title">Choose a save to export</h1>
+			<div id="exportSaveList" class="save-export-list" role="list"></div>
+			<p id="exportSaveEmpty" class="save-export-empty" hidden>No saved games are available to export.</p>
+			<button type="button" class="number-button cancel-button" onclick="hideExportSavePicker()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px">Cancel</button>
 		</div>
 	</div>
 	<div class="win-overlay" style="overflow:clip" id="namefileOverlay">
@@ -381,6 +416,28 @@ if (releaseReady) {
 			</div>
 			<button id="savenamebutton" title="Export your current save game." class="new-main2" onclick="exportsavename()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">OK</button>
 			<button title="Cancel exporting your save game." class="number-button cancel-button" onclick="hideexportnamemenu()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px">Cancel</button>
+		</div>
+	</div>
+	<div class="win-overlay save-manager-overlay" id="playOverlay" hidden aria-label="Saved games and new game menu">
+		<div class="win-card save-manager-card">
+			<div class="save-manager-heading">
+				<h1 class="win-title">Play</h1>
+				<button class="save-close-button" type="button" aria-label="Close saved games" onclick="hidePlayMenu()">×</button>
+			</div>
+			<div id="saveCardList" class="save-card-list" aria-live="polite"></div>
+			<div id="emptySaveMessage" class="empty-save-message" hidden>No saved games yet. Start a new game to begin.</div>
+			<button id="newSaveButton" class="new-main2 save-new-game" type="button" onclick="openmainDifficultyMenu()">New Game</button>
+		</div>
+	</div>
+	<div class="win-overlay save-manager-overlay" id="renameSaveOverlay" hidden aria-label="Rename saved game">
+		<div class="win-card save-rename-card">
+			<h1 class="win-title">Edit save title</h1>
+			<label class="save-rename-label" for="saveRenameInput">Save title</label>
+			<input id="saveRenameInput" class="input save-rename-input" type="text" maxlength="80" autocomplete="off">
+			<div class="save-rename-actions">
+				<button id="saveRenameConfirm" class="save-play-button" type="button">Save</button>
+				<button id="saveRenameCancel" class="save-action-button" type="button">Cancel</button>
+			</div>
 		</div>
 	</div>
 	<div class=win-overlay style=overflow:clip id=newOverlay>
@@ -419,9 +476,30 @@ if (releaseReady) {
     <button title="Create a new game with the god-like difficulty." class="menu-item menu-item2" type="button" aria-label="Create a new game with the god-like difficulty." aria-selected="false" data-difficulty="godlike" role="option">
         Godlike <span>54 Holes - No Tools</span>
     </button>
+    <button title="Choose a custom number of holes and whether tools are available." class="menu-item menu-item2 custom-difficulty-option" type="button" aria-haspopup="dialog" aria-label="Set up a custom difficulty" data-difficulty="custom" role="option">
+        Custom <span>Choose holes and tools</span>
+    </button>
 </div>
 			</div>
 			<div style="margin-bottom:10px;width:100%"><strong>Best Time: <strong id="besttimedisplay" class="font-mono">**:**</strong></strong></div><button title="Create a new game with the selected difficulty" class=new-main2 onclick=continuenewGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px>New Game</button><button title="Cancel creating a new game." class="number-button cancel-button" onclick=hidenewgame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px>Cancel</button>
+		</div>
+	</div>
+	<div class="win-overlay custom-difficulty-overlay" id="customDifficultyOverlay" hidden aria-label="Custom difficulty setup" role="dialog" aria-modal="true" aria-labelledby="customDifficultyTitle">
+		<div class="win-card custom-difficulty-card">
+			<h1 id="customDifficultyTitle" class="win-title">Custom difficulty</h1>
+			<label class="custom-holes-label" for="customHolesInput">Number of empty cells <strong id="customHolesValue">36</strong></label>
+			<input id="customHolesInput" class="custom-holes-slider" type="range" min="0" max="64" step="1" value="36">
+			<div class="setting-row custom-tools-row">
+				<strong class="setting-name">Enable tools for this game</strong>
+				<label class="toggle" aria-label="Enable tools for this game">
+					<input id="customToolsToggle" type="checkbox" checked>
+					<span class="toggle-track"></span>
+				</label>
+			</div>
+			<div class="custom-difficulty-actions">
+				<button id="startCustomGame" class="new-main2" type="button">Start game</button>
+				<button id="cancelCustomDifficulty" class="number-button cancel-button" type="button">Back</button>
+			</div>
 		</div>
 	</div>
 	<div class=win-overlay style=overflow:clip id=continueOverlay>
@@ -490,6 +568,8 @@ if (releaseReady) {
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0px title="Whether or not hints should be enabled."><span class=setting-name style=text-align:left><strong>Enable hints</strong></span> <label class=toggle><input id=hintstoggle type=checkbox> <span class=toggle-track></span></label></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
+					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Show an explanation and highlight related cells when using a hint."><span class=setting-name style=text-align:left><strong>Explain hints</strong></span> <label class=toggle><input id=hintExplanationToggle type=checkbox> <span class=toggle-track></span></label></div>
+					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Whether or not hints should have a cooldown."><span class=setting-name style=text-align:left><strong>Hint cooldown</strong></span> <label class=toggle><input id=hintcooldowntoggle type=checkbox> <span class=toggle-track></span></label></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of hints the game gives you at the start of a game."><span class=setting-name style=text-align:left><strong>Starting hints</strong></span> <input id=startinghints type=number placeholder=30 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
@@ -498,9 +578,9 @@ if (releaseReady) {
 							<option value=time>Time-based
 							<option value=move>Move-based
 						</select>
-						<div id="selectwrap" class="selectwrap" style="height: 40px;position: relative;"><button class="select" id="hintselectvalue" style="width: 160px;background-color: var(--surface-3);height: 40px;border-radius: 10px;position: relative;transition: color 0.2s ease, background-color 0.2s ease, border-radius 0.25s linear, border-bottom-right-radius 0.25s linear, border-bottom-left-radius 0.25slinear;"><p id="hintselectvaluetext" style="margin: 0;font-size: 15px;width: 85%;align-content: center;">Time-Based</p><svg class="svg" xmlns="http://w3.org" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text2);">
+						<div id="selectwrap" class="selectwrap" style="height: 40px;position: relative;"><button class="select" id="hintselectvalue" style="width: 160px;background-color: var(--surface-3);height: 40px;border-radius: 10px;position: relative;transition: border-radius 0.25s linear, border-bottom-right-radius 0.25s linear, border-bottom-left-radius 0.25s linear;"><p id="hintselectvaluetext" style="margin: 0;font-size: 15px;width: 85%;align-content: center;">Time-Based</p><svg class="svg" xmlns="http://w3.org" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="currentColor" d="M6 9l6 6 6-6"></path>
-</svg></button><div id="hintselectbox" class="dropbox" style="position: absolute;width: 100%;top: 40px;left: 0;background-color: var(--surface-3);border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;overflow: hidden;height: 0px;transition: height 0.5s linear, padding 0.5s ease, gap 0.5s ease, background-color 0.2s ease;box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);margin: 0;"><div style="display: flex;flex-direction: column;padding: 5px;gap: 5px;"><button title="Set the selected cooldown type to be time-based" class="dropitem" onclick="setcooldownvalue("time")" style="height: 40px;border-radius: 8px;background-color: var(--surface-3);flex-shrink: 0;">Time-Based</button><button onclick="setcooldownvalue("move")"title="Set the selected cooldown type to be move-based" class="dropitem" style="height: 40px;border-radius: 8px;background-color: var(--surface-3);flex-shrink: 0;">Move-Based</button></div></div></div></div>
+</svg></button><div id="hintselectbox" class="dropbox" style="position: absolute;width: 100%;top: 40px;left: 0;background-color: var(--surface-3);border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;overflow: hidden;height: 0px;transition: height 0.5s linear, padding 0.5s ease, gap 0.5s ease, background-color 0.2s ease;box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);margin: 0;"><div style="display: flex;flex-direction: column;padding: 5px;gap: 5px;"><button title="Set the selected cooldown type to be time-based" class="dropitem" onclick="setcooldownvalue('time')" style="height: 40px;border-radius: 8px;background-color: var(--surface-3);flex-shrink: 0;">Time-Based</button><button title="Set the selected cooldown type to be move-based" class="dropitem" onclick="setcooldownvalue('move')" style="height: 40px;border-radius: 8px;background-color: var(--surface-3);flex-shrink: 0;">Move-Based</button></div></div></div></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of moves/seconds until the hint cooldown ends."><span class=setting-name style=text-align:left><strong>Hint cooldown amount</strong></span> <input id=hintcooldownamount type=number placeholder=30 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
@@ -509,6 +589,9 @@ if (releaseReady) {
 					<div class=setting-row style="padding-bottom:5px;padding-top:0px" title="Whether or not hints should be limited."><span class=setting-name style=text-align:left><strong>Enable Limited Hints</strong></span> <label class=toggle><input id=hintlimit type=checkbox> <span class=toggle-track></span></label></div>
 					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
 					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The maximum amount of hints that you can use in a single game."><span class=setting-name style=text-align:left><strong>Hint Limit</strong></span> <input id=hintlimitinput type=number placeholder=1 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
+					<h1 style=font-size:50px;text-align:center;margin-top:20px class=settindescriber>Keybinds</h1>
+					<div id=keybindList class=keybind-list></div>
+					<button id=resetAllKeybinds class=new-main2 type=button>Reset all Keybinds</button>
 				</div>
 			</div>
 		</div>
@@ -518,7 +601,11 @@ if (releaseReady) {
 	<div style=visibility:hidden;width:100dvw;height:100dvh;position:absolute;background-color:#000;z-index:10000000;display:flex;flex-direction:column;justify-content:center;align-items:center id=crashscreen aria-label="Crash screen">
 		<h1 style=font-size:150px;margin-bottom:50px>:(</h1>
 		<h1>Ceedoku has crashed</h1>
-		<h2 id=crashscreenerrormsg>There was no crash message</h2><button onclick=location.reload() class=restart-button><strong>Restart Ceedoku</strong></button>
+		<h2 id=crashscreenerrormsg>There was no crash message</h2>
+		<div style="display:flex;gap:10px">
+			<button onclick=location.reload() class=restart-button><strong>Restart Ceedoku</strong></button>
+			<button onclick="window.open('https://github.com/Ceebug/Ceedoku/issues/new?template=bug_report.yml', '_blank')" class="restart-button"><strong>Report Crash</strong></button>
+		</div>
 	</div>
 	<!-- Toggles touch styles depending on if using touch or not -->
 	<script>
@@ -598,6 +685,9 @@ if (releaseReady) {
 	</script>
 	<!-- TSparticles.confetti becuase i cant be bothered to make confetti myself-->
 	<script src=./src/js/lib/TSparticles.confetti.js></script>
+	<script src=./src/js/saveManager.js></script>
+	<script src=./src/js/keybindManager.js></script>
+	<script src=./src/js/hintEngine.js></script>
 	<!-- Main script -->
 	<script src=./src/js/script.js></script>
 </body>
