@@ -1043,26 +1043,6 @@ let winmenuOpen = false;
 let pausemenuOpen = false;
 let pageMode = localStorage.getItem("theme") || "dark";
 
-    if (settings.SFX.enabled && settings.SFX.win) {
-        winSound.currentTime = 0;
-        winSound.play().catch(() => {});
-    }
-    winDifficulty.textContent = getDifficultyLabel();
-
-
-    winMistakes.textContent = mistakes;
-    winOverlay.hidden = false;
-
-    requestAnimationFrame(() => {
-        winOverlay.classList.add("show");
-    });
-    setTimeout(() => {
-        if (settings.VFX.enabled && settings.VFX.confetti) {
-            fireconfetti();
-        }
-    }, 200);
-
-}
 
 function opensettingsmenu() {
     document.getElementById("settingsOverlay").classList.add("show");
