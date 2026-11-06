@@ -1043,11 +1043,6 @@ let winmenuOpen = false;
 let pausemenuOpen = false;
 let pageMode = localStorage.getItem("theme") || "dark";
 
-function showWinScreen() {
-    winpauseTimer();
-    if (settings.haptics.puzzlecomplete) {
-        vibrate([20, 50, 40]);
-    }
     if (settings.SFX.enabled && settings.SFX.win) {
         winSound.currentTime = 0;
         winSound.play().catch(() => {});
