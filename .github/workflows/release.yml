@@ -285,7 +285,7 @@ jobs:
         shell: bash
         run: |
           git config user.name "Ceebot"
-          git config user.email ""
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add -A
           CHANGES=$(git diff --cached --name-only)
@@ -376,7 +376,7 @@ jobs:
         shell: bash
         run: |
           git config user.name "Ceebot"
-          git config user.email ""
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add changelog/Changelogs.md
 
