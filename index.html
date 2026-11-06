@@ -672,14 +672,14 @@ if (releaseReady) {
 		window.addEventListener("error", e => {
 			document.body.style.visibility = "visible", document.title = "Ceedoku - Crashed", document.getElementById("crashscreen").style.visibility = "visible";
 			const t = document.getElementById("crashscreenerrormsg");
-			t.innerHTML = `<strong>A fatal error occurred in the main game script.</strong><br>${e.message} - Line ${e.lineno}, Column ${e.colno}`
+			t.innerHTML = `<strong>A fatal error occurred in one of the game scripts.</strong><br>${e.message} - Line ${e.lineno}, Column ${e.colno}`
 		}), window.addEventListener("unhandledrejection", e => {
 			document.body.style.visibility = "visible", document.title = "Ceedoku - Crashed", document.getElementById("crashscreen").style.visibility = "visible";
 			const t = document.getElementById("crashscreenerrormsg");
-			t.innerHTML = `<strong>An unhandled promise rejection occurred in the main script.</strong><br>${String(e.reason)}`
+			t.innerHTML = `<strong>An unhandled promise rejection occurred in one of the game scripts.</strong><br>${String(e.reason)}`
 		}), document.querySelectorAll("script[src]").forEach(e => {
 			e.addEventListener("error", () => {
-				document.body.style.visibility = "visible", document.title = "Ceedoku - Crashed", document.getElementById("crashscreen").style.visibility = "visible", document.getElementById("crashscreenerrormsg").innerHTML = "<strong>Failed to load the main game script.</strong>"
+				document.body.style.visibility = "visible", document.title = "Ceedoku - Crashed", document.getElementById("crashscreen").style.visibility = "visible", document.getElementById("crashscreenerrormsg").innerHTML = "<strong>Failed to load one of the game scripts.</strong>"
 			})
 		})
 	</script>
