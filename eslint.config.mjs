@@ -10,7 +10,9 @@ export default [
     rules: {
       ...js.configs.recommended.rules,
       "no-undef": "off",
-      "no-unused-vars": "off"
+      "no-unused-vars": "off",
+      "preserve-caught-error": "off",
+      "no-useless-assignment": "off"
     }
   }
 ];
