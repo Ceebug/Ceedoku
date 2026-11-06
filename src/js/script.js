@@ -3573,7 +3573,10 @@ function continueGame() {
 
 setInterval(saveGame, 1000);
 
-async function newGame(nextDifficulty = difficulty, customOptions = null) {
+async function newGame(
+    nextDifficulty = difficulty,
+    customOptions = difficulty === "custom" ? customDifficulty : null
+) {
     saveGame();
     runninggame = false;
     clearInterval(timerId);
