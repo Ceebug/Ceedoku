@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: Run tests
+    name: CI: Test/Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +17,36 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+
+      - name: Install linters
+        run: npm install --no-save --no-package-lock --ignore-scripts htmlhint stylelint stylelint-config-recommended eslint @eslint/js
+
+      - name: Lint HTML
+        run: |
+          mapfile -d '' files < <(find . -type f -name '*.html' -not -path './node_modules/*' -not -path './.git/*' -print0)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No HTML files found!"
+            exit 1
+          fi
+          ./node_modules/.bin/htmlhint "${files[@]}"
+
+      - name: Lint CSS
+        run: |
+          mapfile -d '' files < <(find . -type f -name '*.css' -not -path './node_modules/*' -not -path './.git/*' -print0)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No CSS files found!"
+            exit 1
+          fi
+          ./node_modules/.bin/stylelint "${files[@]}"
+
+      - name: Lint JavaScript
+        run: |
+          mapfile -d '' files < <(find . -type f -name '*.js' -not -path './node_modules/*' -not -path './.git/*' -print0)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No JavaScript files found!"
+            exit 1
+          fi
+          ./node_modules/.bin/eslint "${files[@]}"
 
       - name: Run all tests
         run: |
