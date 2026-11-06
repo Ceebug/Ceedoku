@@ -1,7 +1,7 @@
 queue_rules:
   - name: default
     merge_conditions:
-      - check-success=CI: Test/Lint
+      - "check-success=CI: Test/Lint"
     merge_method: squash
     commit_message_format:
       title: pr-title
