@@ -28,7 +28,7 @@ jobs:
             echo "No HTML files found!"
             exit 1
           fi
-          ./node_modules/.bin/htmlhint "${files[@]}"
+          ./node_modules/.bin/htmlhint --config .htmlhintrc "${files[@]}"
 
       - name: Lint CSS
         run: |
