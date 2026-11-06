@@ -257,7 +257,11 @@ The current version is displayed on the Ceedoku website and in the project's rel
 
 For the latest release, see the GitHub releases page:
 
-**https://github.com/ceebug/ceedoku/releases**
+**https://github.com/ceebug/ceedoku/releases/latest**
+
+Alternatively, you can use this page:
+
+**https://ceedoku.github.io/changelog/release/?v=latest**
 
 
 ## Project Status
