@@ -13,7 +13,7 @@ if (releaseReady) {
 }
 
 ------------------------------------------------------------------------>
-<html lang=en>
+<html lang="en">
 
 <head>
 	
@@ -28,11 +28,11 @@ if (releaseReady) {
 	<!-- https://github.com/ceebug/JSF -->
 	<script src="./src/js/lib/JSF.js"></script>
 	<!-- Page description so Google knows WTF the game is -->
-	<meta content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more." name=description>
+	<meta content="Ceedoku is a free Sudoku game with multiple difficulty levels, dark mode, hints, saving, and more." name="description">
 	<!-- Sets the character set to UNICODE TEXT FOUNDATION v8 BECAUSE FOR SOME REASON IT ISNT THE DEFAULT -->
-	<meta charset=utf-8>
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-	<meta content=#101418 name=theme-color>
+	<meta content="#101418" name="theme-color">
 	<link href="./src/images/logo/icon/resizable.svg" rel="icon" type="image/svg+xml">
 	<!-- Loads 2 other png icons because Google's indexers are STUPID and can't understand svgs -->
 	<link href="./src/images/logo/icon/128.png" rel="icon" type="image/png" sizes="128x128">
@@ -40,20 +40,20 @@ if (releaseReady) {
 	<!-- if u cant figure out what this does you're an idiot -->
 	<title>Ceedoku</title>
 	<!-- loads the main stylesheet -->
-	<link href=./src/css/style.css rel=stylesheet>
+	<link href="./src/css/style.css" rel="stylesheet">
 	<!-- Loads the touch hover patching stylesheet that will be toggled on and of by the script at the bottom of the page depending on if the users input method supports hover or not - this is only needed because CSS IS FUCKING STUPID AND FOR DEVICES THAT DONT SUPPORT HOVER JUST KEEPS HOVER ON UNTIL THEY CLICK SOMEWHERE ELSE, FUCK CSS-->
-	<link href=./src/css/hoverPatch.css rel=stylesheet id=touchStyles>
+	<link href="./src/css/hoverPatch.css" rel="stylesheet" id="touchStyles">
 	<!-- registers the serviceworker on supported devices -->
 	<script>        
 		"serviceWorker" in navigator && navigator.serviceWorker.register("./src/pwa/serviceWorker.js").then(() => console.log("Service Worker Registered")).catch(e => console.log("Service Worker Registration Failed", e))
 	</script>
 	<!-- Registers the PWAs manifest to the browser -->
-	<link href=./src/pwa/manifest.json rel=manifest>
+	<link href="./src/pwa/manifest.json" rel="manifest">
 </head>
 
-<body class=dark style="scrollbar-color:transparent transparent;display:flex;align-items:center;justify-content:center">
-	<div style=display:flex;flex-direction:column;place-content:center;position:fixed;place-items:center;visibility:visible;height:100dvh;width:100dvw;overflow:hidden id=loader>
-		<style id=loadingscreen>
+<body class="dark" style="scrollbar-color:transparent transparent;display:flex;align-items:center;justify-content:center">
+	<div style="display:flex;flex-direction:column;place-content:center;position:fixed;place-items:center;visibility:visible;height:100dvh;width:100dvw;overflow:hidden" id="loader">
+		<style id="loadingscreen">
 			.spinner {
 				animation: rotator 1.4s linear infinite
 			}
@@ -120,27 +120,27 @@ if (releaseReady) {
 				}
 			}
 		</style>
-		<div class="loadingdiv" style=display:flex;justify-content:center;margin-bottom:10px><img alt=Ceedoku class=whatdoievencallthis src=./src/images/logo/wordmark.png style=width:90%;image-rendering:pixelated aria-label="Ceedoku"></div><ceedoku-spinner></ceedoku-spinner>
+		<div class="loadingdiv" style="display:flex;justify-content:center;margin-bottom:10px"><img alt="Ceedoku" class="whatdoievencallthis" src="./src/images/logo/wordmark.png" style="width:90%;image-rendering:pixelated" aria-label="Ceedoku"></div><ceedoku-spinner></ceedoku-spinner>
 	</div>
-	<div style="visibility:hidden;scrollbar-color:transparent transparent" id=aahtheentiregame><div id="notification" style="z-index: 9999999;background-color: var(--surface);position: absolute;top: 10px;left: 50%;padding: 10px;transform: translatex(-50%)translatey(-60px);border-radius: 100px;transition: transform 0.2s ease-in-out, background-color 0.2s ease;"><strong id="notification-content" style="margin: 0px;color: var(--text2);">Where is the text?</strong></div>
-		<div class=null>
-			<div class=game-shell style=padding-top:20px>
-				<main aria-label="Ceedoku game" class=app>
+	<div style="visibility:hidden;scrollbar-color:transparent transparent" id="aahtheentiregame"><div id="notification" style="z-index: 9999999;background-color: var(--surface);position: absolute;top: 10px;left: 50%;padding: 10px;transform: translatex(-50%)translatey(-60px);border-radius: 100px;transition: transform 0.2s ease-in-out, background-color 0.2s ease;"><strong id="notification-content" style="margin: 0px;color: var(--text2);">Where is the text?</strong></div>
+		<div class="null">
+			<div class="game-shell" style="padding-top:20px">
+				<main aria-label="Ceedoku game" class="app">
 
-					<section class=main style=width:100%>
-						<div class=topbar>
-							<div class=brand>
-								<div class=mark aria-hidden=true aria-label="Ceedoku Icon">
-									<div class=mark-grid><span></span><span></span><span></span> <span></span><span></span><span></span> <span></span><span></span><span></span></div>
+					<section class="main" style="width:100%">
+						<div class="topbar">
+							<div class="brand">
+								<div class="mark" aria-hidden="true" aria-label="Ceedoku Icon">
+									<div class="mark-grid"><span></span><span></span><span></span> <span></span><span></span><span></span> <span></span><span></span><span></span></div>
 								</div>
-								<div style=margin-bottom:5px>
-									<h1 style=color:var(--text4) id=title>Ceedoku</h1>
-									<div class=difficulty-badge id=difficultyBadge>Easy</div>
+								<div style="margin-bottom:5px">
+									<h1 style="color:var(--text4)" id="title">Ceedoku</h1>
+									<div class="difficulty-badge" id="difficultyBadge">Easy</div>
 								</div>
 							</div>
 						</div>
-						<div class=board-wrap>
-							<div class=board id=board aria-label="Ceedoku board" role=grid></div>
+						<div class="board-wrap">
+							<div class="board" id="board" aria-label="Ceedoku board" role="grid"></div>
 						</div>
 						<svg class="hint-connector" id="hintConnector" aria-hidden="true" hidden>
 							<path id="hintConnectorPath"></path>
@@ -160,27 +160,27 @@ if (releaseReady) {
 								<button id="dismissHintButton" class="number-button cancel-button" type="button">Dismiss</button>
 							</div>
 						</div>
-						<div class=status-line style=padding:3px;display:flex;justify-content:space-between><span id=mistakeStatus>Mistakes: 0</span> <span id=emptyStatus>Empty: 36</span></div>
+						<div class="status-line" style="padding:3px;display:flex;justify-content:space-between"><span id="mistakeStatus">Mistakes: 0</span> <span id="emptyStatus">Empty: 36</span></div>
 					</section>
-					<aside aria-label="Game controls" class=sidebar style="box-shadow:0 0 5px 5px var(--shadow-color)">
-						<div class=control-band>
+					<aside aria-label="Game controls" class="sidebar" style="box-shadow:0 0 5px 5px var(--shadow-color)">
+						<div class="control-band">
 							<div class="control-card hint-wrap">
-								<div style=height:25px;background-color:var(--blue);width:fit-content;border-radius:20px;position:fixed;color:#fff;text-align:center;transform:translatey(-30px);padding-left:5px;padding-right:5px;max-width:80px;overflow:hidden id=hintCooldownDisplay>Loading</div><button title="Get a hint." class=hint-button type=button aria-label="Get a hint" id=hintButton><svg viewBox="0 0 30 31" style=height:35px>
-										<path d="M17.3 25.91c.5 0 .91.48.91 1.08 0 .59-.4 1.07-.91 1.07h-4.6c-.5 0-.91-.48-.91-1.07 0-.6.4-1.08.91-1.08zM15 2.34a9.68 9.68 0 019.64 9.71c0 3.5-1.86 6.7-4.83 8.41-.23.14-.4.39-.5.82a3.21 3.21 0 01-3.13 2.5H13.5a3.21 3.21 0 01-3.17-2.68c-.08-.45-.17-.65-.12-.62a9.72 9.72 0 01-4.85-8.43c0-5.36 4.31-9.7 9.64-9.7zm0 2.15a7.53 7.53 0 00-7.5 7.56 7.57 7.57 0 003.78 6.57c.65.38.99 1.1 1.16 2.12.1.51.54.89 1.06.89h2.68c.5 0 .94-.35 1.05-.83.23-.98.73-1.73 1.5-2.19a7.57 7.57 0 003.77-6.56A7.53 7.53 0 0015 4.5z" fill=var(--muted)></path>
+								<div style="height:25px;background-color:var(--blue);width:fit-content;border-radius:20px;position:fixed;color:#fff;text-align:center;transform:translatey(-30px);padding-left:5px;padding-right:5px;max-width:80px;overflow:hidden" id="hintCooldownDisplay">Loading</div><button title="Get a hint." class="hint-button" type="button" aria-label="Get a hint" id="hintButton"><svg viewBox="0 0 30 31" style="height:35px">
+										<path d="M17.3 25.91c.5 0 .91.48.91 1.08 0 .59-.4 1.07-.91 1.07h-4.6c-.5 0-.91-.48-.91-1.07 0-.6.4-1.08.91-1.08zM15 2.34a9.68 9.68 0 019.64 9.71c0 3.5-1.86 6.7-4.83 8.41-.23.14-.4.39-.5.82a3.21 3.21 0 01-3.13 2.5H13.5a3.21 3.21 0 01-3.17-2.68c-.08-.45-.17-.65-.12-.62a9.72 9.72 0 01-4.85-8.43c0-5.36 4.31-9.7 9.64-9.7zm0 2.15a7.53 7.53 0 00-7.5 7.56 7.57 7.57 0 003.78 6.57c.65.38.99 1.1 1.16 2.12.1.51.54.89 1.06.89h2.68c.5 0 .94-.35 1.05-.83.23-.98.73-1.73 1.5-2.19a7.57 7.57 0 003.77-6.56A7.53 7.53 0 0015 4.5z" fill="var(--muted)"></path>
 									</svg></button>
 							</div>
-							<div class="control-card timer-wrap font-mono" id=timer>00:00</div>
+							<div class="control-card timer-wrap font-mono" id="timer">00:00</div>
 							<div class="control-card aah history-wrap">
-								<div class=history-pill aria-label="History controls"><button title="Undo your last move." title=Undo class=history-button type=button aria-label="Undo your last move" aria-label=Undo id=undoButton disabled><svg viewBox="0 0 24 24" aria-hidden=true>
+								<div class="history-pill" aria-label="History controls"><button title="Undo your last move." title="Undo" class="history-button" type="button" aria-label="Undo your last move" aria-label="Undo" id="undoButton" disabled><svg viewBox="0 0 24 24" aria-hidden="true">
 											<path d="M10 7 5 12l5 5"></path>
 											<path d="M5 12h14"></path>
-										</svg></button> <button title="Redo your last move." title=Redo class=history-button type=button aria-label="Redo your last move" aria-label=Redo id=redoButton disabled><svg viewBox="0 0 24 24" aria-hidden=true>
+										</svg></button> <button title="Redo your last move." title="Redo" class="history-button" type="button" aria-label="Redo your last move" aria-label="Redo" id="redoButton" disabled><svg viewBox="0 0 24 24" aria-hidden="true">
 											<path d="m14 7 5 5-5 5"></path>
 											<path d="M19 12H5"></path>
 										</svg></button></div>
 							</div>
 						</div>
-						<div class=new-game-band id=newGameBand><button title="Create a new game with the previously selected difficulty." class="new-main uuh" type=button id=newGameButton>New Game</button> <button title="Toggle the difficulty menu." title=Difficulty class="new-side umm" type=button aria-label="Choose difficulty" id=difficultyToggle aria-expanded=false><svg viewBox="0 0 24 24" aria-hidden=true>
+						<div class="new-game-band" id="newGameBand"><button title="Create a new game with the previously selected difficulty." class="new-main uuh" type="button" id="newGameButton">New Game</button> <button title="Toggle the difficulty menu." title="Difficulty" class="new-side umm" type="button" aria-label="Choose difficulty" id="difficultyToggle" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">
 									<path d="m6 9 6 6 6-6"></path>
 								</svg></button>
 							<div class="difficulty-menu something" id="difficultyMenu" aria-label="Difficulty Menu" role="listbox">
@@ -220,11 +220,11 @@ if (releaseReady) {
     </button>
 </div>
 						</div>
-						<div class=numbers-band>
-							<div class=pencilanderaser><button title="Toggle pencil mode." class="pencileraserbutton pencil-button" type=button id=pencilButton aria-pressed=false><svg viewBox="0 0 24 24" aria-hidden=true>
+						<div class="numbers-band">
+							<div class="pencilanderaser"><button title="Toggle pencil mode." class="pencileraserbutton pencil-button" type="button" id="pencilButton" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true">
 										<path d="M12 20h9"></path>
 										<path d="m16.5 3.5 4 4L8 20H4v-4L16.5 3.5Z"></path>
-									</svg> Pencil</button> <button title="Toggle erase mode." class="pencileraserbutton erase-button" type=button id=eraseButton aria-pressed=false>
+									</svg> Pencil</button> <button title="Toggle erase mode." class="pencileraserbutton erase-button" type="button" id="eraseButton" aria-pressed="false">
 									<svg viewBox="0 0 24 24" aria-hidden="true">
   <!-- The baseline line, staying away on the right -->
   <path d="M14 21h7"></path>
@@ -235,26 +235,26 @@ if (releaseReady) {
 </svg>
 
  Erase</button></div>
-							<div class=number-grid id=numberGrid aria-label="Number pad"><button title="Use 1" class=number-button type=button data-value=1>1</button><button title="Use 2" class=number-button type=button data-value=2>2</button><button title="Use 3" class=number-button type=button data-value=3>3</button><button title="Use 4" class=number-button type=button data-value=4>4</button><button title="Use 5" class=number-button type=button data-value=5>5</button><button title="Use 6" class=number-button type=button data-value=6>6</button><button title="Use 7" class=number-button type=button data-value=7>7</button><button title="Use 8" class=number-button type=button data-value=8>8</button><button title="Use 9" class=number-button type=button data-value=9>9</button></div>
+							<div class="number-grid" id="numberGrid" aria-label="Number pad"><button title="Use 1" class="number-button" type="button" data-value="1">1</button><button title="Use 2" class="number-button" type="button" data-value="2">2</button><button title="Use 3" class="number-button" type="button" data-value="3">3</button><button title="Use 4" class="number-button" type="button" data-value="4">4</button><button title="Use 5" class="number-button" type="button" data-value="5">5</button><button title="Use 6" class="number-button" type="button" data-value="6">6</button><button title="Use 7" class="number-button" type="button" data-value="7">7</button><button title="Use 8" class="number-button" type="button" data-value="8">8</button><button title="Use 9" class="number-button" type="button" data-value="9">9</button></div>
 						</div>
 					</aside>
-					<div class=foo style=display:flex;position:absolute;right:20px;top:20px;gap:10px><button title="Pause the game." class="hint-button bar" aria-label="Pause the game" id=pause-btn onclick=pauseTimer() style=justify-self:left;width:50px;height:50px;right:20px;top:20px>
+					<div class="foo" style="display:flex;position:absolute;right:20px;top:20px;gap:10px"><button title="Pause the game." class="hint-button bar" aria-label="Pause the game" id="pause-btn" onclick="pauseTimer()" style="justify-self:left;width:50px;height:50px;right:20px;top:20px">
 					<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">
     <path d="M4 2C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22C4.3 22 4.6 21.93 4.87 21.79L21.2 13.25C22.27 12.69 22.27 11.31 21.2 10.75L4.87 2.21C4.6 2.07 4.3 2 4 2Z"></path>
 </svg></button></div>
 				</main>
-				<div class=win-overlay id=winOverlay aria-label="Win Overlay" hidden>
-					<div class=win-card>
-						<div style=display:flex;align-items:center;justify-content:center;height:128><img aria-label="Victory trophy" alt="[Insert trophy image here]&#10;(The file failed to load! D=)" class=win-icon src="./src/images/trophy.png" style=scale:0.25;position-anchor:center draggable=false id=winIcon></div>
-						<h1 style=color:var(--text2) class=win-title>Puzzle Complete!</h1>
+				<div class="win-overlay" id="winOverlay" aria-label="Win Overlay" hidden>
+					<div class="win-card">
+						<div style="display:flex;align-items:center;justify-content:center;height:128"><img aria-label="Victory trophy" alt="[Insert trophy image here]&#10;(The file failed to load! D=)" class="win-icon" src="./src/images/trophy.png" style="scale:0.25;position-anchor:center" draggable="false" id="winIcon"></div>
+						<h1 style="color:var(--text2)" class="win-title">Puzzle Complete!</h1>
 						<div>
-							<div class=win-stats>
-								<div class=win-stat style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;scale:1.3;box-shadow:0 0 5px 5px var(--shadow-color2)">
-									<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style=color:var(--blue)>Difficulty: </strong><span style=color:var(--text3) id=winDifficulty>Easy</span><strong style=color:var(--blue)><br>Time: </strong><span class="font-mono" style=color:var(--text3) id=winTime>00:00</span><strong style=color:var(--blue)><br>Mistakes: </strong><span style=color:var(--text3) id=winMistakes>0</span></h2>
+							<div class="win-stats">
+								<div class="win-stat" style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;scale:1.3;box-shadow:0 0 5px 5px var(--shadow-color2)">
+									<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style="color:var(--blue)">Difficulty: </strong><span style="color:var(--text3)" id="winDifficulty">Easy</span><strong style="color:var(--blue)"><br>Time: </strong><span class="font-mono" style="color:var(--text3)" id="winTime">00:00</span><strong style="color:var(--blue)"><br>Mistakes: </strong><span style="color:var(--text3)" id="winMistakes">0</span></h2>
 								</div>
 							</div>
 						</div>
-						<div class=new-game-band style=margin-bottom:5px id=winnewgameband><button title="Create a new game with the previously selected difficulty." class=new-main type=button id=winNewGameButton>New Game</button> <button title="Toggle the difficulty menu." title=Difficulty class=new-side type=button aria-label="Choose difficulty" id=winDifficultyToggle aria-expanded=false><svg viewBox="0 0 24 24" aria-hidden=true>
+						<div class="new-game-band" style="margin-bottom:5px" id="winnewgameband"><button title="Create a new game with the previously selected difficulty." class="new-main" type="button" id="winNewGameButton">New Game</button> <button title="Toggle the difficulty menu." title="Difficulty" class="new-side" type="button" aria-label="Choose difficulty" id="winDifficultyToggle" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">
 									<path d="m6 9 6 6 6-6"></path>
 								</svg></button>
 							<div class="difficulty-menu thisissomething" id="windifficultyMenu" aria-label="Difficulty Menu" role="listbox">
@@ -293,28 +293,28 @@ if (releaseReady) {
         Custom <span>Pick Stuff!</span>
     </button>
 </div>
-						</div><button onclick=showmainmenu() class=new-main2 style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px>Main Menu</button>
+						</div><button onclick="showmainmenu()" class="new-main2" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px">Main Menu</button>
 					</div>
-					<div class=besttime>
-						<h2 style=text-align:center;color:var(--text2);margin:0;height:25px;width:172px><strong>New best time</strong></h2>
-						<div style=display:flex;flex-direction:row;height:25px>
-							<h3 style=margin:0;margin-right:5px id=oldwintime class="font-mono">00:00</h3>
-							<h3 style=margin:0>➜</h3>
-							<h3 style=margin:0;color:var(--text);margin-left:5px id=newwintime class="font-mono">00:00</h3>
+					<div class="besttime">
+						<h2 style="text-align:center;color:var(--text2);margin:0;height:25px;width:172px"><strong>New best time</strong></h2>
+						<div style="display:flex;flex-direction:row;height:25px">
+							<h3 style="margin:0;margin-right:5px" id="oldwintime" class="font-mono">00:00</h3>
+							<h3 style="margin:0">➜</h3>
+							<h3 style="margin:0;color:var(--text);margin-left:5px" id="newwintime" class="font-mono">00:00</h3>
 						</div>
 					</div>
 				</div>
-				<div class=win-overlay id=pauseOverlay aria-label="Pause Overlay">
-					<div class=win-card>
-						<h1 style=color:var(--text2) class=win-title>Puzzle Paused</h1>
+				<div class="win-overlay" id="pauseOverlay" aria-label="Pause Overlay">
+					<div class="win-card">
+						<h1 style="color:var(--text2)" class="win-title">Puzzle Paused</h1>
 						<div>
-							<div class=win-stats>
-								<div class=win-stat style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;scale:1.3;box-shadow:0 0 5px 5px var(--shadow-color2)">
-									<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style=color:var(--blue)>Difficulty: </strong><span style=color:var(--text3) id=pauseDifficulty>Easy</span><strong style=color:var(--blue)><br>Paused at: </strong><span style=color:var(--text3) id=pauseTime class="font-mono">00:00</span><strong style=color:var(--blue)><br>Mistakes: </strong><span style=color:var(--text3) id=pauseMistakes>0</span></h2>
+							<div class="win-stats">
+								<div class="win-stat" style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;scale:1.3;box-shadow:0 0 5px 5px var(--shadow-color2)">
+									<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style="color:var(--blue)">Difficulty: </strong><span style="color:var(--text3)" id="pauseDifficulty">Easy</span><strong style="color:var(--blue)"><br>Paused at: </strong><span style="color:var(--text3)" id="pauseTime" class="font-mono">00:00</span><strong style="color:var(--blue)"><br>Mistakes: </strong><span style="color:var(--text3)" id="pauseMistakes">0</span></h2>
 								</div>
 							</div>
-						</div><button onclick=resumeTimer() class=new-main2 style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px>Continue Game</button>
-						<div class=new-game-band style=margin-bottom:5px id=pausenewgameband><button title="Create a new game with the previously selected difficulty." class=new-main type=button id=pauseNewGameButton>New Game</button> <button title="Toggle the difficulty menu." title=Difficulty class=new-side type=button aria-label="Choose difficulty" id=pauseDifficultyToggle aria-expanded=false><svg viewBox="0 0 24 24" aria-hidden=true>
+						</div><button onclick="resumeTimer()" class="new-main2" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">Continue Game</button>
+						<div class="new-game-band" style="margin-bottom:5px" id="pausenewgameband"><button title="Create a new game with the previously selected difficulty." class="new-main" type="button" id="pauseNewGameButton">New Game</button> <button title="Toggle the difficulty menu." title="Difficulty" class="new-side" type="button" aria-label="Choose difficulty" id="pauseDifficultyToggle" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">
 									<path d="m6 9 6 6 6-6"></path>
 								</svg></button>
 							<div class="difficulty-menu something" id="pausedifficultyMenu" aria-label="Difficulty Menu" role="listbox">
@@ -353,21 +353,21 @@ if (releaseReady) {
         Custom <span>Pick Stuff!</span>
     </button>
 </div>
-						</div><button onclick=showmainmenu() class=new-main2 style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px>Main Menu</button>
+						</div><button onclick="showmainmenu()" class="new-main2" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px">Main Menu</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="show win-overlay2" style=align-items:normal;height:101dvh;position:absolute;width:100dvw;background-color:var(--bg);display:flex;flex-direction:column;padding:20px;justify-content:center;z-index:4999 id=mainmenu aria-label="Main Menu" tabIndex=-1>
-			<h3 style="position:fixed;bottom:calc(0px + env(safe-area-inset-bottom));left:calc(6px + env(safe-area-inset-left));z-index:9999;margin:0" id=version><strong>Version:</strong> *loading*</h3>
-			<h3 style="position:absolute;z-index:9999;margin-bottom:2px;bottom:calc(0px + env(safe-area-inset-bottom));right:6px" class=feedbacklinkh><a class=feedbacklink href=https://ceedoku.github.io/feedbacklite title="Provide feedback on Ceedoku.">Provide Feedback</a></h3>
-			<div class=cmon style=display:flex;flex-direction:column;align-content:center>
-				<div style=display:flex;justify-content:center><img alt=Ceedoku alt=CEEDOKU class=whatdoievencallthis src=./src/images/logo/wordmark.png style=width:90%;image-rendering:pixelated; aria-label="Ceedoku"></div>
-				<div style=margin-top:20px><button title="Open your saved games and start a new one." class=new-main2 onclick=showPlayMenu() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px id=igiveup>Play</button></div>
-				<div style=margin-top:5px><button title="Import and/or export save files." class=new-main2 type=button id=importexportbutton onclick="showimportexportmenu()" style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px>Import/Export Saves</button><button title="Change the settings." class=new-main2 type=button id=settingsbutton aria-expanded=false onclick=opensettingsmenu() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px>Settings</button></div>
+		<div class="show win-overlay2" style="align-items:normal;height:101dvh;position:absolute;width:100dvw;background-color:var(--bg);display:flex;flex-direction:column;padding:20px;justify-content:center;z-index:4999" id="mainmenu" aria-label="Main Menu" tabIndex="-1">
+			<h3 style="position:fixed;bottom:calc(0px + env(safe-area-inset-bottom));left:calc(6px + env(safe-area-inset-left));z-index:9999;margin:0" id="version"><strong>Version:</strong> *loading*</h3>
+			<h3 style="position:absolute;z-index:9999;margin-bottom:2px;bottom:calc(0px + env(safe-area-inset-bottom));right:6px" class="feedbacklinkh"><a class="feedbacklink" href="https://ceedoku.github.io/feedbacklite" title="Provide feedback on Ceedoku.">Provide Feedback</a></h3>
+			<div class="cmon" style="display:flex;flex-direction:column;align-content:center">
+				<div style="display:flex;justify-content:center"><img alt="Ceedoku" alt="CEEDOKU" class="whatdoievencallthis" src="./src/images/logo/wordmark.png" style="width:90%;image-rendering:pixelated;" aria-label="Ceedoku"></div>
+				<div style="margin-top:20px"><button title="Open your saved games and start a new one." class="new-main2" onclick="showPlayMenu()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px" id="igiveup">Play</button></div>
+				<div style="margin-top:5px"><button title="Import and/or export save files." class="new-main2" type="button" id="importexportbutton" onclick="showimportexportmenu()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px">Import/Export Saves</button><button title="Change the settings." class="new-main2" type="button" id="settingsbutton" aria-expanded="false" onclick="opensettingsmenu()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-top:10px">Settings</button></div>
 			</div>
 		</div>
-		<div style="z-index:10000;width:fit-content;position:absolute;top:0;right:0;background-color:var(--surface);padding:5px 5px 10px 10px;display:flex;gap:5px;border-bottom-left-radius:32px;border:1px solid var(--outline);border-top:0;border-right:0" id=sitecontrols aria-label="site controls"><button title="Pause the game." class="hint-button bar" aria-label="Pause the game" id=pause-btn2 onclick=pauseTimer() style=justify-self:left;width:50px;height:50px;right:20px;top:20px>▶</button>
+		<div style="z-index:10000;width:fit-content;position:absolute;top:0;right:0;background-color:var(--surface);padding:5px 5px 10px 10px;display:flex;gap:5px;border-bottom-left-radius:32px;border:1px solid var(--outline);border-top:0;border-right:0" id="sitecontrols" aria-label="site controls"><button title="Pause the game." class="hint-button bar" aria-label="Pause the game" id="pause-btn2" onclick="pauseTimer()" style="justify-self:left;width:50px;height:50px;right:20px;top:20px">▶</button>
 		<button title="Print the currently active sudoku game." class="hint-button bar" aria-label="Print the currently active sudoku game" id="print" onclick="window.print()" style="font-size:22px;width:50px;height:50px!important">
 <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M6 8V2H18V8"/>
@@ -378,9 +378,9 @@ if (releaseReady) {
     <circle cx="5" cy="12" r="1" fill="currentColor" stroke="none"/>
     <path d="M8 12H16"/>
 </svg>
-		</button><button title="Switch between light and dark mode." class="hint-button bar" aria-label="switch between light and dark mode" id=mode onclick=changemode() style=font-size:22px;width:50px;height:50px!important><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+		</button><button title="Switch between light and dark mode." class="hint-button bar" aria-label="switch between light and dark mode" id="mode" onclick="changemode()" style="font-size:22px;width:50px;height:50px!important"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M20.5 14.5C19.4 15.05 18.16 15.35 16.85 15.35C12.33 15.35 8.65 11.67 8.65 7.15C8.65 5.84 8.95 4.6 9.5 3.5C5.6 4.45 2.7 7.97 2.7 12.15C2.7 17.06 6.68 21.05 11.6 21.05C15.78 21.05 19.55 18.4 20.5 14.5Z"></path>
-</svg></button> <button title="Toggle fullscreen mode." class="hint-button bar" aria-label="toggle fullscreen mode." id=fullscreen onclick=fullscreen() style=font-size:18px;width:50px;height:50px;padding:10px><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5L2 12L8 19"></path><path d="M16 5L22 12L16 19"></path></svg></button><button title="Go to the main menu." class="hint-button bar" aria-label="go to the main menu" id="mainmenubutton" onclick="showmainmenu()" style="font-size: 18px; width: 50px; height: 50px; padding: 10px;"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+</svg></button> <button title="Toggle fullscreen mode." class="hint-button bar" aria-label="toggle fullscreen mode." id="fullscreen" onclick="fullscreen()" style="font-size:18px;width:50px;height:50px;padding:10px"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5L2 12L8 19"></path><path d="M16 5L22 12L16 19"></path></svg></button><button title="Go to the main menu." class="hint-button bar" aria-label="go to the main menu" id="mainmenubutton" onclick="showmainmenu()" style="font-size: 18px; width: 50px; height: 50px; padding: 10px;"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
     <path d="M3 6H21"></path>
     <path d="M3 12H21"></path>
     <path d="M3 18H21"></path>
@@ -440,10 +440,10 @@ if (releaseReady) {
 			</div>
 		</div>
 	</div>
-	<div class=win-overlay style=overflow:clip id=newOverlay>
-		<div class=win-card aria-label="Difficulty selection screen">
-			<h1 style=color:var(--text2) class=win-title>Select a difficulty</h1>
-			<div style=margin-top:10px;margin-bottom:10px>
+	<div class="win-overlay" style="overflow:clip" id="newOverlay">
+		<div class="win-card" aria-label="Difficulty selection screen">
+			<h1 style="color:var(--text2)" class="win-title">Select a difficulty</h1>
+			<div style="margin-top:10px;margin-bottom:10px">
 				<div class="difficulty-menu2 open urgh" id="maindifficultyMenu" aria-label="Difficulties" role="listbox">
     <button title="Select the easy difficulty." class="menu-item menu-item2" type="button" aria-label="Select the easy difficulty" aria-selected="false" data-difficulty="easy" role="option">
         Easy <span>36 Holes</span>
@@ -481,7 +481,7 @@ if (releaseReady) {
     </button>
 </div>
 			</div>
-			<div style="margin-bottom:10px;width:100%"><strong>Best Time: <strong id="besttimedisplay" class="font-mono">**:**</strong></strong></div><button title="Create a new game with the selected difficulty" class=new-main2 onclick=continuenewGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px>New Game</button><button title="Cancel creating a new game." class="number-button cancel-button" onclick=hidenewgame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px>Cancel</button>
+			<div style="margin-bottom:10px;width:100%"><strong>Best Time: <strong id="besttimedisplay" class="font-mono">**:**</strong></strong></div><button title="Create a new game with the selected difficulty" class="new-main2" onclick="continuenewGame()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">New Game</button><button title="Cancel creating a new game." class="number-button cancel-button" onclick="hidenewgame()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px">Cancel</button>
 		</div>
 	</div>
 	<div class="win-overlay custom-difficulty-overlay" id="customDifficultyOverlay" hidden aria-label="Custom difficulty setup" role="dialog" aria-modal="true" aria-labelledby="customDifficultyTitle">
@@ -502,108 +502,108 @@ if (releaseReady) {
 			</div>
 		</div>
 	</div>
-	<div class=win-overlay style=overflow:clip id=continueOverlay>
-		<div class=win-card aria-label="Continue game menu">
-			<h1 style=color:var(--text2) class=win-title>Save Game Stats</h1>
+	<div class="win-overlay" style="overflow:clip" id="continueOverlay">
+		<div class="win-card" aria-label="Continue game menu">
+			<h1 style="color:var(--text2)" class="win-title">Save Game Stats</h1>
 			<div>
-				<div class=win-stats>
-					<div class=win-stat style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;scale:1.3;box-shadow:0 0 5px 5px var(--shadow-color2)">
-						<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style=color:var(--blue)>Difficulty: </strong><span style=color:var(--text3) id=continueDifficulty>Easy</span><strong style=color:var(--blue)><br>Stopped at: </strong><span style=color:var(--text3) id=continueTime class="font-mono">00:00</span><strong style=color:var(--blue)><br>Mistakes: </strong><span style=color:var(--text3) id=continueMistakes>0</span></h2>
+				<div class="win-stats">
+					<div class="win-stat" style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;scale:1.3;box-shadow:0 0 5px 5px var(--shadow-color2)">
+						<h2 style="text-align:left;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:10px"><strong style="color:var(--blue)">Difficulty: </strong><span style="color:var(--text3)" id="continueDifficulty">Easy</span><strong style="color:var(--blue)"><br>Stopped at: </strong><span style="color:var(--text3)" id="continueTime" class="font-mono">00:00</span><strong style="color:var(--blue)"><br>Mistakes: </strong><span style="color:var(--text3)" id="continueMistakes">0</span></h2>
 					</div>
 				</div>
-			</div><button title="Continue your save game." class=new-main2 onclick=continueGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px>Continue Game</button><button title="Open the save deletion confirmation menu." class="new-main2 delete-button" onclick=showdeleteGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;background-color:var(--delete-save)>Delete Save File</button><button title="Cancel continuing your save game." class="number-button cancel-button" onclick=hidecontinuegame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px>Cancel</button>
+			</div><button title="Continue your save game." class="new-main2" onclick="continueGame()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px">Continue Game</button><button title="Open the save deletion confirmation menu." class="new-main2 delete-button" onclick="showdeleteGame()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;background-color:var(--delete-save)">Delete Save File</button><button title="Cancel continuing your save game." class="number-button cancel-button" onclick="hidecontinuegame()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px">Cancel</button>
 		</div>
 	</div>
-	<div class=win-overlay style=overflow:clip id=deleteOverlay aria-label="Save deletion confirmation menu">
-		<div class=win-card>
-			<h1 style=color:var(--text2) class=win-title>Are you sure?</h1>
+	<div class="win-overlay" style="overflow:clip" id="deleteOverlay" aria-label="Save deletion confirmation menu">
+		<div class="win-card">
+			<h1 style="color:var(--text2)" class="win-title">Are you sure?</h1>
 			<div>
-				<div class=win-stats>
-					<div class=win-stat style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;box-shadow:0 0 5px 5px var(--shadow-color2)">
+				<div class="win-stats">
+					<div class="win-stat" style="width:fit-content;margin:33px auto;background-color:var(--surface-2);padding:5px 20px;border-radius:5px;box-shadow:0 0 5px 5px var(--shadow-color2)">
 						<h2 style="text-align:center;width:fit-content;margin:0 auto;margin-top:5px;margin-bottom:2.5px">Are you sure you want<br>to delete your save file?</h2>
-						<h4 style=margin-bottom:10px;margin-top:0>It is strongly recommended to <strong style=font-variant:small-caps>only</strong><br>delete your save file if you have to.<br></h4>
+						<h4 style="margin-bottom:10px;margin-top:0">It is strongly recommended to <strong style="font-variant:small-caps">only</strong><br>delete your save file if you have to.<br></h4>
 					</div>
 				</div>
-			</div><button title="Delete your save." class="new-main2 delete-button" onclick=deleteGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;background-color:var(--delete-save)>Delete Save File</button><button title="Cancel deleting your save file." class="number-button cancel-button" onclick=hidedeleteGame() style=width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px>Cancel</button>
+			</div><button title="Delete your save." class="new-main2 delete-button" onclick="deleteGame()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;background-color:var(--delete-save)">Delete Save File</button><button title="Cancel deleting your save file." class="number-button cancel-button" onclick="hidedeleteGame()" style="width:100%;border-top-right-radius:999px;border-bottom-right-radius:999px;margin-bottom:5px;font-size:1.02rem;min-height:58px">Cancel</button>
 		</div>
 	</div>
-	<div class=win-overlay id=settingsOverlay>
-		<div class=win-card style="display:flex;gap:15px;flex-direction:column;height:80dvh;width:92vw!important;padding-top:10px!important;padding:15px;border:1px solid var(--outline)" aria-label="Settings Menu">
-			<div style=display:flex;height:35px;padding-left:10px>
-				<h1 style=color:var(--text2) class=win-title>Settings</h1><button title="Close the settings menu" aria-label=Close id=WHATTHEFUCKDOICALLTHIS? onclick=closesettingsmenu() style=background-color:transparent;margin-left:auto;margin-right:5px;color:var(--text2)>
-					<h1 style=font-size:45px;height:35px;padding-bottom:8px;text-align:center;align-content:center;justify-content:center;display:flex;flex-direction:column class=win-title>×</h1>
+	<div class="win-overlay" id="settingsOverlay">
+		<div class="win-card" style="display:flex;gap:15px;flex-direction:column;height:80dvh;width:92vw!important;padding-top:10px!important;padding:15px;border:1px solid var(--outline)" aria-label="Settings Menu">
+			<div style="display:flex;height:35px;padding-left:10px">
+				<h1 style="color:var(--text2)" class="win-title">Settings</h1><button title="Close the settings menu" aria-label="Close" id="WHATTHEFUCKDOICALLTHIS?" onclick="closesettingsmenu()" style="background-color:transparent;margin-left:auto;margin-right:5px;color:var(--text2)">
+					<h1 style="font-size:45px;height:35px;padding-bottom:8px;text-align:center;align-content:center;justify-content:center;display:flex;flex-direction:column" class="win-title">×</h1>
 				</button>
 			</div>
-			<div style=flex:1;display:flex;flex-direction:column;min-height:0;background-color:var(--surface-2);border-radius:10px;padding:10px;padding-top:15px;padding-bottom:10px>
+			<div style="flex:1;display:flex;flex-direction:column;min-height:0;background-color:var(--surface-2);border-radius:10px;padding:10px;padding-top:15px;padding-bottom:10px">
 				<div style="flex:1;min-height:0;overflow:auto;scrollbar-color:var(--scrollbar) transparent;scrollbar-width:thick">
 					<!-- i wish that this wasnt what the html code for the settings menu was -->
-					<h1 style=font-size:50px;text-align:center class=settindescriber>Animations</h1>
-					<div class=setting-row style=padding-bottom:5px title="Whether or not animations should be enabled."><span class=setting-name style=text-align:left><strong>Enable animations</strong></span> <label class=toggle><input id=animationtoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-top:0;padding-bottom:5px title="Whether or not to play an animation on completion of a row, column, box or the entire board."><span class=setting-name style=text-align:left><strong>Completion animations</strong></span> <label class=toggle><input id=completionanimationtoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-top:0;padding-bottom:5px title="Whether or not to play a confetti animation on completion of a puzzle."><span class=setting-name style=text-align:left><strong>Confetti animation</strong></span> <label class=toggle><input id=confettianimationtoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<h1 style=font-size:50px;text-align:center;margin-top:20px class=settindescriber>SFX</h1>
-					<div class=setting-row style=padding-bottom:5px title="Whether or not sound effects should be enabled."><span class=setting-name style=text-align:left><strong>Enable sound effects</strong></span> <label class=toggle><input id=sfxtoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-top:0;padding-bottom:5px;text-align:left title="Whether or not to play a sound on puzzle completion."><span class=setting-name style=text-align:left><strong style=text-align:left>Win sound</strong></span> <label class=toggle><input id=winsoundtoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-top:0;padding-bottom:5px;text-align:left title="Whether or not to play a sound on completion of a row, column, box or the entire board."><span class=setting-name style=text-align:left><strong style=text-align:left>Completion sound</strong></span> <label class=toggle><input id=completionsoundtoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<h1 style=font-size:50px;text-align:center;margin-top:20px class=settindescriber>Haptics</h1>
-					<div class=setting-row style=padding-bottom:5px title="Whether or not to play a small vibration for certain actions."><span class=setting-name style=text-align:left><strong>Enable haptics</strong></span> <label class=toggle><input id=hapticstoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Whether or not to play a small vibration when you click a button."><span class=setting-name style=text-align:left><strong>Button haptics</strong></span> <label class=toggle><input id=buttonhapticstoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Whether or not to play a small vibration when you select a cell."><span class=setting-name style=text-align:left><strong>Cell select haptics</strong></span> <label class=toggle><input id=cellhapticstoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Whether or not to play some small vibrations on puzzle completion."><span class=setting-name style=text-align:left><strong>Puzzle completed haptics</strong></span> <label class=toggle><input id=winhapticstoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<h1 style=font-size:50px;text-align:center;margin-top:20px class=settindescriber>Tools</h1>	
-					<div class=setting-row style=padding-bottom:5px; title="Whether or not tools should be enabled."><span class=setting-name style=text-align:left><strong>Enable tools</strong></span> <label class=toggle><input id=toolstoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0px title="Whether or not pencil mode should be enabled."><span class=setting-name style=text-align:left><strong>Enable pencil mode</strong></span> <label class=toggle><input id=penciltoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0px title="Whether or not erase mode should be enabled."><span class=setting-name style=text-align:left><strong>Enable erase mode</strong></span> <label class=toggle><input id=erasetoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0px title="Whether or not undo and redo should be enabled."><span class=setting-name style=text-align:left><strong>Enable undo and redo</strong></span> <label class=toggle><input id=historytoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0px title="Whether or not hints should be enabled."><span class=setting-name style=text-align:left><strong>Enable hints</strong></span> <label class=toggle><input id=hintstoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Show an explanation and highlight related cells when using a hint."><span class=setting-name style=text-align:left><strong>Explain hints</strong></span> <label class=toggle><input id=hintExplanationToggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="Whether or not hints should have a cooldown."><span class=setting-name style=text-align:left><strong>Hint cooldown</strong></span> <label class=toggle><input id=hintcooldowntoggle type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of hints the game gives you at the start of a game."><span class=setting-name style=text-align:left><strong>Starting hints</strong></span> <input id=startinghints type=number placeholder=30 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The type of hint cooldown that should be used"><span class=setting-name style=text-align:left><strong>Hint cooldown type</strong> </span><select class=settings-select id=hintcooldownmethod>
-							<option value=time>Time-based
-							<option value=move>Move-based
+					<h1 style="font-size:50px;text-align:center" class="settindescriber">Animations</h1>
+					<div class="setting-row" style="padding-bottom:5px" title="Whether or not animations should be enabled."><span class="setting-name" style="text-align:left"><strong>Enable animations</strong></span> <label class="toggle"><input id="animationtoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-top:0;padding-bottom:5px" title="Whether or not to play an animation on completion of a row, column, box or the entire board."><span class="setting-name" style="text-align:left"><strong>Completion animations</strong></span> <label class="toggle"><input id="completionanimationtoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-top:0;padding-bottom:5px" title="Whether or not to play a confetti animation on completion of a puzzle."><span class="setting-name" style="text-align:left"><strong>Confetti animation</strong></span> <label class="toggle"><input id="confettianimationtoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<h1 style="font-size:50px;text-align:center;margin-top:20px" class="settindescriber">SFX</h1>
+					<div class="setting-row" style="padding-bottom:5px" title="Whether or not sound effects should be enabled."><span class="setting-name" style="text-align:left"><strong>Enable sound effects</strong></span> <label class="toggle"><input id="sfxtoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-top:0;padding-bottom:5px;text-align:left" title="Whether or not to play a sound on puzzle completion."><span class="setting-name" style="text-align:left"><strong style="text-align:left">Win sound</strong></span> <label class="toggle"><input id="winsoundtoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-top:0;padding-bottom:5px;text-align:left" title="Whether or not to play a sound on completion of a row, column, box or the entire board."><span class="setting-name" style="text-align:left"><strong style="text-align:left">Completion sound</strong></span> <label class="toggle"><input id="completionsoundtoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<h1 style="font-size:50px;text-align:center;margin-top:20px" class="settindescriber">Haptics</h1>
+					<div class="setting-row" style="padding-bottom:5px" title="Whether or not to play a small vibration for certain actions."><span class="setting-name" style="text-align:left"><strong>Enable haptics</strong></span> <label class="toggle"><input id="hapticstoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="Whether or not to play a small vibration when you click a button."><span class="setting-name" style="text-align:left"><strong>Button haptics</strong></span> <label class="toggle"><input id="buttonhapticstoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="Whether or not to play a small vibration when you select a cell."><span class="setting-name" style="text-align:left"><strong>Cell select haptics</strong></span> <label class="toggle"><input id="cellhapticstoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="Whether or not to play some small vibrations on puzzle completion."><span class="setting-name" style="text-align:left"><strong>Puzzle completed haptics</strong></span> <label class="toggle"><input id="winhapticstoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<h1 style="font-size:50px;text-align:center;margin-top:20px" class="settindescriber">Tools</h1>	
+					<div class="setting-row" style="padding-bottom:5px;" title="Whether or not tools should be enabled."><span class="setting-name" style="text-align:left"><strong>Enable tools</strong></span> <label class="toggle"><input id="toolstoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0px" title="Whether or not pencil mode should be enabled."><span class="setting-name" style="text-align:left"><strong>Enable pencil mode</strong></span> <label class="toggle"><input id="penciltoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0px" title="Whether or not erase mode should be enabled."><span class="setting-name" style="text-align:left"><strong>Enable erase mode</strong></span> <label class="toggle"><input id="erasetoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0px" title="Whether or not undo and redo should be enabled."><span class="setting-name" style="text-align:left"><strong>Enable undo and redo</strong></span> <label class="toggle"><input id="historytoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0px" title="Whether or not hints should be enabled."><span class="setting-name" style="text-align:left"><strong>Enable hints</strong></span> <label class="toggle"><input id="hintstoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="Show an explanation and highlight related cells when using a hint."><span class="setting-name" style="text-align:left"><strong>Explain hints</strong></span> <label class="toggle"><input id="hintExplanationToggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="Whether or not hints should have a cooldown."><span class="setting-name" style="text-align:left"><strong>Hint cooldown</strong></span> <label class="toggle"><input id="hintcooldowntoggle" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="The number of hints the game gives you at the start of a game."><span class="setting-name" style="text-align:left"><strong>Starting hints</strong></span> <input id="startinghints" type="number" placeholder="30" style="height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield"></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="The type of hint cooldown that should be used"><span class="setting-name" style="text-align:left"><strong>Hint cooldown type</strong> </span><select class="settings-select" id="hintcooldownmethod">
+							<option value="time">Time-based
+							<option value="move">Move-based
 						</select>
 						<div id="selectwrap" class="selectwrap" style="height: 40px;position: relative;"><button class="select" id="hintselectvalue" style="width: 160px;background-color: var(--surface-3);height: 40px;border-radius: 10px;position: relative;transition: border-radius 0.25s linear, border-bottom-right-radius 0.25s linear, border-bottom-left-radius 0.25s linear;"><p id="hintselectvaluetext" style="margin: 0;font-size: 15px;width: 85%;align-content: center;">Time-Based</p><svg class="svg" xmlns="http://w3.org" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="currentColor" d="M6 9l6 6 6-6"></path>
 </svg></button><div id="hintselectbox" class="dropbox" style="position: absolute;width: 100%;top: 40px;left: 0;background-color: var(--surface-3);border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;overflow: hidden;height: 0px;transition: height 0.5s linear, padding 0.5s ease, gap 0.5s ease, background-color 0.2s ease;box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);margin: 0;"><div style="display: flex;flex-direction: column;padding: 5px;gap: 5px;"><button title="Set the selected cooldown type to be time-based" class="dropitem" onclick="setcooldownvalue('time')" style="height: 40px;border-radius: 8px;background-color: var(--surface-3);flex-shrink: 0;">Time-Based</button><button title="Set the selected cooldown type to be move-based" class="dropitem" onclick="setcooldownvalue('move')" style="height: 40px;border-radius: 8px;background-color: var(--surface-3);flex-shrink: 0;">Move-Based</button></div></div></div></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of moves/seconds until the hint cooldown ends."><span class=setting-name style=text-align:left><strong>Hint cooldown amount</strong></span> <input id=hintcooldownamount type=number placeholder=30 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The number of hints the game gives you after the hint cooldown ends."><span class=setting-name style=text-align:left><strong>Hints after cooldown</strong></span> <input id=hintsaftercooldown type=number placeholder=1 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style="padding-bottom:5px;padding-top:0px" title="Whether or not hints should be limited."><span class=setting-name style=text-align:left><strong>Enable Limited Hints</strong></span> <label class=toggle><input id=hintlimit type=checkbox> <span class=toggle-track></span></label></div>
-					<hr style=height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%>
-					<div class=setting-row style=padding-bottom:5px;padding-top:0 title="The maximum amount of hints that you can use in a single game."><span class=setting-name style=text-align:left><strong>Hint Limit</strong></span> <input id=hintlimitinput type=number placeholder=1 style=height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield></div>
-					<h1 style=font-size:50px;text-align:center;margin-top:20px class=settindescriber>Keybinds</h1>
-					<div id=keybindList class=keybind-list></div>
-					<button id=resetAllKeybinds class=new-main2 type=button>Reset all Keybinds</button>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="The number of moves/seconds until the hint cooldown ends."><span class="setting-name" style="text-align:left"><strong>Hint cooldown amount</strong></span> <input id="hintcooldownamount" type="number" placeholder="30" style="height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield"></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="The number of hints the game gives you after the hint cooldown ends."><span class="setting-name" style="text-align:left"><strong>Hints after cooldown</strong></span> <input id="hintsaftercooldown" type="number" placeholder="1" style="height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield"></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0px" title="Whether or not hints should be limited."><span class="setting-name" style="text-align:left"><strong>Enable Limited Hints</strong></span> <label class="toggle"><input id="hintlimit" type="checkbox"> <span class="toggle-track"></span></label></div>
+					<hr style="height:1px;border:none;background-color:var(--muted);margin:auto;margin-bottom:10px;margin-top:5px;width:98%">
+					<div class="setting-row" style="padding-bottom:5px;padding-top:0" title="The maximum amount of hints that you can use in a single game."><span class="setting-name" style="text-align:left"><strong>Hint Limit</strong></span> <input id="hintlimitinput" type="number" placeholder="1" style="height:40px;border-radius:10px;background-color:var(--surface-3);border:none;text-align:center;background-color:var(--surface-3);appearance:textfield"></div>
+					<h1 style="font-size:50px;text-align:center;margin-top:20px" class="settindescriber">Keybinds</h1>
+					<div id="keybindList" class="keybind-list"></div>
+					<button id="resetAllKeybinds" class="new-main2" type="button">Reset all Keybinds</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- this will load a spinner but it cant be <spinner> because html doesnt let us do that -->
 	<ceedoku-spinner id="otherspinnythingo"></ceedoku-spinner>
-	<div style=visibility:hidden;width:100dvw;height:100dvh;position:absolute;background-color:#000;z-index:10000000;display:flex;flex-direction:column;justify-content:center;align-items:center id=crashscreen aria-label="Crash screen">
-		<h1 style=font-size:150px;margin-bottom:50px>:(</h1>
+	<div style="visibility:hidden;width:100dvw;height:100dvh;position:absolute;background-color:#000;z-index:10000000;display:flex;flex-direction:column;justify-content:center;align-items:center" id="crashscreen" aria-label="Crash screen">
+		<h1 style="font-size:150px;margin-bottom:50px">:(</h1>
 		<h1>Ceedoku has crashed</h1>
-		<h2 id=crashscreenerrormsg>There was no crash message</h2>
+		<h2 id="crashscreenerrormsg">There was no crash message</h2>
 		<div style="display:flex;gap:10px">
-			<button onclick=location.reload() class=restart-button><strong>Restart Ceedoku</strong></button>
+			<button onclick="location.reload()" class="restart-button"><strong>Restart Ceedoku</strong></button>
 			<button onclick="window.open('https://github.com/Ceebug/Ceedoku/issues/new?template=bug_report.yml', '_blank')" class="restart-button"><strong>Report Crash</strong></button>
 		</div>
 	</div>
@@ -684,12 +684,12 @@ if (releaseReady) {
 		})
 	</script>
 	<!-- TSparticles.confetti becuase i cant be bothered to make confetti myself-->
-	<script src=./src/js/lib/TSparticles.confetti.js></script>
-	<script src=./src/js/saveManager.js></script>
-	<script src=./src/js/keybindManager.js></script>
-	<script src=./src/js/hintEngine.js></script>
+	<script src="./src/js/lib/TSparticles.confetti.js"></script>
+	<script src="./src/js/saveManager.js"></script>
+	<script src="./src/js/keybindManager.js"></script>
+	<script src="./src/js/hintEngine.js"></script>
 	<!-- Main script -->
-	<script src=./src/js/script.js></script>
+	<script src="./src/js/script.js"></script>
 </body>
 
 </html>
