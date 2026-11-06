@@ -5,6 +5,7 @@
   "rules": {
     "declaration-block-no-shorthand-property-overrides": null,
     "no-duplicate-selectors": null,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "declaration-block-no-duplicate-properties": null
   }
 }
