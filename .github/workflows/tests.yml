@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: CI: Test/Lint
+    name: "CI: Test/Lint"
     runs-on: ubuntu-latest
 
     steps:
