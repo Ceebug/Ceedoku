@@ -1005,17 +1005,6 @@ historyToggle.addEventListener("change", () => {
 settings.hints.hintlimit.limit = Number(hintlimitinput.value) || 1;
 let hintlimitreached = false
 let hintcounter = 0
-function updateHintCooldownDisplay() {
-    if (canusehelp) {
-        if (!settings.hints.cooldown.enabled) {
-            hintCooldownDisplay.textContent = "∞";
-            hintCooldownDisplay.style.fontWeight = "800";
-        } else {
-            hintCooldownDisplay.style.fontWeight = "unset";
-            hintCooldownDisplay.textContent = getHintCooldownText();
-        }
-    }
-}
 let solution = [];
 let puzzle = [];
 let values = [];
@@ -1052,17 +1041,6 @@ function closesettingsmenu() {
     document.getElementById("settingsOverlay").classList.remove("show");
 }
 
-function showPauseScreen() {
-    pauseDifficulty.textContent = getDifficultyLabel();
-
-
-    pauseMistakes.textContent = mistakes;
-    pauseOverlay.hidden = false;
-
-    requestAnimationFrame(() => {
-        pauseOverlay.classList.add("show");
-    });
-}
 const isAndroidPWA =
     /Android/i.test(navigator.userAgent) &&
     (
