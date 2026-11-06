@@ -1,0 +1,6 @@
+{
+  "doctype-first": false,
+  "attr-no-duplication": false,
+  "attr-lowercase": false,
+  "tag-pair": false
+}
