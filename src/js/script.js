@@ -4001,7 +4001,7 @@ observer.observe(document.body, {
     attributeFilter: ["class"]
 });
 pauseBtn2.style.display = "none"
-const defaultItem = document.querySelector(`#mainDifficultyMenu .menu-item[data-difficulty="${selectedDifficulty}"]`);
+const defaultItem = document.querySelector(`#maindifficultyMenu .menu-item[data-difficulty="${selectedDifficulty}"]`);
 defaultItem.setAttribute("aria-selected", "true");
 const bestTimesa = JSON.parse(localStorage.getItem("besttimes")) || {};
 const bestTimea = bestTimesa[selectedDifficulty];
