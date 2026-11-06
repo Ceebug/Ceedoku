@@ -1,0 +1,17 @@
+queue_rules:
+  - name: default
+    merge_conditions:
+      - check-success=Run tests
+    merge_method: squash
+    commit_message_format:
+      title: pr-title
+      body: empty
+
+commands_restrictions:
+  queue:
+    conditions:
+      - or:
+          - sender = Ceebug
+          - and:
+              - sender-permission >= write
+              - "#approved-reviews-by >= 1"
