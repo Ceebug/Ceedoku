@@ -3037,3 +3037,22 @@ kbd {
         column-gap: 5px;
     }
 }
+
+.win-overlay,
+.win-overlay2 {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.win-card {
+    position: relative;
+    margin-inline: auto;
+    box-sizing: border-box;
+    max-width: calc(100% - 24px);
+}
