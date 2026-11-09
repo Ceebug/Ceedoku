@@ -3079,12 +3079,12 @@ function animateIndexes(indexes, origin, kind) {
                 (e) => {
 
                     // Remove the effect after fading.
-                    if (
-                        e.animationName !==
-                        "rippleFade"
-                    ) {
-                        return;
-                    }
+					if (
+					    e.animationName !== "rippleFade" &&
+					    e.animationName !== "boxGrow2"
+					) {
+					    return;
+					}
 
                     effect.remove();
                     number.remove();
