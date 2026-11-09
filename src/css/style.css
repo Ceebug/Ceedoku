@@ -2075,9 +2075,6 @@ body.light .menu-item:hover {
 			.whatdoievencallthis {
 		width: 100%
 			}
-	#pause-btn2 {
-		display: none
-	}
 @media print {
     .foo,
     aside,
