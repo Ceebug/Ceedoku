@@ -3037,3 +3037,61 @@ kbd {
         column-gap: 5px;
     }
 }
+:root:fullscreen {
+    --cell-size: clamp(
+        34px,
+        min(10vmin, calc((100dvh - 190px) / 9)),
+        96px
+    );
+}
+
+@media (orientation: portrait) {
+    :root:fullscreen {
+        --cell-size: clamp(
+            34px,
+            min(10vmin, calc((100dvw - 40px) / 9)),
+            96px
+        );
+    }
+}
+
+@media (orientation: portrait) {
+    :root {
+        --cell-size: clamp(34px, calc((100vw - 60px) / 9), 100px);
+        --board-size: calc(var(--cell-size) * 9);
+    }
+
+    #aahtheentiregame {
+        width: 100%;
+    }
+
+    .null {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .game-shell {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .app {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .main,
+    .board-wrap {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .board-wrap {
+        max-width: var(--board-size);
+        margin-inline: auto;
+    }
+
+    .board {
+        width: 100%;
+    }
+}
