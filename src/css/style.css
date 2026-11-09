@@ -39,11 +39,6 @@
 	z-index: 4998;
 }
 
-#pause-btn {
-	padding: 15px !important;
-	z-index: 4999;
-}
-
 svg {
   shape-rendering: geometricPrecision;
   transform: translateZ(0);
@@ -2035,9 +2030,6 @@ body.light .menu-item:hover {
 	.hint-wrap {
 		width: 33.3%;
 		}
-	#pause-btn {
-		width: 50px;
-		}
 	.bar {
 	width: 45%
 	}
@@ -2085,9 +2077,6 @@ body.light .menu-item:hover {
 			}
 	#pause-btn2 {
 		display: none
-	}
-	#pause-btn {
-		display: unset
 	}
 @media print {
     .foo,
@@ -2196,9 +2185,6 @@ color: #1a212c !important
 }
 
 @media (orientation: portrait) {
-	#pause-btn {
-		display: none
-	}
 	.difficulty-menu,
 	.difficulty-menu2 {
 		max-height: calc(100dvh - 90px);
