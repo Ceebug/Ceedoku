@@ -1,7 +1,8 @@
-// This code comes from JSF - https://github.com/ceebug/jsf/jsf.js
+// pls link to jsf here if u want to be a nice person, this is not required tho
 const JSF = (() => {
 
-    const HEADER = "CEEDOKU-CSF/1";
+    const HEADER_V1 = "CEEDOKU-CSF/1";
+    const HEADER_V2 = "CEEDOKU-CSF/2";
 
     const KEYS = {
         solution: 0x01,
@@ -22,7 +23,9 @@ const JSF = (() => {
         cooldownmoves: 0x10,
         cooldowntime: 0x11,
         cooldowntypetouse: 0x12,
-        canusehelp: 0x13
+        canusehelp: 0x13,
+        holes: 0x14,
+        toolsEnabled: 0x15
     };
 
     const DIFFICULTIES = [
@@ -33,7 +36,8 @@ const JSF = (() => {
         "master",
         "extreme",
         "impossible",
-        "godlike"
+        "godlike",
+        "custom"
     ];
 
 
@@ -396,30 +400,25 @@ const JSF = (() => {
                     }
                 );
 
-            const headerBytes =
-                encoder.encode(HEADER);
-
             let offset = 0;
+            let formatVersion = 0;
 
-            let hasHeader = true;
+            const headers = [
+                [1, encoder.encode(HEADER_V1)],
+                [2, encoder.encode(HEADER_V2)]
+            ];
 
-            if (
-                data.length >=
-                headerBytes.length
-            ) {
+            for (const [version, headerBytes] of headers) {
+
+                if (data.length < headerBytes.length) {
+                    continue;
+                }
 
                 let matches = true;
 
-                for (
-                    let i = 0;
-                    i < headerBytes.length;
-                    i++
-                ) {
+                for (let i = 0; i < headerBytes.length; i++) {
 
-                    if (
-                        data[i] !==
-                        headerBytes[i]
-                    ) {
+                    if (data[i] !== headerBytes[i]) {
 
                         matches = false;
                         break;
@@ -430,18 +429,19 @@ const JSF = (() => {
 
                 if (matches) {
 
-                    offset =
-                        headerBytes.length;
-
-                } else {
-
-                    hasHeader = false;
+                    formatVersion = version;
+                    offset = headerBytes.length;
+                    break;
 
                 }
 
-            } else {
+            }
 
-                hasHeader = false;
+            if (formatVersion === 0) {
+
+                throw new Error(
+                    "JSF: unsupported or missing CSF header."
+                );
 
             }
 
@@ -538,7 +538,6 @@ const JSF = (() => {
 
                 const shortcode =
                     saveData[dataOffset++];
-
 
 
                 // =============================================
@@ -821,7 +820,7 @@ const JSF = (() => {
                         readValue(
                             bytes,
                             0,
-                            3
+                            formatVersion === 2 ? 4 : 3
                         );
 
 
@@ -839,6 +838,72 @@ const JSF = (() => {
 
                     difficulty =
                         DIFFICULTIES[value];
+
+                    continue;
+
+                }
+
+
+                // =============================================
+                // Custom difficulty fields (CSF 2.0)
+                // =============================================
+
+                if (
+                    shortcode === KEYS.holes ||
+                    shortcode === KEYS.toolsEnabled
+                ) {
+
+                    if (
+                        formatVersion !== 2 ||
+                        difficulty !== "custom"
+                    ) {
+
+                        throw new Error(
+                            "JSF: unexpected custom difficulty field."
+                        );
+
+                    }
+
+                    const bytes =
+                        take(
+                            saveData,
+                            dataOffset,
+                            1
+                        );
+
+                    dataOffset++;
+
+                    if (
+                        shortcode === KEYS.holes
+                    ) {
+
+                        const value =
+                            readValue(bytes, 0, 7);
+
+                        if (
+                            value < 1 ||
+                            value > 64
+                        ) {
+
+                            throw new Error(
+                                "JSF: invalid custom difficulty holes."
+                            );
+
+                        }
+
+                        save.customDifficulty ??= {};
+                        save.customDifficulty.holes = value;
+
+                    } else {
+
+                        save.customDifficulty ??= {};
+
+                        save.customDifficulty.toolsEnabled =
+                            Boolean(
+                                readValue(bytes, 0, 1)
+                            );
+
+                    }
 
                     continue;
 
@@ -1270,9 +1335,35 @@ const JSF = (() => {
 
                 canusehelp:
                     save.canusehelp ??
-                    true
+                    true,
+
+                customDifficulty:
+                    difficulty === "custom"
+                        ? {
+                            holes: save.customDifficulty?.holes,
+                            toolsEnabled: save.customDifficulty?.toolsEnabled ?? true
+                        }
+                        : null
 
             };
+
+
+            if (difficulty === "custom") {
+
+                if (
+                    formatVersion !== 2 ||
+                    !Number.isInteger(orderedSave.customDifficulty.holes) ||
+                    orderedSave.customDifficulty.holes < 1 ||
+                    orderedSave.customDifficulty.holes > 64
+                ) {
+
+                    throw new Error(
+                        "JSF: incomplete custom difficulty data."
+                    );
+
+                }
+
+            }
 
 
             return JSON.stringify(
