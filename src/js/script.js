@@ -1828,7 +1828,6 @@ let elapsedMs = 0;
 let startTime = 0;
 let timerId = null;
 let timerPaused = false;
-let hintCooldownCounter = 0;
 
 function startTimer() {
     clearInterval(timerId);
@@ -2827,7 +2826,6 @@ function starthintcooldown() {
 
         if (settings.hints.cooldown.cooldowntype === "time") {
             cooldowntime = settings.hints.cooldown.cooldowntime;
-            hintCooldownCounter = 0;
             updateHintCooldownDisplay();
         }
     } else {
@@ -2838,7 +2836,6 @@ function starthintcooldown() {
 
             if (cooldowntypetouse === "time") {
                 cooldowntime = savecooldowntime;
-                hintCooldownCounter = 0;
                 updateHintCooldownDisplay();
             }
         } else {
@@ -2848,7 +2845,6 @@ function starthintcooldown() {
 
             if (settings.hints.cooldown.cooldowntype === "time") {
                 cooldowntime = settings.hints.cooldown.cooldowntime;
-                hintCooldownCounter = 0;
                 updateHintCooldownDisplay();
             }
         }
