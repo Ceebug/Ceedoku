@@ -1873,7 +1873,6 @@ function pauseTimer() {
 
         elapsedMs = Date.now() - startTime;
 
-        pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M4 2C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22C4.3 22 4.6 21.93 4.87 21.79L21.2 13.25C22.27 12.69 22.27 11.31 21.2 10.75L4.87 2.21C4.6 2.07 4.3 2 4 2Z"></path></svg>';
         pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M4 2C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22C4.3 22 4.6 21.93 4.87 21.79L21.2 13.25C22.27 12.69 22.27 11.31 21.2 10.75L4.87 2.21C4.6 2.07 4.3 2 4 2Z"></path></svg>';
         document.title = "Ceedoku - Paused";
 
@@ -1887,7 +1886,6 @@ function pauseTimer() {
 
         startTimer();
 
-        pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
         pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
         document.title = `Ceedoku - ${getDifficultyLabel()}`
         hidepausescreen()
@@ -1904,7 +1902,6 @@ function lostfocuspause() {
 
             elapsedMs = Date.now() - startTime;
 
-            pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
             pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
             document.title = "Ceedoku - Paused";
             showPauseScreen()
@@ -1922,8 +1919,6 @@ function winpauseTimer() {
 
         elapsedMs = Date.now() - startTime;
 
-        pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M4 2C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22C4.3 22 4.6 21.93 4.87 21.79L21.2 13.25C22.27 12.69 22.27 11.31 21.2 10.75L4.87 2.21C4.6 2.07 4.3 2 4 2Z"></path></svg>';
-        pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M4 2C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22C4.3 22 4.6 21.93 4.87 21.79L21.2 13.25C22.27 12.69 22.27 11.31 21.2 10.75L4.87 2.21C4.6 2.07 4.3 2 4 2Z"></path></svg>';
         document.title = "Ceedoku - Paused";
     }
 };
@@ -1935,7 +1930,6 @@ function resumeTimer() {
 
     startTimer();
 
-    pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
     pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
     document.title = `Ceedoku - ${getDifficultyLabel()}`
     hidepausescreen()
@@ -3527,7 +3521,6 @@ function continueGame() {
     const completedSave = viewingCompletedSave && finished;
     runninggame = !completedSave;
     hidemainmenu();
-    pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
     pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
 	document.title = `Ceedoku - ${getDifficultyLabel()}`;
     difficultyBadge.textContent = getDifficultyLabel();
@@ -3661,7 +3654,6 @@ async function newGame(
     winTime.textContent = "00:00";
     pauseTime.textContent = "00:00";
     continueTime.textContent = "00:00"
-    pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
     pauseBtn2.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M2 4C2 2.9 2.9 2 4 2H8C9.1 2 10 2.9 10 4V20C10 21.1 9.1 22 8 22H4C2.9 22 2 21.1 2 20Z"/><path d="M14 4C14 2.9 14.9 2 16 2H20C21.1 2 22 2.9 22 4V20C22 21.1 21.1 22 20 22H16C14.9 22 14 21.1 14 20Z"/></svg>';
     title.textContent = "Ceedoku"
     hidewinscreen();
