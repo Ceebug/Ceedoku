@@ -1,7 +1,7 @@
-// This code comes from FSJ - https://github.com/ceebug/fsj/fsj.js
+// pls link to fsj here if u want to be a nice person, this is not required tho
 const FSJ = (() => {
 
-    const HEADER = "CEEDOKU-CSF/1";
+    const HEADER = "CEEDOKU-CSF/2";
 
     const KEYS = {
         solution: 0x01,
@@ -22,7 +22,9 @@ const FSJ = (() => {
         cooldownmoves: 0x10,
         cooldowntime: 0x11,
         cooldowntypetouse: 0x12,
-        canusehelp: 0x13
+        canusehelp: 0x13,
+        holes: 0x14,
+        toolsEnabled: 0x15
     };
 
     const DIFFICULTIES = {
@@ -33,7 +35,8 @@ const FSJ = (() => {
         master: 4,
         extreme: 5,
         impossible: 6,
-        godlike: 7
+        godlike: 7,
+        custom: 8
     };
 
 
@@ -201,6 +204,7 @@ const FSJ = (() => {
             );
 
         }
+
         if (typeof filename !== "string" || filename.length === 0) {
             throw new TypeError(
                 "FSJ: filename must be a non-empty string."
@@ -408,14 +412,64 @@ const FSJ = (() => {
         field(
             KEYS.difficulty,
             writeBits(
-                [
-                    DIFFICULTIES[
-                        save.difficulty
-                    ]
-                ],
-                3
+                [DIFFICULTIES[save.difficulty]],
+                4
             )
         );
+
+
+        // ====================================================
+        // Custom difficulty settings (CSF 2.0)
+        // ====================================================
+
+        if (save.difficulty === "custom") {
+
+            const custom = save.customDifficulty;
+
+            if (
+                !custom ||
+                !Number.isInteger(custom.holes) ||
+                custom.holes < 1 ||
+                custom.holes > 64
+            ) {
+
+                throw new Error(
+                    "FSJ: custom difficulty holes must be an integer from 1 to 64."
+                );
+
+            }
+
+            if (
+                custom.toolsEnabled !== undefined &&
+                typeof custom.toolsEnabled !== "boolean"
+            ) {
+
+                throw new Error(
+                    "FSJ: custom difficulty toolsEnabled must be a boolean."
+                );
+
+            }
+
+            field(
+                KEYS.holes,
+                writeBits([custom.holes], 7)
+            );
+
+            field(
+                KEYS.toolsEnabled,
+                writeBits(
+                    [custom.toolsEnabled === false ? 0 : 1],
+                    1
+                )
+            );
+
+        } else if (save.customDifficulty != null) {
+
+            throw new Error(
+                "FSJ: customDifficulty is only valid for custom difficulty."
+            );
+
+        }
 
 
         // ====================================================
