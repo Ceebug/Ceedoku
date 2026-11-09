@@ -1433,11 +1433,9 @@ function renderSaveCards() {
         exportButton.textContent = "Export .CSF";
         exportButton.addEventListener("click", () => {
             closeSaveMoreMenu();
-            try {
-                FSJ(save.data, save.title);
-            } catch (error) {
-                reportSaveError(error);
-            }
+            pendingExportSave = save;
+            exportnameinput.value = save.title || "Sudoku game";
+            showexportnamemenu();
         });
         const duplicateButton = document.createElement("button");
         duplicateButton.type = "button";
