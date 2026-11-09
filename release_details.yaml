@@ -12,7 +12,11 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "10.0.4"
+version: "10.0.5"
 changelog:
   fix:
-    - Saves with a custom difficulty not exporting correctly.
+    - Fixed custom-difficulty saves not exporting correctly.
+    - Fixed the save-naming dialog not appearing when exporting a save from its options menu.
+    - Fixed completed saves reopening in an unpaused state.
+    - Fixed pause controls appearing when reopening completed saves.
+    - Fixed the Back button not appearing when reopening completed saves.
