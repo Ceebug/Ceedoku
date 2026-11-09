@@ -3037,3 +3037,20 @@ kbd {
         column-gap: 5px;
     }
 }
+:root:fullscreen {
+    --cell-size: clamp(
+        34px,
+        min(10vmin, calc((100dvh - 190px) / 9)),
+        96px
+    );
+}
+
+@media (orientation: portrait) {
+    :root:fullscreen {
+        --cell-size: clamp(
+            34px,
+            min(10vmin, calc((100dvw - 40px) / 9)),
+            96px
+        );
+    }
+}
