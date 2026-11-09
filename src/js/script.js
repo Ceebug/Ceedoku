@@ -730,7 +730,6 @@ document.body.append(hintConnector, hintExplanationPanel);
 let pendingHintMove = null;
 const eraseButton = document.getElementById("eraseButton");
 const pencilButton = document.getElementById("pencilButton");
-const pauseBtn = document.getElementById("pause-btn");
 
 const pauseBtn2 = document.getElementById("pause-btn2");
 const completedSaveBack = document.getElementById("completedSaveBack");
