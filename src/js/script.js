@@ -542,16 +542,18 @@ if ("vibrate" in navigator) {
     vibrate = function() {};
 }
 
-let popQueue = Promise.resolve();
 let pitchInterval = null;
+let popPlaybackId = 0;
 
 function playPop(speed = 1) {
-    if (!settings.SFX) return;
+    if (!settings.SFX.enabled) return;
 
     if (pitchInterval) {
         clearInterval(pitchInterval);
         pitchInterval = null;
     }
+
+    const playbackId = ++popPlaybackId;
 
     popSound.pause();
     popSound.currentTime = 0;
@@ -560,33 +562,43 @@ function playPop(speed = 1) {
     popSound.mozPreservesPitch = false;
     popSound.webkitPreservesPitch = false;
 
-    let currentSpeed = speed;
-
-    if (currentSpeed > 7) {
-        currentSpeed = 7;
-    }
-
+    let currentSpeed = Math.min(speed, 7);
     popSound.playbackRate = currentSpeed;
 
-    popSound.play().catch(err => {
-        console.log("pop failed -", err);
-    });
+    const stopPitchInterval = () => {
+        if (playbackId !== popPlaybackId) return;
 
-    pitchInterval = setInterval(() => {
-        currentSpeed += 0.1;
-
-        if (currentSpeed > 7) {
-            currentSpeed = 7;
+        if (pitchInterval) {
+            clearInterval(pitchInterval);
+            pitchInterval = null;
         }
 
-        popSound.playbackRate = currentSpeed;
-    }, 50);
-
-    popSound.onended = () => {
-        clearInterval(pitchInterval);
-        pitchInterval = null;
         popSound.playbackRate = 1;
     };
+
+    popSound.onended = stopPitchInterval;
+
+    try {
+        const playback = popSound.play();
+
+        if (playback && typeof playback.catch === "function") {
+            playback.catch(error => {
+                stopPitchInterval();
+                console.log("pop failed -", error);
+            });
+        }
+    } catch (error) {
+        stopPitchInterval();
+        console.log("pop failed -", error);
+        return;
+    }
+
+    pitchInterval = setInterval(() => {
+        if (playbackId !== popPlaybackId) return;
+
+        currentSpeed = Math.min(currentSpeed + 0.1, 7);
+        popSound.playbackRate = currentSpeed;
+    }, 50);
 }
 document.addEventListener("pointerdown", (event) => {
     const button = event.target.closest("button");
