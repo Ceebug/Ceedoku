@@ -1838,37 +1838,32 @@ function startTimer() {
     timerId = setInterval(() => {
         elapsedMs = Date.now() - startTime;
 
-        winTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
-        pauseTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
-        continueTime.textContent = formatTime(Math.floor(elapsedMs / 1000));
-        timerEl.textContent = formatTime(Math.floor(elapsedMs / 1000));
+        const formattedTime = formatTime(Math.floor(elapsedMs / 1000));
+        winTime.textContent = formattedTime;
+        pauseTime.textContent = formattedTime;
+        continueTime.textContent = formattedTime;
+        timerEl.textContent = formattedTime;
+
         if (hintcounter == settings.hints.hintlimit.limit && !hintlimitreached) {
-            hintlimitreached = true
-            updateHintCooldownDisplay();
+            hintlimitreached = true;
         }
-        updateHintCooldownDisplay();
-        hintCooldownCounter++;
 
-        if (hintCooldownCounter >= 10) {
-            hintCooldownCounter = 0;
+        if (
+            settings.hints.cooldown.enabled &&
+            settings.hints.cooldown.cooldowntype === "time" &&
+            cooldowntime > 0
+        ) {
+            cooldowntime--;
 
-            if (
-                settings.hints.cooldown.enabled &&
-                settings.hints.cooldown.cooldowntype === "time" &&
-                cooldowntime > 0
-            ) {
-                cooldowntime--;
-
-                if (cooldowntime === 0 && !hintlimitreached) {
-                    hintcount = settings.hints.cooldown.hintsaftercooldown;
-                } else {
-                    hintcount = 0
-                }
-
-                updateHintCooldownDisplay();
+            if (cooldowntime === 0 && !hintlimitreached) {
+                hintcount = settings.hints.cooldown.hintsaftercooldown;
+            } else {
+                hintcount = 0;
             }
         }
-    }, 100);
+
+        updateHintCooldownDisplay();
+    }, 1000);
 }
 
 function pauseTimer() {
@@ -3086,21 +3081,33 @@ function animateIndexes(indexes, origin, kind) {
             // Number goes after the effect.
             cell.appendChild(number);
 
-            effect.addEventListener(
-                "animationend",
-                (e) => {
+            let cleanedUp = false;
+            const cleanup = () => {
+                if (cleanedUp) return;
+                cleanedUp = true;
+                clearTimeout(cleanupTimeout);
+                effect.remove();
+                number.remove();
+            };
 
-                    // Remove the effect after fading.
-					if (
-					    e.animationName !== "rippleFade" &&
-					    e.animationName !== "boxGrow2"
-					) {
-					    return;
-					}
-
-                    effect.remove();
-                    number.remove();
+            effect.addEventListener("animationend", (event) => {
+                if (
+                    event.animationName === "rippleFade" ||
+                    event.animationName === "boxGrow2"
+                ) {
+                    cleanup();
                 }
+            });
+
+            effect.addEventListener("animationcancel", cleanup);
+
+            // Safari can occasionally omit animationend/animationcancel.
+            const cleanupTimeout = setTimeout(
+                cleanup,
+                Math.max(
+                    distance * 60 + 500,
+                    fadeDelay + 350
+                ) + 100
             );
         }
     });
@@ -3149,15 +3156,18 @@ function playBoardRipple() {
                 "--sweep-delay",
                 `${distance * 60}ms`
             );
+            cell.style.setProperty("--fade-delay", "1000ms");
 
             requestAnimationFrame(() => {
                 cell.classList.add("complete-sweep", "board");
             });
 
+            // Keep the pseudo-element mounted until its 350ms fade finishes.
             setTimeout(() => {
                 cell.classList.remove("complete-sweep", "board");
                 cell.style.removeProperty("--sweep-delay");
-            }, 1000 + distance * 60);
+                cell.style.removeProperty("--fade-delay");
+            }, 1450 + distance * 60);
         }
     });
 }
