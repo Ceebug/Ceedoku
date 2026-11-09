@@ -160,6 +160,7 @@ jobs:
               "claude.md",
               "agents.md",
               "release_details.yaml",
+              "eslint.config.js",
           }
 
           excluded_dirs = {
@@ -167,6 +168,7 @@ jobs:
               ".github",
               ".cursor",
               "release-output",
+              "test",
           }
 
           files = []
