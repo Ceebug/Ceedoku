@@ -1438,11 +1438,9 @@ function renderSaveCards() {
         exportButton.textContent = "Export .CSF";
         exportButton.addEventListener("click", () => {
             closeSaveMoreMenu();
-            try {
-                FSJ(save.data, save.title);
-            } catch (error) {
-                reportSaveError(error);
-            }
+            pendingExportSave = save;
+            exportnameinput.value = save.title || "Sudoku game";
+            showexportnamemenu();
         });
         const duplicateButton = document.createElement("button");
         duplicateButton.type = "button";
@@ -1576,7 +1574,7 @@ function loadgame(saveOverride) {
     if (
         game.difficulty === "custom" &&
         Number.isInteger(game.customDifficulty?.holes) &&
-        game.customDifficulty.holes >= 0 &&
+        game.customDifficulty.holes >= 1 &&
         game.customDifficulty.holes <= 64 &&
         typeof game.customDifficulty.toolsEnabled === "boolean"
     ) {
@@ -2219,6 +2217,7 @@ function paintBoard() {
 function saveGame() {
     if (!runninggame && !finished) return;
     if (solution.length !== 81) return;
+    if (difficulty === "custom" && (!Number.isInteger(customDifficulty?.holes) || customDifficulty.holes < 1 || customDifficulty.holes > 64)) return;
 
     const data = saveGameData();
     if (!saveManager) {
@@ -3574,7 +3573,7 @@ async function newGame(
     difficulty = nextDifficulty;
     customDifficulty = difficulty === "custom" && customOptions
         ? {
-            holes: Math.max(0, Math.min(64, Math.trunc(Number(customOptions.holes) || 0))),
+            holes: Math.max(1, Math.min(64, Math.trunc(Number(customOptions.holes) || 1))),
             toolsEnabled: customOptions.toolsEnabled !== false
         }
         : null;
@@ -3626,7 +3625,7 @@ async function newGame(
     redoStack = [];
 
     runninggame = true;
-    if (saveManager) {
+    if (saveManager && (difficulty !== "custom" || (Number.isInteger(customDifficulty?.holes) && customDifficulty.holes >= 1 && customDifficulty.holes <= 64))) {
         try {
             const record = saveManager.add(
                 saveGameData(),
