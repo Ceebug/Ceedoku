@@ -591,6 +591,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         --win-stat-size: 1.2;
         box-sizing: border-box;
         width: fit-content;
+        min-width: 0;
         max-width: calc(100vw - 32px);
         padding: calc(5px * var(--win-stat-size)) calc(20px * var(--win-stat-size));
         border-radius: calc(5px * var(--win-stat-size));
