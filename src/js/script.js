@@ -3669,32 +3669,49 @@ async function newGame(
 
 
 function fitWinStatText() {
-    const availableWidth = document.documentElement.clientWidth - 48;
-
     document.querySelectorAll(".win-stat-scaled").forEach(panel => {
         const heading = panel.querySelector(":scope > h2");
-        if (!heading || availableWidth <= 0) return;
+        const container = panel.parentElement;
+        if (!heading || !container || !container.clientWidth) return;
 
-        // Reset to the natural 1.2x dimensions before measuring.
+        // Measure the panel at its natural 1.2x size before applying any limit.
         panel.style.width = "max-content";
+        panel.style.maxWidth = "none";
         heading.style.width = "max-content";
+        heading.style.maxWidth = "none";
         heading.style.fontSize = "";
+        const naturalWidth = panel.getBoundingClientRect().width;
 
-        // Constrain the container first; its heading is capped by the inner width.
+        // The stats panel must fit its actual parent, not just the viewport.
+        // This accounts for the win-card's padding on narrow screens.
+        const availableWidth = Math.min(
+            container.clientWidth,
+            document.documentElement.clientWidth - 48
+        );
+        if (availableWidth <= 0) return;
+
+        const panelWidth = Math.min(naturalWidth, availableWidth);
+        const panelStyle = getComputedStyle(panel);
+        const horizontalPadding =
+            Number.parseFloat(panelStyle.paddingLeft) +
+            Number.parseFloat(panelStyle.paddingRight);
+        const headingWidth = Math.max(0, panelWidth - horizontalPadding);
+
+        // Give the panel and heading explicit widths so percentage/max-content
+        // intrinsic sizing cannot leave the heading wider than its container.
+        panel.style.width = `${panelWidth}px`;
         panel.style.maxWidth = `${availableWidth}px`;
-        panel.getBoundingClientRect();
-
-        const headingWidth = heading.clientWidth;
-        if (!headingWidth) return;
+        heading.style.width = `${headingWidth}px`;
 
         const baseFontSize = Number.parseFloat(getComputedStyle(heading).fontSize);
-        if (heading.scrollWidth <= headingWidth) return;
+        if (!Number.isFinite(baseFontSize) || heading.clientWidth <= 0) return;
+        if (heading.scrollWidth <= heading.clientWidth) return;
 
-        // Keep the now-constrained container fixed and shrink only its text.
-        let low = 6;
+        // Keep the panel fixed and find the largest font size that fits one line.
+        let low = 1;
         let high = baseFontSize;
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 24; i++) {
             const fontSize = (low + high) / 2;
             heading.style.fontSize = `${fontSize}px`;
 
