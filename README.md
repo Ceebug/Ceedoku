@@ -212,8 +212,8 @@ This repository is primarily a static web app. The main languages used are:
 
 <!-- LANGUAGES_START -->
 - **JavaScript:** 67.21%<br>
-- **CSS:** 27.11%<br>
-- **HTML:** 5.69%
+- **CSS:** 27.10%<br>
+- **HTML:** 5.68%
 <!-- LANGUAGES_END -->
 
 ## Contributing
