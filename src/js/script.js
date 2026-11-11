@@ -2382,7 +2382,7 @@ function hidedeleteGame() {
 }
 
 function hidemainmenu() {
-    document.getElementById("mainmenubutton").style.display = ""
+    document.getElementById("mainmenubutton").style.display = viewingCompletedSave && finished ? "none" : ""
     mainmenu.classList.remove("show");
     mainmenu.inert = true
 
