@@ -3602,8 +3602,7 @@ async function newGame(
     updateHintCooldownDisplay();
 
     if (window.matchMedia("(orientation: landscape)").matches) {
-        let scaleValue = difficulty === "impossible" ? "1.2" : "1.3";
-        document.querySelectorAll(".win-stat").forEach(el => el.style.scale = scaleValue);
+        document.querySelectorAll(".win-stat-scaled").forEach(el => el.style.setProperty("--win-stat-size", "1.2"));
     }
 
     const built = await makePuzzle(customDifficulty ? customDifficulty.holes : DIFFICULTIES[difficulty].holes);
@@ -3668,6 +3667,94 @@ async function newGame(
     testhistorybuttons();
 }
 
+
+function fitWinStatText() {
+    document.querySelectorAll(".win-stat-scaled").forEach(panel => {
+        const heading = panel.querySelector(":scope > h2");
+        const container = panel.parentElement;
+        if (!heading || !container || !container.clientWidth) return;
+
+        // Measure the panel at its natural 1.2x size before applying any limit.
+        panel.style.width = "max-content";
+        panel.style.maxWidth = "none";
+        heading.style.width = "max-content";
+        heading.style.maxWidth = "none";
+        heading.style.fontSize = "";
+        const naturalWidth = panel.getBoundingClientRect().width;
+
+        // The stats panel must fit its actual parent, not just the viewport.
+        // This accounts for the win-card's padding on narrow screens.
+        const availableWidth = Math.min(
+            container.clientWidth,
+            document.documentElement.clientWidth - 48
+        );
+        if (availableWidth <= 0) return;
+
+        const panelWidth = Math.min(naturalWidth, availableWidth);
+        const panelStyle = getComputedStyle(panel);
+        const horizontalPadding =
+            Number.parseFloat(panelStyle.paddingLeft) +
+            Number.parseFloat(panelStyle.paddingRight);
+        const headingWidth = Math.max(0, panelWidth - horizontalPadding);
+
+        // Give the panel and heading explicit widths so percentage/max-content
+        // intrinsic sizing cannot leave the heading wider than its container.
+        panel.style.width = `${panelWidth}px`;
+        panel.style.maxWidth = `${availableWidth}px`;
+        heading.style.width = `${headingWidth}px`;
+
+        const baseFontSize = Number.parseFloat(getComputedStyle(heading).fontSize);
+        if (!Number.isFinite(baseFontSize) || heading.clientWidth <= 0) return;
+        if (heading.scrollWidth <= heading.clientWidth) return;
+
+        // Keep the panel fixed and find the largest font size that fits one line.
+        let low = 1;
+        let high = baseFontSize;
+
+        for (let i = 0; i < 24; i++) {
+            const fontSize = (low + high) / 2;
+            heading.style.fontSize = `${fontSize}px`;
+
+            if (heading.scrollWidth <= heading.clientWidth) {
+                low = fontSize;
+            } else {
+                high = fontSize;
+            }
+        }
+
+        heading.style.fontSize = `${low}px`;
+    });
+}
+
+// Viewport changes are handled by the window resize listener below.
+// Do not observe panel size: changing the fitted font also changes panel height.
+const winStatTextObserver = new MutationObserver(() => {
+    requestAnimationFrame(fitWinStatText);
+});
+
+document.querySelectorAll(".win-stat-scaled > h2").forEach(heading => {
+    winStatTextObserver.observe(heading, {
+        childList: true,
+        characterData: true,
+        subtree: true
+    });
+});
+
+// Refit when an overlay becomes visible. The win overlay starts hidden,
+// so measuring it only during initial page load returns a zero-width heading.
+const winStatOverlayObserver = new MutationObserver(() => {
+    requestAnimationFrame(fitWinStatText);
+});
+
+document.querySelectorAll(".win-overlay, .win-overlay2").forEach(overlay => {
+    winStatOverlayObserver.observe(overlay, {
+        attributes: true,
+        attributeFilter: ["class", "hidden", "style"]
+    });
+});
+
+window.addEventListener("resize", fitWinStatText);
+requestAnimationFrame(fitWinStatText);
 
 
 renderNumberPad();
