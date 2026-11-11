@@ -3673,18 +3673,23 @@ function fitWinStatText() {
     document.querySelectorAll(".win-stat-scaled > h2").forEach(heading => {
         heading.style.fontSize = "";
 
-        const availableWidth = heading.clientWidth;
+        const panel = heading.parentElement;
+        const panelStyle = getComputedStyle(panel);
+        const availableWidth = panel.clientWidth
+            - Number.parseFloat(panelStyle.paddingLeft)
+            - Number.parseFloat(panelStyle.paddingRight);
+
         if (!availableWidth || heading.scrollWidth <= availableWidth) return;
 
         const baseFontSize = Number.parseFloat(getComputedStyle(heading).fontSize);
         let low = 8;
         let high = baseFontSize;
 
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < 14; i++) {
             const fontSize = (low + high) / 2;
             heading.style.fontSize = `${fontSize}px`;
 
-            if (heading.scrollWidth <= heading.clientWidth) {
+            if (heading.scrollWidth <= availableWidth) {
                 low = fontSize;
             } else {
                 high = fontSize;
