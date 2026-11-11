@@ -3673,13 +3673,15 @@ function fitWinStatText() {
         heading.style.fontSize = "";
 
         const availableWidth = heading.clientWidth;
-        if (!availableWidth || heading.scrollWidth <= availableWidth) return;
+        if (!availableWidth) return;
 
         const baseFontSize = Number.parseFloat(getComputedStyle(heading).fontSize);
-        let low = 6;
+        if (heading.scrollWidth <= availableWidth) return;
+
+        let low = 8;
         let high = baseFontSize;
 
-        for (let i = 0; i < 16; i++) {
+        for (let i = 0; i < 18; i++) {
             const fontSize = (low + high) / 2;
             heading.style.fontSize = `${fontSize}px`;
 
