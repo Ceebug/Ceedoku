@@ -3669,19 +3669,32 @@ async function newGame(
 
 
 function fitWinStatText() {
-    document.querySelectorAll(".win-stat-scaled > h2").forEach(heading => {
+    const availableWidth = document.documentElement.clientWidth - 48;
+
+    document.querySelectorAll(".win-stat-scaled").forEach(panel => {
+        const heading = panel.querySelector(":scope > h2");
+        if (!heading || availableWidth <= 0) return;
+
+        // Reset to the natural 1.2x dimensions before measuring.
+        panel.style.width = "max-content";
+        heading.style.width = "max-content";
         heading.style.fontSize = "";
 
-        const availableWidth = heading.clientWidth;
-        if (!availableWidth) return;
+        // Constrain the container first; its heading is capped by the inner width.
+        panel.style.maxWidth = `${availableWidth}px`;
+        panel.getBoundingClientRect();
+
+        const headingWidth = heading.clientWidth;
+        if (!headingWidth) return;
 
         const baseFontSize = Number.parseFloat(getComputedStyle(heading).fontSize);
-        if (heading.scrollWidth <= availableWidth) return;
+        if (heading.scrollWidth <= headingWidth) return;
 
-        let low = 8;
+        // Keep the now-constrained container fixed and shrink only its text.
+        let low = 6;
         let high = baseFontSize;
 
-        for (let i = 0; i < 18; i++) {
+        for (let i = 0; i < 20; i++) {
             const fontSize = (low + high) / 2;
             heading.style.fontSize = `${fontSize}px`;
 
