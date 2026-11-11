@@ -587,6 +587,31 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         transform: translateY(-1dvh);
     }
     
+    .win-stat-scaled {
+        --win-stat-size: 1.2;
+        box-sizing: border-box;
+        width: max-content;
+        min-width: 0;
+        max-width: 100%;
+        padding: calc(5px * var(--win-stat-size)) calc(20px * var(--win-stat-size));
+        border-radius: calc(5px * var(--win-stat-size));
+        box-shadow: 0 0 calc(5px * var(--win-stat-size)) calc(5px * var(--win-stat-size)) var(--shadow-color2);
+    }
+
+    .win-stat-scaled > h2 {
+        box-sizing: border-box;
+        display: block;
+        width: max-content;
+        min-width: 0;
+        max-width: 100%;
+        margin: 0 auto;
+        margin-top: calc(5px * var(--win-stat-size));
+        margin-bottom: calc(10px * var(--win-stat-size));
+        font-size: calc(1.125rem * var(--win-stat-size));
+        line-height: normal;
+        white-space: nowrap !important;
+    }
+
     .win-card {
         width: min(420px, calc(100vw - 32px));
     
