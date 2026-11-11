@@ -3709,14 +3709,8 @@ function fitWinStatText() {
     });
 }
 
-const winStatResizeObserver = new ResizeObserver(() => {
-    requestAnimationFrame(fitWinStatText);
-});
-
-document.querySelectorAll(".win-stat-scaled").forEach(panel => {
-    winStatResizeObserver.observe(panel);
-});
-
+// Viewport changes are handled by the window resize listener below.
+// Do not observe panel size: changing the fitted font also changes panel height.
 const winStatTextObserver = new MutationObserver(() => {
     requestAnimationFrame(fitWinStatText);
 });
