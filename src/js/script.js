@@ -3602,8 +3602,7 @@ async function newGame(
     updateHintCooldownDisplay();
 
     if (window.matchMedia("(orientation: landscape)").matches) {
-        let scaleValue = difficulty === "impossible" ? "1.2" : "1.3";
-        document.querySelectorAll(".win-stat-scaled").forEach(el => el.style.setProperty("--win-stat-size", scaleValue));
+        document.querySelectorAll(".win-stat-scaled").forEach(el => el.style.setProperty("--win-stat-size", "1.2"));
     }
 
     const built = await makePuzzle(customDifficulty ? customDifficulty.holes : DIFFICULTIES[difficulty].holes);
@@ -3675,9 +3674,12 @@ function fitWinStatText() {
 
         const panel = heading.parentElement;
         const panelStyle = getComputedStyle(panel);
+        const headingStyle = getComputedStyle(heading);
         const availableWidth = panel.clientWidth
             - Number.parseFloat(panelStyle.paddingLeft)
-            - Number.parseFloat(panelStyle.paddingRight);
+            - Number.parseFloat(panelStyle.paddingRight)
+            - Number.parseFloat(headingStyle.marginLeft)
+            - Number.parseFloat(headingStyle.marginRight);
 
         if (!availableWidth || heading.scrollWidth <= availableWidth) return;
 
