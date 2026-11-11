@@ -590,7 +590,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
     .win-stat-scaled {
         --win-stat-size: 1.2;
         box-sizing: border-box;
-        width: fit-content;
+        width: max-content;
         min-width: 0;
         max-width: calc(100vw - 48px);
         padding: calc(5px * var(--win-stat-size)) calc(20px * var(--win-stat-size));
@@ -601,7 +601,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
     .win-stat-scaled > h2 {
         box-sizing: border-box;
         display: block;
-        width: 100%;
+        width: max-content;
         min-width: 0;
         max-width: 100%;
         margin: 0 auto;
