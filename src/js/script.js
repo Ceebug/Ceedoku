@@ -1107,6 +1107,7 @@ function showPlayMenu() {
 }
 
 function hidePlayMenu() {
+    closeSaveMoreMenu();
     playOverlay.classList.remove("show");
     setTimeout(() => {
         if (!playOverlay.classList.contains("show")) playOverlay.hidden = true;
