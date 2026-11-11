@@ -3724,7 +3724,7 @@ document.querySelectorAll(".win-stat-scaled > h2").forEach(heading => {
 });
 
 // Refit when an overlay becomes visible. The win overlay starts hidden,
- // so measuring it only during initial page load returns a zero-width heading.
+// so measuring it only during initial page load returns a zero-width heading.
 const winStatOverlayObserver = new MutationObserver(() => {
     requestAnimationFrame(fitWinStatText);
 });
