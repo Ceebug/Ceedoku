@@ -510,7 +510,11 @@ if (audioContext) {
 
             return response.arrayBuffer();
         })
-        .then(data => audioContext.decodeAudioData(data));
+        .then(data => audioContext.decodeAudioData(data))
+        .catch(error => {
+            console.warn("Completion sound could not be loaded:", error);
+            return null;
+        });
 }
 
 function unlockAudio() {
@@ -525,6 +529,7 @@ function isTouchDevice() {
     return window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 }
 document.addEventListener("pointerdown", unlockAudio);
+document.addEventListener("keydown", unlockAudio);
 let vibrate;
 if ("vibrate" in navigator) {
     vibrate = function(duration = 10) {
@@ -544,7 +549,7 @@ function playPop(speed = 1, delay = 0) {
     const requestedStartTime = audioContext.currentTime + Math.max(0, delay);
 
     popBufferPromise.then(async buffer => {
-        if (!settings.SFX.enabled) return;
+        if (!buffer || !settings.SFX.enabled) return;
 
         if (audioContext.state !== "running") {
             await audioContext.resume();
