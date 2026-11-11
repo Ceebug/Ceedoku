@@ -3669,6 +3669,44 @@ async function newGame(
 }
 
 
+function fitWinStatText() {
+    document.querySelectorAll(".win-stat-scaled > h2").forEach(heading => {
+        heading.style.fontSize = "";
+
+        const availableWidth = heading.clientWidth;
+        const contentWidth = heading.scrollWidth;
+        if (!availableWidth || contentWidth <= availableWidth) return;
+
+        const baseFontSize = Number.parseFloat(getComputedStyle(heading).fontSize);
+        const fittedFontSize = Math.max(12, baseFontSize * (availableWidth / contentWidth) * 0.98);
+        heading.style.fontSize = `${fittedFontSize}px`;
+    });
+}
+
+const winStatResizeObserver = new ResizeObserver(() => {
+    requestAnimationFrame(fitWinStatText);
+});
+
+document.querySelectorAll(".win-stat-scaled").forEach(panel => {
+    winStatResizeObserver.observe(panel);
+});
+
+const winStatTextObserver = new MutationObserver(() => {
+    requestAnimationFrame(fitWinStatText);
+});
+
+document.querySelectorAll(".win-stat-scaled > h2").forEach(heading => {
+    winStatTextObserver.observe(heading, {
+        childList: true,
+        characterData: true,
+        subtree: true
+    });
+});
+
+window.addEventListener("resize", fitWinStatText);
+requestAnimationFrame(fitWinStatText);
+
+
 
 renderNumberPad();
 
