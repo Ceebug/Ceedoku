@@ -3583,7 +3583,7 @@ async function newGame(
     difficulty = nextDifficulty;
     customDifficulty = difficulty === "custom" && customOptions
         ? {
-            holes: Math.max(1, Math.min(64, Math.trunc(Number(customOptions.holes) || 1))),
+            holes: Math.max(1, Math.min(55, Math.trunc(Number(customOptions.holes) || 1))),
             toolsEnabled: customOptions.toolsEnabled !== false
         }
         : null;
