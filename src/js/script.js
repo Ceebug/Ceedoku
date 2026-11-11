@@ -1085,6 +1085,7 @@ function showPlayMenu() {
 }
 
 function hidePlayMenu() {
+    closeSaveMoreMenu();
     playOverlay.classList.remove("show");
     setTimeout(() => {
         if (!playOverlay.classList.contains("show")) playOverlay.hidden = true;
@@ -2136,7 +2137,10 @@ function paintBoard() {
         for (const child of [...cell.childNodes]) {
             if (
                 child.nodeType === Node.ELEMENT_NODE &&
-                child.classList.contains("complete-effect")
+                (
+                    child.classList.contains("complete-effect") ||
+                    child.classList.contains("complete-number")
+                )
             ) {
                 continue;
             }
@@ -3016,14 +3020,25 @@ function animateIndexes(indexes, origin, kind) {
             // Effect goes first.
             cell.appendChild(effect);
 
-            // Create a new number on top of the effect.
+            // Keep the existing cell number, but hide its original text while
+            // the correctly aligned overlay is shown above the animated square.
+            cell.classList.add("completion-number-hidden");
+
             const number = document.createElement("p");
-
+            number.className = "complete-number";
             number.textContent = values[index];
-
-            number.style.margin = "0px";
             number.style.position = "absolute";
+            number.style.inset = "0";
+            number.style.display = "grid";
+            number.style.placeItems = "center";
+            number.style.width = "100%";
+            number.style.height = "100%";
+            number.style.margin = "0";
+            number.style.padding = "0";
+            number.style.font = "inherit";
+            number.style.lineHeight = "inherit";
             number.style.zIndex = "2";
+            number.style.pointerEvents = "none";
 
             // Given cells get the heavier font weight.
             if (givens[index]) {
@@ -3032,19 +3047,13 @@ function animateIndexes(indexes, origin, kind) {
 
             // Match the cell's current state.
             if (cell.classList.contains("error")) {
-
                 number.style.color = "var(--danger)";
-
             } else if (cell.classList.contains("correct")) {
-
                 number.style.color = "var(--lime-text)";
-
             } else {
-
                 number.style.color = "var(--text)";
             }
 
-            // Number goes after the effect.
             cell.appendChild(number);
 
             let cleanedUp = false;
@@ -3054,6 +3063,9 @@ function animateIndexes(indexes, origin, kind) {
                 clearTimeout(cleanupTimeout);
                 effect.remove();
                 number.remove();
+                if (!cell.querySelector(".complete-effect")) {
+                    cell.classList.remove("completion-number-hidden");
+                }
             };
 
             effect.addEventListener("animationend", (event) => {
@@ -3079,7 +3091,6 @@ function animateIndexes(indexes, origin, kind) {
     });
 }
 const allIndexes = [...Array(81).keys()];
-animateIndexes(allIndexes, selected, "board");
 
 function animateNewCompletions(previous, origin) {
     const next = getCompletedUnits();
@@ -3138,6 +3149,7 @@ function playBoardRipple() {
         }
     });
 }
+
 document.addEventListener("pointerup", () => {
     updateHintCooldownDisplay();
 });

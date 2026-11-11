@@ -1113,7 +1113,11 @@ position: relative;
     rippleFade .35s ease
         var(--fade-delay, 1000ms) forwards;
     }
-	.complete-effect {
+	.cell.completion-number-hidden {
+    color: transparent !important;
+}
+
+.complete-effect {
     position: absolute;
     inset: 2px;
 
