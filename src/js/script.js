@@ -3603,7 +3603,7 @@ async function newGame(
 
     if (window.matchMedia("(orientation: landscape)").matches) {
         let scaleValue = difficulty === "impossible" ? "1.2" : "1.3";
-        document.querySelectorAll(".win-stat").forEach(el => el.style.setProperty("--win-stat-size", scaleValue));
+        document.querySelectorAll(".win-stat-scaled").forEach(el => el.style.setProperty("--win-stat-size", scaleValue));
     }
 
     const built = await makePuzzle(customDifficulty ? customDifficulty.holes : DIFFICULTIES[difficulty].holes);
