@@ -3674,12 +3674,24 @@ function fitWinStatText() {
         heading.style.fontSize = "";
 
         const availableWidth = heading.clientWidth;
-        const contentWidth = heading.scrollWidth;
-        if (!availableWidth || contentWidth <= availableWidth) return;
+        if (!availableWidth || heading.scrollWidth <= availableWidth) return;
 
         const baseFontSize = Number.parseFloat(getComputedStyle(heading).fontSize);
-        const fittedFontSize = Math.max(12, baseFontSize * (availableWidth / contentWidth) * 0.98);
-        heading.style.fontSize = `${fittedFontSize}px`;
+        let low = 8;
+        let high = baseFontSize;
+
+        for (let i = 0; i < 12; i++) {
+            const fontSize = (low + high) / 2;
+            heading.style.fontSize = `${fontSize}px`;
+
+            if (heading.scrollWidth <= heading.clientWidth) {
+                low = fontSize;
+            } else {
+                high = fontSize;
+            }
+        }
+
+        heading.style.fontSize = `${low}px`;
     });
 }
 
@@ -3705,7 +3717,6 @@ document.querySelectorAll(".win-stat-scaled > h2").forEach(heading => {
 
 window.addEventListener("resize", fitWinStatText);
 requestAnimationFrame(fitWinStatText);
-
 
 
 renderNumberPad();
