@@ -494,42 +494,42 @@ let disableprint = true
 loadSettings();
 let hintcount = settings.hints.cooldown.startinghints
 const winSound = new Audio("./src/sounds/win.ogg");
-const popSound = new Audio("./src/sounds/pop.ogg");
-popSound.preload = "auto";
-popSound.load();
 winSound.preload = "auto";
 winSound.load();
-const audioContext = new AudioContext();
-const popSource = audioContext.createMediaElementSource(popSound);
-const popGain = audioContext.createGain();
 
-popSource.connect(popGain);
-popGain.connect(audioContext.destination);
-let audioUnlocked = false;
+const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+const audioContext = AudioContextClass ? new AudioContextClass() : null;
+let popBufferPromise = null;
+
+if (audioContext) {
+    popBufferPromise = fetch("./src/sounds/pop.ogg")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to load completion sound: ${response.status}`);
+            }
+
+            return response.arrayBuffer();
+        })
+        .then(data => audioContext.decodeAudioData(data))
+        .catch(error => {
+            console.warn("Completion sound could not be loaded:", error);
+            return null;
+        });
+}
 
 function unlockAudio() {
-    if (audioUnlocked) return;
+    if (!audioContext || audioContext.state === "running") return;
 
-    popSound.muted = true;
-
-    popSound.play()
-        .then(() => {
-            popSound.pause();
-            popSound.currentTime = 0;
-            popSound.muted = false;
-            audioUnlocked = true;
-        })
-        .catch(() => {
-            popSound.muted = false;
-        });
+    audioContext.resume().catch(error => {
+        console.warn("Audio context could not be resumed:", error);
+    });
 }
 
 function isTouchDevice() {
     return window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 }
-document.addEventListener("pointerdown", unlockAudio, {
-    once: true
-});
+document.addEventListener("pointerdown", unlockAudio);
+document.addEventListener("keydown", unlockAudio);
 let vibrate;
 if ("vibrate" in navigator) {
     vibrate = function(duration = 10) {
@@ -542,63 +542,41 @@ if ("vibrate" in navigator) {
     vibrate = function() {};
 }
 
-let pitchInterval = null;
-let popPlaybackId = 0;
+function playPop(speed = 1, delay = 0) {
+    if (!settings.SFX.enabled || !audioContext || !popBufferPromise) return;
 
-function playPop(speed = 1) {
-    if (!settings.SFX.enabled) return;
+    const playbackRate = Math.max(0.1, Math.min(speed, 7));
+    const requestedStartTime = audioContext.currentTime + Math.max(0, delay);
 
-    if (pitchInterval) {
-        clearInterval(pitchInterval);
-        pitchInterval = null;
-    }
+    popBufferPromise.then(async buffer => {
+        if (!buffer || !settings.SFX.enabled) return;
 
-    const playbackId = ++popPlaybackId;
-
-    popSound.pause();
-    popSound.currentTime = 0;
-
-    popSound.preservesPitch = false;
-    popSound.mozPreservesPitch = false;
-    popSound.webkitPreservesPitch = false;
-
-    let currentSpeed = Math.min(speed, 7);
-    popSound.playbackRate = currentSpeed;
-
-    const stopPitchInterval = () => {
-        if (playbackId !== popPlaybackId) return;
-
-        if (pitchInterval) {
-            clearInterval(pitchInterval);
-            pitchInterval = null;
+        if (audioContext.state !== "running") {
+            await audioContext.resume();
         }
 
-        popSound.playbackRate = 1;
-    };
+        if (audioContext.state !== "running") return;
 
-    popSound.onended = stopPitchInterval;
+        const startTime = Math.max(audioContext.currentTime, requestedStartTime);
+        const source = audioContext.createBufferSource();
 
-    try {
-        const playback = popSound.play();
+        source.buffer = buffer;
+        source.playbackRate.setValueAtTime(playbackRate, startTime);
 
-        if (playback && typeof playback.catch === "function") {
-            playback.catch(error => {
-                stopPitchInterval();
-                console.log("pop failed -", error);
-            });
+        // Match the old gradual pitch increase without a timer or shared audio element.
+        if (playbackRate < 7) {
+            source.playbackRate.linearRampToValueAtTime(
+                7,
+                startTime + (7 - playbackRate) / 2
+            );
         }
-    } catch (error) {
-        stopPitchInterval();
-        console.log("pop failed -", error);
-        return;
-    }
 
-    pitchInterval = setInterval(() => {
-        if (playbackId !== popPlaybackId) return;
-
-        currentSpeed = Math.min(currentSpeed + 0.1, 7);
-        popSound.playbackRate = currentSpeed;
-    }, 50);
+        source.connect(audioContext.destination);
+        source.addEventListener("ended", () => source.disconnect(), { once: true });
+        source.start(startTime);
+    }).catch(error => {
+        console.warn("Completion sound failed:", error);
+    });
 }
 document.addEventListener("pointerdown", (event) => {
     const button = event.target.closest("button");
@@ -3006,11 +2984,10 @@ function animateIndexes(indexes, origin, kind) {
 
                 distancesPlayed.add(distance);
 
-                setTimeout(() => {
-                    playPop(
-                        Math.min(1 + distance * 0.5)
-                    );
-                }, distance * 60);
+                playPop(
+                    1 + distance * 0.5,
+                    distance * 0.06
+                );
             }
         }
 
@@ -3129,7 +3106,48 @@ function animateNewCompletions(previous, origin) {
 }
 
 function playBoardRipple() {
-    animateIndexes(allIndexes, selected, "board");
+    const distances = getBoardDistances(selected);
+    const distancesPlayed = new Set();
+
+    boardEl.querySelectorAll(".cell").forEach((cell, index) => {
+
+        const distance = distances[index];
+
+        // Sound
+        if (settings.SFX.enabled && settings.SFX.completion) {
+            if (!distancesPlayed.has(distance)) {
+                distancesPlayed.add(distance);
+
+                playPop(
+                    1 + distance * 0.25,
+                    distance * 0.06
+                );
+            }
+        }
+
+        // Animation
+        if (settings.VFX.enabled && settings.VFX.completion) {
+
+            cell.classList.remove("complete-sweep", "board");
+
+            cell.style.setProperty(
+                "--sweep-delay",
+                `${distance * 60}ms`
+            );
+            cell.style.setProperty("--fade-delay", "1000ms");
+
+            requestAnimationFrame(() => {
+                cell.classList.add("complete-sweep", "board");
+            });
+
+            // Keep the pseudo-element mounted until its 350ms fade finishes.
+            setTimeout(() => {
+                cell.classList.remove("complete-sweep", "board");
+                cell.style.removeProperty("--sweep-delay");
+                cell.style.removeProperty("--fade-delay");
+            }, 1450 + distance * 60);
+        }
+    });
 }
 
 document.addEventListener("pointerup", () => {
@@ -3171,7 +3189,6 @@ function checkWin() {
     if (finished) return;
 
     if (values.every((value, index) => value === solution[index])) {
-        popSound.playbackRate = 2;
         pauseBtn2.style.display = "none"
         runninggame = false
         finished = true;
