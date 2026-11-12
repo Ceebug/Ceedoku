@@ -3201,7 +3201,7 @@ kbd {
 }
 
 /* Keep the save menu's New Game button radius consistent while pressed. */
-.save-new-game:active {
+#newSaveButton:active {
     border-radius: 12px !important;
 }
 
