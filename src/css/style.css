@@ -3384,3 +3384,15 @@ body.light .menu-item:active {
         transform: none;
     }
 }
+
+/* Keep long save names inside the export card, clear of its Export button. */
+.save-export-card .save-card-info,
+.save-export-card .save-card-title-row {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.save-export-card .save-card-title {
+    flex: 1 1 0;
+    min-width: 0;
+}
