@@ -2411,6 +2411,13 @@ button,
     gap: 8px;
 }
 
+.save-rename-actions .save-action-button {
+    width: auto;
+    min-width: 80px;
+    padding: 0 14px;
+    white-space: nowrap;
+}
+
 .save-manager-card {
     width: min(760px, calc(100vw - 24px));
     max-height: min(88dvh, 900px);
