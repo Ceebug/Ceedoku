@@ -1032,7 +1032,16 @@ function opensettingsmenu() {
 }
 
 function closesettingsmenu() {
-    document.getElementById("settingsOverlay").classList.remove("show");
+    const overlay = document.getElementById("settingsOverlay");
+    overlay.classList.remove("show");
+
+    if (capturingKeybindAction) {
+        capturingKeybindAction = null;
+        renderKeybinds();
+    }
+
+    const focusedKeybind = overlay.querySelector(".keybind-assign:focus");
+    focusedKeybind?.blur();
 }
 
 const isAndroidPWA =
