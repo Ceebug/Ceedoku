@@ -3175,38 +3175,30 @@ kbd {
         width: 100%;
     }
 }
-@media (hover: hover) and (pointer: fine) {
+
+
 /* Touch devices can retain :hover after a tap; keep save actions in their resting state. */
-@media (hover: none) {
-    .save-play-button:hover {
+@media (hover: none), (pointer: coarse) {
+@media (hover: hover) and (pointer: fine) {
+.save-play-button:hover {
         filter: none;
     }
+}
 
-    .save-more-menu button:hover {
+@media (hover: hover) and (pointer: fine) {
+.save-more-menu button:hover {
         background: transparent;
     }
-
-    .save-square-button:hover,
-    .save-close-button:hover {
-        background: var(--surface-2);
-    }
 }
-}
-(pointer: coarse) {
-    .save-play-button:hover {
-        filter: none;
-    }
 
-    .save-more-menu button:hover {
-        background: transparent;
-    }
-
-    .save-square-button:hover,
-    .save-close-button:hover {
+@media (hover: hover) and (pointer: fine) {
+.save-square-button:hover,
+.save-close-button:hover {
         background: var(--surface-2);
     }
 }
 
+}
 
 /* Keep the save menu's New Game button radius consistent while pressed. */
 .save-new-game:active {
@@ -3342,19 +3334,26 @@ body.light .menu-item:active {
 }
 }
 
+@media (hover: none), (pointer: coarse) {
 @media (hover: none) and (pointer: coarse) {
-/* Touch devices can retain :active after a tap; keep save actions in their resting state. */
-@media (hover: none) {
-    .save-play-button:hover {
+.save-play-button:active {
         filter: none;
     }
+}
+}
 
-    .save-more-menu button:hover {
+@media (hover: none), (pointer: coarse) {
+@media (hover: none) and (pointer: coarse) {
+.save-more-menu button:active {
         background: transparent;
     }
+}
+}
 
-    .save-square-button:hover,
-    .save-close-button:hover {
+@media (hover: none), (pointer: coarse) {
+@media (hover: none) and (pointer: coarse) {
+.save-square-button:active,
+.save-close-button:active {
         background: var(--surface-2);
     }
 }
