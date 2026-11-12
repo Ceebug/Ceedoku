@@ -2391,6 +2391,14 @@ button,
     margin: 0;
 }
 
+.save-rename-description {
+    margin: -4px 0 0;
+    color: var(--text3);
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
 .save-rename-label {
     color: var(--text2);
 }
