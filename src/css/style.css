@@ -2432,7 +2432,7 @@ button,
     background: var(--surface-2);
     text-align: left;
     cursor: grab;
-    touch-action: none;
+    touch-action: auto;
     user-select: none;
 }
 
