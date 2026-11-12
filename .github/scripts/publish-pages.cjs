@@ -1,11 +1,14 @@
 
-const fs = require("node:fs");
-const path = require("node:path");
-const { execFileSync } = require("node:child_process");
-const { DefaultArtifactClient } = require("@actions/artifact");
+import fs from "node:fs";
+import path from "node:path";
+import { execFileSync } from "node:child_process";
+import { DefaultArtifactClient } from "@actions/artifact";
 
 const source = process.env.SOURCE_DIR;
-const output = path.join(process.env.RUNNER_TEMP, "ceedoku-pages-output");
+const output = path.join(
+  process.env.RUNNER_TEMP,
+  "ceedoku-pages-output"
+);
 
 const repository = process.env.GITHUB_REPOSITORY;
 const sha = process.env.GITHUB_SHA;
@@ -29,15 +32,22 @@ function shouldInclude(file) {
 }
 
 async function main() {
+  if (!source || !repository || !sha || !token) {
+    throw new Error("Missing required GitHub Actions environment variables.");
+  }
+
   fs.rmSync(output, { recursive: true, force: true });
   fs.mkdirSync(output, { recursive: true });
 
-  // Use Git's tracked-file list so untracked runner files never enter the site.
+  // Only copy tracked files from the fetched commit.
   const tracked = execFileSync(
     "git",
     ["ls-files", "-z"],
     { cwd: source }
-  ).toString().split("\0").filter(Boolean);
+  )
+    .toString()
+    .split("\0")
+    .filter(Boolean);
 
   const files = [];
 
@@ -46,6 +56,10 @@ async function main() {
 
     const from = path.join(source, relative);
     const to = path.join(output, relative);
+
+    if (!fs.existsSync(from) || !fs.statSync(from).isFile()) {
+      continue;
+    }
 
     fs.mkdirSync(path.dirname(to), { recursive: true });
     fs.copyFileSync(from, to);
@@ -59,7 +73,7 @@ async function main() {
 
   console.log(`Prepared ${files.length} website files.`);
 
-  // Upload the website as a GitHub Actions artifact.
+  // Upload the static website as a GitHub Actions artifact.
   const client = new DefaultArtifactClient();
 
   const artifact = await client.uploadArtifact(
@@ -69,26 +83,34 @@ async function main() {
     { retentionDays: 1 }
   );
 
-  console.log(`Uploaded artifact ${artifact.id} (${artifact.size} bytes).`);
-
-  // Request the short-lived GitHub Actions OIDC token.
-  const oidcResponse = await fetch(
-    process.env.ACTIONS_ID_TOKEN_REQUEST_URL,
-    {
-      headers: {
-        Authorization:
-          `Bearer ${process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN}`
-      }
-    }
+  console.log(
+    `Uploaded artifact ${artifact.id} (${artifact.size} bytes).`
   );
 
+  // Request a short-lived GitHub Actions OIDC token.
+  const oidcUrl = new URL(
+    process.env.ACTIONS_ID_TOKEN_REQUEST_URL
+  );
+
+  oidcUrl.searchParams.set("audience", "github-pages");
+
+  const oidcResponse = await fetch(oidcUrl, {
+    headers: {
+      Authorization:
+        `Bearer ${process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN}`
+    }
+  });
+
   if (!oidcResponse.ok) {
-    throw new Error(`OIDC request failed: ${oidcResponse.status}`);
+    throw new Error(
+      `OIDC request failed: ${oidcResponse.status} ` +
+      await oidcResponse.text()
+    );
   }
 
   const { value: oidcToken } = await oidcResponse.json();
 
-  // Create the GitHub Pages deployment directly.
+  // Submit the artifact to GitHub Pages.
   const deploymentResponse = await fetch(
     `https://api.github.com/repos/${repository}/pages/deployments`,
     {
@@ -121,6 +143,6 @@ async function main() {
 }
 
 main().catch(error => {
-  console.error(error);
+  console.error("Publishing failed:", error);
   process.exitCode = 1;
 });
