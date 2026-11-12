@@ -21,4 +21,4 @@ changelog:
     - The export save-naming dialog now appears above the save-selection menu.
     - The Cancel label in the export filename dialog now fits inside its button.
     - The New Game button in the save menu keeps its corner radius while pressed on mobile.
-    - The export save picker title now uses the correct text colour.
+    - The export save picker title using the incorrect text color.
