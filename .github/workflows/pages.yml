@@ -32,6 +32,7 @@ jobs:
 
     steps:
       - name: Compile Go publisher
+        shell: bash
         run: |
           go build \
             -trimpath \
@@ -52,6 +53,4 @@ jobs:
       - name: Deploy website
         env:
           PAGES_ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
-          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
-          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
         run: "$RUNNER_TEMP/pages-publisher" deploy
