@@ -1153,6 +1153,44 @@ function closeSaveMoreMenu() {
 }
 
 let activeSaveCardDrag = null;
+let pendingSaveCardTouch = null;
+
+function startSaveCardDrag(card, list, save, saveIndex, clientX, clientY, pointerId = null) {
+    const rect = card.getBoundingClientRect();
+    const placeholder = document.createElement("div");
+    placeholder.className = "save-card-placeholder";
+    placeholder.setAttribute("aria-hidden", "true");
+    placeholder.style.height = `${rect.height}px`;
+    card.before(placeholder);
+    activeSaveCardDrag = {
+        card,
+        captureTarget: pointerId === null ? null : card,
+        list,
+        placeholder,
+        saveId: save.id,
+        originalIndex: saveIndex,
+        pointerId,
+        touchId: null,
+        startX: clientX,
+        startY: clientY,
+        offsetX: clientX - rect.left,
+        offsetY: clientY - rect.top,
+        moved: false
+    };
+    card.style.position = "fixed";
+    card.style.left = `${rect.left}px`;
+    card.style.top = `${rect.top}px`;
+    card.style.width = `${rect.width}px`;
+    card.style.zIndex = "5010";
+    card.style.pointerEvents = "none";
+    if (pointerId !== null) card.setPointerCapture(pointerId);
+}
+
+function cancelPendingSaveCardTouch() {
+    if (!pendingSaveCardTouch) return;
+    clearTimeout(pendingSaveCardTouch.timer);
+    pendingSaveCardTouch = null;
+}
 
 function moveSaveCardPlaceholder(clientY) {
     const { card, list, placeholder } = activeSaveCardDrag;
@@ -1163,6 +1201,22 @@ function moveSaveCardPlaceholder(clientY) {
     } else {
         list.appendChild(placeholder);
     }
+}
+
+function moveSaveCardDrag(clientX, clientY) {
+    const drag = activeSaveCardDrag;
+    const deltaX = clientX - drag.startX;
+    const deltaY = clientY - drag.startY;
+    if (!drag.moved && Math.hypot(deltaX, deltaY) < 5) return;
+    drag.moved = true;
+    drag.card.classList.add("dragging");
+    drag.card.style.left = `${clientX - drag.offsetX}px`;
+    drag.card.style.top = `${clientY - drag.offsetY}px`;
+
+    const listRect = drag.list.getBoundingClientRect();
+    if (clientY < listRect.top + 28) drag.list.scrollTop -= 12;
+    else if (clientY > listRect.bottom - 28) drag.list.scrollTop += 12;
+    moveSaveCardPlaceholder(clientY);
 }
 
 function reorderSaveTo(saveId, targetIndex) {
@@ -1202,7 +1256,10 @@ function finishSaveCardDrag(cancelled = false) {
     }
     drag.placeholder.replaceWith(drag.card);
 
-    if (drag.captureTarget.hasPointerCapture(drag.pointerId)) {
+    if (
+        drag.captureTarget &&
+        drag.captureTarget.hasPointerCapture(drag.pointerId)
+    ) {
         drag.captureTarget.releasePointerCapture(drag.pointerId);
     }
     if (cancelled || !drag.moved) return;
@@ -1220,30 +1277,81 @@ function finishSaveCardDrag(cancelled = false) {
 }
 
 document.addEventListener("pointermove", event => {
-    if (!activeSaveCardDrag || event.pointerId !== activeSaveCardDrag.pointerId) return;
-    const drag = activeSaveCardDrag;
-    const deltaX = event.clientX - drag.startX;
-    const deltaY = event.clientY - drag.startY;
-    if (!drag.moved && Math.hypot(deltaX, deltaY) < 5) return;
-    drag.moved = true;
-    drag.card.classList.add("dragging");
-    drag.card.style.left = `${event.clientX - drag.offsetX}px`;
-    drag.card.style.top = `${event.clientY - drag.offsetY}px`;
-
-    const listRect = drag.list.getBoundingClientRect();
-    if (event.clientY < listRect.top + 28) drag.list.scrollTop -= 12;
-    else if (event.clientY > listRect.bottom - 28) drag.list.scrollTop += 12;
-    moveSaveCardPlaceholder(event.clientY);
+    if (
+        !activeSaveCardDrag ||
+        activeSaveCardDrag.pointerId === null ||
+        event.pointerId !== activeSaveCardDrag.pointerId
+    ) return;
+    moveSaveCardDrag(event.clientX, event.clientY);
 });
 
 document.addEventListener("pointerup", event => {
-    if (activeSaveCardDrag && event.pointerId === activeSaveCardDrag.pointerId) {
+    if (
+        activeSaveCardDrag &&
+        activeSaveCardDrag.pointerId !== null &&
+        event.pointerId === activeSaveCardDrag.pointerId
+    ) {
         finishSaveCardDrag();
     }
 });
 
 document.addEventListener("pointercancel", event => {
-    if (activeSaveCardDrag && event.pointerId === activeSaveCardDrag.pointerId) {
+    if (
+        activeSaveCardDrag &&
+        activeSaveCardDrag.pointerId !== null &&
+        event.pointerId === activeSaveCardDrag.pointerId
+    ) {
+        finishSaveCardDrag(true);
+    }
+});
+
+document.addEventListener("touchmove", event => {
+    if (pendingSaveCardTouch) {
+        const touch = Array.from(event.changedTouches).find(item => item.identifier === pendingSaveCardTouch.touchId);
+        if (touch) {
+            pendingSaveCardTouch.clientX = touch.clientX;
+            pendingSaveCardTouch.clientY = touch.clientY;
+            if (Math.hypot(
+                touch.clientX - pendingSaveCardTouch.startX,
+                touch.clientY - pendingSaveCardTouch.startY
+            ) > 8) {
+                cancelPendingSaveCardTouch();
+            }
+        }
+        return;
+    }
+
+    if (!activeSaveCardDrag || activeSaveCardDrag.touchId === null) return;
+    const touch = Array.from(event.changedTouches).find(item => item.identifier === activeSaveCardDrag.touchId);
+    if (!touch) return;
+    event.preventDefault();
+    moveSaveCardDrag(touch.clientX, touch.clientY);
+}, { passive: false });
+
+document.addEventListener("touchend", event => {
+    if (pendingSaveCardTouch) {
+        const ended = Array.from(event.changedTouches).some(item => item.identifier === pendingSaveCardTouch.touchId);
+        if (ended) cancelPendingSaveCardTouch();
+    }
+    if (
+        activeSaveCardDrag &&
+        activeSaveCardDrag.touchId !== null &&
+        Array.from(event.changedTouches).some(item => item.identifier === activeSaveCardDrag.touchId)
+    ) {
+        finishSaveCardDrag();
+    }
+});
+
+document.addEventListener("touchcancel", event => {
+    if (pendingSaveCardTouch) {
+        const cancelled = Array.from(event.changedTouches).some(item => item.identifier === pendingSaveCardTouch.touchId);
+        if (cancelled) cancelPendingSaveCardTouch();
+    }
+    if (
+        activeSaveCardDrag &&
+        activeSaveCardDrag.touchId !== null &&
+        Array.from(event.changedTouches).some(item => item.identifier === activeSaveCardDrag.touchId)
+    ) {
         finishSaveCardDrag(true);
     }
 });
@@ -1287,43 +1395,47 @@ function renderSaveCards() {
     for (const [saveIndex, save] of saves.entries()) {
         const card = document.createElement("article");
         card.className = "save-card";
-        card.setAttribute("aria-label", `Saved game: ${save.title || "Sudoku game"}. Drag anywhere on the card to reorder.`);
+        card.setAttribute("aria-label", `Saved game: ${save.title || "Sudoku game"}. Long-press anywhere on the card to reorder.`);
         card.addEventListener("pointerdown", event => {
             if (
+                event.pointerType === "touch" ||
                 event.button !== 0 ||
                 activeSaveCardDrag ||
                 !saveManager ||
                 event.target.closest("button, a, input, select, textarea, [contenteditable='true']")
             ) return;
             event.preventDefault();
-            const rect = card.getBoundingClientRect();
-            const placeholder = document.createElement("div");
-            placeholder.className = "save-card-placeholder";
-            placeholder.setAttribute("aria-hidden", "true");
-            placeholder.style.height = `${rect.height}px`;
-            card.before(placeholder);
-            activeSaveCardDrag = {
-                card,
-                captureTarget: card,
-                list,
-                placeholder,
-                saveId: save.id,
-                originalIndex: saveIndex,
-                pointerId: event.pointerId,
-                startX: event.clientX,
-                startY: event.clientY,
-                offsetX: event.clientX - rect.left,
-                offsetY: event.clientY - rect.top,
-                moved: false
-            };
-            card.style.position = "fixed";
-            card.style.left = `${rect.left}px`;
-            card.style.top = `${rect.top}px`;
-            card.style.width = `${rect.width}px`;
-            card.style.zIndex = "5010";
-            card.style.pointerEvents = "none";
-            card.setPointerCapture(event.pointerId);
+            startSaveCardDrag(card, list, save, saveIndex, event.clientX, event.clientY, event.pointerId);
         });
+        card.addEventListener("touchstart", event => {
+            if (
+                activeSaveCardDrag ||
+                pendingSaveCardTouch ||
+                !saveManager ||
+                event.target.closest("button, a, input, select, textarea, [contenteditable='true']")
+            ) return;
+            const touch = event.changedTouches[0];
+            if (!touch) return;
+            const pending = {
+                card,
+                list,
+                save,
+                saveIndex,
+                touchId: touch.identifier,
+                startX: touch.clientX,
+                startY: touch.clientY,
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                timer: null
+            };
+            pending.timer = setTimeout(() => {
+                if (pendingSaveCardTouch !== pending) return;
+                pendingSaveCardTouch = null;
+                startSaveCardDrag(card, list, save, saveIndex, pending.clientX, pending.clientY);
+                activeSaveCardDrag.touchId = pending.touchId;
+            }, 400);
+            pendingSaveCardTouch = pending;
+        }, { passive: true });
         const info = document.createElement("div");
         info.className = "save-card-info";
         const titleRow = document.createElement("div");
