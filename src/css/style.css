@@ -3396,3 +3396,14 @@ body.light .menu-item:active {
     flex: 1 1 0;
     min-width: 0;
 }
+
+/* Keep the export filename dialog's Cancel label comfortably inside its button. */
+#namefileOverlay .cancel-button {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 16px;
+    font-size: 1rem !important;
+    line-height: 1.2;
+    white-space: nowrap;
+}
