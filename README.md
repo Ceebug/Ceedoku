@@ -211,9 +211,9 @@ Some of the important parts of the project include:
 This repository is primarily a static web app. The main languages used are:
 
 <!-- LANGUAGES_START -->
-- **JavaScript:** 67.52%<br>
-- **CSS:** 26.86%<br>
-- **HTML:** 5.62%
+- **JavaScript:** 67.22%<br>
+- **CSS:** 27.10%<br>
+- **HTML:** 5.67%
 <!-- LANGUAGES_END -->
 
 ## Contributing
