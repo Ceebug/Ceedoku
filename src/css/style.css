@@ -2389,6 +2389,7 @@ button,
 
 .save-rename-card .win-title {
     margin: 0;
+    color: var(--text2);
 }
 
 .save-rename-label {
