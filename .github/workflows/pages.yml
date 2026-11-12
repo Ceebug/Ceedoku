@@ -27,12 +27,12 @@ jobs:
 
     env:
       GITHUB_TOKEN: ${{ github.token }}
+      SOURCE_DIR: ${{ github.workspace }}/source
+      PUBLISH_DIR: ${{ runner.temp }}/pages-site
 
     steps:
       - name: Fetch exact commit
         shell: bash
-        env:
-          SOURCE_DIR: ${{ runner.temp }}/ceedoku-pages-source
         run: |
           mkdir -p "$SOURCE_DIR"
           git -C "$SOURCE_DIR" init
@@ -47,20 +47,27 @@ jobs:
 
           git -C "$SOURCE_DIR" checkout --detach FETCH_HEAD
 
-      - name: Install artifact library
+      - name: Compile Go publisher
         run: |
-          npm install \
-            --prefix "$RUNNER_TEMP/pages-publisher" \
-            --no-save \
-            --no-package-lock \
-            --ignore-scripts \
-            --no-audit \
-            --no-fund \
-            @actions/artifact@6.1.0
+          go build \
+            -trimpath \
+            -ldflags="-s -w" \
+            -o "$RUNNER_TEMP/pages-publisher" \
+            "$SOURCE_DIR/.github/scripts/pages-publisher.go"
 
-          echo "NODE_PATH=$RUNNER_TEMP/pages-publisher/node_modules" >> "$GITHUB_ENV"
+      - name: Prepare website
+        run: "$RUNNER_TEMP/pages-publisher" prepare
 
-      - name: Package and publish
+      - name: Upload Pages artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/pages-site
+          retention-days: 1
+
+      - name: Deploy website
         env:
-          SOURCE_DIR: ${{ runner.temp }}/ceedoku-pages-source
-        run: node "$SOURCE_DIR/.github/scripts/publish-pages.mjs"
+          PAGES_ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
+          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
+          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
+        run: "$RUNNER_TEMP/pages-publisher" deploy
