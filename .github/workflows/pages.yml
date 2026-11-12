@@ -27,26 +27,10 @@ jobs:
 
     env:
       GITHUB_TOKEN: ${{ github.token }}
-      SOURCE_DIR: ${{ github.workspace }}/source
+      SOURCE_DIR: ${{ github.workspace }}
       PUBLISH_DIR: ${{ runner.temp }}/pages-site
 
     steps:
-      - name: Fetch exact commit
-        shell: bash
-        run: |
-          mkdir -p "$SOURCE_DIR"
-          git -C "$SOURCE_DIR" init
-
-          AUTH=$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)
-
-          git -C "$SOURCE_DIR" \
-            -c http.extraheader="AUTHORIZATION: basic $AUTH" \
-            fetch --depth=1 \
-            "https://github.com/${GITHUB_REPOSITORY}.git" \
-            "$GITHUB_SHA"
-
-          git -C "$SOURCE_DIR" checkout --detach FETCH_HEAD
-
       - name: Compile Go publisher
         run: |
           go build \
