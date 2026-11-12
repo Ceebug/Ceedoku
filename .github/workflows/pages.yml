@@ -2,8 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -17,53 +16,24 @@ concurrency:
 
 jobs:
   deploy:
-    name: Publish static website
     runs-on: ubuntu-24.04
     timeout-minutes: 5
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    env:
-      GITHUB_TOKEN: ${{ github.token }}
-      GH_TOKEN: ${{ github.token }}
-      SOURCE_DIR: ${{ github.workspace }}
-      CGO_ENABLED: "0"
-      GOTOOLCHAIN: local
-
     steps:
-      - name: Set paths
-        shell: bash
-        run: echo "PUBLISH_DIR=$RUNNER_TEMP/pages-site" >> "$GITHUB_ENV"
-
-      - name: Fetch publisher script (no clone)
-        shell: bash
-        run: |
-          gh api \
-            -H "Accept: application/vnd.github.raw+json" \
-            "repos/${{ github.repository }}/contents/.github/scripts/pages-publisher.go?ref=${{ github.sha }}" \
-            > "$RUNNER_TEMP/pages-publisher.go"
-
-      - name: Compile Go publisher
-        shell: bash
-        run: |
-          go build \
-            -trimpath \
-            -ldflags="-s -w" \
-            -o "$RUNNER_TEMP/pages-publisher" \
-            "$RUNNER_TEMP/pages-publisher.go"
-
-      - name: Prepare website
-        shell: bash
-        run: '"$RUNNER_TEMP/pages-publisher" prepare'
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
+      - uses: actions/checkout@v4
         with:
-          path: ${{ runner.temp }}/pages-site
+          fetch-depth: 1
+          # Only grab the folder you publish (remove both lines to use the whole repo):
+          sparse-checkout: site
+          sparse-checkout-cone-mode: true
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
           retention-days: 1
 
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
