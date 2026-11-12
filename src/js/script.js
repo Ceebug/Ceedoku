@@ -3128,7 +3128,7 @@ function playBoardRipple() {
         // Animation
         if (settings.VFX.enabled && settings.VFX.completion) {
 
-            cell.classList.remove("complete-sweep", "board");
+            cell.classList.remove("complete-sweep");
 
             cell.style.setProperty(
                 "--sweep-delay",
@@ -3137,12 +3137,12 @@ function playBoardRipple() {
             cell.style.setProperty("--fade-delay", "1000ms");
 
             requestAnimationFrame(() => {
-                cell.classList.add("complete-sweep", "board");
+                cell.classList.add("complete-sweep");
             });
 
             // Keep the pseudo-element mounted until its 350ms fade finishes.
             setTimeout(() => {
-                cell.classList.remove("complete-sweep", "board");
+                cell.classList.remove("complete-sweep");
                 cell.style.removeProperty("--sweep-delay");
                 cell.style.removeProperty("--fade-delay");
             }, 1450 + distance * 60);
