@@ -29,11 +29,14 @@ jobs:
       GITHUB_TOKEN: ${{ github.token }}
       GH_TOKEN: ${{ github.token }}
       SOURCE_DIR: ${{ github.workspace }}
-      PUBLISH_DIR: ${{ runner.temp }}/pages-site
       CGO_ENABLED: "0"
       GOTOOLCHAIN: local
 
     steps:
+      - name: Set paths
+        shell: bash
+        run: echo "PUBLISH_DIR=$RUNNER_TEMP/pages-site" >> "$GITHUB_ENV"
+
       - name: Fetch publisher script (no clone)
         shell: bash
         run: |
