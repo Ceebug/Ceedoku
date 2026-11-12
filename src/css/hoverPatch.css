@@ -1,14 +1,7 @@
 
-/* Hover effects are only for devices that can actually hover. */
 @media (hover: hover) and (pointer: fine) {
 .select:hover,
 .dropitem:hover {
-    background-color: var(--surface-3) !important;
-}
-}
-@media (hover: none) and (pointer: coarse) {
-.select:active,
-.dropitem:active {
     background-color: var(--surface-3) !important;
 }
 }
@@ -16,6 +9,15 @@
 .select:active,
 .dropitem:active {
 	background-color: var(--buttonhover) !important;
+
+
+/* Touch devices use pressed states instead of persistent hover states. */
+@media (hover: none) and (pointer: coarse) {
+.select:active,
+.dropitem:active {
+    background-color: var(--surface-3) !important;
+}
+}
 }
 .hint-button:active,
 .cancel-button:active,
@@ -42,7 +44,6 @@
   ) !important;
   color: var(--blue) !important;
 }
-/* Hover effects are only for devices that can actually hover. */
 @media (hover: hover) and (pointer: fine) {
 .menu-item2[aria-selected="true"]:hover {
   background: color-mix(
@@ -53,18 +54,7 @@
   color: var(--blue) !important;
 }
 }
-@media (hover: none) and (pointer: coarse) {
-.menu-item2[aria-selected="true"]:active {
-  background: color-mix(
-    in srgb,
-    var(--blue-soft2) 25%,
-    var(--surface-2)
-  ) !important;
-  color: var(--blue) !important;
-}
-}
 
-/* Hover effects are only for devices that can actually hover. */
 @media (hover: hover) and (pointer: fine) {
 .hint-button:hover,
 .cancel-button:hover,
@@ -78,6 +68,98 @@
     box-shadow 0.14s ease;
 }
 }
+
+@media (hover: hover) and (pointer: fine) {
+.history-button:hover:not(:disabled) {
+  color: var(--muted);
+  background: var(--surface-2) !important;
+  transition: transform 0.12s ease, background 0.14s ease, color 0.14s ease,
+    box-shadow 0.14s ease;
+}
+}
+
+@media (hover: hover) and (pointer: fine) {
+.new-main:hover,
+.new-side:hover,
+.new-main2:hover {
+  transition: transform 0.12s ease, background 0.14s ease, color 0.14s ease,
+    box-shadow 0.14s ease;
+}
+}
+
+@media (hover: hover) and (pointer: fine) {
+.new-main2:hover {
+  transition: transform 0.12s ease, background 0.14s ease, color 0.14s ease,
+    box-shadow 0.14s ease;
+}
+}
+
+@media (hover: hover) and (pointer: fine) {
+.menu-item:hover {
+  color: var(--text) !important;
+}
+}
+
+@media (hover: hover) and (pointer: fine) {
+.pencil-button:hover,
+.erase-button:hover {
+  background: var(--pencilerasebutton);
+}
+}
+
+@media (hover: hover) and (pointer: fine) {
+.new-main:hover {
+  border-radius: var(--radius) 0 0 var(--radius) !important;
+  background: var(--blue);
+  color: #fff;
+  font-size: 1.02rem;
+  font-weight: 850;
+}
+}
+
+@media (hover: hover) and (pointer: fine) {
+.new-main2:hover {
+  border-top-right-radius: 999px !important;
+  border-bottom-right-radius: 999px !important;
+  background: var(--blue);
+  color: #fff;
+  font-size: 1.02rem;
+  font-weight: 850;
+  border-radius: var(--radius);
+}
+}
+
+@media (hover: hover) and (pointer: fine) {
+.new-side:hover {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  background: color-mix(in srgb, var(--blue) 86%, #000);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: var(--radius);
+}
+}
+
+.pencil-button[aria-pressed="true"]:active {
+  color: color-mix(in srgb, var(--lime-text) 80%, #fff);
+  background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
+
+
+/* Touch devices use pressed states instead of persistent hover states. */
+@media (hover: none) and (pointer: coarse) {
+.menu-item2[aria-selected="true"]:active {
+  background: color-mix(
+    in srgb,
+    var(--blue-soft2) 25%,
+    var(--surface-2)
+  ) !important;
+  color: var(--blue) !important;
+}
+}
+
 @media (hover: none) and (pointer: coarse) {
 .hint-button:active,
 .cancel-button:active,
@@ -92,15 +174,6 @@
 }
 }
 
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.history-button:hover:not(:disabled) {
-  color: var(--muted);
-  background: var(--surface-2) !important;
-  transition: transform 0.12s ease, background 0.14s ease, color 0.14s ease,
-    box-shadow 0.14s ease;
-}
-}
 @media (hover: none) and (pointer: coarse) {
 .history-button:active:not(:disabled) {
   color: var(--muted);
@@ -110,15 +183,6 @@
 }
 }
 
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.new-main:hover,
-.new-side:hover,
-.new-main2:hover {
-  transition: transform 0.12s ease, background 0.14s ease, color 0.14s ease,
-    box-shadow 0.14s ease;
-}
-}
 @media (hover: none) and (pointer: coarse) {
 .new-main:active,
 .new-side:active,
@@ -128,13 +192,6 @@
 }
 }
 
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.new-main2:hover {
-  transition: transform 0.12s ease, background 0.14s ease, color 0.14s ease,
-    box-shadow 0.14s ease;
-}
-}
 @media (hover: none) and (pointer: coarse) {
 .new-main2:active {
   transition: transform 0.12s ease, background 0.14s ease, color 0.14s ease,
@@ -142,25 +199,12 @@
 }
 }
 
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.menu-item:hover {
-  color: var(--text) !important;
-}
-}
 @media (hover: none) and (pointer: coarse) {
 .menu-item:active {
   color: var(--text) !important;
 }
 }
 
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.pencil-button:hover,
-.erase-button:hover {
-  background: var(--pencilerasebutton);
-}
-}
 @media (hover: none) and (pointer: coarse) {
 .pencil-button:active,
 .erase-button:active {
@@ -168,16 +212,6 @@
 }
 }
 
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.new-main:hover {
-  border-radius: var(--radius) 0 0 var(--radius) !important;
-  background: var(--blue);
-  color: #fff;
-  font-size: 1.02rem;
-  font-weight: 850;
-}
-}
 @media (hover: none) and (pointer: coarse) {
 .new-main:active {
   border-radius: var(--radius) 0 0 var(--radius) !important;
@@ -188,18 +222,6 @@
 }
 }
 
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.new-main2:hover {
-  border-top-right-radius: 999px !important;
-  border-bottom-right-radius: 999px !important;
-  background: var(--blue);
-  color: #fff;
-  font-size: 1.02rem;
-  font-weight: 850;
-  border-radius: var(--radius);
-}
-}
 @media (hover: none) and (pointer: coarse) {
 .new-main2:active {
   border-top-right-radius: 999px !important;
@@ -212,19 +234,6 @@
 }
 }
 
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.new-side:hover {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  background: color-mix(in srgb, var(--blue) 86%, #000);
-  color: #fff;
-  display: grid;
-  place-items: center;
-  border-left: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: var(--radius);
-}
-}
 @media (hover: none) and (pointer: coarse) {
 .new-side:active {
   border-top-left-radius: 0 !important;
@@ -237,22 +246,9 @@
   border-radius: var(--radius);
 }
 }
-
-.pencil-button[aria-pressed="true"]:active {
-  color: color-mix(in srgb, var(--lime-text) 80%, #fff);
-  background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
 }
-/* Hover effects are only for devices that can actually hover. */
 @media (hover: hover) and (pointer: fine) {
 .pencil-button[aria-pressed="true"]:hover {
-  color: var(--lime-text);
-  background: var(--lime-soft);
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
-}
-}
-@media (hover: none) and (pointer: coarse) {
-.pencil-button[aria-pressed="true"]:active {
   color: var(--lime-text);
   background: var(--lime-soft);
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
@@ -263,36 +259,9 @@
   color: var(--lime-text);
   background: var(--lime-soft);
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
-}
-.erase-button[aria-pressed="true"]:active {
-  color: color-mix(in srgb, var(--lime-text) 80%, #fff);
-  background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
-}
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.erase-button[aria-pressed="true"]:hover {
-  color: var(--lime-text);
-  background: var(--lime-soft);
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
-}
-}
-@media (hover: none) and (pointer: coarse) {
-.erase-button[aria-pressed="true"]:active {
-  color: var(--lime-text);
-  background: var(--lime-soft);
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
-}
-}
 
-/* Hover effects are only for devices that can actually hover. */
-@media (hover: hover) and (pointer: fine) {
-.pencil-button[aria-pressed="true"]:hover {
-  color: var(--lime-text);
-  background: var(--lime-soft);
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
-}
-}
+
+/* Touch devices use pressed states instead of persistent hover states. */
 @media (hover: none) and (pointer: coarse) {
 .pencil-button[aria-pressed="true"]:active {
   color: var(--lime-text);
@@ -300,8 +269,12 @@
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
 }
 }
-
-/* Hover effects are only for devices that can actually hover. */
+}
+.erase-button[aria-pressed="true"]:active {
+  color: color-mix(in srgb, var(--lime-text) 80%, #fff);
+  background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
+}
 @media (hover: hover) and (pointer: fine) {
 .erase-button[aria-pressed="true"]:hover {
   color: var(--lime-text);
@@ -309,8 +282,17 @@
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
 }
 }
-@media (hover: none) and (pointer: coarse) {
-.erase-button[aria-pressed="true"]:active {
+
+@media (hover: hover) and (pointer: fine) {
+.pencil-button[aria-pressed="true"]:hover {
+  color: var(--lime-text);
+  background: var(--lime-soft);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
+}
+}
+
+@media (hover: hover) and (pointer: fine) {
+.erase-button[aria-pressed="true"]:hover {
   color: var(--lime-text);
   background: var(--lime-soft);
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
@@ -333,6 +315,32 @@
   color: var(--muted);
   transform: translateY(1px);
   border-radius: 999px;
+
+
+/* Touch devices use pressed states instead of persistent hover states. */
+@media (hover: none) and (pointer: coarse) {
+.erase-button[aria-pressed="true"]:active {
+  color: var(--lime-text);
+  background: var(--lime-soft);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.pencil-button[aria-pressed="true"]:active {
+  color: var(--lime-text);
+  background: var(--lime-soft);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.erase-button[aria-pressed="true"]:active {
+  color: var(--lime-text);
+  background: var(--lime-soft);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
+}
+}
 }
 .history-button:active:not(:disabled) {
   background: color-mix(
@@ -359,14 +367,8 @@
 .new-side:active {
   border-radius: 0 var(--radius) var(--radius) 0 !important;
 }
-/* Hover effects are only for devices that can actually hover. */
 @media (hover: hover) and (pointer: fine) {
 .delete-button:hover {
-  background: var(--delete-save) !important;
-}
-}
-@media (hover: none) and (pointer: coarse) {
-.delete-button:active {
   background: var(--delete-save) !important;
 }
 }
@@ -377,6 +379,14 @@
     var(--delete-save) 70%,
     var(--surface-2)
   ) !important;
+
+
+/* Touch devices use pressed states instead of persistent hover states. */
+@media (hover: none) and (pointer: coarse) {
+.delete-button:active {
+  background: var(--delete-save) !important;
+}
+}
 }
 .menu-item2[aria-selected="true"]:active {
   color: var(--blue) !important;
