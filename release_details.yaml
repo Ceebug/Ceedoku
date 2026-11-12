@@ -12,13 +12,11 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "10.0.6"
+version: "10.0.7"
+
 changelog:
   fix:
-    - Touch devices now use pressed states instead of retaining desktop hover effects across the interface.
-    - Save-menu buttons now have clearer pressed styling and improved touch targets.
-    - Long save names no longer overlap the Export buttons in the save export picker.
-    - The export save-naming dialog now appears above the save-selection menu.
-    - The Cancel label in the export filename dialog now fits inside its button.
-    - The New Game button in the save menu keeps its corner radius while pressed on mobile.
-    - The export save picker title using the incorrect text color.
+    - Closing Settings while capturing a keybind now cancels keybind capture and removes focus from the keybind field.
+    - The Edit save title heading now uses the correct text colour.
+    - The Edit save title dialog now has a proper description with corrected text colour and styling.
+    - The Cancel button in the Edit save title dialog now has enough space to display its label without overflowing.
