@@ -2453,7 +2453,15 @@ function hideimportexportgame() {
 const exportnamemenu = document.getElementById("namefileOverlay")
 const exportnamemenuinput = document.getElementById("savenameinput")
 const exportnameinput = exportnamemenuinput
+function updateExportNameButtonState() {
+    const hasFilename = exportnamemenuinput.value.trim().length > 0;
+    const button = document.getElementById("savenamebutton");
+    button.classList.toggle("disabled", !hasFilename);
+    button.disabled = !hasFilename;
+}
+
 function showexportnamemenu() {
+    updateExportNameButtonState();
 	exportnamemenu.hidden = false;
 	requestAnimationFrame(() => {
         exportnamemenu.classList.add("show");
@@ -2463,7 +2471,8 @@ function showexportnamemenu() {
 function hideexportnamemenu() {
 	exportnamemenu.hidden = true;
 	exportnamemenu.classList.remove("show");
-	exportnameinput.value = ""
+	exportnameinput.value = "";
+    updateExportNameButtonState();
 }
 function showimportexportmenu() {
 	importexportOverlay.hidden = false;
@@ -4223,22 +4232,8 @@ const bestTimea = bestTimesa[selectedDifficulty];
 document.getElementById("besttimedisplay").textContent =
     typeof bestTimea === "number" ? formatTime(Math.floor(bestTimea / 1000)) : "**:**";
 renderKeybinds();
-exportnamemenuinput.addEventListener("input", () => {
-    if (exportnamemenuinput.value === "") {
-		document.getElementById("savenamebutton").classList.add("disabled")
-		document.getElementById("savenamebutton").disabled = true
-		return
-	}
-	if (exportnamemenuinput.value != "") {
-		document.getElementById("savenamebutton").classList.remove("disabled")
-		document.getElementById("savenamebutton").disabled = false
-		return
-	}
-});
-if (exportnamemenuinput.value === "") {
-	document.getElementById("savenamebutton").classList.add("disabled")
-	document.getElementById("savenamebutton").disabled = true
-}
+exportnamemenuinput.addEventListener("input", updateExportNameButtonState);
+updateExportNameButtonState();
 exportnamemenuinput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         if (!exportnamemenuinput.disabled && exportnamemenuinput.value !== "") {
