@@ -1,5 +1,5 @@
 
-name: Deploy to GitHub Pages
+name: Deploy to Github Pages
 
 on:
   push:
@@ -14,23 +14,50 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    name: Publish static website
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+      SOURCE_DIR: ${{ runner.temp }}/ceedoku-pages-source
+
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
+      - name: Fetch exact commit
+        shell: bash
+        run: |
+          mkdir -p "$SOURCE_DIR"
+          git -C "$SOURCE_DIR" init
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
+          AUTH=$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)
 
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          git -C "$SOURCE_DIR" \
+            -c http.extraheader="AUTHORIZATION: basic $AUTH" \
+            fetch --depth=1 \
+            "https://github.com/${GITHUB_REPOSITORY}.git" \
+            "$GITHUB_SHA"
+
+          git -C "$SOURCE_DIR" checkout --detach FETCH_HEAD
+
+      - name: Install artifact library
+        run: |
+          npm install \
+            --prefix "$RUNNER_TEMP/pages-publisher" \
+            --no-save \
+            --no-package-lock \
+            --ignore-scripts \
+            --no-audit \
+            --no-fund \
+            @actions/artifact@6.1.0
+
+          echo "NODE_PATH=$RUNNER_TEMP/pages-publisher/node_modules" >> "$GITHUB_ENV"
+
+      - name: Package and publish
+        run: node "$SOURCE_DIR/.github/scripts/publish-pages.cjs"
