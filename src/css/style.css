@@ -3107,3 +3107,20 @@ kbd {
         width: 100%;
     }
 }
+
+
+/* Touch devices can retain :hover after a tap; keep save actions in their resting state. */
+@media (hover: none), (pointer: coarse) {
+    .save-play-button:hover {
+        filter: none;
+    }
+
+    .save-more-menu button:hover {
+        background: transparent;
+    }
+
+    .save-square-button:hover,
+    .save-close-button:hover {
+        background: var(--surface-2);
+    }
+}
