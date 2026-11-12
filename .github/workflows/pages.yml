@@ -63,4 +63,4 @@ jobs:
       - name: Package and publish
         env:
           SOURCE_DIR: ${{ runner.temp }}/ceedoku-pages-source
-        run: node "$SOURCE_DIR/.github/scripts/publish-pages.cjs"
+        run: node "$SOURCE_DIR/.github/scripts/publish-pages.mjs"
