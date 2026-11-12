@@ -12,21 +12,13 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "10.0.5"
+version: "10.0.6"
 changelog:
   fix:
-    - The Sudoku board scaling incorrectly when in portrait mode.
-    - The game information panels overflowing their available space.
-    - Custom games allowing too many empty cells.
-    - The main menu button appearing alongside the Back button when viewing completed saves.
-    - The save menu dropdown remaining open after its parent menu was closed.
-    - The full-board completion animation making cells look wrong.
-    - The full-board completion animation not playing.
-    - Completion sounds causing lag and freezes.
-    - Completion animation cleanup and timing, and incorrect hint cooldown timer intervals.
-    - Mobile save cards interfering with scrolling and dragging.
-    - Save menu buttons retaining hover effects after being tapped on mobile.
-    - The New Game button's corner radius changing while pressed.
-    - The export filename button not correctly reflecting whether a filename was entered.
-    - Inconsistent corner rounding on the Sudoku board.
-    - The Play menu title having a different text colour from other menu titles.
+    - Touch devices now use pressed states instead of retaining desktop hover effects across the interface.
+    - Save-menu buttons now have clearer pressed styling and improved touch targets.
+    - Long save names no longer overlap the Export buttons in the save export picker.
+    - The export save-naming dialog now appears above the save-selection menu.
+    - The Cancel label in the export filename dialog now fits inside its button.
+    - The New Game button in the save menu keeps its corner radius while pressed on mobile.
+    - The export save picker title now uses the correct text colour.
