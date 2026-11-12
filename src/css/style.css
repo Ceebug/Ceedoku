@@ -3100,7 +3100,7 @@ kbd {
     }
 
     .save-play-button {
-        min-width: 64px;
+        min-width: 90px;
         height: 36px;
     }
 
@@ -3357,4 +3357,30 @@ body.light .menu-item:active {
         background: var(--surface-2);
     }
 }
+}
+
+
+/* Save-menu controls use their hover appearance while pressed on touch devices. */
+@media (hover: none) and (pointer: coarse) {
+    .save-play-button:active {
+        filter: brightness(1.08);
+        transform: translateY(1px);
+    }
+
+    .save-more-menu button:active,
+    .save-square-button:active,
+    .save-close-button:active,
+    .save-action-button:active {
+        background: var(--buttonhover);
+        transform: translateY(1px);
+    }
+
+    .save-delete-button:active {
+        background: color-mix(in srgb, var(--danger) 12%, var(--surface-2));
+    }
+
+    .save-more-menu button:disabled:active {
+        background: transparent;
+        transform: none;
+    }
 }
