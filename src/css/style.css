@@ -3358,3 +3358,22 @@ body.light .menu-item:active {
     }
 }
 }
+
+/* Keep the export filename field and its .csf suffix inside the overlay. */
+#namefileOverlay .win-card > div {
+    width: 100%;
+    min-width: 0;
+}
+
+#namefileOverlay #savenameinput {
+    box-sizing: border-box;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto !important;
+}
+
+#namefileOverlay #savenameinput + div {
+    box-sizing: border-box;
+    flex: 0 0 20%;
+    min-width: 0;
+}
