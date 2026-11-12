@@ -388,3 +388,8 @@
   background: var(--delete-save) !important;
 }
 }
+
+/* Match the export picker heading to the other save-menu text. */
+#exportSavePickerTitle {
+    color: var(--text2);
+}
