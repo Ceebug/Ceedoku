@@ -182,14 +182,6 @@ body.light .besttime {
 
 .feedbacklink:active {
     color: var(--blue);
-
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.feedbacklink:active {
-    color: var(--blue);
-}
-}
 }
 .theme-switching,
 .theme-switching * {
@@ -276,14 +268,6 @@ select:disabled {
 #WHATTHEFUCKDOICALLTHIS\?:active {
     color: var(--text) !important;
     transform: translateY(1px);
-
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-#WHATTHEFUCKDOICALLTHIS\?:active {
-    color: var(--text) !important;
-}
-}
 }
 .setting-row {
     display: flex;
@@ -487,14 +471,6 @@ transition: transform 0.1s ease;
 
 .delete-button:active {
 	background: color-mix(in srgb, var(--delete-save) 60%, var(--surface-2)) !important
-
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.delete-button:active {
-	background: color-mix(in srgb, var(--delete-save) 70%, var(--surface-2)) !important
-}
-}
 }
 #title {
 font-size: clamp(1.20rem, 5vw, 2.5rem)
@@ -673,13 +649,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
 .new-main2.disabled:hover {background: #b1bdcc !important}
 }
 
-.new-main2.disabled:active {background: #b1bdcc !important;transform:translatey(0px) !Important
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.new-main2.disabled:active {background: #b1bdcc !important}
-}
-}
+.new-main2.disabled:active {background: #b1bdcc !important;transform:translatey(0px) !Important}
     .win-overlay.show .win-card {
         transform: scale(1) translateY(0);
         opacity: 1;
@@ -785,16 +755,7 @@ font-size: clamp(1.20rem, 5vw, 2.5rem)
         border-radius: 6px;
         transform-origin: center;
         animation: rowFlash 0.9s ease-out forwards;
-    
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.select:active,
-.dropitem:active {
-    background-color: var(--buttonhover) !important;
-}
-}
-}
+    }
     @keyframes rowFlash {
         0% {
             transform: scaleX(0);
@@ -1305,17 +1266,7 @@ position: relative;
         background: var(--lime);
     
         animation: boxGrow2 .5s cubic-bezier(.22,1,.36,1) var(--sweep-delay,0ms) forwards;
-    
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.erase-button[aria-pressed="true"]:active {
-          color: color-mix(in srgb, var(--lime-text) 80%, #fff);
-          background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
-          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
-        }
-}
-}
+    }
     @keyframes boxGrow {
         0% {
             transform: scale(.15) rotate(0deg);
@@ -1573,48 +1524,7 @@ body.light .menu-item:hover {
         .theme-toggle:active,
         .history-button:active:not(:disabled) {
           transform: translateY(1px)
-        
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.menu-item2[aria-selected=true]:active {
-	border: 2.5px solid;
-	background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2)) !important;
-	color: var(--blue) !important;
-}
-}
-
-@media (hover: none) and (pointer: coarse) {
-.hint-button:active,
-.pencil-button:active,
-.new-main:active,
-.new-side:active,
-.new-main2:active,
-.number-button:active,
-.erase-button:active,
-.menu-item:active,
-.cancel-button:active,
-.keybind-assign:active:not(.listening),
-.keybind-reset:active,
-.theme-toggle:active,
-.history-button:active:not(:disabled) {
-          background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2));
-	  color: var(--muted);
         }
-}
-
-@media (hover: none) and (pointer: coarse) {
-body.light .menu-item:active {
-	color: var(--text) !important
-}
-}
-
-@media (hover: none) and (pointer: coarse) {
-.menu-item[aria-selected=true]:active {
-          background: color-mix(in srgb, var(--blue-soft2) 65%, var(--surface-2)) !important;		
-}
-}
-}
 	.disabled {
 		          transform: translateY(0px);
     }
@@ -1674,17 +1584,7 @@ body.light .menu-item:active {
 		  cursor: not-allowed;
 		  background: var(--muted) !important;
 		  color: #dde1e7;
-		
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.new-main2.disabled:active {
-		  cursor: not-allowed;
-		  background: var(--muted) !important;
-		  color: #dde1e7;
 		}
-}
-}
         .history-button svg,
         .new-side svg,
         .pencil-button svg {
@@ -1843,25 +1743,7 @@ body.light .menu-item:active {
           font-weight: 750;
           text-align: left;
           background: transparent;
-        
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.erase-button[aria-pressed="true"]:active {
-          color: color-mix(in srgb, var(--lime-text) 80%, #fff);
-          background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
-          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
         }
-}
-
-@media (hover: none) and (pointer: coarse) {
-.pencil-button[aria-pressed="true"]:active {
-          color: color-mix(in srgb, var(--lime-text) 80%, #fff);
-          background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
-          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
-        }
-}
-}
     
         .menu-item[aria-selected="true"] {
           background: transparent;
@@ -2745,14 +2627,6 @@ button,
 
 .save-delete-button {
     color: var(--danger);
-
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.save-play-button:active {
-    filter: brightness(1.08);
-}
-}
 }
 
 .save-more-wrap {
@@ -2796,16 +2670,6 @@ button,
     color: var(--muted);
     cursor: not-allowed;
     opacity: .55;
-
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.save-more-menu button:active,
-.save-square-button:active,
-.save-close-button:active {
-    background: var(--buttonhover);
-}
-}
 }
 @media (hover: hover) and (pointer: fine) {
 .save-more-menu button:disabled:hover {
@@ -2818,14 +2682,6 @@ button,
     flex: 0 0 auto;
     min-height: 48px;
     border-radius: 12px;
-
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-.save-more-menu button:disabled:active {
-    background: transparent;
-}
-}
 }
 
 .empty-save-message {
@@ -3089,15 +2945,6 @@ button,
 
 #resetAllKeybinds:active {
     transform: translateY(1px);
-
-
-/* Touch devices use pressed states instead of persistent hover states. */
-@media (hover: none) and (pointer: coarse) {
-#resetAllKeybinds:active {
-    background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2));
-    color: var(--muted);
-}
-}
 }
 
 .keybind-list {
@@ -3364,9 +3211,137 @@ kbd {
 /* Keep the save menu's New Game button radius consistent while pressed. */
 .save-new-game:active {
     border-radius: 12px !important;
+}
 
 
 /* Touch devices use pressed states instead of persistent hover states. */
+@media (hover: none) and (pointer: coarse) {
+.feedbacklink:active {
+    color: var(--blue);
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+#WHATTHEFUCKDOICALLTHIS\?:active {
+    color: var(--text) !important;
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.delete-button:active {
+	background: color-mix(in srgb, var(--delete-save) 70%, var(--surface-2)) !important
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.new-main2.disabled:active {background: #b1bdcc !important}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.select:active,
+.dropitem:active {
+    background-color: var(--buttonhover) !important;
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.erase-button[aria-pressed="true"]:active {
+          color: color-mix(in srgb, var(--lime-text) 80%, #fff);
+          background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
+        }
+}
+
+@media (hover: none) and (pointer: coarse) {
+.menu-item2[aria-selected=true]:active {
+	border: 2.5px solid;
+	background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2)) !important;
+	color: var(--blue) !important;
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.hint-button:active,
+.pencil-button:active,
+.new-main:active,
+.new-side:active,
+.new-main2:active,
+.number-button:active,
+.erase-button:active,
+.menu-item:active,
+.cancel-button:active,
+.keybind-assign:active:not(.listening),
+.keybind-reset:active,
+.theme-toggle:active,
+.history-button:active:not(:disabled) {
+          background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2));
+	  color: var(--muted);
+        }
+}
+
+@media (hover: none) and (pointer: coarse) {
+body.light .menu-item:active {
+	color: var(--text) !important
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.menu-item[aria-selected=true]:active {
+          background: color-mix(in srgb, var(--blue-soft2) 65%, var(--surface-2)) !important;		
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.new-main2.disabled:active {
+		  cursor: not-allowed;
+		  background: var(--muted) !important;
+		  color: #dde1e7;
+		}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.erase-button[aria-pressed="true"]:active {
+          color: color-mix(in srgb, var(--lime-text) 80%, #fff);
+          background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
+        }
+}
+
+@media (hover: none) and (pointer: coarse) {
+.pencil-button[aria-pressed="true"]:active {
+          color: color-mix(in srgb, var(--lime-text) 80%, #fff);
+          background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
+          box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
+        }
+}
+
+@media (hover: none) and (pointer: coarse) {
+.save-play-button:active {
+    filter: brightness(1.08);
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.save-more-menu button:active,
+.save-square-button:active,
+.save-close-button:active {
+    background: var(--buttonhover);
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+.save-more-menu button:disabled:active {
+    background: transparent;
+}
+}
+
+@media (hover: none) and (pointer: coarse) {
+#resetAllKeybinds:active {
+    background: color-mix(in srgb, var(--blue-soft2) 85%, var(--surface-2));
+    color: var(--muted);
+}
+}
+
 @media (hover: none) and (pointer: coarse) {
 /* Touch devices can retain :active after a tap; keep save actions in their resting state. */
 @media (hover: none) {
@@ -3382,6 +3357,5 @@ kbd {
     .save-close-button:hover {
         background: var(--surface-2);
     }
-}
 }
 }
