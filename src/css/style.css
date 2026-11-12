@@ -3124,3 +3124,8 @@ kbd {
         background: var(--surface-2);
     }
 }
+
+/* Keep the save menu's New Game button radius consistent while pressed. */
+.save-new-game:active {
+    border-radius: 12px !important;
+}
