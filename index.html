@@ -42,7 +42,7 @@ if (releaseReady) {
 	<!-- loads the main stylesheet -->
 	<link href="./src/css/style.css" rel="stylesheet">
 	<!-- Loads the touch hover patching stylesheet that will be toggled on and of by the script at the bottom of the page depending on if the users input method supports hover or not - this is only needed because CSS IS FUCKING STUPID AND FOR DEVICES THAT DONT SUPPORT HOVER JUST KEEPS HOVER ON UNTIL THEY CLICK SOMEWHERE ELSE, FUCK CSS-->
-	<link href="./src/css/hoverPatch.css" rel="stylesheet" id="touchStyles">
+	<link href="./src/css/hoverPatch.css" rel="stylesheet" id="hoverStyles">
 	<!-- registers the serviceworker on supported devices -->
 	<script>        
 		"serviceWorker" in navigator && navigator.serviceWorker.register("./src/pwa/serviceWorker.js").then(() => console.log("Service Worker Registered")).catch(e => console.log("Service Worker Registration Failed", e))
@@ -604,14 +604,16 @@ if (releaseReady) {
 			<button onclick="window.open('https://github.com/Ceebug/Ceedoku/issues/new?template=bug_report.yml', '_blank')" class="restart-button"><strong>Report Crash</strong></button>
 		</div>
 	</div>
-	<!-- Toggles touch styles depending on if using touch or not -->
+	<!-- Toggles hover styles depending on the active pointer type. -->
 	<script>
-		const touchStyles = document.getElementById("touchStyles");
-		touchStyles.disabled = !window.matchMedia("(hover: none) and (pointer: coarse)").matches, window.addEventListener("pointermove", e => {
-			"mouse" === e.pointerType && (touchStyles.disabled = !0)
-		}), window.addEventListener("pointerdown", e => {
-			"touch" === e.pointerType && (touchStyles.disabled = !1)
-		})
+		const hoverStyles = document.getElementById("hoverStyles");
+		hoverStyles.disabled = !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+		window.addEventListener("pointermove", e => {
+			if (e.pointerType === "mouse") hoverStyles.disabled = false;
+		});
+		window.addEventListener("pointerdown", e => {
+			if (e.pointerType === "touch") hoverStyles.disabled = true;
+		});
 	</script>
 	<!-- Sets the version and the link for the version thingo -->
 	<script>
