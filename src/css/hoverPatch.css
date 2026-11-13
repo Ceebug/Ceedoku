@@ -249,8 +249,10 @@
   ) !important;
 }
 }
+@media (hover: none) and (pointer: coarse) {
 .menu-item2[aria-selected="true"]:active {
   color: var(--blue) !important;
+}
 }
 .pencileraserbutton:disabled {
   background: var(--disabledbox) !important;
