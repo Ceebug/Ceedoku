@@ -4182,9 +4182,14 @@ function deleteGame() {
 }
 
 const elementstoanimate = document.querySelectorAll(".whatdoievencallthis");
+let lastObservedIsDark = document.body.classList.contains("dark");
 
 const observer = new MutationObserver(() => {
     const isDark = document.body.classList.contains("dark");
+
+    // Ignore body class changes that do not actually change the theme.
+    if (isDark === lastObservedIsDark) return;
+    lastObservedIsDark = isDark;
 
     elementstoanimate.forEach(element => {
         element.animate(
