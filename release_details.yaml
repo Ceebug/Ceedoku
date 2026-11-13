@@ -16,9 +16,4 @@ version: "10.0.8"
 
 changelog:
   fix:
-    - Closing Settings while capturing a keybind not cancelling keybind capture or removing focus from the keybind field.
-    - The Edit save title heading having incorrect text colour.
-    - The Edit save title dialog description having incorrect styling.
-    - The Edit save title dialog having an incorrect description.
-    - The Cancel button text in the Edit save title dialog overflowing its button.
     - Mouse hover styling not being applied on devices that support hover.
