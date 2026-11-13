@@ -43,8 +43,6 @@ if (releaseReady) {
 	<link href="./src/css/style.css" rel="stylesheet">
 	<!-- Loads the touch hover patching stylesheet that will be toggled on and of by the script at the bottom of the page depending on if the users input method supports hover or not - this is only needed because CSS IS FUCKING STUPID AND FOR DEVICES THAT DONT SUPPORT HOVER JUST KEEPS HOVER ON UNTIL THEY CLICK SOMEWHERE ELSE, FUCK CSS-->
 	<link href="./src/css/hoverPatch.css" rel="stylesheet" id="touchStyles">
-	<!-- Loads hover styling only on devices that support hover. -->
-	<link href="./src/css/hover.css" rel="stylesheet" media="(hover: hover) and (pointer: fine)">
 	<!-- registers the serviceworker on supported devices -->
 	<script>        
 		"serviceWorker" in navigator && navigator.serviceWorker.register("./src/pwa/serviceWorker.js").then(() => console.log("Service Worker Registered")).catch(e => console.log("Service Worker Registration Failed", e))
