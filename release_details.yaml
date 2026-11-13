@@ -17,3 +17,4 @@ version: "10.0.8"
 changelog:
   fix:
     - Mouse hover styling not being applied on devices that support hover.
+    - The top of buttons in the site controls being cut off.
