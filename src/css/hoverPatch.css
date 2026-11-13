@@ -6,10 +6,13 @@
 }
 }
  
+@media (hover: none) and (pointer: coarse) {
 .select:active,
 .dropitem:active {
 	background-color: var(--buttonhover) !important;
 }
+}
+@media (hover: none) and (pointer: coarse) {
 .hint-button:active,
 .cancel-button:active,
 .new-main:active,
@@ -24,8 +27,9 @@
     var(--blue-soft) 85%,
     var(--surface-2)
   ) !important;
-  transform: translateY(1px);
 }
+}
+@media (hover: none) and (pointer: coarse) {
 .menu-item2[aria-selected="true"]:active {
   border: 2.5px solid;
   background: color-mix(
@@ -34,6 +38,7 @@
     var(--surface-2)
   ) !important;
   color: var(--blue) !important;
+}
 }
 @media (hover: hover) and (pointer: fine) {
 .menu-item2[aria-selected="true"]:hover {
@@ -133,10 +138,12 @@
 }
 }
 
+@media (hover: none) and (pointer: coarse) {
 .pencil-button[aria-pressed="true"]:active {
   color: color-mix(in srgb, var(--lime-text) 80%, #fff);
   background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
+}
 }
 @media (hover: hover) and (pointer: fine) {
 .pencil-button[aria-pressed="true"]:hover {
@@ -151,10 +158,12 @@
   background: var(--lime-soft);
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 68%, transparent);
 }
+@media (hover: none) and (pointer: coarse) {
 .erase-button[aria-pressed="true"]:active {
   color: color-mix(in srgb, var(--lime-text) 80%, #fff);
   background: color-mix(in srgb, var(--lime-soft) 80%, #fff);
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lime) 90%, transparent);
+}
 }
 @media (hover: hover) and (pointer: fine) {
 .erase-button[aria-pressed="true"]:hover {
@@ -180,6 +189,7 @@
 }
 }
 
+@media (hover: none) and (pointer: coarse) {
 .hint-button:active,
 .pencil-button:active:not([aria-pressed="true"]),
 .new-main2:active,
@@ -194,9 +204,10 @@
     var(--surface-2)
   ) !important;
   color: var(--muted);
-  transform: translateY(1px);
   border-radius: 999px;
 }
+}
+@media (hover: none) and (pointer: coarse) {
 .history-button:active:not(:disabled) {
   background: color-mix(
     in srgb,
@@ -204,8 +215,9 @@
     var(--surface-2)
   ) !important;
   color: var(--muted);
-  transform: translateY(1px);
 }
+}
+@media (hover: none) and (pointer: coarse) {
 .new-main:active,
 .new-side:active {
   background: color-mix(
@@ -214,7 +226,7 @@
     var(--surface-2)
   ) !important;
   color: var(--muted);
-  transform: translateY(1px);
+}
 }
 .new-main:active {
   border-radius: var(--radius) 0 0 var(--radius) !important;
@@ -228,12 +240,14 @@
 }
 }
 
+@media (hover: none) and (pointer: coarse) {
 .delete-button:active {
   background: color-mix(
     in srgb,
     var(--delete-save) 70%,
     var(--surface-2)
   ) !important;
+}
 }
 .menu-item2[aria-selected="true"]:active {
   color: var(--blue) !important;
