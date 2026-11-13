@@ -1,4 +1,4 @@
-/* Every :active style mirrored to :hover, excluding transform declarations. */
+/* Hover equivalents of the pressed-state styles, excluding transforms. */
 
 .feedbacklink:hover {
     color: var(--blue);
