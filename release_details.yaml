@@ -12,7 +12,7 @@
 #       - Enable erase mode.
 # Developer notes use the same categories and structure as the changelog.
 
-version: "10.0.7"
+version: "10.0.8"
 
 changelog:
   fix:
@@ -21,3 +21,4 @@ changelog:
     - The Edit save title dialog description having incorrect styling.
     - The Edit save title dialog having an incorrect description.
     - The Cancel button text in the Edit save title dialog overflowing its button.
+    - Mouse hover styling not being applied on devices that support hover.
