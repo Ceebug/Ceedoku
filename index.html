@@ -606,12 +606,14 @@ if (releaseReady) {
 	</div>
 	<!-- Toggles hover styles depending on the active pointer type. -->
 	<script>
-		const touchStyles = document.getElementById("touchStyles");
-		touchStyles.disabled = !window.matchMedia("(hover: none) and (pointer: coarse)").matches, window.addEventListener("pointermove", e => {
-			"mouse" === e.pointerType && (touchStyles.disabled = !0)
-		}), window.addEventListener("pointerdown", e => {
-			"touch" === e.pointerType && (touchStyles.disabled = !1)
-		})
+		const hoverStyles = document.getElementById("hoverStyles");
+		hoverStyles.disabled = !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+		window.addEventListener("pointermove", e => {
+			if (e.pointerType === "mouse") hoverStyles.disabled = false;
+		});
+		window.addEventListener("pointerdown", e => {
+			if (e.pointerType === "touch") hoverStyles.disabled = true;
+		});
 	</script>
 	<!-- Sets the version and the link for the version thingo -->
 	<script>
