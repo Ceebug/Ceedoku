@@ -597,6 +597,7 @@ let menuOpen = false;
 let cooldowntypetouse = "just declaring var"
 
 function showmainmenu() {
+    document.title = "Ceedoku";
     printBtn.style.display = "none";
 	disableprint = true
     viewingCompletedSave = false;
