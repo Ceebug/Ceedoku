@@ -180,8 +180,10 @@ body.light .besttime {
 }
 
 
+@media (hover: none) and (pointer: coarse) {
 .feedbacklink:active {
     color: var(--blue);
+}
 }
 .theme-switching,
 .theme-switching * {
@@ -266,8 +268,12 @@ select:disabled {
 
 
 #WHATTHEFUCKDOICALLTHIS\?:active {
-    color: var(--text) !important;
     transform: translateY(1px);
+}
+@media (hover: none) and (pointer: coarse) {
+#WHATTHEFUCKDOICALLTHIS\?:active {
+    color: var(--text) !important;
+}
 }
 .setting-row {
     display: flex;
@@ -469,8 +475,10 @@ transition: transform 0.1s ease;
 }
 }
 
+@media (hover: none) and (pointer: coarse) {
 .delete-button:active {
 	background: color-mix(in srgb, var(--delete-save) 60%, var(--surface-2)) !important
+}
 }
 #title {
 font-size: clamp(1.20rem, 5vw, 2.5rem)
@@ -1506,8 +1514,10 @@ body.light .menu-item:hover {
           background: color-mix(in srgb, var(--blue-soft2) 65%, var(--surface-2)) !important;		
 }
 }
+@media (hover: none) and (pointer: coarse) {
 .menu-item[aria-selected=true]:active {
           background: color-mix(in srgb, var(--blue-soft2) 65%, var(--surface-2)) !important;		
+}
 }
 		  
         .hint-button:active,
