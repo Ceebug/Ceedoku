@@ -2,50 +2,50 @@
   "short_name": "Ceedoku",
   "name": "Ceedoku",
   "icons": [
-  {
-    "purpose": "maskable",
-    "sizes": "48x48",
-    "src": "src/images/logo/icon/maskable/48.png",
-    "type": "image/png"
-  },
-  {
-    "purpose": "maskable",
-    "sizes": "72x72",
-    "src": "src/images/logo/icon/maskable/72.png",
-    "type": "image/png"
-  },
-  {
-    "purpose": "maskable",
-    "sizes": "96x96",
-    "src": "src/images/logo/icon/maskable/96.png",
-    "type": "image/png"
-  },
-  {
-    "purpose": "maskable",
-    "sizes": "128x128",
-    "src": "src/images/logo/icon/maskable/128.png",
-    "type": "image/png"
-  },
-  {
-    "purpose": "maskable",
-    "sizes": "192x192",
-    "src": "src/images/logo/icon/maskable/192.png",
-    "type": "image/png"
-  },
-  {
-    "purpose": "maskable",
-    "sizes": "384x384",
-    "src": "src/images/logo/icon/maskable/384.png",
-    "type": "image/png"
-  },
-  {
-    "purpose": "maskable",
-    "sizes": "512x512",
-    "src": "src/images/logo/icon/maskable/512.png",
-    "type": "image/png"
-  }
-],
-  "start_url": "./index.html",
+    {
+      "purpose": "maskable",
+      "sizes": "48x48",
+      "src": "../images/logo/icon/maskable/48.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "72x72",
+      "src": "../images/logo/icon/maskable/72.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "96x96",
+      "src": "../images/logo/icon/maskable/96.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "128x128",
+      "src": "../images/logo/icon/maskable/128.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "192x192",
+      "src": "../images/logo/icon/maskable/192.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "384x384",
+      "src": "../images/logo/icon/maskable/384.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "../images/logo/icon/maskable/512.png",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "../../index.html",
   "background_color": "#101418",
   "theme_color": "#101418",
   "display": "fullscreen",
